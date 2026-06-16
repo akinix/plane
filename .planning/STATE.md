@@ -1,3 +1,18 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+current_phase: Initialization
+status: unknown
+last_updated: "2026-06-16T04:45:25.487Z"
+progress:
+  total_phases: 14
+  completed_phases: 0
+  total_plans: 3
+  completed_plans: 0
+  percent: 0
+---
+
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-16  
@@ -22,6 +37,7 @@
 ## Current State
 
 ### Completed
+
 - [x] Codebase map generated (`.planning/codebase/` — 7 docs)
 - [x] Project initialized (`.planning/PROJECT.md`)
 - [x] Requirements defined (`.planning/REQUIREMENTS.md`)
@@ -30,9 +46,11 @@
 - [x] Configuration set (`.planning/config.json`)
 
 ### In Progress
+
 - [ ] Nothing yet
 
 ### Pending
+
 - [ ] Phase 0: 项目初始化 & 脚手架
 - [ ] Phase 1: Foundation — 基础设施
 - [ ] Phase 2-8: Core & Extended Domain
