@@ -2,7 +2,7 @@ using Aspire.Hosting.ApplicationModel;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-// Per-app prefix from the AppHost assembly name (YH.Flow.AppHost -> fsh-starter); namespaces Docker volumes + resource names so multiple YH apps don't clash.
+// Per-app prefix from the AppHost assembly name (YH.Flow.AppHost -> yh-flow); namespaces Docker volumes + resource names so multiple YH apps don't clash.
 #pragma warning disable CA1308 // resource + volume names are conventionally lowercase
 var appPrefix = builder.Environment.ApplicationName
     .Replace(".AppHost", string.Empty, StringComparison.OrdinalIgnoreCase)
@@ -137,27 +137,9 @@ var api = builder.AddProject<Projects.YH_Flow_Api>($"{appPrefix}-api")
     .WithEnvironment("Storage__S3__ForcePathStyle", "true")
     .WithEnvironment("Storage__S3__PublicBaseUrl", ReferenceExpression.Create($"{minioApiEndpoint}/{MinioBucket}"));
 
-//#if (frontend)
-// Admin console (React + Vite). Target the API's HTTPS endpoint directly — UseHttpsRedirection's 307 to https is cross-origin and strips the Authorization header.
-builder.AddJavaScriptApp($"{appPrefix}-admin", "../../../clients/admin", "dev")
-    .WithNpm()
-    .WithReference(api)
-    .WaitFor(api)
-    .WithHttpEndpoint(port: 5173, targetPort: 5173, isProxied: false)
-    .WithExternalHttpEndpoints()
-    .WithEnvironment("VITE_API_BASE_URL", api.GetEndpoint("https"));
-
-// Tenant-facing dashboard (React + Vite, with SSE live feed)
-builder.AddJavaScriptApp($"{appPrefix}-dashboard", "../../../clients/dashboard", "dev")
-    .WithNpm()
-    .WithReference(api)
-    .WaitFor(api)
-    .WithHttpEndpoint(port: 5174, targetPort: 5174, isProxied: false)
-    .WithExternalHttpEndpoints()
-    .WithEnvironment("VITE_API_BASE_URL", api.GetEndpoint("https"));
-//#else
-// React apps excluded: discard the unused api handle to keep the no-frontend scaffold warning-clean (S1481 under TreatWarningsAsErrors).
+// NOTE: Frontend JS apps (admin on port 5173, dashboard on port 5174) are not started in Phase 0.
+// They will be added back in Phase 13 when the new Flow Web frontend is implemented.
+// The line below discards the unused api handle to keep the scaffold warning-clean.
 _ = api;
-//#endif
 
 await builder.Build().RunAsync();
