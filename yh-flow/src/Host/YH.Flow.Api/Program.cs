@@ -7,9 +7,6 @@ using YH.Modules.Identity.Features.v1.Tokens.TokenGeneration;
 using YH.Modules.Multitenancy;
 using YH.Modules.Multitenancy.Contracts.v1.GetTenantStatus;
 using YH.Modules.Webhooks;
-using YH.Modules.Billing;
-using YH.Modules.Catalog;
-using YH.Modules.Tickets;
 using YH.Modules.Multitenancy.Features.v1.GetTenantStatus;
 using System.Reflection;
 using System.Text.Json.Serialization;
@@ -51,16 +48,8 @@ builder.Services.AddMediator(o =>
         typeof(YH.Modules.Auditing.Persistence.AuditDbContext),
         typeof(YH.Modules.Webhooks.Contracts.v1.CreateWebhookSubscription.CreateWebhookSubscriptionCommand),
         typeof(YH.Modules.Webhooks.WebhooksModule),
-        typeof(YH.Modules.Billing.Contracts.BillingContractsMarker),
-        typeof(YH.Modules.Billing.BillingModule),
-        typeof(YH.Modules.Catalog.Contracts.CatalogContractsMarker),
-        typeof(YH.Modules.Catalog.CatalogModule),
-        typeof(YH.Modules.Tickets.Contracts.TicketsContractsMarker),
-        typeof(YH.Modules.Tickets.TicketsModule),
         typeof(YH.Modules.Files.Contracts.v1.Commands.RequestUploadUrlCommand),
         typeof(YH.Modules.Files.FilesModule),
-        typeof(YH.Modules.Chat.Contracts.v1.Commands.CreateChannelCommand),
-        typeof(YH.Modules.Chat.ChatModule),
         typeof(YH.Modules.Notifications.Contracts.v1.Commands.MarkNotificationReadCommand),
         typeof(YH.Modules.Notifications.NotificationsModule)];
 });
@@ -72,10 +61,6 @@ var moduleAssemblies = new Assembly[]
     typeof(AuditingModule).Assembly,
     typeof(YH.Modules.Files.FilesModule).Assembly,
     typeof(WebhooksModule).Assembly,
-    typeof(BillingModule).Assembly,
-    typeof(CatalogModule).Assembly,
-    typeof(TicketsModule).Assembly,
-    typeof(YH.Modules.Chat.ChatModule).Assembly,
     typeof(YH.Modules.Notifications.NotificationsModule).Assembly,
 };
 
