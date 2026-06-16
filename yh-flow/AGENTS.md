@@ -1,22 +1,19 @@
-# FullStackHero .NET Starter Kit
+# YH.Flow
 
-> A production-ready modular .NET 10 monolith + two React 19 apps, built for enterprise SaaS.
+> A production-ready modular .NET 10 monolith, built for enterprise SaaS project management.
 
 This file is the canonical guide for **all** AI coding tools (Claude Code, Gemini CLI, Cursor, Codex, …).
 `CLAUDE.md` and `GEMINI.md` are thin bridges that import this file — edit conventions **here**, not there.
 
-This file is the map. Detailed conventions live in `.agents/rules/` and are read on demand — **read the
-relevant rule file before working in that area** (see the index below). Keep this file lean.
+This file is the map. Keep this file lean.
 
 ## What this is
 
-A **modular monolith** (Vertical Slice Architecture) backend that ships with two **React + Vite**
-front-ends and a CLI. Multitenancy, auth, auditing, billing, files, chat and more are first-class.
+A **modular monolith** (Vertical Slice Architecture) backend for project management (Plane-compatible API). Multitenancy, auth, auditing, files, webhooks and more are first-class.
 
-- **Backend** — .NET 10, EF Core 10, PostgreSQL, Redis, JWT + ASP.NET Identity, Finbuckle multitenancy,
+- **Backend** — .NET 10, EF Core 10, PostgreSQL, Redis (Valkey), JWT + ASP.NET Identity, Finbuckle multitenancy,
   Hangfire, OpenAPI/Scalar, Serilog + OpenTelemetry, .NET Aspire.
-- **Frontends** — `clients/admin` (operator-facing) and `clients/dashboard` (tenant-facing): React 19,
-  Vite 7, TypeScript, TanStack Query v5, React Router 7, Radix + Tailwind v4 (shadcn-style), SignalR/SSE.
+- **Template origin** — Based on fullstackhero/dotnet-starter-kit, renamed to YH.Flow namespace.
 
 ## Repo map
 
@@ -24,14 +21,13 @@ front-ends and a CLI. Multitenancy, auth, auditing, billing, files, chat and mor
 |------|------|
 | `src/BuildingBlocks/` | Shared framework libraries (Core, Persistence, Web, Caching, Eventing, Storage, Quota…). **Protected — see below.** |
 | `src/Modules/{Name}/` | Bounded contexts. Each has a runtime project + a `.Contracts` project (its only public API). |
-| `src/Host/FSH.Starter.Api` | Composition-root Web API host. |
-| `src/Host/FSH.Starter.AppHost` | .NET Aspire orchestrator (Postgres, Redis, MinIO, migrator, API, **both React apps**). |
-| `src/Host/FSH.Starter.DbMigrator` | One-shot migrate/seed runner. DB is **not** migrated at API startup. |
-| `src/Host/FSH.Starter.Migrations.PostgreSQL` | All EF migrations, organized per-module by folder. |
+| `src/Host/YH.Flow.Api` | Composition-root Web API host. |
+| `src/Host/YH.Flow.AppHost` | .NET Aspire orchestrator (Postgres, Redis, MinIO, migrator, API). |
+| `src/Host/YH.Flow.DbMigrator` | One-shot migrate/seed runner. DB is **not** migrated at API startup. |
+| `src/Host/YH.Flow.Migrations.PostgreSQL` | All EF migrations, organized per-module by folder. |
 | `src/Tests/` | Per-module tests, `Architecture.Tests` (NetArchTest), `Integration.Tests` (Testcontainers). |
-| `src/Tools/CLI` | The `fsh` CLI (Spectre.Console). |
-| `clients/admin`, `clients/dashboard` | The two React apps. |
-| `deploy/` | Infra (docker, terraform, dokploy). |
+| `src/Tools/CLI` | The `yh` CLI (Spectre.Console). |
+| `clients/web` | Flow Web frontend (Phase 13). |
 
 ## Tech stack
 
@@ -51,24 +47,21 @@ front-ends and a CLI. Multitenancy, auth, auditing, billing, files, chat and mor
 ## Build & run
 
 ```bash
-# Whole stack (Postgres + pgAdmin + Redis + MinIO + migrator + API + both React apps)
-dotnet run --project src/Host/FSH.Starter.AppHost   # one-time: npm install in clients/admin & clients/dashboard
+# Whole stack (Postgres + pgAdmin + Redis + MinIO + migrator + API)
+dotnet run --project src/Host/YH.Flow.AppHost
 
-dotnet build src/FSH.Starter.slnx                   # build backend
-dotnet run --project src/Host/FSH.Starter.Api       # API only → https://localhost:7030 (/scalar)
-dotnet test src/FSH.Starter.slnx                    # tests — integration tests REQUIRE Docker
-
-cd clients/admin && npm install && npm run dev       # → http://localhost:5173
-cd clients/dashboard && npm install && npm run dev   # → http://localhost:5174
+dotnet build src/YH.Flow.slnx                    # build backend
+dotnet run --project src/Host/YH.Flow.Api        # API only
+dotnet test src/YH.Flow.slnx                     # tests — integration tests REQUIRE Docker
 ```
 
 Migrations / seed (DbMigrator, separate step):
 ```bash
-dotnet run --project src/Host/FSH.Starter.DbMigrator -- apply [--seed]
-dotnet run --project src/Host/FSH.Starter.DbMigrator -- list-pending
+dotnet run --project src/Host/YH.Flow.DbMigrator -- apply [--seed]
+dotnet run --project src/Host/YH.Flow.DbMigrator -- list-pending
 ```
 
-**Ports:** API 7030 (https)/5030 (http) · admin 5173 · dashboard 5174 · Postgres 5432 · pgAdmin 5050 · Valkey 6379 · MinIO 9000/9001.
+**Ports:** API 7030 (https)/5030 (http) · Postgres 5432 · pgAdmin 5050 · Valkey 6379 · RedisInsight 5540 · MinIO 9000/9001.
 
 ## Branching & PRs
 
@@ -85,7 +78,7 @@ Single long-lived branch: **`main`** (the default) — there is **no `develop`**
 7. **Propagate `CancellationToken`** into every EF/IO call; add as `= default` on public service methods.
 8. **Every command handler + paginated query handler needs a validator** (`{Name}Validator`). Enforced by `Architecture.Tests`.
 9. **Frontend: pass per-call data through `mutate(arg)`**, never via state the mutation callbacks close over (execute-time race). See `frontend/shared.md`.
-10. **Docs + changelog travel with the change** — a user-facing change (feature, endpoint, config, infra, breaking change) isn't done until the **separate docs repo** (`github.com/fullstackhero/docs`, the Astro site) is updated to match **and** a changelog entry is added (`src/content/docs/changelog/`). Don't let the docs drift from the code.
+10. **Docs + changelog travel with the change** — a user-facing change (feature, endpoint, config, infra, breaking change) isn't done until the changelog entry is added. Don't let the docs drift from the code.
 
 ## Rules index — read the relevant file before you work
 
