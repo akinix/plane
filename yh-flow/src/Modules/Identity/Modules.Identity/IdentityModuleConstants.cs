@@ -1,6 +1,6 @@
-﻿using FSH.Framework.Web.Modules;
+using YH.Framework.Web.Modules;
 
-namespace FSH.Modules.Identity;
+namespace YH.Modules.Identity;
 
 public sealed class IdentityModuleConstants : IModuleConstants
 {

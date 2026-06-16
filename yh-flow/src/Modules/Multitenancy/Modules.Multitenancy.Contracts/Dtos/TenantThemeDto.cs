@@ -1,7 +1,7 @@
 using System.ComponentModel;
-using FSH.Framework.Shared.Storage;
+using YH.Framework.Shared.Storage;
 
-namespace FSH.Modules.Multitenancy.Contracts.Dtos;
+namespace YH.Modules.Multitenancy.Contracts.Dtos;
 
 /// <remarks>
 /// Marked <see cref="ImmutableObjectAttribute"/> + <c>sealed</c> so HybridCache can reuse the

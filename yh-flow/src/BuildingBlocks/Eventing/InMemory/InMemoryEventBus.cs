@@ -1,11 +1,11 @@
-using FSH.Framework.Eventing.Abstractions;
-using FSH.Framework.Eventing.Inbox;
+using YH.Framework.Eventing.Abstractions;
+using YH.Framework.Eventing.Inbox;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace FSH.Framework.Eventing.InMemory;
+namespace YH.Framework.Eventing.InMemory;
 
 /// <summary>
 /// In-memory event bus implementation used for single-process deployments.

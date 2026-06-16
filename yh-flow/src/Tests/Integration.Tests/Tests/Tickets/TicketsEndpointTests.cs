@@ -1,7 +1,7 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Tickets.Data;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Tickets.Data;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 

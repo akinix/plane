@@ -1,4 +1,4 @@
-using FSH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.DTOs;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 

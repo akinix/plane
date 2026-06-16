@@ -1,7 +1,7 @@
 using System.Globalization;
 using Finbuckle.MultiTenant.Abstractions;
 using Finbuckle.MultiTenant.Stores;
-using FSH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Multitenancy;
 using Integration.Tests.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 

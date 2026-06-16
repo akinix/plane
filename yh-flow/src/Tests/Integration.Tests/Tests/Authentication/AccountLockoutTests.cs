@@ -1,6 +1,6 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Multitenancy;
 using Integration.Tests.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -93,7 +93,7 @@ public sealed class AccountLockoutTests
             .MultiTenantContext = new MultiTenantContext<AppTenantInfo>(tenant);
 
         var userManager = scope.ServiceProvider
-            .GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<FSH.Modules.Identity.Domain.FshUser>>();
+            .GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<YH.Modules.Identity.Domain.FshUser>>();
         var user = await userManager.FindByEmailAsync(email);
         user.ShouldNotBeNull();
         var token = await userManager.GenerateEmailConfirmationTokenAsync(user!);

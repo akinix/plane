@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Quota;
+using YH.Framework.Shared.Quota;
 
-namespace FSH.Modules.Billing.Contracts.Dtos;
+namespace YH.Modules.Billing.Contracts.Dtos;
 
 public sealed record BillingPlanDto(
     Guid Id,

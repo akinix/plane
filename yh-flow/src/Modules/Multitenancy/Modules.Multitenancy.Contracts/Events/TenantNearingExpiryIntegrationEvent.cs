@@ -1,6 +1,6 @@
-using FSH.Framework.Eventing.Abstractions;
+using YH.Framework.Eventing.Abstractions;
 
-namespace FSH.Modules.Multitenancy.Contracts.Events;
+namespace YH.Modules.Multitenancy.Contracts.Events;
 
 /// <summary>
 /// Raised by the daily expiry scan when an active tenant is within the configured lead time of its

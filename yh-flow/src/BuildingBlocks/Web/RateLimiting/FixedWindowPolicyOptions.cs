@@ -1,4 +1,4 @@
-namespace FSH.Framework.Web.RateLimiting;
+namespace YH.Framework.Web.RateLimiting;
 
 public sealed class FixedWindowPolicyOptions
 {

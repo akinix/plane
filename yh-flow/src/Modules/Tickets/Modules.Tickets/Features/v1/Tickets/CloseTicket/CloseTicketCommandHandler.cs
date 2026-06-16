@@ -1,10 +1,10 @@
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Tickets.Contracts.v1.Tickets;
-using FSH.Modules.Tickets.Data;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Tickets.Contracts.v1.Tickets;
+using YH.Modules.Tickets.Data;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Tickets.Features.v1.Tickets.CloseTicket;
+namespace YH.Modules.Tickets.Features.v1.Tickets.CloseTicket;
 
 public sealed class CloseTicketCommandHandler(TicketsDbContext dbContext)
     : ICommandHandler<CloseTicketCommand, Guid>

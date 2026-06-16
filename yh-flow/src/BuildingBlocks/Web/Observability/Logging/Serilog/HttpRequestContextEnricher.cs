@@ -1,9 +1,9 @@
-﻿using FSH.Framework.Shared.Identity.Claims;
+using YH.Framework.Shared.Identity.Claims;
 using Microsoft.AspNetCore.Http;
 using Serilog.Core;
 using Serilog.Events;
 
-namespace FSH.Framework.Web.Observability.Logging.Serilog;
+namespace YH.Framework.Web.Observability.Logging.Serilog;
 
 public class HttpRequestContextEnricher : ILogEventEnricher
 {

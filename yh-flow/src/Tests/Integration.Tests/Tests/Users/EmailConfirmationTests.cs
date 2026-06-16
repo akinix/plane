@@ -1,16 +1,16 @@
 using Integration.Tests.Infrastructure;
-using FSH.Modules.Identity.Contracts.v1.Users.RegisterUser;
-using FSH.Modules.Identity.Domain;
+using YH.Modules.Identity.Contracts.v1.Users.RegisterUser;
+using YH.Modules.Identity.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http.Json;
 using System.Net;
 using Shouldly;
 using Xunit;
-using FSH.Modules.Identity.Contracts.v1.Users.ConfirmEmail;
+using YH.Modules.Identity.Contracts.v1.Users.ConfirmEmail;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Multitenancy;
 using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 

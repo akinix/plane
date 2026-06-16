@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace FSH.CLI.Infrastructure;
+namespace YH.CLI.Infrastructure;
 
 /// <summary>
 /// Validates project names for use as C# identifiers, folder names, and NuGet package names.

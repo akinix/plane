@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Spectre.Console;
 
-namespace FSH.CLI.Infrastructure;
+namespace YH.CLI.Infrastructure;
 
 /// <summary>
 /// Shared process execution with cancellation, timeout, and output streaming.

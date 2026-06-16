@@ -1,6 +1,6 @@
-using FSH.Modules.Auditing;
-using FSH.Modules.Identity;
-using FSH.Modules.Multitenancy;
+using YH.Modules.Auditing;
+using YH.Modules.Identity;
+using YH.Modules.Multitenancy;
 using Shouldly;
 using System.Reflection;
 using Xunit;
@@ -28,8 +28,8 @@ internal static class ModuleAssemblyDiscovery
         // Get the directory where the tests are running
         string baseDir = AppContext.BaseDirectory;
 
-        // Scan for FSH.Modules.*.dll files (excluding Contracts)
-        var moduleFiles = Directory.GetFiles(baseDir, "FSH.Modules.*.dll")
+        // Scan for YH.Modules.*.dll files (excluding Contracts)
+        var moduleFiles = Directory.GetFiles(baseDir, "YH.Modules.*.dll")
             .Where(f => !f.EndsWith(".Contracts.dll", StringComparison.OrdinalIgnoreCase))
             .ToList();
 

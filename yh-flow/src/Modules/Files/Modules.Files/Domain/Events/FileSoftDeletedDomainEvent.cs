@@ -1,6 +1,6 @@
-using FSH.Framework.Core.Domain;
+using YH.Framework.Core.Domain;
 
-namespace FSH.Modules.Files.Domain.Events;
+namespace YH.Modules.Files.Domain.Events;
 
 public sealed record FileSoftDeletedDomainEvent(
     Guid FileAssetId,

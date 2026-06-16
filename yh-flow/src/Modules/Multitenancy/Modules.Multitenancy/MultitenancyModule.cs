@@ -5,29 +5,29 @@ using Finbuckle.MultiTenant.AspNetCore.Extensions;
 using Finbuckle.MultiTenant.EntityFrameworkCore.Stores;
 using Finbuckle.MultiTenant.Extensions;
 using Finbuckle.MultiTenant.Stores;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Eventing.Abstractions;
-using FSH.Framework.Persistence;
-using FSH.Framework.Shared.Constants;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Web.Modules;
-using FSH.Modules.Multitenancy.Contracts;
-using FSH.Modules.Multitenancy.Data;
-using FSH.Modules.Multitenancy.Features.v1.AdjustTenantValidity;
-using FSH.Modules.Multitenancy.Features.v1.ChangeTenantActivation;
-using FSH.Modules.Multitenancy.Features.v1.CreateTenant;
-using FSH.Modules.Multitenancy.Features.v1.GetMyTenantStatus;
-using FSH.Modules.Multitenancy.Features.v1.GetTenantMigrations;
-using FSH.Modules.Multitenancy.Features.v1.GetTenants;
-using FSH.Modules.Multitenancy.Features.v1.GetTenantStatus;
-using FSH.Modules.Multitenancy.Features.v1.GetTenantTheme;
-using FSH.Modules.Multitenancy.Features.v1.ResetTenantTheme;
-using FSH.Modules.Multitenancy.Features.v1.TenantProvisioning.GetTenantProvisioningStatus;
-using FSH.Modules.Multitenancy.Features.v1.TenantProvisioning.RetryTenantProvisioning;
-using FSH.Modules.Multitenancy.Features.v1.RenewTenant;
-using FSH.Modules.Multitenancy.Features.v1.UpdateTenantTheme;
-using FSH.Modules.Multitenancy.Provisioning;
-using FSH.Modules.Multitenancy.Services;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Eventing.Abstractions;
+using YH.Framework.Persistence;
+using YH.Framework.Shared.Constants;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Web.Modules;
+using YH.Modules.Multitenancy.Contracts;
+using YH.Modules.Multitenancy.Data;
+using YH.Modules.Multitenancy.Features.v1.AdjustTenantValidity;
+using YH.Modules.Multitenancy.Features.v1.ChangeTenantActivation;
+using YH.Modules.Multitenancy.Features.v1.CreateTenant;
+using YH.Modules.Multitenancy.Features.v1.GetMyTenantStatus;
+using YH.Modules.Multitenancy.Features.v1.GetTenantMigrations;
+using YH.Modules.Multitenancy.Features.v1.GetTenants;
+using YH.Modules.Multitenancy.Features.v1.GetTenantStatus;
+using YH.Modules.Multitenancy.Features.v1.GetTenantTheme;
+using YH.Modules.Multitenancy.Features.v1.ResetTenantTheme;
+using YH.Modules.Multitenancy.Features.v1.TenantProvisioning.GetTenantProvisioningStatus;
+using YH.Modules.Multitenancy.Features.v1.TenantProvisioning.RetryTenantProvisioning;
+using YH.Modules.Multitenancy.Features.v1.RenewTenant;
+using YH.Modules.Multitenancy.Features.v1.UpdateTenantTheme;
+using YH.Modules.Multitenancy.Provisioning;
+using YH.Modules.Multitenancy.Services;
 using Hangfire;
 using Hangfire.Common;
 using Microsoft.AspNetCore.Builder;
@@ -40,7 +40,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
-namespace FSH.Modules.Multitenancy;
+namespace YH.Modules.Multitenancy;
 
 public sealed class MultitenancyModule : IModule
 {
@@ -48,8 +48,8 @@ public sealed class MultitenancyModule : IModule
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        FSH.Framework.Shared.Constants.PermissionConstants.Register(
-            FSH.Modules.Multitenancy.Contracts.Authorization.MultitenancyPermissions.All);
+        YH.Framework.Shared.Constants.PermissionConstants.Register(
+            YH.Modules.Multitenancy.Contracts.Authorization.MultitenancyPermissions.All);
 
         builder.Services.Configure<TenantBillingOptions>(
             builder.Configuration.GetSection(TenantBillingOptions.SectionName));
@@ -64,7 +64,7 @@ public sealed class MultitenancyModule : IModule
         // Singleton — the buffer survives the request scope that calls Store(...)
         // so the background Hangfire-scheduled seed scope can still TryConsume(...).
         builder.Services.AddSingleton<
-            FSH.Framework.Shared.Multitenancy.ITenantInitialPasswordBuffer,
+            YH.Framework.Shared.Multitenancy.ITenantInitialPasswordBuffer,
             Services.TenantInitialPasswordBuffer>();
 
         builder.Services.AddHeroDbContext<TenantDbContext>();

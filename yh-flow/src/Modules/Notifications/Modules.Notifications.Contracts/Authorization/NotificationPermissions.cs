@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Constants;
+using YH.Framework.Shared.Constants;
 
-namespace FSH.Modules.Notifications.Contracts.Authorization;
+namespace YH.Modules.Notifications.Contracts.Authorization;
 
 /// <summary>
 /// Permission constants for the Notifications module. Permissions follow the

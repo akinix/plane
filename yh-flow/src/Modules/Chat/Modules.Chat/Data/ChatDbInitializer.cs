@@ -1,8 +1,8 @@
-using FSH.Framework.Persistence;
+using YH.Framework.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.Modules.Chat.Data;
+namespace YH.Modules.Chat.Data;
 
 public sealed class ChatDbInitializer(
     ChatDbContext dbContext,

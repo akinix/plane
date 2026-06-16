@@ -1,4 +1,4 @@
-namespace FSH.Framework.Persistence;
+namespace YH.Framework.Persistence;
 
 /// <summary>
 /// Stable names for the named EF Core query filters registered by the

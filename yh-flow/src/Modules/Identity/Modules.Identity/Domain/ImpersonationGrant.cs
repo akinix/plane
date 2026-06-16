@@ -1,6 +1,6 @@
-using FSH.Framework.Core.Domain;
+using YH.Framework.Core.Domain;
 
-namespace FSH.Modules.Identity.Domain;
+namespace YH.Modules.Identity.Domain;
 
 /// <summary>
 /// Server-side record of a single impersonation session. Created on Start, mutated

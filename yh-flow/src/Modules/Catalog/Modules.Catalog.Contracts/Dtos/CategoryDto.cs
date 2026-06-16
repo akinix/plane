@@ -1,4 +1,4 @@
-namespace FSH.Modules.Catalog.Contracts.Dtos;
+namespace YH.Modules.Catalog.Contracts.Dtos;
 
 public sealed record CategoryDto(
     Guid Id,

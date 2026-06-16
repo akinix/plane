@@ -1,10 +1,10 @@
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Shared.Quota;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Quota;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
 
-namespace FSH.Framework.Quota;
+namespace YH.Framework.Quota;
 
 /// <summary>
 /// Redis-backed quota counter. Counter-based resources use atomic <c>INCRBY</c> on a key of the

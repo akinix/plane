@@ -1,6 +1,6 @@
 using System.Text.Json;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Multitenancy.Provisioning;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Multitenancy.Provisioning;
 using Integration.Tests.Infrastructure;
 
 namespace Integration.Tests.Tests.Multitenancy;

@@ -1,5 +1,5 @@
-using FSH.Modules.Auditing.Contracts;
-using FSH.Modules.Auditing.Contracts.Dtos;
+using YH.Modules.Auditing.Contracts;
+using YH.Modules.Auditing.Contracts.Dtos;
 using Integration.Tests.Infrastructure;
 
 namespace Integration.Tests.Tests.Auditing;

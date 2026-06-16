@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 
-namespace FSH.Framework.Web.Realtime;
+namespace YH.Framework.Web.Realtime;
 
 /// <summary>
 /// Concurrent in-memory implementation of <see cref="IPresenceTracker"/>. Keys are user ids,

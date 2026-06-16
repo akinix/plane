@@ -1,4 +1,4 @@
-namespace FSH.Framework.Shared.Constants;
+namespace YH.Framework.Shared.Constants;
 
 /// <summary>
 /// Cross-cutting platform permissions that don't belong to a specific business module.

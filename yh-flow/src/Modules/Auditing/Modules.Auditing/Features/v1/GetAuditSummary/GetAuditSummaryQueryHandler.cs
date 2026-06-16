@@ -1,15 +1,15 @@
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Auditing.Contracts;
-using FSH.Modules.Auditing.Contracts.Authorization;
-using FSH.Modules.Auditing.Contracts.Dtos;
-using FSH.Modules.Auditing.Contracts.v1.GetAuditSummary;
-using FSH.Modules.Auditing.Persistence;
-using FSH.Modules.Identity.Contracts.Services;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Auditing.Contracts;
+using YH.Modules.Auditing.Contracts.Authorization;
+using YH.Modules.Auditing.Contracts.Dtos;
+using YH.Modules.Auditing.Contracts.v1.GetAuditSummary;
+using YH.Modules.Auditing.Persistence;
+using YH.Modules.Identity.Contracts.Services;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Auditing.Features.v1.GetAuditSummary;
+namespace YH.Modules.Auditing.Features.v1.GetAuditSummary;
 
 public sealed class GetAuditSummaryQueryHandler : IQueryHandler<GetAuditSummaryQuery, AuditSummaryAggregateDto>
 {

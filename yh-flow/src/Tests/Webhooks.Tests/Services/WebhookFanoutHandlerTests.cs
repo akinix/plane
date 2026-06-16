@@ -1,11 +1,11 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Eventing.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Webhooks.Data;
-using FSH.Modules.Webhooks.Domain;
-using FSH.Modules.Webhooks.Services;
+using YH.Framework.Eventing.Abstractions;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Webhooks.Data;
+using YH.Modules.Webhooks.Domain;
+using YH.Modules.Webhooks.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;

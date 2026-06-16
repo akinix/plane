@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Constants;
+using YH.Framework.Shared.Constants;
 
-namespace FSH.Modules.Chat.Contracts.Authorization;
+namespace YH.Modules.Chat.Contracts.Authorization;
 
 /// <summary>
 /// Permission constants for the Chat module. Permission names follow the

@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Constants;
+using YH.Framework.Shared.Constants;
 
-namespace FSH.Modules.Multitenancy.Contracts.Authorization;
+namespace YH.Modules.Multitenancy.Contracts.Authorization;
 
 public static class MultitenancyPermissions
 {

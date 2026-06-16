@@ -1,13 +1,13 @@
-using FSH.Modules.Auditing.Contracts;
-using FSH.Modules.Auditing.Contracts.Dtos;
-using FSH.Modules.Auditing.Contracts.v1.GetAuditById;
-using FSH.Modules.Auditing.Persistence;
+using YH.Modules.Auditing.Contracts;
+using YH.Modules.Auditing.Contracts.Dtos;
+using YH.Modules.Auditing.Contracts.v1.GetAuditById;
+using YH.Modules.Auditing.Persistence;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
-namespace FSH.Modules.Auditing.Features.v1.GetAuditById;
+namespace YH.Modules.Auditing.Features.v1.GetAuditById;
 
 public sealed class GetAuditByIdQueryHandler : IQueryHandler<GetAuditByIdQuery, AuditDetailDto>
 {

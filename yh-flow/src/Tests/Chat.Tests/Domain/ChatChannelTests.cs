@@ -1,6 +1,6 @@
-using FSH.Modules.Chat.Contracts.v1.DTOs;
-using FSH.Modules.Chat.Domain;
-using FSH.Modules.Chat.Domain.Events;
+using YH.Modules.Chat.Contracts.v1.DTOs;
+using YH.Modules.Chat.Domain;
+using YH.Modules.Chat.Domain.Events;
 
 namespace Chat.Tests.Domain;
 

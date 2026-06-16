@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Constants;
+using YH.Framework.Shared.Constants;
 
-namespace FSH.Modules.Tickets.Contracts.Authorization;
+namespace YH.Modules.Tickets.Contracts.Authorization;
 
 public static class TicketsPermissions
 {

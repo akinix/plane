@@ -1,14 +1,14 @@
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Shared.Identity.Claims;
-using FSH.Modules.Identity.Contracts.DTOs;
-using FSH.Modules.Identity.Contracts.v1.Users.GetUserProfile;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Shared.Identity.Claims;
+using YH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.v1.Users.GetUserProfile;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using System.Security.Claims;
 
-namespace FSH.Modules.Identity.Features.v1.Users.GetUserProfile;
+namespace YH.Modules.Identity.Features.v1.Users.GetUserProfile;
 
 public static class GetUserProfileEndpoint
 {

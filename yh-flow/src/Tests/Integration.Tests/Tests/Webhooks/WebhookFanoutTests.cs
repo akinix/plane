@@ -1,9 +1,9 @@
 using System.Collections.Concurrent;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Eventing.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Webhooks.Services;
+using YH.Framework.Eventing.Abstractions;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Webhooks.Services;
 using Integration.Tests.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;

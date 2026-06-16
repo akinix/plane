@@ -1,8 +1,8 @@
-using FSH.Modules.Catalog.Domain;
+using YH.Modules.Catalog.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FSH.Modules.Catalog.Data.Configurations;
+namespace YH.Modules.Catalog.Data.Configurations;
 
 public sealed class BrandConfiguration : IEntityTypeConfiguration<Brand>
 {

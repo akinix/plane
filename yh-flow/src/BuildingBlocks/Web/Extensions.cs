@@ -1,26 +1,26 @@
-﻿using FSH.Framework.Caching;
-using FSH.Framework.Jobs;
-using FSH.Framework.Mailing;
-using FSH.Framework.Persistence;
-using FSH.Framework.Quota;
-using FSH.Framework.Shared.Constants;
-using FSH.Framework.Web.Auth;
-using FSH.Framework.Web.Cors;
-using FSH.Framework.Web.Exceptions;
-using FSH.Framework.Web.FeatureFlags;
-using FSH.Framework.Web.Idempotency;
-using FSH.Framework.Web.Sse;
-using FSH.Framework.Web.Health;
-using FSH.Framework.Web.Mediator.Behaviors;
-using FSH.Framework.Web.Modules;
-using FSH.Framework.Web.Observability.Logging.Serilog;
-using FSH.Framework.Web.Observability.OpenTelemetry;
-using FSH.Framework.Web.OpenApi;
-using FSH.Framework.Web.Origin;
-using FSH.Framework.Web.RateLimiting;
-using FSH.Framework.Web.Realtime;
-using FSH.Framework.Web.Security;
-using FSH.Framework.Web.Versioning;
+using YH.Framework.Caching;
+using YH.Framework.Jobs;
+using YH.Framework.Mailing;
+using YH.Framework.Persistence;
+using YH.Framework.Quota;
+using YH.Framework.Shared.Constants;
+using YH.Framework.Web.Auth;
+using YH.Framework.Web.Cors;
+using YH.Framework.Web.Exceptions;
+using YH.Framework.Web.FeatureFlags;
+using YH.Framework.Web.Idempotency;
+using YH.Framework.Web.Sse;
+using YH.Framework.Web.Health;
+using YH.Framework.Web.Mediator.Behaviors;
+using YH.Framework.Web.Modules;
+using YH.Framework.Web.Observability.Logging.Serilog;
+using YH.Framework.Web.Observability.OpenTelemetry;
+using YH.Framework.Web.OpenApi;
+using YH.Framework.Web.Origin;
+using YH.Framework.Web.RateLimiting;
+using YH.Framework.Web.Realtime;
+using YH.Framework.Web.Security;
+using YH.Framework.Web.Versioning;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Caching.Distributed;
@@ -30,7 +30,7 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Mediator;
 
-namespace FSH.Framework.Web;
+namespace YH.Framework.Web;
 
 public static class Extensions
 {

@@ -1,11 +1,11 @@
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Catalog.Contracts.Dtos;
-using FSH.Modules.Catalog.Contracts.v1.Products.AddProductImage;
-using FSH.Modules.Catalog.Data;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Catalog.Contracts.Dtos;
+using YH.Modules.Catalog.Contracts.v1.Products.AddProductImage;
+using YH.Modules.Catalog.Data;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Catalog.Features.v1.Products.AddProductImage;
+namespace YH.Modules.Catalog.Features.v1.Products.AddProductImage;
 
 public sealed class AddProductImageCommandHandler(CatalogDbContext dbContext)
     : ICommandHandler<AddProductImageCommand, ProductImageDto>

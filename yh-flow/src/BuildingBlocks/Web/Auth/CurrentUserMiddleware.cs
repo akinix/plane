@@ -1,9 +1,9 @@
-﻿using FSH.Framework.Core.Context;
-using FSH.Framework.Shared.Identity.Claims;
+using YH.Framework.Core.Context;
+using YH.Framework.Shared.Identity.Claims;
 using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 
-namespace FSH.Framework.Web.Auth;
+namespace YH.Framework.Web.Auth;
 
 public class CurrentUserMiddleware(ICurrentUserInitializer currentUserInitializer) : IMiddleware
 {
@@ -24,13 +24,13 @@ public class CurrentUserMiddleware(ICurrentUserInitializer currentUserInitialize
             var correlationId = context.Request.HttpContext.TraceIdentifier;
 
             if (!string.IsNullOrEmpty(userId))
-                activity.SetTag("fsh.user_id", userId);
+                activity.SetTag("YH.user_id", userId);
 
             if (!string.IsNullOrEmpty(tenant))
-                activity.SetTag("fsh.tenant_id", tenant);
+                activity.SetTag("YH.tenant_id", tenant);
 
             if (!string.IsNullOrEmpty(correlationId))
-                activity.SetTag("fsh.correlation_id", correlationId);
+                activity.SetTag("YH.correlation_id", correlationId);
         }
 
         await next(context);

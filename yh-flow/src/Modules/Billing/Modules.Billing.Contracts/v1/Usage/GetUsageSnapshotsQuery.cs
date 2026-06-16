@@ -1,7 +1,7 @@
-using FSH.Modules.Billing.Contracts.Dtos;
+using YH.Modules.Billing.Contracts.Dtos;
 using Mediator;
 
-namespace FSH.Modules.Billing.Contracts.v1.Usage;
+namespace YH.Modules.Billing.Contracts.v1.Usage;
 
 public sealed record GetUsageSnapshotsQuery(
     string? TenantId = null,

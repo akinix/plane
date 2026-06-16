@@ -1,9 +1,9 @@
 using System.Reflection;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Webhooks.Data;
-using FSH.Modules.Webhooks.Services;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Webhooks.Data;
+using YH.Modules.Webhooks.Services;
 using Hangfire;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;

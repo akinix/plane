@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Constants;
+using YH.Framework.Shared.Constants;
 
-namespace FSH.Modules.Files.Contracts.Authorization;
+namespace YH.Modules.Files.Contracts.Authorization;
 
 /// <summary>
 /// Permission constants + the registry entry consumed by <c>FilesModule.ConfigureServices</c>.

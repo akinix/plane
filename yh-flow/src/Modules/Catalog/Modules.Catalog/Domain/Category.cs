@@ -1,6 +1,6 @@
-using FSH.Framework.Core.Domain;
+using YH.Framework.Core.Domain;
 
-namespace FSH.Modules.Catalog.Domain;
+namespace YH.Modules.Catalog.Domain;
 
 public sealed class Category : AggregateRoot<Guid>, ISoftDeletable
 {

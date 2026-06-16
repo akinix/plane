@@ -1,8 +1,8 @@
-using FSH.Modules.Identity.Domain;
+using YH.Modules.Identity.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FSH.Modules.Identity.Data.Configurations;
+namespace YH.Modules.Identity.Data.Configurations;
 
 public class PasswordHistoryConfiguration : IEntityTypeConfiguration<PasswordHistory>
 {

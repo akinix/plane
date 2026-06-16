@@ -1,7 +1,7 @@
-using FSH.Modules.Auditing.Contracts;
+using YH.Modules.Auditing.Contracts;
 using System.Text.Json;
 
-namespace FSH.Modules.Auditing.Contracts.Dtos;
+namespace YH.Modules.Auditing.Contracts.Dtos;
 
 public sealed class AuditDetailDto
 {

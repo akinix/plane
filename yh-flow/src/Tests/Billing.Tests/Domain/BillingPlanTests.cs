@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Quota;
-using FSH.Modules.Billing.Contracts;
-using FSH.Modules.Billing.Domain;
+using YH.Framework.Shared.Quota;
+using YH.Modules.Billing.Contracts;
+using YH.Modules.Billing.Domain;
 
 namespace Billing.Tests.Domain;
 

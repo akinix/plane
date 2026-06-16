@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using StackExchange.Redis;
 
-namespace FSH.Framework.Quota;
+namespace YH.Framework.Quota;
 
 public static class Extensions
 {

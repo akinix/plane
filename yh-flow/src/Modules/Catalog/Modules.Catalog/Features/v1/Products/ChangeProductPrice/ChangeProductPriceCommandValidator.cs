@@ -1,7 +1,7 @@
 using FluentValidation;
-using FSH.Modules.Catalog.Contracts.v1.Products;
+using YH.Modules.Catalog.Contracts.v1.Products;
 
-namespace FSH.Modules.Catalog.Features.v1.Products.ChangeProductPrice;
+namespace YH.Modules.Catalog.Features.v1.Products.ChangeProductPrice;
 
 public sealed class ChangeProductPriceCommandValidator : AbstractValidator<ChangeProductPriceCommand>
 {

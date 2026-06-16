@@ -1,13 +1,13 @@
-﻿using Finbuckle.MultiTenant;
+using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Core.Common;
-using FSH.Framework.Core.Context;
-using FSH.Framework.Shared.Multitenancy;
+using YH.Framework.Core.Common;
+using YH.Framework.Core.Context;
+using YH.Framework.Shared.Multitenancy;
 using Hangfire;
 using Hangfire.Server;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FSH.Framework.Jobs;
+namespace YH.Framework.Jobs;
 
 public class FshJobActivator : JobActivator
 {

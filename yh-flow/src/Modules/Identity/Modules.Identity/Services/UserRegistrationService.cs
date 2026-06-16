@@ -1,16 +1,16 @@
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Core.Common;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Eventing.Outbox;
-using FSH.Framework.Jobs.Services;
-using FSH.Framework.Mailing;
-using FSH.Framework.Mailing.Services;
-using FSH.Framework.Shared.Constants;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Identity.Contracts.Events;
-using FSH.Modules.Identity.Contracts.Services;
-using FSH.Modules.Identity.Data;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Core.Common;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Eventing.Outbox;
+using YH.Framework.Jobs.Services;
+using YH.Framework.Mailing;
+using YH.Framework.Mailing.Services;
+using YH.Framework.Shared.Constants;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Identity.Contracts.Events;
+using YH.Modules.Identity.Contracts.Services;
+using YH.Modules.Identity.Data;
+using YH.Modules.Identity.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +19,7 @@ using System.Globalization;
 using System.Security.Claims;
 using System.Text;
 
-namespace FSH.Modules.Identity.Services;
+namespace YH.Modules.Identity.Services;
 
 internal sealed class UserRegistrationService(
     UserManager<FshUser> userManager,

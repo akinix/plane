@@ -1,5 +1,5 @@
 using System.Reflection;
-using FSH.CLI.Commands;
+using YH.CLI.Commands;
 using Spectre.Console.Cli;
 
 // Strip the +gitsha build-metadata suffix so `fsh --version` prints a clean version.

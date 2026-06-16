@@ -1,12 +1,12 @@
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Core.Context;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Auditing.Contracts;
+using YH.Framework.Core.Context;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Auditing.Contracts;
 using Microsoft.AspNetCore.Http;
 using System.Diagnostics;
 using System.Security.Claims;
 
-namespace FSH.Modules.Auditing;
+namespace YH.Modules.Auditing;
 
 /// <summary>
 /// Ambient-aware audit scope. Prefers HTTP context when present (the

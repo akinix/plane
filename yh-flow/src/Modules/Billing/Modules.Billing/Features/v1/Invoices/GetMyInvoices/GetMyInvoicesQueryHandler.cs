@@ -1,14 +1,14 @@
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Billing.Contracts.Dtos;
-using FSH.Modules.Billing.Contracts.v1.Invoices;
-using FSH.Modules.Billing.Data;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Billing.Contracts.Dtos;
+using YH.Modules.Billing.Contracts.v1.Invoices;
+using YH.Modules.Billing.Data;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Billing.Features.v1.Invoices.GetMyInvoices;
+namespace YH.Modules.Billing.Features.v1.Invoices.GetMyInvoices;
 
 public sealed class GetMyInvoicesQueryHandler(
     BillingDbContext dbContext,

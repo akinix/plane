@@ -1,19 +1,19 @@
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Shared.Storage;
-using FSH.Framework.Storage;
-using FSH.Framework.Storage.Services;
-using FSH.Framework.Web.Origin;
-using FSH.Modules.Identity.Contracts.DTOs;
-using FSH.Modules.Identity.Contracts.Services;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Storage;
+using YH.Framework.Storage;
+using YH.Framework.Storage.Services;
+using YH.Framework.Web.Origin;
+using YH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.Services;
+using YH.Modules.Identity.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace FSH.Modules.Identity.Services;
+namespace YH.Modules.Identity.Services;
 
 internal sealed class UserProfileService(
     UserManager<FshUser> userManager,

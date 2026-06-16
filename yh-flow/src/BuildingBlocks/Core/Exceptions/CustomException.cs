@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Net;
 
-namespace FSH.Framework.Core.Exceptions;
+namespace YH.Framework.Core.Exceptions;
 
 /// <summary>
 /// FullStackHero exception used for consistent error handling across the stack.

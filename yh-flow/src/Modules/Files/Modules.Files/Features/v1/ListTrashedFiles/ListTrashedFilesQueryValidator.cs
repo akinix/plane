@@ -1,7 +1,7 @@
 using FluentValidation;
-using FSH.Modules.Files.Contracts.v1.Queries;
+using YH.Modules.Files.Contracts.v1.Queries;
 
-namespace FSH.Modules.Files.Features.v1.ListTrashedFiles;
+namespace YH.Modules.Files.Features.v1.ListTrashedFiles;
 
 public sealed class ListTrashedFilesQueryValidator : AbstractValidator<ListTrashedFilesQuery>
 {

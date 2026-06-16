@@ -1,4 +1,4 @@
-namespace FSH.Modules.Identity.Domain;
+namespace YH.Modules.Identity.Domain;
 
 public class UserGroup
 {

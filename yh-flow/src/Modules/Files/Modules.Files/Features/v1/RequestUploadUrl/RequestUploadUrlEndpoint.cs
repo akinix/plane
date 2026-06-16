@@ -1,13 +1,13 @@
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Framework.Web.Idempotency;
-using FSH.Modules.Files.Contracts.Authorization;
-using FSH.Modules.Files.Contracts.v1.Commands;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Framework.Web.Idempotency;
+using YH.Modules.Files.Contracts.Authorization;
+using YH.Modules.Files.Contracts.v1.Commands;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Files.Features.v1.RequestUploadUrl;
+namespace YH.Modules.Files.Features.v1.RequestUploadUrl;
 
 public static class RequestUploadUrlEndpoint
 {

@@ -40,18 +40,18 @@
 
 	<PropertyGroup>
 		<!-- Default NuGet metadata -->
-		<Authors>Mukesh Murugan</Authors>
-		<Company>FullStackHero</Company>
+		<Authors>YHFlow</Authors>
+		<Company>YHFlow</Company>
 		<Version>10.0.0</Version>
-		<RepositoryUrl>https://github.com/fullstackhero/dotnet-starter-kit</RepositoryUrl>
-		<PackageTags>FSH;FullStackHero;Modular;CQRS;VerticalSlice;DotNet;CleanArchitecture</PackageTags>
+		<RepositoryUrl>https://github.com/YHFlow/dotnet-starter-kit</RepositoryUrl>
+		<PackageTags>YH;YHFlow;Modular;CQRS;VerticalSlice;DotNet;CleanArchitecture</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageProjectUrl>https://fullstackhero.net</PackageProjectUrl>
-		<Description>FullStackHero .NET Starter Kit - A production-ready modular .NET framework for building enterprise applications</Description>
+		<PackageProjectUrl>https://YHFlow.net</PackageProjectUrl>
+		<Description>YHFlow .NET Starter Kit - A production-ready modular .NET framework for building enterprise applications</Description>
 		<!--
 		  Distribution model = SOURCE OWNERSHIP. Only TWO packages ship to NuGet.org:
-		  FullStackHero.NET.StarterKit (template, in templates/) and FullStackHero.CLI
+		  YHFlow.NET.StarterKit (template, in templates/) and YHFlow.CLI
 		  (src/Tools/CLI). The template scaffolds full, owned source; modules/framework
 		  are consumed via ProjectReference, never as binary NuGets. So pack is OFF by
 		  default here and explicitly re-enabled ONLY on the CLI. This prevents the 33

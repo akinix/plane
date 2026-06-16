@@ -1,14 +1,14 @@
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Identity.Contracts.DTOs;
-using FSH.Modules.Identity.Contracts.Services;
-using FSH.Modules.Identity.Contracts.v1.Groups.UpdateGroup;
-using FSH.Modules.Identity.Data;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.Services;
+using YH.Modules.Identity.Contracts.v1.Groups.UpdateGroup;
+using YH.Modules.Identity.Data;
+using YH.Modules.Identity.Domain;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Identity.Features.v1.Groups.UpdateGroup;
+namespace YH.Modules.Identity.Features.v1.Groups.UpdateGroup;
 
 public sealed class UpdateGroupCommandHandler : ICommandHandler<UpdateGroupCommand, GroupDto>
 {

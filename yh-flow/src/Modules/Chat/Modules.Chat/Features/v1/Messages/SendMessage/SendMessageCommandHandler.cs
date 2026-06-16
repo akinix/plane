@@ -1,21 +1,21 @@
 using System.Diagnostics;
 using System.Net;
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Eventing.Abstractions;
-using FSH.Framework.Web.Realtime;
-using FSH.Modules.Chat.Contracts.Events;
-using FSH.Modules.Chat.Contracts.v1.Commands;
-using FSH.Modules.Chat.Contracts.v1.DTOs;
-using FSH.Modules.Chat.Data;
-using FSH.Modules.Chat.Domain;
-using FSH.Modules.Chat.Features.v1.Internal;
-using FSH.Modules.Chat.Services;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Eventing.Abstractions;
+using YH.Framework.Web.Realtime;
+using YH.Modules.Chat.Contracts.Events;
+using YH.Modules.Chat.Contracts.v1.Commands;
+using YH.Modules.Chat.Contracts.v1.DTOs;
+using YH.Modules.Chat.Data;
+using YH.Modules.Chat.Domain;
+using YH.Modules.Chat.Features.v1.Internal;
+using YH.Modules.Chat.Services;
 using Mediator;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Chat.Features.v1.Messages.SendMessage;
+namespace YH.Modules.Chat.Features.v1.Messages.SendMessage;
 
 public sealed class SendMessageCommandHandler(
     ChatDbContext db,

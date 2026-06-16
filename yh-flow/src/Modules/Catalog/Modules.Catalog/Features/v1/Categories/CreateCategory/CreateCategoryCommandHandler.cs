@@ -1,12 +1,12 @@
 using System.Net;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Catalog.Contracts.v1.Categories;
-using FSH.Modules.Catalog.Data;
-using FSH.Modules.Catalog.Domain;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Catalog.Contracts.v1.Categories;
+using YH.Modules.Catalog.Data;
+using YH.Modules.Catalog.Domain;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Catalog.Features.v1.Categories.CreateCategory;
+namespace YH.Modules.Catalog.Features.v1.Categories.CreateCategory;
 
 public sealed class CreateCategoryCommandHandler(CatalogDbContext dbContext)
     : ICommandHandler<CreateCategoryCommand, Guid>

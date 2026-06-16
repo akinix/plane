@@ -1,10 +1,10 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Identity.Domain;
-using FSH.Modules.Notifications.Contracts.v1.DTOs;
-using FSH.Modules.Notifications.Data;
-using FSH.Modules.Notifications.Domain;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Identity.Domain;
+using YH.Modules.Notifications.Contracts.v1.DTOs;
+using YH.Modules.Notifications.Data;
+using YH.Modules.Notifications.Domain;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;

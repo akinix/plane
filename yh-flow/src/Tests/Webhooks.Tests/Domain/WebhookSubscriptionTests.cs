@@ -1,4 +1,4 @@
-using FSH.Modules.Webhooks.Domain;
+using YH.Modules.Webhooks.Domain;
 
 namespace Webhooks.Tests.Domain;
 

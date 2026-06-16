@@ -1,7 +1,7 @@
 using FluentValidation;
-using FSH.Modules.Webhooks.Contracts.v1.CreateWebhookSubscription;
+using YH.Modules.Webhooks.Contracts.v1.CreateWebhookSubscription;
 
-namespace FSH.Modules.Webhooks.Features.v1.CreateWebhookSubscription;
+namespace YH.Modules.Webhooks.Features.v1.CreateWebhookSubscription;
 
 public sealed class CreateWebhookSubscriptionCommandValidator : AbstractValidator<CreateWebhookSubscriptionCommand>
 {

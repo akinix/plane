@@ -1,13 +1,13 @@
-using FSH.Framework.Caching;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Identity.Contracts.Services;
-using FSH.Modules.Identity.Contracts.v1.Impersonation;
-using FSH.Modules.Identity.Data;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Caching;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Identity.Contracts.Services;
+using YH.Modules.Identity.Contracts.v1.Impersonation;
+using YH.Modules.Identity.Data;
+using YH.Modules.Identity.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Hybrid;
 
-namespace FSH.Modules.Identity.Services;
+namespace YH.Modules.Identity.Services;
 
 internal sealed class ImpersonationGrantService(
     IdentityDbContext db,

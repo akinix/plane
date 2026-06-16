@@ -1,10 +1,10 @@
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Webhooks.Contracts.v1.DeleteWebhookSubscription;
-using FSH.Modules.Webhooks.Data;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Webhooks.Contracts.v1.DeleteWebhookSubscription;
+using YH.Modules.Webhooks.Data;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Webhooks.Features.v1.DeleteWebhookSubscription;
+namespace YH.Modules.Webhooks.Features.v1.DeleteWebhookSubscription;
 
 public sealed class DeleteWebhookSubscriptionCommandHandler(
     WebhookDbContext dbContext) : ICommandHandler<DeleteWebhookSubscriptionCommand>

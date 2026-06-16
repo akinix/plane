@@ -1,13 +1,13 @@
-using FSH.Modules.Billing.Contracts.Authorization;
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Modules.Billing.Contracts;
-using FSH.Modules.Billing.Contracts.v1.Invoices;
+using YH.Modules.Billing.Contracts.Authorization;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Billing.Contracts;
+using YH.Modules.Billing.Contracts.v1.Invoices;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Billing.Features.v1.Invoices.GetInvoices;
+namespace YH.Modules.Billing.Features.v1.Invoices.GetInvoices;
 
 public static class GetInvoicesEndpoint
 {

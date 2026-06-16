@@ -1,6 +1,6 @@
-using FSH.Framework.Core.Domain;
+using YH.Framework.Core.Domain;
 
-namespace FSH.Modules.Identity.Domain.Events;
+namespace YH.Modules.Identity.Domain.Events;
 
 /// <summary>Raised when a user account is deactivated.</summary>
 public sealed record UserDeactivatedEvent(

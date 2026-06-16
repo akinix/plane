@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<RootNamespace>FSH.Modules.Tickets</RootNamespace>
-		<AssemblyName>FSH.Modules.Tickets</AssemblyName>
+		<RootNamespace>YH.Modules.Tickets</RootNamespace>
+		<AssemblyName>YH.Modules.Tickets</AssemblyName>
 		<NoWarn>$(NoWarn);CA1031;CA1812;CA1859;S3267</NoWarn>
 	</PropertyGroup>
 

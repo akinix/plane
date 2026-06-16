@@ -1,7 +1,7 @@
 using AutoFixture;
-using FSH.Modules.Identity.Contracts.Services;
-using FSH.Modules.Identity.Contracts.v1.Users.ConfirmEmail;
-using FSH.Modules.Identity.Features.v1.Users.ConfirmEmail;
+using YH.Modules.Identity.Contracts.Services;
+using YH.Modules.Identity.Contracts.v1.Users.ConfirmEmail;
+using YH.Modules.Identity.Features.v1.Users.ConfirmEmail;
 using NSubstitute;
 using Shouldly;
 using Xunit;

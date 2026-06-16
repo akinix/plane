@@ -1,4 +1,4 @@
-namespace FSH.Framework.Web.Sse;
+namespace YH.Framework.Web.Sse;
 
 /// <summary>
 /// Represents a Server-Sent Event to push to connected clients.

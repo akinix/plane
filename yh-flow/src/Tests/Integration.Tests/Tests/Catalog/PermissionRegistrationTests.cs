@@ -1,10 +1,10 @@
-using FSH.Framework.Shared.Constants;
-using FSH.Modules.Auditing.Contracts.Authorization;
-using FSH.Modules.Billing.Contracts.Authorization;
-using FSH.Modules.Catalog.Contracts.Authorization;
-using FSH.Modules.Identity.Contracts.Authorization;
-using FSH.Modules.Multitenancy.Contracts.Authorization;
-using FSH.Modules.Tickets.Contracts.Authorization;
+using YH.Framework.Shared.Constants;
+using YH.Modules.Auditing.Contracts.Authorization;
+using YH.Modules.Billing.Contracts.Authorization;
+using YH.Modules.Catalog.Contracts.Authorization;
+using YH.Modules.Identity.Contracts.Authorization;
+using YH.Modules.Multitenancy.Contracts.Authorization;
+using YH.Modules.Tickets.Contracts.Authorization;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 

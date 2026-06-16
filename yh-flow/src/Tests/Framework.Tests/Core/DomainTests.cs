@@ -1,4 +1,4 @@
-using FSH.Framework.Core.Domain;
+using YH.Framework.Core.Domain;
 
 namespace Framework.Tests.Core;
 

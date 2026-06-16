@@ -2,12 +2,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Billing.Contracts;
-using FSH.Modules.Billing.Contracts.Dtos;
-using FSH.Modules.Billing.Data;
-using FSH.Modules.Billing.Domain;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Billing.Contracts;
+using YH.Modules.Billing.Contracts.Dtos;
+using YH.Modules.Billing.Data;
+using YH.Modules.Billing.Domain;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 

@@ -1,4 +1,4 @@
-namespace FSH.Framework.Shared.Constants;
+namespace YH.Framework.Shared.Constants;
 
 /// <summary>
 /// Central permission registry. Each module/component contributes its own permissions

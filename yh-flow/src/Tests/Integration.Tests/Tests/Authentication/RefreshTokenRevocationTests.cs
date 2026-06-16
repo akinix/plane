@@ -1,5 +1,5 @@
 using Integration.Tests.Infrastructure;
-using FSH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.DTOs;
 using System.Net.Http.Json;
 using System.Net;
 using Shouldly;

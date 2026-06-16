@@ -1,5 +1,5 @@
-using FSH.Modules.Chat.Domain;
-using FSH.Modules.Chat.Domain.Events;
+using YH.Modules.Chat.Domain;
+using YH.Modules.Chat.Domain.Events;
 
 namespace Chat.Tests.Domain;
 

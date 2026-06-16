@@ -1,12 +1,12 @@
-using FSH.Modules.Auditing.Contracts;
-using FSH.Modules.Auditing.Contracts.Dtos;
-using FSH.Modules.Auditing.Contracts.v1.GetExceptionAudits;
-using FSH.Modules.Auditing.Persistence;
+using YH.Modules.Auditing.Contracts;
+using YH.Modules.Auditing.Contracts.Dtos;
+using YH.Modules.Auditing.Contracts.v1.GetExceptionAudits;
+using YH.Modules.Auditing.Persistence;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
-using static FSH.Modules.Auditing.Persistence.AuditJsonbFunctions;
+using static YH.Modules.Auditing.Persistence.AuditJsonbFunctions;
 
-namespace FSH.Modules.Auditing.Features.v1.GetExceptionAudits;
+namespace YH.Modules.Auditing.Features.v1.GetExceptionAudits;
 
 public sealed class GetExceptionAuditsQueryHandler : IQueryHandler<GetExceptionAuditsQuery, IReadOnlyList<AuditSummaryDto>>
 {

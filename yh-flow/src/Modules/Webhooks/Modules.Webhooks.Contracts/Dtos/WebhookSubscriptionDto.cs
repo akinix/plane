@@ -1,4 +1,4 @@
-namespace FSH.Modules.Webhooks.Contracts.Dtos;
+namespace YH.Modules.Webhooks.Contracts.Dtos;
 
 public sealed class WebhookSubscriptionDto
 {

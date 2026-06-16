@@ -1,7 +1,7 @@
 using FluentValidation;
-using FSH.Modules.Catalog.Contracts.v1.Brands;
+using YH.Modules.Catalog.Contracts.v1.Brands;
 
-namespace FSH.Modules.Catalog.Features.v1.Brands.UpdateBrand;
+namespace YH.Modules.Catalog.Features.v1.Brands.UpdateBrand;
 
 public sealed class UpdateBrandCommandValidator : AbstractValidator<UpdateBrandCommand>
 {

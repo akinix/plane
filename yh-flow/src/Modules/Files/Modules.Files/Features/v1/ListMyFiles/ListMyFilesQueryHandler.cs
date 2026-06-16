@@ -1,16 +1,16 @@
 using System.Collections.ObjectModel;
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Storage.Services;
-using FSH.Modules.Files.Contracts.v1.DTOs;
-using FSH.Modules.Files.Contracts.v1.Queries;
-using FSH.Modules.Files.Data;
-using FSH.Modules.Files.Domain;
-using FSH.Modules.Files.Features.v1.Internal;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Storage.Services;
+using YH.Modules.Files.Contracts.v1.DTOs;
+using YH.Modules.Files.Contracts.v1.Queries;
+using YH.Modules.Files.Data;
+using YH.Modules.Files.Domain;
+using YH.Modules.Files.Features.v1.Internal;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Files.Features.v1.ListMyFiles;
+namespace YH.Modules.Files.Features.v1.ListMyFiles;
 
 public sealed class ListMyFilesQueryHandler(
     FilesDbContext db,

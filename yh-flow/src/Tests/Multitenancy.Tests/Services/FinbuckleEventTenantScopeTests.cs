@@ -1,7 +1,7 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Multitenancy.Services;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Multitenancy.Services;
 using Shouldly;
 using Xunit;
 

@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace FSH.Framework.Eventing.Outbox;
+namespace YH.Framework.Eventing.Outbox;
 
 /// <summary>
 /// Background service that periodically dispatches outbox messages.

@@ -1,6 +1,6 @@
-using FSH.Framework.Eventing.Abstractions;
+using YH.Framework.Eventing.Abstractions;
 
-namespace FSH.Modules.Chat.Contracts.Events;
+namespace YH.Modules.Chat.Contracts.Events;
 
 /// <summary>
 /// One event per resolved <c>@user</c> mention inside a sent <see cref="MessageId"/>. Consumed by

@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Constants;
+using YH.Framework.Shared.Constants;
 
-namespace FSH.Modules.Identity.Contracts.Authorization;
+namespace YH.Modules.Identity.Contracts.Authorization;
 
 /// <summary>
 /// Identity module permissions. Single source of truth — string literals (used by

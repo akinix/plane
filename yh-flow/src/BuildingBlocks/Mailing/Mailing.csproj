@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<RootNamespace>FSH.Framework.Mailing</RootNamespace>
-		<AssemblyName>FSH.Framework.Mailing</AssemblyName>
+		<RootNamespace>YH.Framework.Mailing</RootNamespace>
+		<AssemblyName>YH.Framework.Mailing</AssemblyName>
 	</PropertyGroup>
 	
 	<ItemGroup>

@@ -1,11 +1,11 @@
-using FSH.Framework.Quota;
-using FSH.Framework.Shared.Quota;
-using FSH.Modules.Identity.Data;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Quota;
+using YH.Framework.Shared.Quota;
+using YH.Modules.Identity.Data;
+using YH.Modules.Identity.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Identity.Services;
+namespace YH.Modules.Identity.Services;
 
 /// <summary>
 /// Reports the live user count for a tenant as a quota gauge. Uses the tenant-scoped

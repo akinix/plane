@@ -1,4 +1,4 @@
-using FSH.Framework.Core.Exceptions;
+using YH.Framework.Core.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,17 +1,17 @@
 using Finbuckle.MultiTenant.Abstractions;
 using Finbuckle.MultiTenant.Identity.EntityFrameworkCore;
-using FSH.Framework.Eventing.Inbox;
-using FSH.Framework.Eventing.Outbox;
-using FSH.Framework.Persistence;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Eventing.Inbox;
+using YH.Framework.Eventing.Outbox;
+using YH.Framework.Persistence;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Identity.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace FSH.Modules.Identity.Data;
+namespace YH.Modules.Identity.Data;
 
 public class IdentityDbContext : MultiTenantIdentityDbContext<FshUser,
     FshRole,

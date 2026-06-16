@@ -1,11 +1,11 @@
 using System.Text.Json;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Shared.Quota;
-using FSH.Modules.Billing.Contracts.Dtos;
-using FSH.Modules.Billing.Data;
-using FSH.Modules.Billing.Domain;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Quota;
+using YH.Modules.Billing.Contracts.Dtos;
+using YH.Modules.Billing.Data;
+using YH.Modules.Billing.Domain;
 using Integration.Tests.Infrastructure;
 
 namespace Integration.Tests.Tests.Billing;
@@ -319,7 +319,7 @@ public sealed class UsageSnapshotQueryTests
             new MultiTenantContext<AppTenantInfo>(tenant);
 
         var userManager = scope.ServiceProvider
-            .GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<FSH.Modules.Identity.Domain.FshUser>>();
+            .GetRequiredService<Microsoft.AspNetCore.Identity.UserManager<YH.Modules.Identity.Domain.FshUser>>();
         var user = await userManager.FindByIdAsync(userId);
         user.ShouldNotBeNull();
         if (!user!.EmailConfirmed)

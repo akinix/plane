@@ -1,13 +1,13 @@
-using FSH.Modules.Auditing.Contracts.Authorization;
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Modules.Auditing.Contracts.Dtos;
-using FSH.Modules.Auditing.Contracts.v1.GetAuditsByTrace;
+using YH.Modules.Auditing.Contracts.Authorization;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Auditing.Contracts.Dtos;
+using YH.Modules.Auditing.Contracts.v1.GetAuditsByTrace;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Auditing.Features.v1.GetAuditsByTrace;
+namespace YH.Modules.Auditing.Features.v1.GetAuditsByTrace;
 
 public static class GetAuditsByTraceEndpoint
 {

@@ -1,11 +1,11 @@
 using System.Text.Json;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Auditing;
-using FSH.Modules.Auditing.Contracts;
-using FSH.Modules.Auditing.Contracts.Dtos;
-using FSH.Modules.Auditing.Persistence;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Auditing;
+using YH.Modules.Auditing.Contracts;
+using YH.Modules.Auditing.Contracts.Dtos;
+using YH.Modules.Auditing.Persistence;
 using Integration.Tests.Infrastructure;
 
 namespace Integration.Tests.Tests.Auditing;
@@ -89,7 +89,7 @@ public sealed class AuditPayloadFilterTests
     {
         // Arrange
         var correlationId = NewCorrelationId();
-        var exceptionType = $"FSH.Test.WidgetException_{Guid.NewGuid():N}";
+        var exceptionType = $"YH.Test.WidgetException_{Guid.NewGuid():N}";
         var payload = SerializeException(ExceptionArea.Api, exceptionType, "/api/v1/widgets");
         await SeedAuditRecordAsync(AuditEventType.Exception, AuditSeverity.Error, correlationId, payload);
 

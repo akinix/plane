@@ -1,9 +1,9 @@
-using FSH.Modules.Identity.Contracts.DTOs;
-using FSH.Modules.Identity.Contracts.Services;
-using FSH.Modules.Identity.Contracts.v1.Users.GetUserRoles;
+using YH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.Services;
+using YH.Modules.Identity.Contracts.v1.Users.GetUserRoles;
 using Mediator;
 
-namespace FSH.Modules.Identity.Features.v1.Users.GetUserRoles;
+namespace YH.Modules.Identity.Features.v1.Users.GetUserRoles;
 
 public sealed class GetUserRolesQueryHandler : IQueryHandler<GetUserRolesQuery, List<UserRoleDto>>
 {

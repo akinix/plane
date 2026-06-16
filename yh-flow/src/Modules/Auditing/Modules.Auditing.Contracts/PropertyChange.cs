@@ -1,4 +1,4 @@
-﻿namespace FSH.Modules.Auditing.Contracts;
+namespace YH.Modules.Auditing.Contracts;
 
 /// <summary>
 /// A single property delta for entity-change auditing.

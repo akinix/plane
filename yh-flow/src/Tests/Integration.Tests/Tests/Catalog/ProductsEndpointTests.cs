@@ -1,8 +1,8 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Catalog.Contracts.Dtos;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Catalog.Contracts.Dtos;
+using YH.Modules.Identity.Domain;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;

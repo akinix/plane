@@ -1,8 +1,8 @@
-using FSH.Framework.Persistence;
+using YH.Framework.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.Modules.Files.Data;
+namespace YH.Modules.Files.Data;
 
 public sealed class FilesDbInitializer(
     FilesDbContext dbContext,

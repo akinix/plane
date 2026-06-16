@@ -1,8 +1,8 @@
-using FSH.Modules.Notifications.Domain;
+using YH.Modules.Notifications.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FSH.Modules.Notifications.Data.Configurations;
+namespace YH.Modules.Notifications.Data.Configurations;
 
 internal sealed class NotificationConfiguration : IEntityTypeConfiguration<Notification>
 {

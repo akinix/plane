@@ -1,4 +1,4 @@
-﻿namespace FSH.Framework.Web;
+namespace YH.Framework.Web;
 
 public interface IFshWeb
 {

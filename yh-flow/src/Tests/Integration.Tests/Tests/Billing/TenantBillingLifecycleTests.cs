@@ -1,8 +1,8 @@
 #pragma warning disable S1144, S3459 // members populated by JSON deserialization
 using System.Text.Json;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Billing.Contracts;
-using FSH.Modules.Billing.Contracts.Dtos;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Billing.Contracts;
+using YH.Modules.Billing.Contracts.Dtos;
 using Integration.Tests.Infrastructure;
 
 namespace Integration.Tests.Tests.Billing;

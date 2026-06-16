@@ -1,22 +1,22 @@
 using System.Diagnostics;
 using System.Net;
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Eventing.Abstractions;
-using FSH.Framework.Quota;
-using FSH.Framework.Shared.Quota;
-using FSH.Framework.Storage.Services;
-using FSH.Modules.Files.Contracts.Events;
-using FSH.Modules.Files.Contracts.v1.Commands;
-using FSH.Modules.Files.Contracts.v1.DTOs;
-using FSH.Modules.Files.Data;
-using FSH.Modules.Files.Domain;
-using FSH.Modules.Files.Features.v1.Internal;
-using FSH.Modules.Files.Services;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Eventing.Abstractions;
+using YH.Framework.Quota;
+using YH.Framework.Shared.Quota;
+using YH.Framework.Storage.Services;
+using YH.Modules.Files.Contracts.Events;
+using YH.Modules.Files.Contracts.v1.Commands;
+using YH.Modules.Files.Contracts.v1.DTOs;
+using YH.Modules.Files.Data;
+using YH.Modules.Files.Domain;
+using YH.Modules.Files.Features.v1.Internal;
+using YH.Modules.Files.Services;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Files.Features.v1.FinalizeUpload;
+namespace YH.Modules.Files.Features.v1.FinalizeUpload;
 
 public sealed class FinalizeUploadCommandHandler(
     FilesDbContext db,

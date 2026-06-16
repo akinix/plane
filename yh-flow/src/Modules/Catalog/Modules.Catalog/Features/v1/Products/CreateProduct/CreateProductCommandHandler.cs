@@ -1,12 +1,12 @@
 using System.Net;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Catalog.Contracts.v1.Products;
-using FSH.Modules.Catalog.Data;
-using FSH.Modules.Catalog.Domain;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Catalog.Contracts.v1.Products;
+using YH.Modules.Catalog.Data;
+using YH.Modules.Catalog.Domain;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Catalog.Features.v1.Products.CreateProduct;
+namespace YH.Modules.Catalog.Features.v1.Products.CreateProduct;
 
 public sealed class CreateProductCommandHandler(CatalogDbContext dbContext)
     : ICommandHandler<CreateProductCommand, Guid>

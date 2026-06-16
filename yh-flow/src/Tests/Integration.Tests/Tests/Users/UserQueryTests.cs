@@ -1,7 +1,7 @@
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 using Integration.Tests.Tests.Sessions;
-using UserRoleDto = FSH.Modules.Identity.Contracts.DTOs.UserRoleDto;
+using UserRoleDto = YH.Modules.Identity.Contracts.DTOs.UserRoleDto;
 
 namespace Integration.Tests.Tests.Users;
 

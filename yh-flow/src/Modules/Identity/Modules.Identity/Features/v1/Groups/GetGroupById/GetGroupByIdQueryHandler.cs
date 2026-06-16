@@ -1,11 +1,11 @@
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Identity.Contracts.DTOs;
-using FSH.Modules.Identity.Contracts.v1.Groups.GetGroupById;
-using FSH.Modules.Identity.Data;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.v1.Groups.GetGroupById;
+using YH.Modules.Identity.Data;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Identity.Features.v1.Groups.GetGroupById;
+namespace YH.Modules.Identity.Features.v1.Groups.GetGroupById;
 
 public sealed class GetGroupByIdQueryHandler : IQueryHandler<GetGroupByIdQuery, GroupDto>
 {

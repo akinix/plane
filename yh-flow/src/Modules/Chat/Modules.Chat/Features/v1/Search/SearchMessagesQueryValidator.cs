@@ -1,7 +1,7 @@
 using FluentValidation;
-using FSH.Modules.Chat.Contracts.v1.Queries;
+using YH.Modules.Chat.Contracts.v1.Queries;
 
-namespace FSH.Modules.Chat.Features.v1.Search;
+namespace YH.Modules.Chat.Features.v1.Search;
 
 public sealed class SearchMessagesQueryValidator : AbstractValidator<SearchMessagesQuery>
 {

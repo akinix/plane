@@ -60,7 +60,7 @@ public sealed class AuditQueryTenantIsolationTests
         byTrace.ShouldBeEmpty();
     }
 
-    private static async Task<FSH.Modules.Auditing.Contracts.Dtos.AuditSummaryDto> PollForOtherTenantAuditAsync(
+    private static async Task<YH.Modules.Auditing.Contracts.Dtos.AuditSummaryDto> PollForOtherTenantAuditAsync(
         HttpClient otherClient, string tenantId)
     {
         // The other tenant authenticated (Security audit) and now hits an

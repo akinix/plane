@@ -1,14 +1,14 @@
-using FSH.Modules.Identity.Contracts.Authorization;
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Modules.Identity.Contracts.v1.Impersonation;
-using FSH.Modules.Identity.Contracts.v1.Impersonation.GetImpersonationGrants;
+using YH.Modules.Identity.Contracts.Authorization;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Identity.Contracts.v1.Impersonation;
+using YH.Modules.Identity.Contracts.v1.Impersonation.GetImpersonationGrants;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Identity.Features.v1.Impersonation.GetImpersonationGrants;
+namespace YH.Modules.Identity.Features.v1.Impersonation.GetImpersonationGrants;
 
 public static class GetImpersonationGrantsEndpoint
 {

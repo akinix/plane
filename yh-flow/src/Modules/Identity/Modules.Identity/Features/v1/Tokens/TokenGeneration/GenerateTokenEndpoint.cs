@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Identity.Contracts.DTOs;
-using FSH.Modules.Identity.Contracts.v1.Tokens.TokenGeneration;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.v1.Tokens.TokenGeneration;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using System.ComponentModel;
 
-namespace FSH.Modules.Identity.Features.v1.Tokens.TokenGeneration;
+namespace YH.Modules.Identity.Features.v1.Tokens.TokenGeneration;
 
 public static class GenerateTokenEndpoint
 {

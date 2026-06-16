@@ -1,13 +1,13 @@
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Persistence.Context;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Files.Domain;
+using YH.Framework.Persistence.Context;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Files.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace FSH.Modules.Files.Data;
+namespace YH.Modules.Files.Data;
 
 public sealed class FilesDbContext : BaseDbContext
 {

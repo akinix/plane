@@ -1,4 +1,4 @@
-using FSH.Modules.Identity.Contracts.Authorization;
+using YH.Modules.Identity.Contracts.Authorization;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 

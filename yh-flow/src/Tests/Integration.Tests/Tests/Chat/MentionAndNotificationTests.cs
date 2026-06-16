@@ -1,9 +1,9 @@
 using System.Net.Http.Json;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Identity.Domain;
-using FSH.Modules.Notifications.Contracts.v1.DTOs;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Identity.Domain;
+using YH.Modules.Notifications.Contracts.v1.DTOs;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;

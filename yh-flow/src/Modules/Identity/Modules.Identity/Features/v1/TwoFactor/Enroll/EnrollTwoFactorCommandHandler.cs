@@ -1,13 +1,13 @@
 using System.Text.Encodings.Web;
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Identity.Contracts.DTOs;
-using FSH.Modules.Identity.Contracts.v1.TwoFactor;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.v1.TwoFactor;
+using YH.Modules.Identity.Domain;
 using Mediator;
 using Microsoft.AspNetCore.Identity;
 
-namespace FSH.Modules.Identity.Features.v1.TwoFactor.Enroll;
+namespace YH.Modules.Identity.Features.v1.TwoFactor.Enroll;
 
 public sealed class EnrollTwoFactorCommandHandler
     : ICommandHandler<EnrollTwoFactorCommand, TwoFactorEnrollmentResponse>

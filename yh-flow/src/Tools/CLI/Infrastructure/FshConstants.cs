@@ -1,4 +1,4 @@
-namespace FSH.CLI.Infrastructure;
+namespace YH.CLI.Infrastructure;
 
 internal static class FshConstants
 {

@@ -1,16 +1,16 @@
-using FSH.Framework.Caching;
-using FSH.Framework.Shared.Constants;
-using FSH.Framework.Shared.Identity.Claims;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Identity.Data;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Caching;
+using YH.Framework.Shared.Constants;
+using YH.Framework.Shared.Identity.Claims;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Identity.Data;
+using YH.Modules.Identity.Domain;
 using Finbuckle.MultiTenant.Abstractions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.Modules.Identity.Authorization;
+namespace YH.Modules.Identity.Authorization;
 
 /// <summary>
 /// Adds missing permission claims to the built-in roles (<see cref="RoleConstants.Admin"/>,

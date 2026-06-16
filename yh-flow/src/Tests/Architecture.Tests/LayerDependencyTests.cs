@@ -1,4 +1,4 @@
-using FSH.Framework.Core;
+using YH.Framework.Core;
 using NetArchTest.Rules;
 using Shouldly;
 using System.Reflection;

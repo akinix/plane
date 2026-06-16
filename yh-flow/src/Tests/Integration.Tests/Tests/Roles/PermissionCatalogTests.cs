@@ -1,6 +1,6 @@
 using System.Net.Http.Json;
-using FSH.Framework.Shared.Constants;
-using FSH.Modules.Identity.Contracts.DTOs;
+using YH.Framework.Shared.Constants;
+using YH.Modules.Identity.Contracts.DTOs;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 

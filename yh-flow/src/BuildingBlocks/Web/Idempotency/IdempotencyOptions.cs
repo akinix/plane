@@ -1,4 +1,4 @@
-namespace FSH.Framework.Web.Idempotency;
+namespace YH.Framework.Web.Idempotency;
 
 /// <summary>
 /// Configuration options for HTTP request idempotency.

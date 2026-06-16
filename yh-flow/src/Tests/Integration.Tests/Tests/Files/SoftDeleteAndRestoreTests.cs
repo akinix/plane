@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Files.Contracts.v1.DTOs;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Files.Contracts.v1.DTOs;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 

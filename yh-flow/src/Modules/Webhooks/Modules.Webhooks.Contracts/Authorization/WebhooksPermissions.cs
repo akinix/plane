@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Constants;
+using YH.Framework.Shared.Constants;
 
-namespace FSH.Modules.Webhooks.Contracts.Authorization;
+namespace YH.Modules.Webhooks.Contracts.Authorization;
 
 public static class WebhooksPermissions
 {

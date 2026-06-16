@@ -1,4 +1,4 @@
-namespace FSH.Modules.Billing.Contracts;
+namespace YH.Modules.Billing.Contracts;
 
 public enum InvoiceStatus
 {

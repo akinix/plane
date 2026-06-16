@@ -1,4 +1,4 @@
-﻿namespace FSH.Modules.Auditing.Contracts;
+namespace YH.Modules.Auditing.Contracts;
 
 public static class ExceptionSeverityClassifier
 {

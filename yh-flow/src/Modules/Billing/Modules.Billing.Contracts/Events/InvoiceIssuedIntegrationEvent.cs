@@ -1,6 +1,6 @@
-using FSH.Framework.Eventing.Abstractions;
+using YH.Framework.Eventing.Abstractions;
 
-namespace FSH.Modules.Billing.Contracts.Events;
+namespace YH.Modules.Billing.Contracts.Events;
 
 /// <summary>
 /// Raised when an invoice transitions to Issued and becomes a real bill (e.g. the subscription invoice

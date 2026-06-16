@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using System;
 using AspNetCorsOptions = Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions;
 
-namespace FSH.Framework.Web.Cors;
+namespace YH.Framework.Web.Cors;
 
 public static class Extensions
 {

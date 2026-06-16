@@ -1,13 +1,13 @@
-using FSH.Modules.Identity.Contracts.Authorization;
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Modules.Identity.Contracts.v1.Sessions.RevokeSession;
+using YH.Modules.Identity.Contracts.Authorization;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Identity.Contracts.v1.Sessions.RevokeSession;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Identity.Features.v1.Sessions.RevokeSession;
+namespace YH.Modules.Identity.Features.v1.Sessions.RevokeSession;
 
 public static class RevokeSessionEndpoint
 {

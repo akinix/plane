@@ -1,10 +1,10 @@
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Catalog.Contracts.v1.Products.SetProductThumbnail;
-using FSH.Modules.Catalog.Data;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Catalog.Contracts.v1.Products.SetProductThumbnail;
+using YH.Modules.Catalog.Data;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Catalog.Features.v1.Products.SetProductThumbnail;
+namespace YH.Modules.Catalog.Features.v1.Products.SetProductThumbnail;
 
 public sealed class SetProductThumbnailCommandHandler(CatalogDbContext dbContext)
     : ICommandHandler<SetProductThumbnailCommand, Unit>

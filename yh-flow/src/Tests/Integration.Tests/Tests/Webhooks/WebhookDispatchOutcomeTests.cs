@@ -1,8 +1,8 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Webhooks.Data;
-using FSH.Modules.Webhooks.Services;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Webhooks.Data;
+using YH.Modules.Webhooks.Services;
 using Integration.Tests.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -159,7 +159,7 @@ public sealed class WebhookDispatchOutcomeTests
             cancellationToken: CancellationToken.None);
     }
 
-    private static async Task<FSH.Modules.Webhooks.Domain.WebhookDelivery?> ReadLatestDeliveryAsync(
+    private static async Task<YH.Modules.Webhooks.Domain.WebhookDelivery?> ReadLatestDeliveryAsync(
         WebApplicationFactory<Program> capturingFactory, Guid subscriptionId)
     {
         using var scope = capturingFactory.Services.CreateScope();

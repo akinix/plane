@@ -1,7 +1,7 @@
-using FSH.Framework.Core.Domain;
-using FSH.Modules.Tickets.Contracts.Dtos;
+using YH.Framework.Core.Domain;
+using YH.Modules.Tickets.Contracts.Dtos;
 
-namespace FSH.Modules.Tickets.Domain.Events;
+namespace YH.Modules.Tickets.Domain.Events;
 
 public sealed record TicketCreatedDomainEvent(
     Guid TicketId,

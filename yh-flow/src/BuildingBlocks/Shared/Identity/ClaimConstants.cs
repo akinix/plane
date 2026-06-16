@@ -1,4 +1,4 @@
-﻿namespace FSH.Framework.Shared.Constants;
+namespace YH.Framework.Shared.Constants;
 
 public static class ClaimConstants
 {

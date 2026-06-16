@@ -1,11 +1,11 @@
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Persistence;
-using FSH.Modules.Catalog.Contracts.v1.Brands;
-using FSH.Modules.Catalog.Data;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Persistence;
+using YH.Modules.Catalog.Contracts.v1.Brands;
+using YH.Modules.Catalog.Data;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Catalog.Features.v1.Brands.RestoreBrand;
+namespace YH.Modules.Catalog.Features.v1.Brands.RestoreBrand;
 
 public sealed class RestoreBrandCommandHandler(CatalogDbContext dbContext)
     : ICommandHandler<RestoreBrandCommand, Guid>

@@ -1,4 +1,4 @@
-using FSH.Modules.Multitenancy.Provisioning;
+using YH.Modules.Multitenancy.Provisioning;
 
 namespace Multitenancy.Tests.Provisioning;
 

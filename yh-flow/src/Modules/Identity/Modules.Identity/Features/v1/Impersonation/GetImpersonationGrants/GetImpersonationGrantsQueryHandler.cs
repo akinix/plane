@@ -1,12 +1,12 @@
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Identity.Contracts.Services;
-using FSH.Modules.Identity.Contracts.v1.Impersonation;
-using FSH.Modules.Identity.Contracts.v1.Impersonation.GetImpersonationGrants;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Identity.Contracts.Services;
+using YH.Modules.Identity.Contracts.v1.Impersonation;
+using YH.Modules.Identity.Contracts.v1.Impersonation.GetImpersonationGrants;
 using Mediator;
 
-namespace FSH.Modules.Identity.Features.v1.Impersonation.GetImpersonationGrants;
+namespace YH.Modules.Identity.Features.v1.Impersonation.GetImpersonationGrants;
 
 public sealed class GetImpersonationGrantsQueryHandler(
     IImpersonationGrantService grantService,

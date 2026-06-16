@@ -1,10 +1,10 @@
-using FSH.Modules.Identity.Contracts.DTOs;
-using FSH.Modules.Identity.Contracts.v1.Groups.GetGroups;
-using FSH.Modules.Identity.Data;
+using YH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.v1.Groups.GetGroups;
+using YH.Modules.Identity.Data;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Identity.Features.v1.Groups.GetGroups;
+namespace YH.Modules.Identity.Features.v1.Groups.GetGroups;
 
 public sealed class GetGroupsQueryHandler : IQueryHandler<GetGroupsQuery, IEnumerable<GroupDto>>
 {

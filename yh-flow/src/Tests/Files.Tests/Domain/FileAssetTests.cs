@@ -1,6 +1,6 @@
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Files.Contracts.v1.DTOs;
-using FSH.Modules.Files.Domain;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Files.Contracts.v1.DTOs;
+using YH.Modules.Files.Domain;
 
 namespace Files.Tests.Domain;
 

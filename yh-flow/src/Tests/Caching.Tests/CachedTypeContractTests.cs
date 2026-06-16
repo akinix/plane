@@ -1,7 +1,7 @@
 using System.ComponentModel;
-using FSH.Framework.Web.Idempotency;
-using FSH.Modules.Identity;
-using FSH.Modules.Multitenancy.Contracts.Dtos;
+using YH.Framework.Web.Idempotency;
+using YH.Modules.Identity;
+using YH.Modules.Multitenancy.Contracts.Dtos;
 
 namespace Caching.Tests;
 
@@ -35,7 +35,7 @@ public sealed class CachedTypeContractTests
 
             // Reach into the Identity runtime assembly for the internal PermissionSet type.
             var permissionSet = typeof(IdentityModule).Assembly
-                .GetType("FSH.Modules.Identity.Caching.PermissionSet", throwOnError: false);
+                .GetType("YH.Modules.Identity.Caching.PermissionSet", throwOnError: false);
             if (permissionSet is not null)
             {
                 data.Add(permissionSet);

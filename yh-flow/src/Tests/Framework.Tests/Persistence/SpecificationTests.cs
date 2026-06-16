@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
-using FSH.Framework.Persistence;
-using FSH.Framework.Persistence.Specifications;
+using YH.Framework.Persistence;
+using YH.Framework.Persistence.Specifications;
 
 namespace Framework.Tests.Persistence;
 

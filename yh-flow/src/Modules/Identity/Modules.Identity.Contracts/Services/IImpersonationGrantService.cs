@@ -1,6 +1,6 @@
-using FSH.Modules.Identity.Contracts.v1.Impersonation;
+using YH.Modules.Identity.Contracts.v1.Impersonation;
 
-namespace FSH.Modules.Identity.Contracts.Services;
+namespace YH.Modules.Identity.Contracts.Services;
 
 /// <summary>
 /// Source of truth for impersonation grant lifecycle (issued → ended/revoked).

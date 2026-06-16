@@ -1,7 +1,7 @@
 using FluentValidation;
-using FSH.Modules.Catalog.Contracts.v1.Categories;
+using YH.Modules.Catalog.Contracts.v1.Categories;
 
-namespace FSH.Modules.Catalog.Features.v1.Categories.UpdateCategory;
+namespace YH.Modules.Catalog.Features.v1.Categories.UpdateCategory;
 
 public sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
 {

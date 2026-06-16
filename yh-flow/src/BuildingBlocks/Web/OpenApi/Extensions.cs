@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi;
 using Scalar.AspNetCore;
 
-namespace FSH.Framework.Web.OpenApi;
+namespace YH.Framework.Web.OpenApi;
 
 public static class Extensions
 {

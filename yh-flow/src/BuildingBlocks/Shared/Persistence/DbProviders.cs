@@ -1,4 +1,4 @@
-namespace FSH.Framework.Shared.Persistence;
+namespace YH.Framework.Shared.Persistence;
 
 /// <summary>
 /// Supported database providers for the starter kit.

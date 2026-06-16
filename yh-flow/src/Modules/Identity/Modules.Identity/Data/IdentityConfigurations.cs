@@ -1,10 +1,10 @@
 using Finbuckle.MultiTenant.EntityFrameworkCore.Extensions;
-using FSH.Modules.Identity.Domain;
+using YH.Modules.Identity.Domain;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FSH.Modules.Identity.Data;
+namespace YH.Modules.Identity.Data;
 
 public class ApplicationUserConfig : IEntityTypeConfiguration<FshUser>
 {

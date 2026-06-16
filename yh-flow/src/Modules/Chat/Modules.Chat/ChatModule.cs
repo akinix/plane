@@ -1,34 +1,34 @@
 using Asp.Versioning;
 using FluentValidation;
-using FSH.Framework.Persistence;
-using FSH.Framework.Shared.Constants;
-using FSH.Framework.Web.Modules;
-using FSH.Framework.Web.Realtime;
-using FSH.Modules.Chat.Contracts.Authorization;
-using FSH.Modules.Chat.Data;
-using FSH.Modules.Chat.Features.v1.Channels.AddChannelMembers;
-using FSH.Modules.Chat.Features.v1.Channels.ArchiveChannel;
-using FSH.Modules.Chat.Features.v1.Channels.CreateChannel;
-using FSH.Modules.Chat.Features.v1.Channels.DiscoverChannels;
-using FSH.Modules.Chat.Features.v1.Channels.FindOrCreateDm;
-using FSH.Modules.Chat.Features.v1.Channels.GetChannelById;
-using FSH.Modules.Chat.Features.v1.Channels.ListMyChannels;
-using FSH.Modules.Chat.Features.v1.Channels.MarkChannelRead;
-using FSH.Modules.Chat.Features.v1.Channels.RemoveChannelMember;
-using FSH.Modules.Chat.Features.v1.Channels.RestoreChannel;
-using FSH.Modules.Chat.Features.v1.Channels.UpdateChannel;
-using FSH.Modules.Chat.Features.v1.Messages.DeleteMessage;
-using FSH.Modules.Chat.Features.v1.Messages.EditMessage;
-using FSH.Modules.Chat.Features.v1.Messages.GetPinnedMessages;
-using FSH.Modules.Chat.Features.v1.Messages.ListChannelMessages;
-using FSH.Modules.Chat.Features.v1.Messages.ListMessageReplies;
-using FSH.Modules.Chat.Features.v1.Messages.PinMessage;
-using FSH.Modules.Chat.Features.v1.Messages.SendMessage;
-using FSH.Modules.Chat.Features.v1.Messages.UnpinMessage;
-using FSH.Modules.Chat.Features.v1.Reactions.AddReaction;
-using FSH.Modules.Chat.Features.v1.Reactions.RemoveReaction;
-using FSH.Modules.Chat.Features.v1.Search;
-using FSH.Modules.Chat.Services;
+using YH.Framework.Persistence;
+using YH.Framework.Shared.Constants;
+using YH.Framework.Web.Modules;
+using YH.Framework.Web.Realtime;
+using YH.Modules.Chat.Contracts.Authorization;
+using YH.Modules.Chat.Data;
+using YH.Modules.Chat.Features.v1.Channels.AddChannelMembers;
+using YH.Modules.Chat.Features.v1.Channels.ArchiveChannel;
+using YH.Modules.Chat.Features.v1.Channels.CreateChannel;
+using YH.Modules.Chat.Features.v1.Channels.DiscoverChannels;
+using YH.Modules.Chat.Features.v1.Channels.FindOrCreateDm;
+using YH.Modules.Chat.Features.v1.Channels.GetChannelById;
+using YH.Modules.Chat.Features.v1.Channels.ListMyChannels;
+using YH.Modules.Chat.Features.v1.Channels.MarkChannelRead;
+using YH.Modules.Chat.Features.v1.Channels.RemoveChannelMember;
+using YH.Modules.Chat.Features.v1.Channels.RestoreChannel;
+using YH.Modules.Chat.Features.v1.Channels.UpdateChannel;
+using YH.Modules.Chat.Features.v1.Messages.DeleteMessage;
+using YH.Modules.Chat.Features.v1.Messages.EditMessage;
+using YH.Modules.Chat.Features.v1.Messages.GetPinnedMessages;
+using YH.Modules.Chat.Features.v1.Messages.ListChannelMessages;
+using YH.Modules.Chat.Features.v1.Messages.ListMessageReplies;
+using YH.Modules.Chat.Features.v1.Messages.PinMessage;
+using YH.Modules.Chat.Features.v1.Messages.SendMessage;
+using YH.Modules.Chat.Features.v1.Messages.UnpinMessage;
+using YH.Modules.Chat.Features.v1.Reactions.AddReaction;
+using YH.Modules.Chat.Features.v1.Reactions.RemoveReaction;
+using YH.Modules.Chat.Features.v1.Search;
+using YH.Modules.Chat.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -36,7 +36,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 
-namespace FSH.Modules.Chat;
+namespace YH.Modules.Chat;
 
 /// <summary>
 /// Chat module: Slack-style messaging (DMs + group DMs + named channels). Module Order 800 places
@@ -66,7 +66,7 @@ public sealed class ChatModule : IModule
 
         // File attachments: members attach+read, only the uploader deletes. Registered as
         // IFileAccessPolicy so Files endpoints route through it for OwnerType=ChatChannel.
-        builder.Services.AddScoped<FSH.Modules.Files.Contracts.IFileAccessPolicy, Authorization.ChatChannelFileAccessPolicy>();
+        builder.Services.AddScoped<YH.Modules.Files.Contracts.IFileAccessPolicy, Authorization.ChatChannelFileAccessPolicy>();
 
         builder.Services.AddHealthChecks().AddDbContextCheck<ChatDbContext>(
             name: "db:chat",

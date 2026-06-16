@@ -2,17 +2,17 @@ using Amazon;
 using Amazon.Runtime;
 using Amazon.S3;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Quota;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Storage.Local;
-using FSH.Framework.Storage.S3;
-using FSH.Framework.Storage.Services;
+using YH.Framework.Quota;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Storage.Local;
+using YH.Framework.Storage.S3;
+using YH.Framework.Storage.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace FSH.Framework.Storage;
+namespace YH.Framework.Storage;
 
 public static class Extensions
 {

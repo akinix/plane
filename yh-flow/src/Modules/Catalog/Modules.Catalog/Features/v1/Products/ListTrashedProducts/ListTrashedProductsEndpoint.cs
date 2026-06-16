@@ -1,12 +1,12 @@
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Modules.Catalog.Contracts.Authorization;
-using FSH.Modules.Catalog.Contracts.v1.Products;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Catalog.Contracts.Authorization;
+using YH.Modules.Catalog.Contracts.v1.Products;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Catalog.Features.v1.Products.ListTrashedProducts;
+namespace YH.Modules.Catalog.Features.v1.Products.ListTrashedProducts;
 
 public static class ListTrashedProductsEndpoint
 {

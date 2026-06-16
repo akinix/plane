@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
-using FSH.Modules.Catalog.Contracts.Dtos;
-using FSH.Modules.Files.Contracts.v1.DTOs;
+using YH.Modules.Catalog.Contracts.Dtos;
+using YH.Modules.Files.Contracts.v1.DTOs;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 

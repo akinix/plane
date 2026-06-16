@@ -1,8 +1,8 @@
-using FSH.Modules.Auditing.Contracts;
-using FSH.Modules.Auditing.Contracts.Dtos;
+using YH.Modules.Auditing.Contracts;
+using YH.Modules.Auditing.Contracts.Dtos;
 using Mediator;
 
-namespace FSH.Modules.Auditing.Contracts.v1.GetSecurityAudits;
+namespace YH.Modules.Auditing.Contracts.v1.GetSecurityAudits;
 
 public sealed class GetSecurityAuditsQuery : IQuery<IReadOnlyList<AuditSummaryDto>>
 {

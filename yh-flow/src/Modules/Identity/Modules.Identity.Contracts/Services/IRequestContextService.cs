@@ -1,6 +1,6 @@
-using FSH.Framework.Core.Context;
+using YH.Framework.Core.Context;
 
-namespace FSH.Modules.Identity.Contracts.Services;
+namespace YH.Modules.Identity.Contracts.Services;
 
 /// <summary>
 /// Service interface for accessing HTTP request context information.

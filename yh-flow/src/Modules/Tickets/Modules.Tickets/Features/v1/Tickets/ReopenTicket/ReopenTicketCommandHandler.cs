@@ -1,10 +1,10 @@
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Tickets.Contracts.v1.Tickets;
-using FSH.Modules.Tickets.Data;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Tickets.Contracts.v1.Tickets;
+using YH.Modules.Tickets.Data;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Tickets.Features.v1.Tickets.ReopenTicket;
+namespace YH.Modules.Tickets.Features.v1.Tickets.ReopenTicket;
 
 public sealed class ReopenTicketCommandHandler(TicketsDbContext dbContext)
     : ICommandHandler<ReopenTicketCommand, Guid>

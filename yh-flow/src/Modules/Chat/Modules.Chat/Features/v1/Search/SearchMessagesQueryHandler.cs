@@ -1,15 +1,15 @@
 using System.Collections.ObjectModel;
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Chat.Contracts.v1.DTOs;
-using FSH.Modules.Chat.Contracts.v1.Queries;
-using FSH.Modules.Chat.Data;
-using FSH.Modules.Chat.Domain;
-using FSH.Modules.Chat.Features.v1.Internal;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Chat.Contracts.v1.DTOs;
+using YH.Modules.Chat.Contracts.v1.Queries;
+using YH.Modules.Chat.Data;
+using YH.Modules.Chat.Domain;
+using YH.Modules.Chat.Features.v1.Internal;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Chat.Features.v1.Search;
+namespace YH.Modules.Chat.Features.v1.Search;
 
 public sealed class SearchMessagesQueryHandler(
     ChatDbContext db,

@@ -12,13 +12,13 @@ public class HostArchitectureTests
         // Assemblies / namespaces that represent host applications.
         string[] hostNamespaces =
         {
-            "FSH.Starter.Api"
+            "YH.Flow.Api"
         };
 
         var result = Types
             .InCurrentDomain()
             .That()
-            .ResideInNamespace("FSH.Modules")
+            .ResideInNamespace("YH.Modules")
             .Should()
             .NotHaveDependencyOnAny(hostNamespaces)
             .GetResult();
@@ -37,21 +37,21 @@ public class HostArchitectureTests
         // but should not directly reference feature or data-layer namespaces.
         string[] forbiddenNamespaces =
         {
-            "FSH.Modules.Auditing.Features",
-            "FSH.Modules.Auditing.Data",
-            "FSH.Modules.Chat.Features",
-            "FSH.Modules.Chat.Data",
-            "FSH.Modules.Chat.Domain",
-            "FSH.Modules.Identity.Features",
-            "FSH.Modules.Identity.Data",
-            "FSH.Modules.Multitenancy.Features",
-            "FSH.Modules.Multitenancy.Data"
+            "YH.Modules.Auditing.Features",
+            "YH.Modules.Auditing.Data",
+            "YH.Modules.Chat.Features",
+            "YH.Modules.Chat.Data",
+            "YH.Modules.Chat.Domain",
+            "YH.Modules.Identity.Features",
+            "YH.Modules.Identity.Data",
+            "YH.Modules.Multitenancy.Features",
+            "YH.Modules.Multitenancy.Data"
         };
 
         var hostResult = Types
             .InCurrentDomain()
             .That()
-            .ResideInNamespace("FSH.Starter")
+            .ResideInNamespace("YH.Starter")
             .Should()
             .NotHaveDependencyOnAny(forbiddenNamespaces)
             .GetResult();

@@ -1,4 +1,4 @@
-namespace FSH.Modules.Auditing.Persistence;
+namespace YH.Modules.Auditing.Persistence;
 
 /// <summary>
 /// LINQ-translatable helpers for querying the <c>jsonb</c> <c>PayloadJson</c> column.

@@ -1,13 +1,13 @@
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Files.Contracts;
-using FSH.Modules.Files.Contracts.v1.Commands;
-using FSH.Modules.Files.Data;
-using FSH.Modules.Files.Services;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Files.Contracts;
+using YH.Modules.Files.Contracts.v1.Commands;
+using YH.Modules.Files.Data;
+using YH.Modules.Files.Services;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Files.Features.v1.DeleteFile;
+namespace YH.Modules.Files.Features.v1.DeleteFile;
 
 public sealed class DeleteFileCommandHandler(
     FilesDbContext db,

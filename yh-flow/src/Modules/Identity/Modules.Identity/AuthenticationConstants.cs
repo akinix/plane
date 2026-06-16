@@ -1,4 +1,4 @@
-﻿namespace FSH.Modules.Identity;
+namespace YH.Modules.Identity;
 
 public static class AuthenticationConstants
 {

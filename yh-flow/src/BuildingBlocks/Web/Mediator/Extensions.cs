@@ -1,9 +1,9 @@
-﻿using FSH.Framework.Web.Mediator.Behaviors;
+using YH.Framework.Web.Mediator.Behaviors;
 using Mediator;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace FSH.Framework.Web.Mediator;
+namespace YH.Framework.Web.Mediator;
 
 public static class Extensions
 {

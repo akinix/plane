@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace FSH.Modules.Multitenancy.Provisioning;
+namespace YH.Modules.Multitenancy.Provisioning;
 
 public sealed class TenantProvisioningStep
 {

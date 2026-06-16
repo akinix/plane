@@ -1,7 +1,7 @@
 using FluentValidation;
-using FSH.Framework.Shared.Persistence;
+using YH.Framework.Shared.Persistence;
 
-namespace FSH.Framework.Web.Validation;
+namespace YH.Framework.Web.Validation;
 
 /// <summary>
 /// Shared validator for types implementing IPagedQuery.

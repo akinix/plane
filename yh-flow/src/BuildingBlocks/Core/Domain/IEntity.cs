@@ -1,4 +1,4 @@
-﻿namespace FSH.Framework.Core.Domain;
+namespace YH.Framework.Core.Domain;
 
 /// <summary>
 /// Represents an entity with a strongly-typed identifier.

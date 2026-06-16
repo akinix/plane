@@ -1,14 +1,14 @@
-using FSH.Modules.Identity.Contracts.Authorization;
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Modules.Identity.Contracts.v1.Impersonation;
-using FSH.Modules.Identity.Contracts.v1.Impersonation.RevokeImpersonationGrant;
+using YH.Modules.Identity.Contracts.Authorization;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Identity.Contracts.v1.Impersonation;
+using YH.Modules.Identity.Contracts.v1.Impersonation.RevokeImpersonationGrant;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Identity.Features.v1.Impersonation.RevokeImpersonationGrant;
+namespace YH.Modules.Identity.Features.v1.Impersonation.RevokeImpersonationGrant;
 
 public static class RevokeImpersonationGrantEndpoint
 {

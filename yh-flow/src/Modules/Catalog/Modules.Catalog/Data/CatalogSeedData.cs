@@ -1,6 +1,6 @@
-using FSH.Modules.Catalog.Domain;
+using YH.Modules.Catalog.Domain;
 
-namespace FSH.Modules.Catalog.Data;
+namespace YH.Modules.Catalog.Data;
 
 /// <summary>
 /// Demo seed data for the Catalog module — a small "what a catalogue looks like"

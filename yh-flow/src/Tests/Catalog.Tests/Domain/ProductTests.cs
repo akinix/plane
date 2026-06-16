@@ -1,6 +1,6 @@
-using FSH.Framework.Core.Domain;
-using FSH.Modules.Catalog.Domain;
-using FSH.Modules.Catalog.Domain.Events;
+using YH.Framework.Core.Domain;
+using YH.Modules.Catalog.Domain;
+using YH.Modules.Catalog.Domain.Events;
 
 namespace Catalog.Tests.Domain;
 

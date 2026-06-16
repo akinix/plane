@@ -1,7 +1,7 @@
 using Asp.Versioning;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FSH.Framework.Web.Versioning;
+namespace YH.Framework.Web.Versioning;
 
 public static class Extensions
 {

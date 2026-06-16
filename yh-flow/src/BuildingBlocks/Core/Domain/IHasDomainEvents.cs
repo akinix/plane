@@ -1,4 +1,4 @@
-﻿namespace FSH.Framework.Core.Domain;
+namespace YH.Framework.Core.Domain;
 
 /// <summary>
 /// Exposes domain events raised by an entity.

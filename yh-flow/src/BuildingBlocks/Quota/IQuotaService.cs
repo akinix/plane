@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Quota;
+using YH.Framework.Shared.Quota;
 
-namespace FSH.Framework.Quota;
+namespace YH.Framework.Quota;
 
 public interface IQuotaService
 {

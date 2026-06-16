@@ -1,7 +1,7 @@
 using FluentValidation;
-using FSH.Modules.Files.Contracts.v1.Commands;
+using YH.Modules.Files.Contracts.v1.Commands;
 
-namespace FSH.Modules.Files.Features.v1.RequestUploadUrl;
+namespace YH.Modules.Files.Features.v1.RequestUploadUrl;
 
 public sealed class RequestUploadUrlCommandValidator : AbstractValidator<RequestUploadUrlCommand>
 {

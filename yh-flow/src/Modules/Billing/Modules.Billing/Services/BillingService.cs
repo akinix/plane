@@ -1,16 +1,16 @@
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Eventing.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Shared.Quota;
-using FSH.Modules.Billing.Contracts;
-using FSH.Modules.Billing.Contracts.Events;
-using FSH.Modules.Billing.Data;
-using FSH.Modules.Billing.Domain;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Eventing.Abstractions;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Quota;
+using YH.Modules.Billing.Contracts;
+using YH.Modules.Billing.Contracts.Events;
+using YH.Modules.Billing.Data;
+using YH.Modules.Billing.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.Modules.Billing.Services;
+namespace YH.Modules.Billing.Services;
 
 public sealed class BillingService : IBillingService
 {

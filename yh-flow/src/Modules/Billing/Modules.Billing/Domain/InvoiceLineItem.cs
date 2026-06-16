@@ -1,8 +1,8 @@
-using FSH.Framework.Core.Domain;
-using FSH.Framework.Shared.Quota;
-using FSH.Modules.Billing.Contracts;
+using YH.Framework.Core.Domain;
+using YH.Framework.Shared.Quota;
+using YH.Modules.Billing.Contracts;
 
-namespace FSH.Modules.Billing.Domain;
+namespace YH.Modules.Billing.Domain;
 
 /// <summary>
 /// A single line on an invoice. Amount is computed as Quantity * UnitPrice and is stored so that

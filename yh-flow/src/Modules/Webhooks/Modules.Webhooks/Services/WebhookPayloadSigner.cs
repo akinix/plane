@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace FSH.Modules.Webhooks.Services;
+namespace YH.Modules.Webhooks.Services;
 
 public static class WebhookPayloadSigner
 {

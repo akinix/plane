@@ -1,8 +1,8 @@
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Catalog.Contracts.Dtos;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Catalog.Contracts.Dtos;
 using Mediator;
 
-namespace FSH.Modules.Catalog.Contracts.v1.Categories;
+namespace YH.Modules.Catalog.Contracts.v1.Categories;
 
 /// <summary>
 /// Search for categories with pagination and sorting.

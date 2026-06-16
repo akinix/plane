@@ -1,5 +1,5 @@
 using System.Text.Json;
-using FSH.Modules.Billing.Contracts.Dtos;
+using YH.Modules.Billing.Contracts.Dtos;
 using Hangfire;
 using Hangfire.Storage;
 using Integration.Tests.Infrastructure;

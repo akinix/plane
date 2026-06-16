@@ -1,6 +1,6 @@
-using FSH.Modules.Multitenancy.Contracts.Dtos;
+using YH.Modules.Multitenancy.Contracts.Dtos;
 
-namespace FSH.Modules.Multitenancy.Contracts;
+namespace YH.Modules.Multitenancy.Contracts;
 
 public interface ITenantThemeService
 {

@@ -1,4 +1,4 @@
-namespace FSH.Modules.Identity;
+namespace YH.Modules.Identity;
 
 /// <summary>
 /// Login-side view of the tenant billing grace window (config section <c>"Billing"</c>). A tenant

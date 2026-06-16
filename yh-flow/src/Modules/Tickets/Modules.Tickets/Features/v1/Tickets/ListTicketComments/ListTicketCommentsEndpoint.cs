@@ -1,12 +1,12 @@
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Modules.Tickets.Contracts.Authorization;
-using FSH.Modules.Tickets.Contracts.v1.Tickets;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Tickets.Contracts.Authorization;
+using YH.Modules.Tickets.Contracts.v1.Tickets;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Tickets.Features.v1.Tickets.ListTicketComments;
+namespace YH.Modules.Tickets.Features.v1.Tickets.ListTicketComments;
 
 public static class ListTicketCommentsEndpoint
 {

@@ -1,8 +1,8 @@
-using FSH.Framework.Eventing.Abstractions;
+using YH.Framework.Eventing.Abstractions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace FSH.Framework.Eventing.Outbox;
+namespace YH.Framework.Eventing.Outbox;
 
 /// <summary>
 /// Dispatches outbox messages via the configured event bus.

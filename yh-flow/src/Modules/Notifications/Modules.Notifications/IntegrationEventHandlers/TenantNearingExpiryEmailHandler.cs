@@ -1,9 +1,9 @@
-using FSH.Framework.Eventing.Abstractions;
-using FSH.Framework.Mailing.Services;
-using FSH.Modules.Multitenancy.Contracts.Events;
+using YH.Framework.Eventing.Abstractions;
+using YH.Framework.Mailing.Services;
+using YH.Modules.Multitenancy.Contracts.Events;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.Modules.Notifications.IntegrationEventHandlers;
+namespace YH.Modules.Notifications.IntegrationEventHandlers;
 
 /// <summary>Emails the tenant admin that their subscription is nearing expiry.</summary>
 public sealed class TenantNearingExpiryEmailHandler(

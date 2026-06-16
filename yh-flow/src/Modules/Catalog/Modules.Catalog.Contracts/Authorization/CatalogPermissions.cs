@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Constants;
+using YH.Framework.Shared.Constants;
 
-namespace FSH.Modules.Catalog.Contracts.Authorization;
+namespace YH.Modules.Catalog.Contracts.Authorization;
 
 public static class CatalogPermissions
 {

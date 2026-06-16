@@ -1,9 +1,9 @@
-using FSH.Framework.Core.Domain;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Chat.Contracts.v1.DTOs;
-using FSH.Modules.Chat.Domain.Events;
+using YH.Framework.Core.Domain;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Chat.Contracts.v1.DTOs;
+using YH.Modules.Chat.Domain.Events;
 
-namespace FSH.Modules.Chat.Domain;
+namespace YH.Modules.Chat.Domain;
 
 /// <summary>
 /// A chat channel: a 1:1 DM, a group DM (3+), or a named channel (Slack-style).

@@ -1,4 +1,4 @@
-using FSH.Framework.Caching;
+using YH.Framework.Caching;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Configuration;

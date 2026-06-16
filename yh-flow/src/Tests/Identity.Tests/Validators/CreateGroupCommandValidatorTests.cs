@@ -1,5 +1,5 @@
-using FSH.Modules.Identity.Contracts.v1.Groups.CreateGroup;
-using FSH.Modules.Identity.Features.v1.Groups.CreateGroup;
+using YH.Modules.Identity.Contracts.v1.Groups.CreateGroup;
+using YH.Modules.Identity.Features.v1.Groups.CreateGroup;
 
 namespace Identity.Tests.Validators;
 

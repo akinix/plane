@@ -1,9 +1,9 @@
-using FSH.Framework.Shared.Persistence;
+using YH.Framework.Shared.Persistence;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace FSH.Framework.Persistence;
+namespace YH.Framework.Persistence;
 
 /// <summary>
 /// Hosted service that logs database configuration options during application startup.

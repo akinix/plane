@@ -1,4 +1,4 @@
-﻿namespace FSH.Framework.Mailing;
+namespace YH.Framework.Mailing;
 
 public sealed class MailOptions
 {

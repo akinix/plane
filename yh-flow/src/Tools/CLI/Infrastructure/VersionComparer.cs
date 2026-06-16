@@ -1,4 +1,4 @@
-namespace FSH.CLI.Infrastructure;
+namespace YH.CLI.Infrastructure;
 
 /// <summary>
 /// Minimal semantic-version comparison for the CLI's "update available" hints.

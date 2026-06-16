@@ -1,5 +1,5 @@
 using System.Net.Http.Json;
-using FSH.Modules.Chat.Contracts.v1.DTOs;
+using YH.Modules.Chat.Contracts.v1.DTOs;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Framework.Eventing.Inbox;
+namespace YH.Framework.Eventing.Inbox;
 
 /// <summary>
 /// EF Core-based inbox store for a specific DbContext.

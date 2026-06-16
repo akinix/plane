@@ -1,14 +1,14 @@
 using System.Collections.ObjectModel;
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Notifications.Contracts.v1.DTOs;
-using FSH.Modules.Notifications.Contracts.v1.Queries;
-using FSH.Modules.Notifications.Data;
-using FSH.Modules.Notifications.Features.v1.Internal;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Notifications.Contracts.v1.DTOs;
+using YH.Modules.Notifications.Contracts.v1.Queries;
+using YH.Modules.Notifications.Data;
+using YH.Modules.Notifications.Features.v1.Internal;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Notifications.Features.v1.ListNotifications;
+namespace YH.Modules.Notifications.Features.v1.ListNotifications;
 
 public sealed class ListNotificationsQueryHandler(
     NotificationsDbContext db,

@@ -1,5 +1,5 @@
-using FSH.Modules.Billing.Contracts;
-using FSH.Modules.Billing.Domain;
+using YH.Modules.Billing.Contracts;
+using YH.Modules.Billing.Domain;
 
 namespace Billing.Tests.Domain;
 

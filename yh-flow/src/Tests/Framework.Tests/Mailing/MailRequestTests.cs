@@ -1,5 +1,5 @@
 using System.Collections.ObjectModel;
-using FSH.Framework.Mailing;
+using YH.Framework.Mailing;
 
 namespace Framework.Tests.Mailing;
 

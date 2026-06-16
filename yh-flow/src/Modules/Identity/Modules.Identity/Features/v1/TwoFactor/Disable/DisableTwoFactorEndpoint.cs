@@ -1,11 +1,11 @@
-using FSH.Modules.Identity.Contracts.v1.TwoFactor;
+using YH.Modules.Identity.Contracts.v1.TwoFactor;
 using Mediator;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Identity.Features.v1.TwoFactor.Disable;
+namespace YH.Modules.Identity.Features.v1.TwoFactor.Disable;
 
 public static class DisableTwoFactorEndpoint
 {

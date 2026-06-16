@@ -1,9 +1,9 @@
 using System.Net.NetworkInformation;
-using FSH.CLI.Infrastructure;
+using YH.CLI.Infrastructure;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace FSH.CLI.Commands;
+namespace YH.CLI.Commands;
 
 public sealed class DoctorCommand : AsyncCommand
 {

@@ -1,8 +1,8 @@
-using FSH.Framework.Eventing.Abstractions;
+using YH.Framework.Eventing.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.Framework.Eventing.Outbox;
+namespace YH.Framework.Eventing.Outbox;
 
 /// <summary>
 /// EF Core-based outbox store for a specific DbContext.

@@ -1,12 +1,12 @@
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Catalog.Contracts.Dtos;
-using FSH.Modules.Catalog.Contracts.v1.Products;
-using FSH.Modules.Catalog.Data;
-using FSH.Modules.Catalog.Domain;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Catalog.Contracts.Dtos;
+using YH.Modules.Catalog.Contracts.v1.Products;
+using YH.Modules.Catalog.Data;
+using YH.Modules.Catalog.Domain;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Catalog.Features.v1.Products.SearchProducts;
+namespace YH.Modules.Catalog.Features.v1.Products.SearchProducts;
 
 public sealed class SearchProductsQueryHandler(CatalogDbContext dbContext)
     : IQueryHandler<SearchProductsQuery, PagedResponse<ProductDto>>

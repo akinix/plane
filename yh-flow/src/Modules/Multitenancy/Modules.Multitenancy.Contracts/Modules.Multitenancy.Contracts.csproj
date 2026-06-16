@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<RootNamespace>FSH.Modules.Multitenancy.Contracts</RootNamespace>
-		<AssemblyName>FSH.Modules.Multitenancy.Contracts</AssemblyName>
+		<RootNamespace>YH.Modules.Multitenancy.Contracts</RootNamespace>
+		<AssemblyName>YH.Modules.Multitenancy.Contracts</AssemblyName>
 		<NoWarn>$(NoWarn);CA1056;S2094</NoWarn>
 	</PropertyGroup>
   <ItemGroup>

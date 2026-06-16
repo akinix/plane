@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace FSH.Modules.Identity.Domain;
+namespace YH.Modules.Identity.Domain;
 
 public class FshRole : IdentityRole
 {

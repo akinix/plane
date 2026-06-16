@@ -1,7 +1,7 @@
-using FSH.Framework.Core.Domain;
-using FSH.Modules.Billing.Contracts;
+using YH.Framework.Core.Domain;
+using YH.Modules.Billing.Contracts;
 
-namespace FSH.Modules.Billing.Domain;
+namespace YH.Modules.Billing.Domain;
 
 /// <summary>
 /// An invoice for a tenant covering a single monthly period. Starts as Draft, transitions to

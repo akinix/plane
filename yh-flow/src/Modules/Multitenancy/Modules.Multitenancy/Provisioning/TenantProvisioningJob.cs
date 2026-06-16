@@ -1,13 +1,13 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Persistence;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Multitenancy.Contracts;
-using FSH.Modules.Multitenancy.Services;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Persistence;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Multitenancy.Contracts;
+using YH.Modules.Multitenancy.Services;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.Modules.Multitenancy.Provisioning;
+namespace YH.Modules.Multitenancy.Provisioning;
 
 public sealed class TenantProvisioningJob
 {

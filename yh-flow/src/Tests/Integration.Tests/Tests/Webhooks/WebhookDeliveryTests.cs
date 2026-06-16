@@ -1,11 +1,11 @@
 using System.Net.Http.Headers;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Webhooks.Contracts.Dtos;
-using FSH.Modules.Webhooks.Data;
-using FSH.Modules.Webhooks.Services;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Webhooks.Contracts.Dtos;
+using YH.Modules.Webhooks.Data;
+using YH.Modules.Webhooks.Services;
 using Integration.Tests.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -15,10 +15,10 @@ namespace Integration.Tests.Tests.Webhooks;
 
 /// <summary>
 /// Exercises the delivery-log read path (<c>GET /subscriptions/{id}/deliveries</c> →
-/// <see cref="FSH.Modules.Webhooks.Features.v1.GetWebhookDeliveries.GetWebhookDeliveriesQueryHandler"/>),
+/// <see cref="YH.Modules.Webhooks.Features.v1.GetWebhookDeliveries.GetWebhookDeliveriesQueryHandler"/>),
 /// the synchronous test-send flow
 /// (<c>POST /subscriptions/{id}/test</c> →
-/// <see cref="FSH.Modules.Webhooks.Features.v1.TestWebhookSubscription.TestWebhookSubscriptionCommandHandler"/>
+/// <see cref="YH.Modules.Webhooks.Features.v1.TestWebhookSubscription.TestWebhookSubscriptionCommandHandler"/>
 /// → <see cref="WebhookDeliveryService"/>), and tenant isolation of the delivery rows.
 ///
 /// To make the test-send actually produce a delivery row WITHOUT a real network call, we swap the

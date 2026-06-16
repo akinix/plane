@@ -1,4 +1,4 @@
-using FSH.Modules.Webhooks.Domain;
+using YH.Modules.Webhooks.Domain;
 using Integration.Tests.Infrastructure;
 #pragma warning disable CA1707 // Test method names use underscores by convention
 

@@ -1,6 +1,6 @@
-using FSH.Framework.Core.Domain;
+using YH.Framework.Core.Domain;
 
-namespace FSH.Modules.Catalog.Domain.Events;
+namespace YH.Modules.Catalog.Domain.Events;
 
 public sealed record ProductPriceChangedDomainEvent(
     Guid ProductId,

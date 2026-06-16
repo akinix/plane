@@ -1,10 +1,10 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Billing.Contracts;
-using FSH.Modules.Billing.Data;
-using FSH.Modules.Billing.Domain;
-using FSH.Modules.Billing.Services;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Billing.Contracts;
+using YH.Modules.Billing.Data;
+using YH.Modules.Billing.Domain;
+using YH.Modules.Billing.Services;
 using Integration.Tests.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 

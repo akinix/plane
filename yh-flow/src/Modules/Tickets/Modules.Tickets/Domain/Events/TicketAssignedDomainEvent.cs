@@ -1,6 +1,6 @@
-using FSH.Framework.Core.Domain;
+using YH.Framework.Core.Domain;
 
-namespace FSH.Modules.Tickets.Domain.Events;
+namespace YH.Modules.Tickets.Domain.Events;
 
 public sealed record TicketAssignedDomainEvent(
     Guid TicketId,

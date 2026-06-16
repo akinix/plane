@@ -1,8 +1,8 @@
-﻿using FluentValidation;
+using FluentValidation;
 using FluentValidation.Results;
 using Mediator;
 
-namespace FSH.Framework.Web.Mediator.Behaviors;
+namespace YH.Framework.Web.Mediator.Behaviors;
 
 public sealed class ValidationBehavior<TMessage, TResponse> : IPipelineBehavior<TMessage, TResponse>
     where TMessage : IMessage

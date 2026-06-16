@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace FSH.Framework.Web.Idempotency;
+namespace YH.Framework.Web.Idempotency;
 
 /// <summary>
 /// A cached HTTP response for idempotent replay.

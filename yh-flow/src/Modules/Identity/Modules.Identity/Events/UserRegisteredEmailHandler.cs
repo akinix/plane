@@ -1,10 +1,10 @@
-using FSH.Framework.Eventing.Abstractions;
-using FSH.Framework.Mailing;
-using FSH.Framework.Mailing.Services;
-using FSH.Modules.Identity.Contracts.Events;
+using YH.Framework.Eventing.Abstractions;
+using YH.Framework.Mailing;
+using YH.Framework.Mailing.Services;
+using YH.Modules.Identity.Contracts.Events;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.Modules.Identity.Events;
+namespace YH.Modules.Identity.Events;
 
 /// <summary>
 /// Sends a welcome email when a new user registers.

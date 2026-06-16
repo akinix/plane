@@ -1,6 +1,6 @@
 using Mediator;
 
-namespace FSH.Modules.Catalog.Contracts.v1.Brands;
+namespace YH.Modules.Catalog.Contracts.v1.Brands;
 
 public sealed record UpdateBrandCommand(
     Guid BrandId,

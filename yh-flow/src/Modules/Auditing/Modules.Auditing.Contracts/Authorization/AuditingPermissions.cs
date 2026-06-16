@@ -1,6 +1,6 @@
-using FSH.Framework.Shared.Constants;
+using YH.Framework.Shared.Constants;
 
-namespace FSH.Modules.Auditing.Contracts.Authorization;
+namespace YH.Modules.Auditing.Contracts.Authorization;
 
 public static class AuditingPermissions
 {

@@ -1,7 +1,7 @@
-using FSH.Framework.Mailing.Services;
-using FSH.Modules.Multitenancy.Data;
-using FSH.Modules.Multitenancy.Domain;
-using FSH.Modules.Multitenancy.Services;
+using YH.Framework.Mailing.Services;
+using YH.Modules.Multitenancy.Data;
+using YH.Modules.Multitenancy.Domain;
+using YH.Modules.Multitenancy.Services;
 using Integration.Tests.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

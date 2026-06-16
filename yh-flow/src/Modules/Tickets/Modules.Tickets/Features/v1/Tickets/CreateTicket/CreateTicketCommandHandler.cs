@@ -1,15 +1,15 @@
 using System.Globalization;
 using System.Net;
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Tickets.Contracts.v1.Tickets;
-using FSH.Modules.Tickets.Data;
-using FSH.Modules.Tickets.Domain;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Tickets.Contracts.v1.Tickets;
+using YH.Modules.Tickets.Data;
+using YH.Modules.Tickets.Domain;
 using Mediator;
-using FSH.Framework.Persistence;
+using YH.Framework.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Tickets.Features.v1.Tickets.CreateTicket;
+namespace YH.Modules.Tickets.Features.v1.Tickets.CreateTicket;
 
 public sealed class CreateTicketCommandHandler(
     TicketsDbContext dbContext,

@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace FSH.CLI.Infrastructure;
+namespace YH.CLI.Infrastructure;
 
 /// <summary>
 /// Lightweight NuGet API client for version checking.

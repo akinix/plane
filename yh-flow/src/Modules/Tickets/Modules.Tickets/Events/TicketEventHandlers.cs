@@ -1,8 +1,8 @@
-using FSH.Modules.Tickets.Domain.Events;
+using YH.Modules.Tickets.Domain.Events;
 using Mediator;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.Modules.Tickets.Events;
+namespace YH.Modules.Tickets.Events;
 
 public sealed class TicketEventHandlers(ILogger<TicketEventHandlers> logger) :
     INotificationHandler<TicketAssignedDomainEvent>,

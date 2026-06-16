@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace FSH.Modules.Tickets.Contracts.Dtos;
+namespace YH.Modules.Tickets.Contracts.Dtos;
 
 /// <summary>
 /// Lifecycle states a ticket transitions through.

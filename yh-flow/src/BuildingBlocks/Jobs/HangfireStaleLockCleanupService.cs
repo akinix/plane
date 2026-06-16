@@ -1,10 +1,10 @@
-using FSH.Framework.Shared.Persistence;
+using YH.Framework.Shared.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Npgsql;
 
-namespace FSH.Framework.Jobs;
+namespace YH.Framework.Jobs;
 
 /// <summary>
 /// Best-effort cleanup of stale Hangfire locks from crashed instances.

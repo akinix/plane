@@ -1,13 +1,13 @@
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Billing.Contracts.v1.Subscriptions;
-using FSH.Modules.Billing.Data;
-using FSH.Modules.Billing.Domain;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Billing.Contracts.v1.Subscriptions;
+using YH.Modules.Billing.Data;
+using YH.Modules.Billing.Domain;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Billing.Features.v1.Subscriptions.AssignSubscription;
+namespace YH.Modules.Billing.Features.v1.Subscriptions.AssignSubscription;
 
 public sealed class AssignSubscriptionCommandHandler(
     BillingDbContext dbContext,

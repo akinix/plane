@@ -1,22 +1,22 @@
 using Asp.Versioning;
-using FSH.Framework.Persistence;
-using FSH.Framework.Shared.Constants;
-using FSH.Framework.Web.Modules;
-using FSH.Modules.Tickets.Contracts.Authorization;
-using FSH.Modules.Tickets.Data;
-using FSH.Modules.Tickets.Features.v1.Tickets.AddTicketComment;
-using FSH.Modules.Tickets.Features.v1.Tickets.AssignTicket;
-using FSH.Modules.Tickets.Features.v1.Tickets.CloseTicket;
-using FSH.Modules.Tickets.Features.v1.Tickets.CreateTicket;
-using FSH.Modules.Tickets.Features.v1.Tickets.DeleteTicket;
-using FSH.Modules.Tickets.Features.v1.Tickets.GetTicketById;
-using FSH.Modules.Tickets.Features.v1.Tickets.ListTicketComments;
-using FSH.Modules.Tickets.Features.v1.Tickets.ListTrashedTickets;
-using FSH.Modules.Tickets.Features.v1.Tickets.ReopenTicket;
-using FSH.Modules.Tickets.Features.v1.Tickets.ResolveTicket;
-using FSH.Modules.Tickets.Features.v1.Tickets.RestoreTicket;
-using FSH.Modules.Tickets.Features.v1.Tickets.SearchTickets;
-using FSH.Modules.Tickets.Features.v1.Tickets.UpdateTicket;
+using YH.Framework.Persistence;
+using YH.Framework.Shared.Constants;
+using YH.Framework.Web.Modules;
+using YH.Modules.Tickets.Contracts.Authorization;
+using YH.Modules.Tickets.Data;
+using YH.Modules.Tickets.Features.v1.Tickets.AddTicketComment;
+using YH.Modules.Tickets.Features.v1.Tickets.AssignTicket;
+using YH.Modules.Tickets.Features.v1.Tickets.CloseTicket;
+using YH.Modules.Tickets.Features.v1.Tickets.CreateTicket;
+using YH.Modules.Tickets.Features.v1.Tickets.DeleteTicket;
+using YH.Modules.Tickets.Features.v1.Tickets.GetTicketById;
+using YH.Modules.Tickets.Features.v1.Tickets.ListTicketComments;
+using YH.Modules.Tickets.Features.v1.Tickets.ListTrashedTickets;
+using YH.Modules.Tickets.Features.v1.Tickets.ReopenTicket;
+using YH.Modules.Tickets.Features.v1.Tickets.ResolveTicket;
+using YH.Modules.Tickets.Features.v1.Tickets.RestoreTicket;
+using YH.Modules.Tickets.Features.v1.Tickets.SearchTickets;
+using YH.Modules.Tickets.Features.v1.Tickets.UpdateTicket;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
@@ -24,9 +24,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 
-[assembly: FshModule(typeof(FSH.Modules.Tickets.TicketsModule), 700)]
+[assembly: FshModule(typeof(YH.Modules.Tickets.TicketsModule), 700)]
 
-namespace FSH.Modules.Tickets;
+namespace YH.Modules.Tickets;
 
 public sealed class TicketsModule : IModule
 {

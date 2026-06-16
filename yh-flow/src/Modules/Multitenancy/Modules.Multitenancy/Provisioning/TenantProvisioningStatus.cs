@@ -1,4 +1,4 @@
-namespace FSH.Modules.Multitenancy.Provisioning;
+namespace YH.Modules.Multitenancy.Provisioning;
 
 public enum TenantProvisioningStatus
 {

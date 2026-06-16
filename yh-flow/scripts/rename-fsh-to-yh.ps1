@@ -19,7 +19,8 @@ Write-Host ""
 # -------------------------------------------------------
 Write-Host "[Phase 1] Replacing csproj file contents..." -ForegroundColor Yellow
 
-$csprojFiles = Get-ChildItem -Path "$baseDir/src" -Filter "*.csproj" -Recurse
+$csprojFiles = Get-ChildItem -Path "$baseDir/src" -Filter "*.csproj" -Recurse -File |
+    Where-Object { $_.FullName -notmatch '[\\/](obj|bin|\.vs)[\\/]' }
 foreach ($file in $csprojFiles) {
     $content = Get-Content $file.FullName -Raw -Encoding UTF8
     $original = $content
@@ -41,7 +42,8 @@ foreach ($file in $csprojFiles) {
 }
 
 # Now fix the Starter -> Flow mapping in all csproj files (Phase 1b)
-$csprojFiles2 = Get-ChildItem -Path "$baseDir/src" -Filter "*.csproj" -Recurse
+$csprojFiles2 = Get-ChildItem -Path "$baseDir/src" -Filter "*.csproj" -Recurse -File |
+    Where-Object { $_.FullName -notmatch '[\\/](obj|bin|\.vs)[\\/]' }
 foreach ($file in $csprojFiles2) {
     $content = Get-Content $file.FullName -Raw -Encoding UTF8
     $original = $content
@@ -63,7 +65,8 @@ Write-Host ""
 # -------------------------------------------------------
 Write-Host "[Phase 2] Replacing C# source file namespaces..." -ForegroundColor Yellow
 
-$csFiles = Get-ChildItem -Path "$baseDir/src" -Filter "*.cs" -Recurse
+$csFiles = Get-ChildItem -Path "$baseDir/src" -Filter "*.cs" -Recurse -File |
+    Where-Object { $_.FullName -notmatch '[\\/](obj|bin|\.vs)[\\/]' }
 foreach ($file in $csFiles) {
     # Skip obj/ and bin/ directories
     if ($file.FullName -match '[\\/](obj|bin)[\\/]') { continue }
@@ -126,7 +129,8 @@ Write-Host ""
 # -------------------------------------------------------
 Write-Host "[Phase 4] Replacing solution files..." -ForegroundColor Yellow
 
-$slnxFiles = Get-ChildItem -Path "$baseDir/src" -Filter "*.slnx" -Recurse
+$slnxFiles = Get-ChildItem -Path "$baseDir/src" -Filter "*.slnx" -Recurse -File |
+    Where-Object { $_.FullName -notmatch '[\\/](obj|bin|\.vs)[\\/]' }
 foreach ($file in $slnxFiles) {
     $content = Get-Content $file.FullName -Raw -Encoding UTF8
     $original = $content
@@ -160,7 +164,8 @@ Write-Host ""
 # -------------------------------------------------------
 Write-Host "[Phase 5] Replacing build properties..." -ForegroundColor Yellow
 
-$buildProps = Get-ChildItem -Path "$baseDir/src" -Filter "Directory.Build.props" -Recurse
+$buildProps = Get-ChildItem -Path "$baseDir/src" -Filter "Directory.Build.props" -Recurse -File |
+    Where-Object { $_.FullName -notmatch '[\\/](obj|bin|\.vs)[\\/]' }
 foreach ($file in $buildProps) {
     $content = Get-Content $file.FullName -Raw -Encoding UTF8
     $original = $content
@@ -294,12 +299,12 @@ Write-Host "=== Rename Complete ===" -ForegroundColor Cyan
 Write-Host ""
 Write-Host "Verifying no residual FSH references..." -ForegroundColor Yellow
 
-$residualCs = Get-ChildItem -Path "$baseDir/src" -Filter "*.cs" -Recurse |
-    Where-Object { $_.FullName -notmatch '[\\/](obj|bin)[\\/]' } |
+$residualCs = Get-ChildItem -Path "$baseDir/src" -Filter "*.cs" -Recurse -File |
+    Where-Object { $_.FullName -notmatch '[\\/](obj|bin|\.vs)[\\/]' } |
     Select-String -Pattern 'FSH\.' -SimpleMatch
 
-$residualCsproj = Get-ChildItem -Path "$baseDir/src" -Filter "*.csproj" -Recurse |
-    Where-Object { $_.FullName -notmatch '[\\/](obj|bin)[\\/]' } |
+$residualCsproj = Get-ChildItem -Path "$baseDir/src" -Filter "*.csproj" -Recurse -File |
+    Where-Object { $_.FullName -notmatch '[\\/](obj|bin|\.vs)[\\/]' } |
     Select-String -Pattern 'FSH\.' -SimpleMatch
 
 if ($residualCs) {

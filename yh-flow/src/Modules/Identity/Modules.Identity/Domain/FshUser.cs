@@ -1,8 +1,8 @@
-using FSH.Framework.Core.Domain;
-using FSH.Modules.Identity.Domain.Events;
+using YH.Framework.Core.Domain;
+using YH.Modules.Identity.Domain.Events;
 using Microsoft.AspNetCore.Identity;
 
-namespace FSH.Modules.Identity.Domain;
+namespace YH.Modules.Identity.Domain;
 
 public class FshUser : IdentityUser, IHasDomainEvents
 {

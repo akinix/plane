@@ -1,7 +1,7 @@
-using FSH.Framework.Shared.Storage;
+using YH.Framework.Shared.Storage;
 using Mediator;
 
-namespace FSH.Modules.Identity.Contracts.v1.Users.UpdateUser;
+namespace YH.Modules.Identity.Contracts.v1.Users.UpdateUser;
 
 public class UpdateUserCommand : ICommand<Unit>
 {

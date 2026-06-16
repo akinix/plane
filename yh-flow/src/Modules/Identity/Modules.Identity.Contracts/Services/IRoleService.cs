@@ -1,7 +1,7 @@
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Identity.Contracts.DTOs;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Identity.Contracts.DTOs;
 
-namespace FSH.Modules.Identity.Contracts.Services;
+namespace YH.Modules.Identity.Contracts.Services;
 
 public interface IRoleService
 {

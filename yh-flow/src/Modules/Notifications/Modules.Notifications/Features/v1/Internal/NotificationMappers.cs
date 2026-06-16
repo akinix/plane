@@ -1,7 +1,7 @@
-using FSH.Modules.Notifications.Contracts.v1.DTOs;
-using FSH.Modules.Notifications.Domain;
+using YH.Modules.Notifications.Contracts.v1.DTOs;
+using YH.Modules.Notifications.Domain;
 
-namespace FSH.Modules.Notifications.Features.v1.Internal;
+namespace YH.Modules.Notifications.Features.v1.Internal;
 
 internal static class NotificationMappers
 {

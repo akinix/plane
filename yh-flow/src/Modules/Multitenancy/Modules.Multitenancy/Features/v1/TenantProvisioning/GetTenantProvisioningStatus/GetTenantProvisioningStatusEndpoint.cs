@@ -1,15 +1,15 @@
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Multitenancy.Contracts.Authorization;
-using FSH.Modules.Multitenancy.Contracts.Dtos;
-using FSH.Modules.Multitenancy.Contracts.v1.TenantProvisioning;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Multitenancy.Contracts.Authorization;
+using YH.Modules.Multitenancy.Contracts.Dtos;
+using YH.Modules.Multitenancy.Contracts.v1.TenantProvisioning;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Multitenancy.Features.v1.TenantProvisioning.GetTenantProvisioningStatus;
+namespace YH.Modules.Multitenancy.Features.v1.TenantProvisioning.GetTenantProvisioningStatus;
 
 public static class GetTenantProvisioningStatusEndpoint
 {

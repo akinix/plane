@@ -1,11 +1,11 @@
-using FSH.Modules.Auditing.Contracts;
-using FSH.Modules.Auditing.Contracts.Dtos;
-using FSH.Modules.Auditing.Contracts.v1.GetAuditsByCorrelation;
-using FSH.Modules.Auditing.Persistence;
+using YH.Modules.Auditing.Contracts;
+using YH.Modules.Auditing.Contracts.Dtos;
+using YH.Modules.Auditing.Contracts.v1.GetAuditsByCorrelation;
+using YH.Modules.Auditing.Persistence;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Auditing.Features.v1.GetAuditsByCorrelation;
+namespace YH.Modules.Auditing.Features.v1.GetAuditsByCorrelation;
 
 public sealed class GetAuditsByCorrelationQueryHandler : IQueryHandler<GetAuditsByCorrelationQuery, IReadOnlyList<AuditSummaryDto>>
 {

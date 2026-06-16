@@ -15,37 +15,37 @@ public class HandlerValidatorPairingTests
     
     // Known missing validators (to be implemented)
     private static readonly string[] KnownMissingCommandHandlers = [
-        "FSH.Modules.Billing.Features.v1.Invoices.VoidInvoice.VoidInvoiceCommandHandler",
-        "FSH.Modules.Billing.Features.v1.Invoices.MarkInvoicePaid.MarkInvoicePaidCommandHandler",
-        "FSH.Modules.Billing.Features.v1.Invoices.IssueInvoice.IssueInvoiceCommandHandler",
-        "FSH.Modules.Catalog.Features.v1.Products.RestoreProduct.RestoreProductCommandHandler",
-        "FSH.Modules.Catalog.Features.v1.Products.DeleteProduct.DeleteProductCommandHandler",
-        "FSH.Modules.Catalog.Features.v1.Categories.RestoreCategory.RestoreCategoryCommandHandler",
-        "FSH.Modules.Catalog.Features.v1.Categories.DeleteCategory.DeleteCategoryCommandHandler",
-        "FSH.Modules.Catalog.Features.v1.Brands.RestoreBrand.RestoreBrandCommandHandler",
-        "FSH.Modules.Catalog.Features.v1.Brands.DeleteBrand.DeleteBrandCommandHandler",
-        "FSH.Modules.Identity.Features.v1.TwoFactor.Enroll.EnrollTwoFactorCommandHandler",
-        "FSH.Modules.Identity.Features.v1.Impersonation.EndImpersonation.EndImpersonationCommandHandler",
-        "FSH.Modules.Multitenancy.Features.v1.TenantProvisioning.RetryTenantProvisioning.RetryTenantProvisioningCommandHandler",
-        "FSH.Modules.Multitenancy.Features.v1.ResetTenantTheme.ResetTenantThemeCommandHandler",
-        "FSH.Modules.Tickets.Features.v1.Tickets.RestoreTicket.RestoreTicketCommandHandler",
-        "FSH.Modules.Tickets.Features.v1.Tickets.ResolveTicket.ResolveTicketCommandHandler",
-        "FSH.Modules.Tickets.Features.v1.Tickets.ReopenTicket.ReopenTicketCommandHandler",
-        "FSH.Modules.Tickets.Features.v1.Tickets.AssignTicket.AssignTicketCommandHandler"
+        "YH.Modules.Billing.Features.v1.Invoices.VoidInvoice.VoidInvoiceCommandHandler",
+        "YH.Modules.Billing.Features.v1.Invoices.MarkInvoicePaid.MarkInvoicePaidCommandHandler",
+        "YH.Modules.Billing.Features.v1.Invoices.IssueInvoice.IssueInvoiceCommandHandler",
+        "YH.Modules.Catalog.Features.v1.Products.RestoreProduct.RestoreProductCommandHandler",
+        "YH.Modules.Catalog.Features.v1.Products.DeleteProduct.DeleteProductCommandHandler",
+        "YH.Modules.Catalog.Features.v1.Categories.RestoreCategory.RestoreCategoryCommandHandler",
+        "YH.Modules.Catalog.Features.v1.Categories.DeleteCategory.DeleteCategoryCommandHandler",
+        "YH.Modules.Catalog.Features.v1.Brands.RestoreBrand.RestoreBrandCommandHandler",
+        "YH.Modules.Catalog.Features.v1.Brands.DeleteBrand.DeleteBrandCommandHandler",
+        "YH.Modules.Identity.Features.v1.TwoFactor.Enroll.EnrollTwoFactorCommandHandler",
+        "YH.Modules.Identity.Features.v1.Impersonation.EndImpersonation.EndImpersonationCommandHandler",
+        "YH.Modules.Multitenancy.Features.v1.TenantProvisioning.RetryTenantProvisioning.RetryTenantProvisioningCommandHandler",
+        "YH.Modules.Multitenancy.Features.v1.ResetTenantTheme.ResetTenantThemeCommandHandler",
+        "YH.Modules.Tickets.Features.v1.Tickets.RestoreTicket.RestoreTicketCommandHandler",
+        "YH.Modules.Tickets.Features.v1.Tickets.ResolveTicket.ResolveTicketCommandHandler",
+        "YH.Modules.Tickets.Features.v1.Tickets.ReopenTicket.ReopenTicketCommandHandler",
+        "YH.Modules.Tickets.Features.v1.Tickets.AssignTicket.AssignTicketCommandHandler"
     ];
 
     private static readonly string[] KnownMissingQueryHandlers = [
-        "FSH.Modules.Billing.Features.v1.Invoices.GetMyInvoices.GetMyInvoicesQueryHandler",
-        "FSH.Modules.Billing.Features.v1.Invoices.GetInvoices.GetInvoicesQueryHandler",
-        "FSH.Modules.Catalog.Features.v1.Products.SearchProducts.SearchProductsQueryHandler",
-        "FSH.Modules.Catalog.Features.v1.Products.ListTrashedProducts.ListTrashedProductsQueryHandler",
-        "FSH.Modules.Catalog.Features.v1.Categories.SearchCategories.SearchCategoriesQueryHandler",
-        "FSH.Modules.Catalog.Features.v1.Categories.ListTrashedCategories.ListTrashedCategoriesQueryHandler",
-        "FSH.Modules.Catalog.Features.v1.Brands.SearchBrands.SearchBrandsQueryHandler",
-        "FSH.Modules.Catalog.Features.v1.Brands.ListTrashedBrands.ListTrashedBrandsQueryHandler",
-        "FSH.Modules.Identity.Features.v1.Sessions.GetTenantSessions.GetTenantSessionsQueryHandler",
-        "FSH.Modules.Tickets.Features.v1.Tickets.SearchTickets.SearchTicketsQueryHandler",
-        "FSH.Modules.Tickets.Features.v1.Tickets.ListTrashedTickets.ListTrashedTicketsQueryHandler"
+        "YH.Modules.Billing.Features.v1.Invoices.GetMyInvoices.GetMyInvoicesQueryHandler",
+        "YH.Modules.Billing.Features.v1.Invoices.GetInvoices.GetInvoicesQueryHandler",
+        "YH.Modules.Catalog.Features.v1.Products.SearchProducts.SearchProductsQueryHandler",
+        "YH.Modules.Catalog.Features.v1.Products.ListTrashedProducts.ListTrashedProductsQueryHandler",
+        "YH.Modules.Catalog.Features.v1.Categories.SearchCategories.SearchCategoriesQueryHandler",
+        "YH.Modules.Catalog.Features.v1.Categories.ListTrashedCategories.ListTrashedCategoriesQueryHandler",
+        "YH.Modules.Catalog.Features.v1.Brands.SearchBrands.SearchBrandsQueryHandler",
+        "YH.Modules.Catalog.Features.v1.Brands.ListTrashedBrands.ListTrashedBrandsQueryHandler",
+        "YH.Modules.Identity.Features.v1.Sessions.GetTenantSessions.GetTenantSessionsQueryHandler",
+        "YH.Modules.Tickets.Features.v1.Tickets.SearchTickets.SearchTicketsQueryHandler",
+        "YH.Modules.Tickets.Features.v1.Tickets.ListTrashedTickets.ListTrashedTicketsQueryHandler"
     ];
 
     [Fact]

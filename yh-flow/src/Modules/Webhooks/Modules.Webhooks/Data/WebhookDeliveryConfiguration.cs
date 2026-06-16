@@ -1,9 +1,9 @@
 using Finbuckle.MultiTenant.EntityFrameworkCore.Extensions;
-using FSH.Modules.Webhooks.Domain;
+using YH.Modules.Webhooks.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FSH.Modules.Webhooks.Data;
+namespace YH.Modules.Webhooks.Data;
 
 public sealed class WebhookDeliveryConfiguration : IEntityTypeConfiguration<WebhookDelivery>
 {

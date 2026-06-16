@@ -1,7 +1,7 @@
-using FSH.Framework.Core;
-using FSH.Framework.Persistence;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Framework.Web;
+using YH.Framework.Core;
+using YH.Framework.Persistence;
+using YH.Framework.Shared.Multitenancy;
+using YH.Framework.Web;
 using NetArchTest.Rules;
 using Shouldly;
 using System.Reflection;
@@ -35,9 +35,9 @@ public class BuildingBlocksIndependenceTests
                 .InAssembly(assembly)
                 .ShouldNot()
                 .HaveDependencyOnAny(
-                    "FSH.Modules.Auditing",
-                    "FSH.Modules.Identity",
-                    "FSH.Modules.Multitenancy")
+                    "YH.Modules.Auditing",
+                    "YH.Modules.Identity",
+                    "YH.Modules.Multitenancy")
                 .GetResult();
 
             var failingTypes = result.FailingTypeNames ?? [];
@@ -57,8 +57,8 @@ public class BuildingBlocksIndependenceTests
                 .InAssembly(assembly)
                 .ShouldNot()
                 .HaveDependencyOnAny(
-                    "FSH.Starter",
-                    "FSH.Starter.Api")
+                    "YH.Starter",
+                    "YH.Flow.Api")
                 .GetResult();
 
             var failingTypes = result.FailingTypeNames ?? [];
@@ -105,7 +105,7 @@ public class BuildingBlocksIndependenceTests
 
                 // Check if it references a Host project
                 if (referencedName.Contains("AppHost", StringComparison.OrdinalIgnoreCase) ||
-                    referencedName.StartsWith("FSH.Starter.Api", StringComparison.OrdinalIgnoreCase))
+                    referencedName.StartsWith("YH.Flow.Api", StringComparison.OrdinalIgnoreCase))
                 {
                     violations.Add($"{projectName} -> {referencedName}");
                 }

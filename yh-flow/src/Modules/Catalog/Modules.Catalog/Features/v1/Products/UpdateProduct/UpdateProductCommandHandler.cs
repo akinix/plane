@@ -1,11 +1,11 @@
 using System.Net;
-using FSH.Framework.Core.Exceptions;
-using FSH.Modules.Catalog.Contracts.v1.Products;
-using FSH.Modules.Catalog.Data;
+using YH.Framework.Core.Exceptions;
+using YH.Modules.Catalog.Contracts.v1.Products;
+using YH.Modules.Catalog.Data;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Catalog.Features.v1.Products.UpdateProduct;
+namespace YH.Modules.Catalog.Features.v1.Products.UpdateProduct;
 
 public sealed class UpdateProductCommandHandler(CatalogDbContext dbContext)
     : ICommandHandler<UpdateProductCommand, Guid>

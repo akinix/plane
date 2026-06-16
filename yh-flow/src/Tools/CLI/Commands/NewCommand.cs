@@ -1,10 +1,10 @@
 using System.ComponentModel;
 using System.Security.Cryptography;
-using FSH.CLI.Infrastructure;
+using YH.CLI.Infrastructure;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace FSH.CLI.Commands;
+namespace YH.CLI.Commands;
 
 public sealed class NewCommand : AsyncCommand<NewCommand.Settings>
 {

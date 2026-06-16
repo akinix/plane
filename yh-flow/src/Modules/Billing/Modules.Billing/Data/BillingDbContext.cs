@@ -1,7 +1,7 @@
-using FSH.Modules.Billing.Domain;
+using YH.Modules.Billing.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace FSH.Modules.Billing.Data;
+namespace YH.Modules.Billing.Data;
 
 /// <summary>
 /// Billing data lives in the main application database rather than per-tenant databases because

@@ -1,9 +1,9 @@
-using FSH.Modules.Identity.Contracts.DTOs;
-using FSH.Modules.Identity.Contracts.Services;
-using FSH.Modules.Identity.Contracts.v1.Roles.GetRoleWithPermissions;
+using YH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.Services;
+using YH.Modules.Identity.Contracts.v1.Roles.GetRoleWithPermissions;
 using Mediator;
 
-namespace FSH.Modules.Identity.Features.v1.Roles.GetRoleWithPermissions;
+namespace YH.Modules.Identity.Features.v1.Roles.GetRoleWithPermissions;
 
 public sealed class GetRoleWithPermissionsQueryHandler : IQueryHandler<GetRoleWithPermissionsQuery, RoleDto>
 {

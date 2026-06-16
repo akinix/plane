@@ -1,15 +1,15 @@
-using FSH.Modules.Auditing.Contracts.Authorization;
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Auditing.Contracts.Dtos;
-using FSH.Modules.Auditing.Contracts.v1.GetAudits;
+using YH.Modules.Auditing.Contracts.Authorization;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Auditing.Contracts.Dtos;
+using YH.Modules.Auditing.Contracts.v1.GetAudits;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Auditing.Features.v1.GetAudits;
+namespace YH.Modules.Auditing.Features.v1.GetAudits;
 
 public static class GetAuditsEndpoint
 {

@@ -1,12 +1,12 @@
-using FSH.Modules.Catalog.Contracts.Authorization;
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Modules.Catalog.Contracts.v1.Brands;
+using YH.Modules.Catalog.Contracts.Authorization;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Catalog.Contracts.v1.Brands;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Catalog.Features.v1.Brands.GetBrandById;
+namespace YH.Modules.Catalog.Features.v1.Brands.GetBrandById;
 
 public static class GetBrandByIdEndpoint
 {

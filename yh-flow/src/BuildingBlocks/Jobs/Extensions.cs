@@ -1,13 +1,13 @@
-﻿using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Jobs.Services;
-using FSH.Framework.Shared.Persistence;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Jobs.Services;
+using YH.Framework.Shared.Persistence;
 using Hangfire;
 using Hangfire.PostgreSql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FSH.Framework.Jobs;
+namespace YH.Framework.Jobs;
 
 public static class Extensions
 {

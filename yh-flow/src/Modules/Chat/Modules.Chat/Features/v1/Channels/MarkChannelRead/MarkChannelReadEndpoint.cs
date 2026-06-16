@@ -1,13 +1,13 @@
-using FSH.Framework.Shared.Identity.Authorization;
-using FSH.Modules.Chat.Contracts.Authorization;
-using FSH.Modules.Chat.Contracts.v1.Commands;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Chat.Contracts.Authorization;
+using YH.Modules.Chat.Contracts.v1.Commands;
 using Mediator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace FSH.Modules.Chat.Features.v1.Channels.MarkChannelRead;
+namespace YH.Modules.Chat.Features.v1.Channels.MarkChannelRead;
 
 public static class MarkChannelReadEndpoint
 {

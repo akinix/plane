@@ -1,16 +1,16 @@
-using FSH.Framework.Core.Context;
-using FSH.Framework.Persistence;
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Identity.Contracts.DTOs;
-using FSH.Modules.Identity.Contracts.v1.Users.SearchUsers;
-using FSH.Modules.Identity.Data;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Core.Context;
+using YH.Framework.Persistence;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Identity.Contracts.DTOs;
+using YH.Modules.Identity.Contracts.v1.Users.SearchUsers;
+using YH.Modules.Identity.Data;
+using YH.Modules.Identity.Domain;
 using Mediator;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace FSH.Modules.Identity.Features.v1.Users.SearchUsers;
+namespace YH.Modules.Identity.Features.v1.Users.SearchUsers;
 
 public sealed class SearchUsersQueryHandler : IQueryHandler<SearchUsersQuery, PagedResponse<UserDto>>
 {

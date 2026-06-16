@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
 using System.ComponentModel;
 
-namespace FSH.Modules.Identity.Caching;
+namespace YH.Modules.Identity.Caching;
 
 /// <summary>
 /// Immutable container for a user's permission set. Used as the cache value type in

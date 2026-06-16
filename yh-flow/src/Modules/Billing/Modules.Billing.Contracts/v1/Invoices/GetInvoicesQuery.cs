@@ -1,8 +1,8 @@
-using FSH.Framework.Shared.Persistence;
-using FSH.Modules.Billing.Contracts.Dtos;
+using YH.Framework.Shared.Persistence;
+using YH.Modules.Billing.Contracts.Dtos;
 using Mediator;
 
-namespace FSH.Modules.Billing.Contracts.v1.Invoices;
+namespace YH.Modules.Billing.Contracts.v1.Invoices;
 
 /// <summary>
 /// Admin query — lists invoices across all tenants with optional filters. Tenant-scoped callers

@@ -1,9 +1,9 @@
 using System.Net.Http.Json;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
-using FSH.Framework.Shared.Multitenancy;
-using FSH.Modules.Chat.Contracts.v1.DTOs;
-using FSH.Modules.Identity.Domain;
+using YH.Framework.Shared.Multitenancy;
+using YH.Modules.Chat.Contracts.v1.DTOs;
+using YH.Modules.Identity.Domain;
 using Integration.Tests.Infrastructure;
 using Integration.Tests.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
@@ -13,7 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Integration.Tests.Tests.Chat;
 
 /// <summary>
-/// Covers the <c>JoinChannel</c> hub method: <see cref="FSH.Framework.Web.Realtime.AppHub.OnConnectedAsync"/>
+/// Covers the <c>JoinChannel</c> hub method: <see cref="YH.Framework.Web.Realtime.AppHub.OnConnectedAsync"/>
 /// only pre-joins channels that existed (and the user was a member of) at connect time, so a channel that
 /// becomes relevant *after* the socket is live needs an on-demand join or its group broadcasts never arrive
 /// until the page reloads. This is the root cause of "the recipient doesn't see the message until refresh".

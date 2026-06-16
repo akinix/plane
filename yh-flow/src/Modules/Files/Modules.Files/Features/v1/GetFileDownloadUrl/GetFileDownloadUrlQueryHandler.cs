@@ -1,16 +1,16 @@
-using FSH.Framework.Core.Context;
-using FSH.Framework.Core.Exceptions;
-using FSH.Framework.Storage.Services;
-using FSH.Modules.Files.Contracts;
-using FSH.Modules.Files.Contracts.v1.DTOs;
-using FSH.Modules.Files.Contracts.v1.Queries;
-using FSH.Modules.Files.Data;
-using FSH.Modules.Files.Services;
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Storage.Services;
+using YH.Modules.Files.Contracts;
+using YH.Modules.Files.Contracts.v1.DTOs;
+using YH.Modules.Files.Contracts.v1.Queries;
+using YH.Modules.Files.Data;
+using YH.Modules.Files.Services;
 using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
-namespace FSH.Modules.Files.Features.v1.GetFileDownloadUrl;
+namespace YH.Modules.Files.Features.v1.GetFileDownloadUrl;
 
 public sealed class GetFileDownloadUrlQueryHandler(
     FilesDbContext db,

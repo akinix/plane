@@ -1,10 +1,10 @@
-using FSH.Framework.Persistence;
-using FSH.Modules.Billing.Contracts;
-using FSH.Modules.Billing.Domain;
+using YH.Framework.Persistence;
+using YH.Modules.Billing.Contracts;
+using YH.Modules.Billing.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace FSH.Modules.Billing.Data;
+namespace YH.Modules.Billing.Data;
 
 public sealed class BillingDbInitializer(
     BillingDbContext dbContext,
