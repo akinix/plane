@@ -1,0 +1,35 @@
+{
+  "projectName": "YH.Flow",
+  "displayName": "Flow",
+  "description": "Open-source project management platform - .NET 10 C# backend migration from Plane (Django)",
+  "version": "0.1.0",
+  "createdAt": "2026-06-16",
+  "repository": "d:/github/akinix-plane",
+  "projectPath": "yh-flow",
+  "template": {
+    "name": "fullstackhero-dotnet-starter-kit",
+    "version": "net10",
+    "localPath": "D:/github/fullstackhero-dotnet-starter-kit",
+    "docsPath": "D:/github/fullstackhero-docs",
+    "docsUrl": "https://fullstackhero.net/docs/"
+  },
+  "referenceProject": {
+    "name": "Plane",
+    "path": "d:/github/akinix-plane",
+    "branch": "preview",
+    "doNotModify": true
+  },
+  "workflow": {
+    "strategy": "modular-monolith-migration",
+    "apiCompatibility": true,
+    "ci_cd": false,
+    "realTimeCollaboration": false
+  },
+  "codebaseMap": ".planning/codebase/",
+  "gsd": {
+    "intel": {
+      "enabled": true
+    },
+    "modelProfile": "opus"
+  }
+}
