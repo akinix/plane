@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Catalog
+namespace YH.Flow.Migrations.PostgreSQL.Catalog
 {
     /// <inheritdoc />
     public partial class CatalogTenantIsolation : Migration

@@ -6,7 +6,7 @@ using System.Reflection;
 namespace Generic.Tests.Architecture;
 
 /// <summary>
-/// Discovers all FSH module assemblies for use in generic architecture tests.
+/// Discovers all YH module assemblies for use in generic architecture tests.
 /// </summary>
 internal static class ModuleAssemblyDiscovery
 {

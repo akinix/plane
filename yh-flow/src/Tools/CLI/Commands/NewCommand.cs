@@ -204,7 +204,7 @@ public sealed class NewCommand : AsyncCommand<NewCommand.Settings>
 
         if (installed) return true;
 
-        AnsiConsole.MarkupLine($"[{FshConstants.WarningColor}]FSH template not found. Installing...[/]");
+        AnsiConsole.MarkupLine($"[{FshConstants.WarningColor}]YH template not found. Installing...[/]");
         await ProcessRunner.RunAsync(
             "dotnet", $"new install {FshConstants.TemplatePackageId}",
             cancellationToken: cancellationToken).ConfigureAwait(false);

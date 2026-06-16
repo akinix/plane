@@ -16,8 +16,8 @@ using YH.Modules.Multitenancy.Data;
 using YH.Modules.Multitenancy.Features.v1.GetTenantStatus;
 using YH.Modules.Tickets;
 using YH.Modules.Webhooks;
-using YH.Starter.DbMigrator;
-using YH.Starter.DbMigrator.DemoSeed;
+using YH.Flow.DbMigrator;
+using YH.Flow.DbMigrator.DemoSeed;
 using Finbuckle.MultiTenant.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +26,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-// FSH DbMigrator — one-shot console that migrates every DB to head, optionally seeds, then exits 0/1.
+// YH DbMigrator — one-shot console that migrates every DB to head, optionally seeds, then exits 0/1.
 // Runs as a deployment step (not at API startup) so it can use an elevated-DDL connection string. Verbs: see MigratorCommand.HelpText.
 
 var cli = MigratorCommand.Parse(args);

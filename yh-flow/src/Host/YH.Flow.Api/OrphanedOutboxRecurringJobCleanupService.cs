@@ -1,7 +1,7 @@
 using Hangfire;
 using Hangfire.Storage;
 
-namespace YH.Starter.Api;
+namespace YH.Flow.Api;
 
 /// <summary>
 /// One-shot, best-effort removal of orphaned <c>{module}-outbox-dispatcher</c> Hangfire recurring jobs.

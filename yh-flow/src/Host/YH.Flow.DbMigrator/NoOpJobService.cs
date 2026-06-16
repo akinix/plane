@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using YH.Framework.Jobs.Services;
 
-namespace YH.Starter.DbMigrator;
+namespace YH.Flow.DbMigrator;
 
 /// <summary>
 /// Satisfies <see cref="IJobService"/> in the migrator's DI graph without

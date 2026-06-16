@@ -51,7 +51,7 @@ public class HostArchitectureTests
         var hostResult = Types
             .InCurrentDomain()
             .That()
-            .ResideInNamespace("YH.Starter")
+            .ResideInNamespace("YH.Flow")
             .Should()
             .NotHaveDependencyOnAny(forbiddenNamespaces)
             .GetResult();

@@ -8,7 +8,7 @@ using Xunit;
 namespace Architecture.Tests;
 
 /// <summary>
-/// Discovers all FSH module assemblies for use in architecture tests.
+/// Discovers all YH module assemblies for use in architecture tests.
 /// Uses a seed assembly list to ensure the correct AppDomain is loaded,
 /// then auto-discovers any additional module assemblies that are loaded.
 /// Adding a new module requires only adding its assembly reference to the
@@ -19,7 +19,7 @@ internal static class ModuleAssemblyDiscovery
     private static readonly Assembly[] _cached = Discover();
 
     /// <summary>
-    /// Returns all loaded FSH module assemblies (excluding Contracts assemblies).
+    /// Returns all loaded YH module assemblies (excluding Contracts assemblies).
     /// </summary>
     public static Assembly[] GetModuleAssemblies() => _cached;
 
@@ -70,7 +70,7 @@ public sealed class ModuleAssemblyDiscoveryGuardTests
         if (assemblies.Length == 0)
         {
             throw new InvalidOperationException(
-                "ModuleAssemblyDiscovery found no FSH module assemblies. " +
+                "ModuleAssemblyDiscovery found no YH module assemblies. " +
                 "Ensure Architecture.Tests.csproj references at least one Modules.* project.");
         }
 

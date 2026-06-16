@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Tickets
+namespace YH.Flow.Migrations.PostgreSQL.Tickets
 {
     /// <inheritdoc />
     public partial class TicketsTenantIsolation : Migration

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Webhooks
+namespace YH.Flow.Migrations.PostgreSQL.Webhooks
 {
     /// <inheritdoc />
     public partial class InitialWebhooks : Migration

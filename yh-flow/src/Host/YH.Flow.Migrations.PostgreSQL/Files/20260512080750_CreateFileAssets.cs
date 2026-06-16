@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Files
+namespace YH.Flow.Migrations.PostgreSQL.Files
 {
     /// <inheritdoc />
     public partial class CreateFileAssets : Migration

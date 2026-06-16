@@ -21,7 +21,7 @@ public static class GenerateTokenEndpoint
     /// belt-and-braces check; the dashboard client also rejects root-tenant tokens
     /// locally for a cleaner UX.
     /// </summary>
-    public const string AppHeader = "X-FSH-App";
+    public const string AppHeader = "X-YH-App";
     public const string AppAdmin = "admin";
     public const string AppDashboard = "dashboard";
 
@@ -52,7 +52,7 @@ public static class GenerateTokenEndpoint
             })
             .WithName("IssueJwtTokens")
             .WithSummary("Issue JWT access and refresh tokens")
-            .WithDescription("Submit credentials to receive a JWT access token and a refresh token. Provide the 'tenant' header to select the tenant context (defaults to 'root'). The 'X-FSH-App' header (admin|dashboard) is used to enforce the SuperAdmin / dashboard boundary.")
+            .WithDescription("Submit credentials to receive a JWT access token and a refresh token. Provide the 'tenant' header to select the tenant context (defaults to 'root'). The 'X-YH-App' header (admin|dashboard) is used to enforce the SuperAdmin / dashboard boundary.")
             .Produces<TokenResponse>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status401Unauthorized)
             .Produces(StatusCodes.Status403Forbidden)

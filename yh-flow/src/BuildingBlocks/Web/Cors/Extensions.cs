@@ -9,7 +9,7 @@ namespace YH.Framework.Web.Cors;
 
 public static class Extensions
 {
-    private const string PolicyName = "FSHCorsPolicy";
+    private const string PolicyName = "YHCorsPolicy";
 
     public static IServiceCollection AddHeroCors(
         this IServiceCollection services,

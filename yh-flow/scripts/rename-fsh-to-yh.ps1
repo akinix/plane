@@ -80,8 +80,10 @@ foreach ($file in $csFiles) {
     $content = $content -replace 'using FSH\.', 'using YH.'
     # typeof(FSH. -> typeof(YH.
     $content = $content -replace 'typeof\(FSH\.', 'typeof(YH.'
-    # FSH.Starter. -> YH.Flow. (for any remaining string references)
+    # FSH.Starter. -> YH.Flow. (must come before generic FSH. -> YH.)
     $content = $content -replace 'FSH\.Starter\.', 'YH.Flow.'
+    # YH.Starter. -> YH.Flow. (handles intermediate state from prior runs)
+    $content = $content -replace 'YH\.Starter\.', 'YH.Flow.'
     # FSH. -> YH. (catch-all for any other FSH namespace references)
     $content = $content -replace 'FSH\.', 'YH.'
 

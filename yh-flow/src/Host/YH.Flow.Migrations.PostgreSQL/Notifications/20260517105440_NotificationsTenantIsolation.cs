@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Notifications
+namespace YH.Flow.Migrations.PostgreSQL.Notifications
 {
     /// <inheritdoc />
     public partial class NotificationsTenantIsolation : Migration

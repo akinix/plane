@@ -1,4 +1,4 @@
-namespace YH.Starter.DbMigrator;
+namespace YH.Flow.DbMigrator;
 
 /// <summary>
 /// Lightweight command-line parser. Avoids dragging in System.CommandLine for
@@ -55,7 +55,7 @@ internal sealed record MigratorCommand(
     }
 
     public const string HelpText = """
-        FSH DbMigrator — apply EF Core migrations across the tenant catalog
+        YH DbMigrator — apply EF Core migrations across the tenant catalog
         and every tenant's per-module databases.
 
         Usage:

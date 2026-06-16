@@ -83,7 +83,7 @@
   </Folder>
   <!--#if (includeTools) -->
   <Folder Name="/Tools/">
-    <Project Path="Tools/CLI/FSH.CLI.csproj" />
+    <Project Path="Tools/CLI/YH.CLI.csproj" />
   </Folder>
   <!--#endif -->
 

@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.MultiTenancy
+namespace YH.Flow.Migrations.PostgreSQL.MultiTenancy
 {
     /// <inheritdoc />
     public partial class UpdateMultitenancy : Migration

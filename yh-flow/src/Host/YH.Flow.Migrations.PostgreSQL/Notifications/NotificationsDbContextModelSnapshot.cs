@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Notifications
+namespace YH.Flow.Migrations.PostgreSQL.Notifications
 {
     [DbContext(typeof(NotificationsDbContext))]
     partial class NotificationsDbContextModelSnapshot : ModelSnapshot

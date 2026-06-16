@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Tickets
+namespace YH.Flow.Migrations.PostgreSQL.Tickets
 {
     [DbContext(typeof(TicketsDbContext))]
     partial class TicketsDbContextModelSnapshot : ModelSnapshot

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Billing
+namespace YH.Flow.Migrations.PostgreSQL.Billing
 {
     /// <inheritdoc />
     public partial class BillingPlanIntervalAndInvoicePurpose : Migration

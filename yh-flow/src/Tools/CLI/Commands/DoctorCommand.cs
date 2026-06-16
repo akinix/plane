@@ -9,7 +9,7 @@ public sealed class DoctorCommand : AsyncCommand
 {
     protected override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken)
     {
-        AnsiConsole.MarkupLine($"[bold {FshConstants.AccentColor}]FSH Doctor[/] — checking your development environment");
+        AnsiConsole.MarkupLine($"[bold {FshConstants.AccentColor}]YH Doctor[/] — checking your development environment");
         AnsiConsole.WriteLine();
 
         var checks = new List<DoctorCheck>();
@@ -112,11 +112,11 @@ public sealed class DoctorCommand : AsyncCommand
             .ConfigureAwait(false);
 
         if (version is null)
-            return new("FSH Template", CheckStatus.Warn,
+            return new("YH Template", CheckStatus.Warn,
                 $"Not installed. Run: dotnet new install {FshConstants.TemplatePackageId}");
 
         string detail = char.IsDigit(version[0]) ? $"v{version}" : version;
-        return new("FSH Template", CheckStatus.Pass, detail);
+        return new("YH Template", CheckStatus.Pass, detail);
     }
 
     private static DoctorCheck CheckPorts()

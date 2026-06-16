@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Chat
+namespace YH.Flow.Migrations.PostgreSQL.Chat
 {
     /// <summary>
     /// Adds a generated tsvector column on chat.Messages and a GIN index so the search endpoint

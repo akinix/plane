@@ -57,7 +57,7 @@ public class BuildingBlocksIndependenceTests
                 .InAssembly(assembly)
                 .ShouldNot()
                 .HaveDependencyOnAny(
-                    "YH.Starter",
+                    "YH.Flow",
                     "YH.Flow.Api")
                 .GetResult();
 

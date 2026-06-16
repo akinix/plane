@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Npgsql;
 using NpgsqlTypes;
 
-namespace YH.Starter.DbMigrator;
+namespace YH.Flow.DbMigrator;
 
 /// <summary>
 /// Coordinates concurrent migrator invocations via a Postgres session-level

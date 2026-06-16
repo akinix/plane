@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Audit
+namespace YH.Flow.Migrations.PostgreSQL.Audit
 {
     [DbContext(typeof(AuditDbContext))]
     [Migration("20260403185410_SyncModel")]

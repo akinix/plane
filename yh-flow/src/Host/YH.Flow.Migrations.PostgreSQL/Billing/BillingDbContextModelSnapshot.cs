@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Billing
+namespace YH.Flow.Migrations.PostgreSQL.Billing
 {
     [DbContext(typeof(BillingDbContext))]
     partial class BillingDbContextModelSnapshot : ModelSnapshot

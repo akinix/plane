@@ -4,7 +4,7 @@ using System;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Identity
+namespace YH.Flow.Migrations.PostgreSQL.Identity
 {
     /// <inheritdoc />
     public partial class Initial : Migration

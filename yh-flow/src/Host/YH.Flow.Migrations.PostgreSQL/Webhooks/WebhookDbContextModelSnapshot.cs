@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Webhooks
+namespace YH.Flow.Migrations.PostgreSQL.Webhooks
 {
     [DbContext(typeof(WebhookDbContext))]
     partial class WebhookDbContextModelSnapshot : ModelSnapshot

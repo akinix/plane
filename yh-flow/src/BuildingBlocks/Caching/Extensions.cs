@@ -62,7 +62,7 @@ public static class Extensions
             // Redis so multi-instance hosts share a key ring and tokens survive rolling restarts.
             services.AddDataProtection()
                 .PersistKeysToStackExchangeRedis(sharedMultiplexer, "DataProtection-Keys")
-                .SetApplicationName("YH.Starter");
+                .SetApplicationName("YH.Flow");
         }
 
         // HybridCache auto-composes with whatever IDistributedCache is registered above.

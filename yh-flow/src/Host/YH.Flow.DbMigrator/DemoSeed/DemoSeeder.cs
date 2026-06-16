@@ -28,7 +28,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace YH.Starter.DbMigrator.DemoSeed;
+namespace YH.Flow.DbMigrator.DemoSeed;
 
 /// <summary>
 /// Owns the "rich demo content" that the dev environment needs to feel lived-in:

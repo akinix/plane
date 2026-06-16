@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Chat
+namespace YH.Flow.Migrations.PostgreSQL.Chat
 {
     /// <inheritdoc />
     public partial class ChatTenantIsolation : Migration

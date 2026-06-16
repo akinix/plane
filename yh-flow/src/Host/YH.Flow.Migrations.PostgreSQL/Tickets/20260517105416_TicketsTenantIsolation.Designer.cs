@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Tickets
+namespace YH.Flow.Migrations.PostgreSQL.Tickets
 {
     [DbContext(typeof(TicketsDbContext))]
     [Migration("20260517105416_TicketsTenantIsolation")]

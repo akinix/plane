@@ -3,7 +3,7 @@ using System;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Audit
+namespace YH.Flow.Migrations.PostgreSQL.Audit
 {
     /// <inheritdoc />
     public partial class AddAudits : Migration

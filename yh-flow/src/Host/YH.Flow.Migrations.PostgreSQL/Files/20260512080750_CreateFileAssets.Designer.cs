@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace YH.Starter.Migrations.PostgreSQL.Files
+namespace YH.Flow.Migrations.PostgreSQL.Files
 {
     [DbContext(typeof(FilesDbContext))]
     [Migration("20260512080750_CreateFileAssets")]
