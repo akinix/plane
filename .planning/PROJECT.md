@@ -3,7 +3,7 @@
 **Project:** YH.Flow (展示名称: Flow)  
 **Type:** 后端迁移 + 前后端重写  
 **Start Date:** 2026-06-16  
-**Status:** 🚀 Initializing
+**Status:** ✅ Phase 0 Complete — 项目脚手架已就绪
 
 ---
 
@@ -158,3 +158,21 @@ d:/github/akinix-plane/
 - **代码库映射**: `.planning/codebase/` (7 篇分析文档)
 - **模板规范**: `D:/github/fullstackhero-dotnet-starter-kit/AGENTS.md`
 - **模板规则**: `D:/github/fullstackhero-dotnet-starter-kit/.agents/rules/`
+
+## 9. Validated Requirements
+
+### Phase 0: 项目初始化 & 脚手架 (2026-06-16)
+
+- T0.1: ✅ yh-flow/ 项目结构创建完成（BuildingBlocks 11, Modules 10, Host 4）
+- T0.2: ✅ 禁用模块 DI 注册移除（Catalog, Tickets, Chat, Billing）
+- T0.3: ✅ 构建基础设施配置完成（Directory.Build.props, Directory.Packages.props, NuGet.Config）
+- T0.4: ✅ FSH → YH 命名空间重命名完成（1500+ 文件，零残留）
+- T0.5: ✅ BuildingBlocks 引用配置完成
+- T0.6: ✅ YH.Flow.slnx 解决方案文件创建（51 个项目）
+- T0.7: ✅ Aspire AppHost 配置完成（PostgreSQL, Redis/Valkey, MinIO）
+- T0.8: ✅ 编译验证通过（51 projects, 0 errors, 0 warnings）
+- ⏳ 待人工验证: Aspire 容器完整启动 + API 健康检查
+
+## 10. Current State
+
+Phase 0 完成 — YH.Flow 项目脚手架就绪。编译通过，命名空间替换完成，Aspire 编排配置正确。待 Docker 环境下人工验证容器启动后即可进入 Phase 1 (Foundation)。
