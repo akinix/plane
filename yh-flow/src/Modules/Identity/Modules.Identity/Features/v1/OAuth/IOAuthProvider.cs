@@ -6,7 +6,7 @@ public interface IOAuthProvider
 {
     string ProviderName { get; }
 
-    Uri GetAuthUrl(string state, string callbackUrl);
+    string GetAuthUrl(string state, string callbackUrl);
 
     Task<OAuthUserInfo> ExchangeCodeAsync(string code, string callbackUrl, CancellationToken ct);
 }

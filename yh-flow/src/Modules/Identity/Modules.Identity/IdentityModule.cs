@@ -14,6 +14,7 @@ using YH.Modules.Identity.Authorization.SessionCookie;
 using YH.Modules.Identity.Contracts.Services;
 using YH.Modules.Identity.Data;
 using YH.Modules.Identity.Domain;
+using YH.Modules.Identity.Features.v1.Auth;
 using YH.Modules.Identity.Features.v1.OAuth;
 using YH.Modules.Identity.Features.v1.Groups.AddUsersToGroup;
 using YH.Modules.Identity.Features.v1.Groups.CreateGroup;
@@ -263,5 +264,8 @@ public class IdentityModule : IModule
         group.MapEnrollTwoFactorEndpoint();
         group.MapVerifyEnrollTwoFactorEndpoint();
         group.MapDisableTwoFactorEndpoint();
+
+        // Plane-compatible authentication endpoints (/auth/*)
+        endpoints.MapPlaneAuthEndpoints();
     }
 }
