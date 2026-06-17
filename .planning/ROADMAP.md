@@ -109,6 +109,20 @@ Plans:
 - T2.8: 创建 WorkspaceDbContext + 迁移
 - T2.9: 实现 Workspace 权限
 
+### Plans
+
+**Plans:** 6 plans (6 waves)
+
+Plans:
+
+- [ ] 02-PLAN-00-INDEX.md — Phase 2 计划索引（wave/plan/REQ/decision 覆盖矩阵）
+- [ ] 02-01-PLAN.md — Wave 0：spike Q1（Finbuckle 外部追加 strategy）+ Workspace.Tests 脚手架 + Workspace.Contracts 契约 + Identity.Contracts 扩展
+- [ ] 02-02-PLAN.md — Wave 1：Domain 实体（Workspace/Member/Invitation）+ WorkspaceDbContext + 3 个 IEntityTypeConfiguration + Finbuckle slug strategy/store wiring（D-01）
+- [ ] 02-03-PLAN.md — Wave 2：[BLOCKING] EF 迁移应用 + DbMigrator/Api Program.cs wiring + WorkspaceMembershipMiddleware（D-02）+ [RequireWorkspaceRole] authz（D-11）
+- [ ] 02-04-PLAN.md — Wave 3：SlugGenerator（D-07/09）+ 6 个 Workspace Feature slice（Create/Get/Update/Delete/ListUserWorkspaces/CheckSlug）
+- [ ] 02-05-PLAN.md — Wave 4：UserIdentityService（Identity 模块）+ InvitationTokenService（D-12）+ 4 Member + 5 Invitation Feature slice（D-04/05/10/12）
+- [ ] 02-06-PLAN.md — Wave 5：[BLOCKING] 全量回归 + WorkspaceLifecycleSmoke + WorkspaceRoleCapability + checkpoint:human-verify 手工 smoke
+
 **Deliverables:**
 
 - 完整工作区管理 API
