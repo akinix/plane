@@ -244,6 +244,6 @@ None. The plan's `<threat_model>` registered T-02-01 (RestrictedSlugs integrity)
 
 No new threat surface introduced (Wave 0 has no HTTP endpoints, no runtime entry points per the plan's threat register).
 
-## Self-Check: PENDING
+## Self-Check: PASSED
 
-Self-check will run after SUMMARY is committed and verified.
+All 18 created files verified present on disk. All 4 commits (`e6431840e`, `a0b55653b`, `e9ed9d8a6`, `169a414e9`) verified in `git log`.
