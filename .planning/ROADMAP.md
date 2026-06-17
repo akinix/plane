@@ -21,6 +21,7 @@ Foundation → Workspace → Project → WorkItems → Cycle/Module/Page/View �
 **Duration Estimate:** 2-3 days
 
 ### Tasks
+
 - T0.1: 基于 fullstackhero 模板创建 `yh-flow/` 项目结构
 - T0.2: 移除不需要的模块（Catalog, Tickets, Chat, Billing）
 - T0.3: 配置 Directory.Build.props, Directory.Packages.props, NuGet.Config
@@ -31,6 +32,7 @@ Foundation → Workspace → Project → WorkItems → Cycle/Module/Page/View �
 - T0.8: 验证项目可编译运行
 
 **Deliverables:**
+
 - 可编译的 YH.Flow 解决方案
 - Aspire 编排可启动所有基础设施
 
@@ -44,6 +46,7 @@ Foundation → Workspace → Project → WorkItems → Cycle/Module/Page/View �
 **Duration Estimate:** 3-5 days
 
 ### Tasks
+
 - T1.1: 配置 PostgreSQL 连接和 EF Core
 - T1.2: 建立 DbMigrator + Migrations 项目
 - T1.3: 实现多租户基础设施（Finbuckle header/query-string）
@@ -62,13 +65,25 @@ Foundation → Workspace → Project → WorkItems → Cycle/Module/Page/View �
 **Plans:** 5 plans (4 waves)
 
 Plans:
+**Wave 1**
+
 - [ ] 01-01-PLAN.md — 多 Scheme 认证协商（API Key + Session Cookie + PolicyScheme 路由器）
 - [ ] 01-02-PLAN.md — Domain 实体 + EF 配置（APIToken + OAuthProviderSettings + IdentityDbContext）
+
+**Wave 2** *(blocked on Wave 1 completion)*
+
 - [ ] 01-03-PLAN.md — OAuth Provider 框架 + Plane 兼容认证端点（/auth/*）
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
 - [ ] 01-04-PLAN.md — API Token CRUD + OAuth Provider 管理 + Plane 格式适配
+
+**Wave 4** *(blocked on Wave 3 completion)*
+
 - [ ] 01-05-PLAN.md — [BLOCKING] Schema Push + 全阶段验证
 
 **Deliverables:**
+
 - 完整认证流程（JWT + API Key + Session）
 - API 基础设施就绪
 
@@ -83,6 +98,7 @@ Plans:
 **Requirements:** REQ-2.1 ~ REQ-2.4
 
 ### Tasks
+
 - T2.1: 创建 Workspace 实体和领域模型
 - T2.2: 创建 WorkspaceMember 实体
 - T2.3: 创建 WorkspaceInvitation 实体
@@ -94,6 +110,7 @@ Plans:
 - T2.9: 实现 Workspace 权限
 
 **Deliverables:**
+
 - 完整工作区管理 API
 - 多租户数据隔离
 
@@ -108,6 +125,7 @@ Plans:
 **Requirements:** REQ-3.1 ~ REQ-3.3
 
 ### Tasks
+
 - T3.1: 创建 Project 实体和领域模型
 - T3.2: 创建 ProjectMember 实体
 - T3.3: 实现 Project CRUD 端点
@@ -118,6 +136,7 @@ Plans:
 - T3.8: 实现 Project 权限
 
 **Deliverables:**
+
 - 完整项目管理 API
 
 ---
@@ -131,6 +150,7 @@ Plans:
 **Requirements:** REQ-4.1 ~ REQ-4.9
 
 ### Tasks
+
 - T4.1: 创建 State 实体 + CRUD 端点
 - T4.2: 创建 Label 实体 + CRUD 端点
 - T4.3: 创建 Estimate 实体 + CRUD 端点
@@ -148,6 +168,7 @@ Plans:
 - T4.15: 实现 WorkItems 权限
 
 **Deliverables:**
+
 - 完整工作项管理 API
 - Import/Export 功能
 
@@ -162,6 +183,7 @@ Plans:
 **Requirements:** REQ-5.1 ~ REQ-5.2
 
 ### Tasks
+
 - T5.1: 创建 Cycle 实体和领域模型
 - T5.2: 创建 CycleIssue 关联实体
 - T5.3: 实现 Cycle CRUD 端点
@@ -171,6 +193,7 @@ Plans:
 - T5.7: 实现 Cycle 权限
 
 **Deliverables:**
+
 - 完整周期管理 API
 
 ---
@@ -184,6 +207,7 @@ Plans:
 **Requirements:** REQ-6.1 ~ REQ-6.2
 
 ### Tasks
+
 - T6.1: 创建 Module 实体和领域模型
 - T6.2: 创建 ModuleIssue 关联实体
 - T6.3: 实现 Module CRUD 端点
@@ -193,6 +217,7 @@ Plans:
 - T6.7: 实现 Module 权限
 
 **Deliverables:**
+
 - 完整模块管理 API
 
 ---
@@ -206,6 +231,7 @@ Plans:
 **Requirements:** REQ-7.1 ~ REQ-7.2
 
 ### Tasks
+
 - T7.1: 创建 Page 实体和领域模型
 - T7.2: 实现 Page 层级结构（父子关系）
 - T7.3: 实现 Page CRUD 端点
@@ -215,6 +241,7 @@ Plans:
 - T7.7: 实现 Page 权限
 
 **Deliverables:**
+
 - 完整文档管理 API（不含实时协作）
 
 ---
@@ -228,6 +255,7 @@ Plans:
 **Requirements:** REQ-8.1 ~ REQ-8.2
 
 ### Tasks
+
 - T8.1: 创建 View 实体和领域模型
 - T8.2: 实现 View CRUD 端点
 - T8.3: 实现 View 筛选条件校验
@@ -235,6 +263,7 @@ Plans:
 - T8.5: 实现 View 权限
 
 **Deliverables:**
+
 - 完整视图管理 API
 
 ---
@@ -248,6 +277,7 @@ Plans:
 **Requirements:** REQ-9.1 ~ REQ-9.5
 
 ### Tasks
+
 - T9.1: 实现 GitHub OAuth + API 客户端
 - T9.2: 实现 GitHub Issue 双向同步
 - T9.3: 实现 GitHub 评论同步
@@ -259,6 +289,7 @@ Plans:
 - T9.9: 实现 Integration 权限
 
 **Deliverables:**
+
 - 完整集成管理 API
 
 ---
@@ -272,6 +303,7 @@ Plans:
 **Requirements:** REQ-10.1 ~ REQ-10.2
 
 ### Tasks
+
 - T10.1: 创建 Webhook 实体
 - T10.2: 创建 WebhookLog 实体
 - T10.3: 实现 Webhook CRUD 端点
@@ -282,6 +314,7 @@ Plans:
 - T10.8: 创建 WebhookDbContext + 迁移
 
 **Deliverables:**
+
 - 完整 Webhook 系统
 
 ---
@@ -295,6 +328,7 @@ Plans:
 **Requirements:** REQ-11.1 ~ REQ-11.2
 
 ### Tasks
+
 - T11.1: 创建 Notification 实体
 - T11.2: 实现通知生成（领域事件 → 通知）
 - T11.3: 实现通知列表端点
@@ -303,6 +337,7 @@ Plans:
 - T11.6: 创建 NotificationDbContext + 迁移
 
 **Deliverables:**
+
 - 完整通知系统
 
 ---
@@ -316,6 +351,7 @@ Plans:
 **Requirements:** REQ-12.1 ~ REQ-12.2
 
 ### Tasks
+
 - T12.1: 实现 Issue 统计分析
 - T12.2: 实现 Cycle 进度分析
 - T12.3: 实现成员工作量分析
@@ -324,6 +360,7 @@ Plans:
 - T12.6: 创建 AnalyticsDbContext + 迁移
 
 **Deliverables:**
+
 - 完整分析 API
 
 ---
@@ -337,6 +374,7 @@ Plans:
 **Requirements:** REQ-13.1 ~ REQ-13.4
 
 ### Tasks
+
 - T13.1: 项目初始化（基于 FSH clients/dashboard 模板）
 - T13.2: 布局框架（侧边栏、导航、面包屑）
 - T13.3: 认证页面（登录、注册、OAuth）
@@ -355,6 +393,7 @@ Plans:
 - T13.16: 主题切换（亮/暗）
 
 **Deliverables:**
+
 - 完整 Flow Web 前端
 
 ---
@@ -401,6 +440,7 @@ Cycle Module View Page  │          │              │
 ## Parallelizable Work
 
 以下 Phase 在依赖满足后可以并行执行：
+
 - **Phase 5 (Cycle) + Phase 6 (Module) + Phase 8 (View)**: 都仅依赖 Phase 4
 - **Phase 7 (Page)**: 仅依赖 Phase 3
 - **Phase 9 (Integration) + Phase 10 (Webhook)**: 依赖不同

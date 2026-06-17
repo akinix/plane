@@ -841,19 +841,19 @@ internal sealed class CreateApiTokenEndpoint
 | A2 | Plane 前端使用 Cookie 名 `.AspNetCore.Session` 或类似格式 | Pattern 1 | 中 — 需要检查 Plane 前端源码中的 cookie 名称 |
 | A3 | OAuth callback 重定向到前端时使用 URL query string 传递 JWT（`?token=xxx`） | Pitfall 2 | 中 — Plane 前端可能使用不同的 token 传递机制 |
 
-## Open Questions
+## Open Questions (ALL RESOLVED)
 
-1. **Plane 前端的 Cookie 认证具体使用什么 Cookie 名？**
+1. **[RESOLVED] Plane 前端的 Cookie 认证具体使用什么 Cookie 名？** — 决定: 使用 `.YHFlow.Session` 作为 Cookie 名 (见 Plan 01-01 SessionCookieAuthenticationDefaults)
    - What we know: Plane 使用 Django session framework，默认 Cookie 名为 `sessionid`
    - What's unclear: .NET 端是否应使用相同的 Cookie 名 `sessionid` 以保持前端兼容
    - Recommendation: 使用 `sessionid` 作为 Cookie 名，确保与 Plane 前端的 `withCredentials: true` 配置兼容
 
-2. **OAuth 回调后 JWT 传递给前端的具体机制？**
+2. **[RESOLVED] OAuth 回调后 JWT 传递给前端的具体机制？** — 决定: 使用 query string `?token=xxx&refresh_token=yyy` (见 Plan 01-03 OAuthCallbackEndpoint)
    - What we know: Plane 使用 URL 重定向，前端从 URL 中提取认证信息
    - What's unclear: 具体是 query string 还是 hash fragment
    - Recommendation: 使用 query string `?token=xxx&refresh_token=yyy`，Phase 9 实现具体 Provider 时验证
 
-3. **OAuthProviderSettings 是全局配置还是 per-tenant 配置？**
+3. **[RESOLVED] OAuthProviderSettings 是全局配置还是 per-tenant 配置？** — 决定: 实现为 IGlobalEntity (全局)，见 Plan 01-02 OAuthProviderSettings
    - What we know: D-08 说放在 Identity 模块，D-07 说数据库动态管理
    - What's unclear: 不同租户是否需要不同的 OAuth 配置
    - Recommendation: 一期实现为 IGlobalEntity（全局），后续如有需求可改为 IHasTenant
