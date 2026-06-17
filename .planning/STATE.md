@@ -3,20 +3,20 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 current_phase: 01
-status: ready_to_plan
-last_updated: "2026-06-17T05:48:15.053Z"
+status: executing
+last_updated: "2026-06-17T07:30:00.000Z"
 progress:
   total_phases: 14
   completed_phases: 1
   total_plans: 8
-  completed_plans: 3
-  percent: 7
+  completed_plans: 6
+  percent: 10
 ---
 
 # YH.Flow — Project State
 
-**Last Updated:** 2026-06-16  
-**Current Phase:** 01
+**Last Updated:** 2026-06-17  
+**Current Phase:** 01 (Wave 3 — executing)
 **Active Workstream:** None
 
 ---
@@ -47,12 +47,15 @@ progress:
 
 ### In Progress
 
-- [ ] Nothing yet
+- [x] Phase 0: 项目初始化 &  scaffolding ✅
+- [x] Phase 1 Plan 01: Multi-Scheme Auth (JWT + API Key + Session Cookie) ✅
+- [x] Phase 1 Plan 02: Domain Entities (APIToken + OAuthProviderSettings) ✅
+- [x] Phase 1 Plan 03: OAuth Provider Framework + Plane Auth Endpoints ✅
+- [ ] Phase 1 Plan 04: API Token CRUD + OAuth Provider Management (Wave 3)
+- [ ] Phase 1 Plan 05: Schema Push + Full Phase 1 Verification (Wave 4)
 
 ### Pending
 
-- [ ] Phase 0: 项目初始化 & 脚手架
-- [ ] Phase 1: Foundation — 基础设施
 - [ ] Phase 2-8: Core & Extended Domain
 - [ ] Phase 9-12: Infrastructure & Cross-cutting
 - [ ] Phase 13: Flow Web — 前端
