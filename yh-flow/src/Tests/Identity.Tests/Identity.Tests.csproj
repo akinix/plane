@@ -5,7 +5,7 @@
     <IsPublishable>false</IsPublishable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <NoWarn>$(NoWarn);CA1515;CA1861;CA1707</NoWarn>
+    <NoWarn>$(NoWarn);CA1515;CA1861;CA1707;S101</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="coverlet.collector">
@@ -21,6 +21,7 @@
     <PackageReference Include="Shouldly" />
     <PackageReference Include="AutoFixture" />
     <PackageReference Include="NSubstitute" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Modules\Identity\Modules.Identity\Modules.Identity.csproj" />

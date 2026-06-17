@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<RootNamespace>YH.Modules.Identity.Contracts</RootNamespace>
 		<AssemblyName>YH.Modules.Identity.Contracts</AssemblyName>
-		<NoWarn>$(NoWarn);CA1002;CA1056;CS1572;S2094</NoWarn>
+		<NoWarn>$(NoWarn);CA1002;CA1056;CS1572;S2094;S101</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
