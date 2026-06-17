@@ -16,6 +16,7 @@ using YH.Modules.Identity.Data;
 using YH.Modules.Identity.Domain;
 using YH.Modules.Identity.Features.v1.Auth;
 using YH.Modules.Identity.Features.v1.OAuth;
+using YH.Modules.Identity.Features.v1.OAuth.Manage;
 using YH.Modules.Identity.Features.v1.Groups.AddUsersToGroup;
 using YH.Modules.Identity.Features.v1.Groups.CreateGroup;
 using YH.Modules.Identity.Features.v1.Groups.DeleteGroup;
@@ -102,6 +103,7 @@ public class IdentityModule : IModule
         services.AddScoped<ITokenService, TokenService>();
         services.AddSingleton<OAuthProviderRegistry>();
         services.AddScoped<IOAuthProviderSettingsService, OAuthProviderSettingsService>();
+        services.AddScoped<IApiTokenService, ApiTokenService>();
         services.AddScoped<IImpersonationGrantService, ImpersonationGrantService>();
 
         // User services - focused single-responsibility services
@@ -264,6 +266,13 @@ public class IdentityModule : IModule
         group.MapEnrollTwoFactorEndpoint();
         group.MapVerifyEnrollTwoFactorEndpoint();
         group.MapDisableTwoFactorEndpoint();
+
+        // OAuth provider management
+        group.MapGetOAuthProvidersEndpoint();
+        group.MapCreateOAuthProviderEndpoint();
+        group.MapUpdateOAuthProviderEndpoint();
+        group.MapToggleOAuthProviderEndpoint();
+        group.MapDeleteOAuthProviderEndpoint();
 
         // Plane-compatible authentication endpoints (/auth/*)
         endpoints.MapPlaneAuthEndpoints();

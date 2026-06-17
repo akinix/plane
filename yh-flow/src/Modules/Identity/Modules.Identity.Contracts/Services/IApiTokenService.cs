@@ -14,10 +14,11 @@ public interface IApiTokenService
     Task<ApiKeyValidationResult?> ValidateAndGetOwnerAsync(string rawKey, CancellationToken ct);
 
     /// <summary>
-    /// Creates a new API token for the specified user. Returns the DTO (never the plaintext key).
-    /// The plaintext key is only available in the creation response from the Feature handler.
+    /// Creates a new API token for the specified user. Returns both the DTO (metadata)
+    /// and the raw plaintext key. The plaintext key is only available at creation time
+    /// and is never persisted — the caller must return it to the user immediately.
     /// </summary>
-    Task<APITokenDto> CreateAsync(string name, string userId, string tenantId, DateTime? expiredAt, CancellationToken ct);
+    Task<(APITokenDto Dto, string RawKey)> CreateAsync(string name, string userId, string tenantId, DateTime? expiredAt, CancellationToken ct);
 
     /// <summary>
     /// Lists all API tokens for a given user.

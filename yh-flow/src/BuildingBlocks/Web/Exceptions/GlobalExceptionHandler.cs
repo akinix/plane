@@ -101,7 +101,31 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
 
         logger.LogError("Exception at {Path} - {StatusCode} {Title}", httpContext.Request.Path.Value?.Replace(Environment.NewLine, string.Empty), statusCode, problemDetails.Title);
 
-        await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken).ConfigureAwait(false);
+        // Plane-compatible error format for /auth routes
+        if (IsPlaneRoute(httpContext.Request.Path))
+        {
+            var planeError = new
+            {
+                error = problemDetails.Title ?? "error",
+                error_code = $"error_{statusCode}",
+                error_detail = problemDetails.Detail ?? "An unexpected error occurred.",
+            };
+            await httpContext.Response.WriteAsJsonAsync(planeError, cancellationToken).ConfigureAwait(false);
+        }
+        else
+        {
+            await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken).ConfigureAwait(false);
+        }
+
         return true;
+    }
+
+    /// <summary>
+    /// Returns true if the request path targets a Plane-compatible route (/auth/*).
+    /// These routes return Plane-format error responses instead of RFC 7807 ProblemDetails.
+    /// </summary>
+    private static bool IsPlaneRoute(PathString path)
+    {
+        return path.StartsWithSegments("/auth", StringComparison.OrdinalIgnoreCase);
     }
 }

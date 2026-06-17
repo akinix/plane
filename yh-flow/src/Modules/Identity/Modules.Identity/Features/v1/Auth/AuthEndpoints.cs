@@ -1,4 +1,7 @@
 using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Identity.Features.v1.ApiTokens.Create;
+using YH.Modules.Identity.Features.v1.ApiTokens.List;
+using YH.Modules.Identity.Features.v1.ApiTokens.Revoke;
 using YH.Modules.Identity.Features.v1.Auth.CurrentUser;
 using YH.Modules.Identity.Features.v1.Auth.SignIn;
 using YH.Modules.Identity.Features.v1.Auth.SignOut;
@@ -29,5 +32,10 @@ internal static class AuthEndpoints
         // Authenticated endpoints
         auth.MapPlaneSignOutEndpoint().RequireAuthorization();
         auth.MapPlaneMeEndpoint().RequireAuthorization();
+
+        // API token management endpoints
+        auth.MapCreateApiTokenEndpoint().RequireAuthorization();
+        auth.MapListApiTokensEndpoint().RequireAuthorization();
+        auth.MapRevokeApiTokenEndpoint().RequireAuthorization();
     }
 }
