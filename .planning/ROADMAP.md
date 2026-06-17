@@ -115,12 +115,26 @@ Plans:
 
 Plans:
 
+**Wave 1**
+
 - [ ] 02-PLAN-00-INDEX.md — Phase 2 计划索引（wave/plan/REQ/decision 覆盖矩阵）
 - [ ] 02-01-PLAN.md — Wave 0：spike Q1（Finbuckle 外部追加 strategy）+ Workspace.Tests 脚手架 + Workspace.Contracts 契约 + Identity.Contracts 扩展
 - [ ] 02-02-PLAN.md — Wave 1：Domain 实体（Workspace/Member/Invitation）+ WorkspaceDbContext + 3 个 IEntityTypeConfiguration + Finbuckle slug strategy/store wiring（D-01）
+
+**Wave 2** _(blocked on Wave 1 completion)_
+
 - [ ] 02-03-PLAN.md — Wave 2：[BLOCKING] EF 迁移应用 + DbMigrator/Api Program.cs wiring + WorkspaceMembershipMiddleware（D-02）+ [RequireWorkspaceRole] authz（D-11）
+
+**Wave 3** _(blocked on Wave 2 completion)_
+
 - [ ] 02-04-PLAN.md — Wave 3：SlugGenerator（D-07/09）+ 6 个 Workspace Feature slice（Create/Get/Update/Delete/ListUserWorkspaces/CheckSlug）
+
+**Wave 4** _(blocked on Wave 3 completion)_
+
 - [ ] 02-05-PLAN.md — Wave 4：UserIdentityService（Identity 模块）+ InvitationTokenService（D-12）+ 4 Member + 5 Invitation Feature slice（D-04/05/10/12）
+
+**Wave 5** _(blocked on Wave 4 completion)_
+
 - [ ] 02-06-PLAN.md — Wave 5：[BLOCKING] 全量回归 + WorkspaceLifecycleSmoke + WorkspaceRoleCapability + checkpoint:human-verify 手工 smoke
 
 **Deliverables:**
