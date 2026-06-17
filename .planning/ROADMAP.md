@@ -57,6 +57,17 @@ Foundation → Workspace → Project → WorkItems → Cycle/Module/Page/View �
 - T1.11: 配置 Scalar/OpenAPI
 - T1.12: 配置 Serilog + OpenTelemetry
 
+### Plans
+
+**Plans:** 5 plans (4 waves)
+
+Plans:
+- [ ] 01-01-PLAN.md — 多 Scheme 认证协商（API Key + Session Cookie + PolicyScheme 路由器）
+- [ ] 01-02-PLAN.md — Domain 实体 + EF 配置（APIToken + OAuthProviderSettings + IdentityDbContext）
+- [ ] 01-03-PLAN.md — OAuth Provider 框架 + Plane 兼容认证端点（/auth/*）
+- [ ] 01-04-PLAN.md — API Token CRUD + OAuth Provider 管理 + Plane 格式适配
+- [ ] 01-05-PLAN.md — [BLOCKING] Schema Push + 全阶段验证
+
 **Deliverables:**
 - 完整认证流程（JWT + API Key + Session）
 - API 基础设施就绪
