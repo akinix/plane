@@ -2,21 +2,21 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 01
-status: executing
-last_updated: "2026-06-17T07:30:00.000Z"
+current_phase: 02
+status: ready_to_plan
+last_updated: "2026-06-17T11:15:00.000Z"
 progress:
   total_phases: 14
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 8
-  completed_plans: 6
-  percent: 10
+  completed_plans: 8
+  percent: 13
 ---
 
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-17  
-**Current Phase:** 01 (Wave 3 — executing)
+**Current Phase:** 01 ✅ COMPLETE → 02 (ready_to_plan)
 **Active Workstream:** None
 
 ---
@@ -45,14 +45,16 @@ progress:
 - [x] Domain research completed (`.planning/research/` — 3 docs)
 - [x] Configuration set (`.planning/config.json`)
 
-### In Progress
+### Phase Progress
 
-- [x] Phase 0: 项目初始化 &  scaffolding ✅
+- [x] Phase 0: 项目初始化 & scaffolding (plans 01-03) ✅
 - [x] Phase 1 Plan 01: Multi-Scheme Auth (JWT + API Key + Session Cookie) ✅
 - [x] Phase 1 Plan 02: Domain Entities (APIToken + OAuthProviderSettings) ✅
 - [x] Phase 1 Plan 03: OAuth Provider Framework + Plane Auth Endpoints ✅
-- [ ] Phase 1 Plan 04: API Token CRUD + OAuth Provider Management (Wave 3)
-- [ ] Phase 1 Plan 05: Schema Push + Full Phase 1 Verification (Wave 4)
+- [x] Phase 1 Plan 04: API Token CRUD + OAuth Provider Management (Wave 3) ✅
+- [x] Phase 1 Plan 05: Schema Push + Full Phase 1 Verification (Wave 4) ✅ — DB migrated & verified
+
+> 🟢 **Phase 1 (Foundation): COMPLETE** — 5 plans done, `AddAPITokenAndOAuthProviderSettings` migration applied to postgres (`identity.ApiTokens` + `identity.OAuthProviderSettings` verified), build clean (51 projects / 0 errors), Identity.Tests 412/412 pass. Ready for Phase 2.
 
 ### Pending
 
@@ -112,5 +114,6 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 ## Next Steps
 
-Run `/gsd-plan-phase 0` to start Phase 0 (项目初始化 & 脚手架).
-Or run `/gsd-plan-phase 1` to jump directly to Phase 1 (Foundation).
+Run `/gsd-plan-phase 2` to start Phase 2 (next phase per ROADMAP).
+
+Phase 1 (Foundation) is complete — auth system (JWT + API Key + Session Cookie + OAuth framework), API infrastructure (Plane error/pagination format, CORS, rate limiting), EF Core migration pipeline, and multi-tenancy base are all in place and DB-migrated.
