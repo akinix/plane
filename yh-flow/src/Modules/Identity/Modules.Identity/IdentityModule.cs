@@ -14,6 +14,7 @@ using YH.Modules.Identity.Authorization.SessionCookie;
 using YH.Modules.Identity.Contracts.Services;
 using YH.Modules.Identity.Data;
 using YH.Modules.Identity.Domain;
+using YH.Modules.Identity.Features.v1.OAuth;
 using YH.Modules.Identity.Features.v1.Groups.AddUsersToGroup;
 using YH.Modules.Identity.Features.v1.Groups.CreateGroup;
 using YH.Modules.Identity.Features.v1.Groups.DeleteGroup;
@@ -98,6 +99,8 @@ public class IdentityModule : IModule
         services.AddScoped<IRequestContextService, RequestContextService>();
         services.AddScoped<IRequestContext>(sp => sp.GetRequiredService<IRequestContextService>());
         services.AddScoped<ITokenService, TokenService>();
+        services.AddSingleton<OAuthProviderRegistry>();
+        services.AddScoped<IOAuthProviderSettingsService, OAuthProviderSettingsService>();
         services.AddScoped<IImpersonationGrantService, ImpersonationGrantService>();
 
         // User services - focused single-responsibility services
