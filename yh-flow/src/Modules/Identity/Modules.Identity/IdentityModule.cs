@@ -8,7 +8,9 @@ using YH.Framework.Storage.Local;
 using YH.Framework.Storage.Services;
 using YH.Framework.Web.Modules;
 using YH.Modules.Identity.Authorization;
+using YH.Modules.Identity.Authorization.ApiKey;
 using YH.Modules.Identity.Authorization.Jwt;
+using YH.Modules.Identity.Authorization.SessionCookie;
 using YH.Modules.Identity.Contracts.Services;
 using YH.Modules.Identity.Data;
 using YH.Modules.Identity.Domain;
@@ -166,6 +168,8 @@ public class IdentityModule : IModule
         services.AddSingleton<IdentityMetrics>();
 
         services.ConfigureJwtAuth();
+        services.ConfigureApiKeyAuth();
+        services.ConfigureSessionCookieAuth();
     }
 
     public void MapEndpoints(IEndpointRouteBuilder endpoints)

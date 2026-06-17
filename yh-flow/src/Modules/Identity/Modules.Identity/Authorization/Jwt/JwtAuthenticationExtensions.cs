@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using YH.Modules.Identity.Authorization.ApiKey;
+using YH.Modules.Identity.Authorization.SessionCookie;
 
 namespace YH.Modules.Identity.Authorization.Jwt;
 
@@ -17,10 +19,27 @@ internal static class JwtAuthenticationExtensions
         services
             .AddAuthentication(authentication =>
             {
-                authentication.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                authentication.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                authentication.DefaultAuthenticateScheme = "SmartSelector";
+                authentication.DefaultChallengeScheme = "SmartSelector";
             })
-            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, null!);
+            .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, null!)
+            .AddPolicyScheme("SmartSelector", "Smart Selector", options =>
+            {
+                options.ForwardDefaultSelector = context =>
+                {
+                    if (context.Request.Headers.ContainsKey(ApiKeyAuthenticationDefaults.HeaderName))
+                    {
+                        return ApiKeyAuthenticationDefaults.AuthenticationScheme;
+                    }
+
+                    if (context.Request.Cookies.ContainsKey(SessionCookieAuthenticationDefaults.CookieName))
+                    {
+                        return SessionCookieAuthenticationDefaults.AuthenticationScheme;
+                    }
+
+                    return JwtBearerDefaults.AuthenticationScheme;
+                };
+            });
 
         services.AddAuthorizationBuilder().AddRequiredPermissionPolicy();
         services.AddAuthorization(options =>
