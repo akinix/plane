@@ -42,6 +42,10 @@ public class IdentityDbContext : MultiTenantIdentityDbContext<FshUser,
 
     public DbSet<ImpersonationGrant> ImpersonationGrants => Set<ImpersonationGrant>();
 
+    public DbSet<APIToken> ApiTokens => Set<APIToken>();
+
+    public DbSet<OAuthProviderSettings> OAuthProviderSettings => Set<OAuthProviderSettings>();
+
     public IdentityDbContext(
         IMultiTenantContextAccessor<AppTenantInfo> multiTenantContextAccessor,
         DbContextOptions<IdentityDbContext> options,
