@@ -53,6 +53,9 @@
     <Project Path="Modules/Webhooks/Modules.Webhooks.Contracts/Modules.Webhooks.Contracts.csproj" />
     <Project Path="Modules/Webhooks/Modules.Webhooks/Modules.Webhooks.csproj" />
   </Folder>
+  <Folder Name="/Modules/Workspace/">
+    <Project Path="Modules/Workspace/Modules.Workspace.Contracts/Modules.Workspace.Contracts.csproj" />
+  </Folder>
   <Folder Name="/Host/">
     <Project Path="Host/YH.Flow.Api/YH.Flow.Api.csproj" Id="187ce245-0a57-469c-96c2-a88902f2d40d" />
     <Project Path="Host/YH.Flow.DbMigrator/YH.Flow.DbMigrator.csproj" />
