@@ -67,18 +67,18 @@ Foundation → Workspace → Project → WorkItems → Cycle/Module/Page/View �
 Plans:
 **Wave 1**
 
-- [ ] 01-01-PLAN.md — 多 Scheme 认证协商（API Key + Session Cookie + PolicyScheme 路由器）
-- [ ] 01-02-PLAN.md — Domain 实体 + EF 配置（APIToken + OAuthProviderSettings + IdentityDbContext）
+- [x] 01-01-PLAN.md — 多 Scheme 认证协商（API Key + Session Cookie + PolicyScheme 路由器）
+- [x] 01-02-PLAN.md — Domain 实体 + EF 配置（APIToken + OAuthProviderSettings + IdentityDbContext）
 
-**Wave 2** *(blocked on Wave 1 completion)*
+**Wave 2** _(blocked on Wave 1 completion)_
 
-- [ ] 01-03-PLAN.md — OAuth Provider 框架 + Plane 兼容认证端点（/auth/*）
+- [ ] 01-03-PLAN.md — OAuth Provider 框架 + Plane 兼容认证端点（/auth/\*）
 
-**Wave 3** *(blocked on Wave 2 completion)*
+**Wave 3** _(blocked on Wave 2 completion)_
 
 - [ ] 01-04-PLAN.md — API Token CRUD + OAuth Provider 管理 + Plane 格式适配
 
-**Wave 4** *(blocked on Wave 3 completion)*
+**Wave 4** _(blocked on Wave 3 completion)_
 
 - [ ] 01-05-PLAN.md — [BLOCKING] Schema Push + 全阶段验证
 
@@ -448,13 +448,13 @@ Cycle Module View Page  │          │              │
 
 ## Total Estimate
 
-| Category | Phases | Days |
-|----------|--------|------|
-| Foundation | 0, 1 | 5-8 |
-| Core Domain | 2, 3, 4 | 10-14 |
-| Extended Domain | 5, 6, 7, 8 | 7-11 |
-| Infrastructure | 9, 10, 11, 12 | 9-14 |
-| Frontend | 13 | 10-15 |
-| **Total** | | **41-62 days** |
+| Category        | Phases        | Days           |
+| --------------- | ------------- | -------------- |
+| Foundation      | 0, 1          | 5-8            |
+| Core Domain     | 2, 3, 4       | 10-14          |
+| Extended Domain | 5, 6, 7, 8    | 7-11           |
+| Infrastructure  | 9, 10, 11, 12 | 9-14           |
+| Frontend        | 13            | 10-15          |
+| **Total**       |               | **41-62 days** |
 
-*With parallel execution of eligible phases: estimated **30-45 working days***.
+\*With parallel execution of eligible phases: estimated **30-45 working days\***.
