@@ -127,11 +127,11 @@ Plans:
 
 **Wave 3** _(blocked on Wave 2 completion)_
 
-- [ ] 02-04-PLAN.md — Wave 3：SlugGenerator（D-07/09）+ 6 个 Workspace Feature slice（Create/Get/Update/Delete/ListUserWorkspaces/CheckSlug）
+- [x] 02-04-PLAN.md — Wave 3：SlugGenerator（D-07/09）+ 6 个 Workspace Feature slice（Create/Get/Update/Delete/ListUserWorkspaces/CheckSlug）
 
 **Wave 4** _(blocked on Wave 3 completion)_
 
-- [ ] 02-05-PLAN.md — Wave 4：UserIdentityService（Identity 模块）+ InvitationTokenService（D-12）+ 4 Member + 5 Invitation Feature slice（D-04/05/10/12）
+- [x] 02-05-PLAN.md — Wave 4：UserIdentityService（Identity 模块）+ InvitationTokenService（D-12）+ 4 Member + 5 Invitation Feature slice（D-04/05/10/12）
 
 **Wave 5** _(blocked on Wave 4 completion)_
 
