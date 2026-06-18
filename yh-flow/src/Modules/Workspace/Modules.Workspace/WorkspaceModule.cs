@@ -1,7 +1,9 @@
+using Asp.Versioning;
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -13,8 +15,15 @@ using YH.Framework.Web.Modules;
 using YH.Modules.Workspace.Authorization;
 using YH.Modules.Workspace.Contracts;
 using YH.Modules.Workspace.Data;
+using YH.Modules.Workspace.Features.v1.Workspaces.CheckWorkspaceSlug;
+using YH.Modules.Workspace.Features.v1.Workspaces.CreateWorkspace;
+using YH.Modules.Workspace.Features.v1.Workspaces.DeleteWorkspace;
+using YH.Modules.Workspace.Features.v1.Workspaces.GetWorkspace;
+using YH.Modules.Workspace.Features.v1.Workspaces.ListUserWorkspaces;
+using YH.Modules.Workspace.Features.v1.Workspaces.UpdateWorkspace;
 using YH.Modules.Workspace.Middleware;
 using YH.Modules.Workspace.MultiTenancy;
+using YH.Modules.Workspace.Services;
 
 namespace YH.Modules.Workspace;
 
@@ -90,8 +99,11 @@ public sealed class WorkspaceModule : IModule
         builder.Services.TryAddEnumerable(ServiceDescriptor.Scoped<
             IAuthorizationHandler, RequireWorkspaceRoleAuthorizationHandler>());
 
-        // TODO 02-05: workspace services (ISlugGenerator + SlugGenerator,
-        // IInvitationTokenService + InvitationTokenService, WorkspaceMembershipService).
+        // D-07/D-08/D-09 — slug generation service (plan 02-04). Scoped because it depends on the
+        // scoped WorkspaceDbContext (collision probe in GenerateUniqueSlugAsync).
+        // TODO 02-05: workspace services (IInvitationTokenService + InvitationTokenService,
+        // WorkspaceMembershipService) — additive; do not re-register the strategy/store above.
+        builder.Services.AddScoped<ISlugGenerator, SlugGenerator>();
     }
 
     public void ConfigureMiddleware(IApplicationBuilder app)
@@ -108,8 +120,40 @@ public sealed class WorkspaceModule : IModule
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
     {
         ArgumentNullException.ThrowIfNull(endpoints);
-        // TODO 02-04: top-level workspace endpoints (POST /api/v1/workspaces/, List user workspaces,
-        // Check slug availability).
-        // TODO 02-05: {slug}-scoped endpoints — workspace detail + members + invitations.
+
+        var apiVersionSet = endpoints.NewApiVersionSet()
+            .HasApiVersion(new ApiVersion(1))
+            .ReportApiVersions()
+            .Build();
+
+        // Top-level workspace routes (no {slug} segment): create, list-mine, slug-check. Plane uses
+        // /api/v1/workspaces/ for create + slug-check, and /api/v1/users/me/workspaces/ for list-mine.
+        var topLevel = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces")
+            .WithTags("Workspaces")
+            .WithApiVersionSet(apiVersionSet);
+
+        topLevel.MapCreateWorkspaceEndpoint();
+        topLevel.MapVerifyWorkspaceSlugEndpoint();
+
+        // list-mine lives under /api/v1/users/me/workspaces/ (Plane-compatible path). Registered on
+        // the root endpoint route builder so the path is distinct from the /workspaces group above.
+        endpoints.MapListUserWorkspacesEndpoint();
+
+        // Scoped workspace routes (with {slug} segment): get / update / delete. These rely on the
+        // Finbuckle slug strategy resolving {slug} to a tenant, after which
+        // WorkspaceMembershipMiddleware populates ICurrentWorkspaceContext and
+        // [RequireWorkspaceRole] enforces Admin on mutations (T-2-eop mitigation).
+        var scoped = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}")
+            .WithTags("Workspaces")
+            .WithApiVersionSet(apiVersionSet);
+
+        scoped.MapGetWorkspaceEndpoint();
+        scoped.MapUpdateWorkspaceEndpoint();
+        scoped.MapDeleteWorkspaceEndpoint();
+
+        // TODO 02-05: {slug}-scoped member + invitation endpoints
+        // (MapGroup("api/v{version:apiVersion}/workspaces/{slug}/members") etc.).
     }
 }
