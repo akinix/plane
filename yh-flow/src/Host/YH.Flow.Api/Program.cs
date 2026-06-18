@@ -62,6 +62,7 @@ var moduleAssemblies = new Assembly[]
     typeof(YH.Modules.Files.FilesModule).Assembly,
     typeof(WebhooksModule).Assembly,
     typeof(YH.Modules.Notifications.NotificationsModule).Assembly,
+    typeof(YH.Modules.Workspace.WorkspaceModule).Assembly,
 };
 
 builder.AddHeroPlatform(o =>

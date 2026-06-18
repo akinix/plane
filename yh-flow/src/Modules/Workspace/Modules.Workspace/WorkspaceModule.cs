@@ -1,5 +1,6 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,8 +10,10 @@ using Microsoft.Extensions.Hosting;
 using YH.Framework.Persistence;
 using YH.Framework.Shared.Multitenancy;
 using YH.Framework.Web.Modules;
+using YH.Modules.Workspace.Authorization;
 using YH.Modules.Workspace.Contracts;
 using YH.Modules.Workspace.Data;
+using YH.Modules.Workspace.Middleware;
 using YH.Modules.Workspace.MultiTenancy;
 
 namespace YH.Modules.Workspace;
@@ -80,6 +83,13 @@ public sealed class WorkspaceModule : IModule
         builder.Services.TryAddEnumerable(ServiceDescriptor.Scoped<
             IMultiTenantStore<AppTenantInfo>, WorkspaceTenantStore>());
 
+        // D-11 — workspace-role authorization handler. Reads pre-populated ICurrentWorkspaceContext
+        // (no DB hit — populated by WorkspaceMembershipMiddleware above). Multi-registered alongside
+        // Identity's RequiredPermissionAuthorizationHandler via IAuthorizationHandler IEnumerable;
+        // the two coexist without conflict because each handles its own requirement type.
+        builder.Services.TryAddEnumerable(ServiceDescriptor.Scoped<
+            IAuthorizationHandler, RequireWorkspaceRoleAuthorizationHandler>());
+
         // TODO 02-05: workspace services (ISlugGenerator + SlugGenerator,
         // IInvitationTokenService + InvitationTokenService, WorkspaceMembershipService).
     }
@@ -87,8 +97,12 @@ public sealed class WorkspaceModule : IModule
     public void ConfigureMiddleware(IApplicationBuilder app)
     {
         ArgumentNullException.ThrowIfNull(app);
-        // TODO 02-03: app.UseMiddleware<WorkspaceMembershipMiddleware>() (D-02 — populates
-        // ICurrentWorkspaceContext after Finbuckle resolves the tenant and after authentication).
+
+        // D-02 — populate ICurrentWorkspaceContext after Finbuckle resolves the tenant and after
+        // authentication. Module Order=200 guarantees this runs after Identity/Multitenancy's
+        // middleware (auth + tenant resolution) but before Auditing (300). The middleware is the
+        // SINGLE writer of ICurrentWorkspaceContext per scope (threat T-2-memberskip).
+        app.UseMiddleware<WorkspaceMembershipMiddleware>();
     }
 
     public void MapEndpoints(IEndpointRouteBuilder endpoints)
