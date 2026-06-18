@@ -26,6 +26,11 @@ using YH.Modules.Workspace.Features.v1.Members.LeaveWorkspace;
 using YH.Modules.Workspace.Features.v1.Members.ListMembers;
 using YH.Modules.Workspace.Features.v1.Members.RemoveMember;
 using YH.Modules.Workspace.Features.v1.Members.UpdateMemberRole;
+using YH.Modules.Workspace.Features.v1.Invitations.AcceptInvitation;
+using YH.Modules.Workspace.Features.v1.Invitations.CreateInvitation;
+using YH.Modules.Workspace.Features.v1.Invitations.ListInvitations;
+using YH.Modules.Workspace.Features.v1.Invitations.RejectInvitation;
+using YH.Modules.Workspace.Features.v1.Invitations.RevokeInvitation;
 using YH.Modules.Workspace.Middleware;
 using YH.Modules.Workspace.MultiTenancy;
 using YH.Modules.Workspace.Services;
@@ -178,6 +183,21 @@ public sealed class WorkspaceModule : IModule
         members.MapRemoveMemberEndpoint();
         members.MapLeaveWorkspaceEndpoint();
 
-        // TODO 02-05: {slug}-scoped invitation endpoints (Create/List/Revoke scoped; Accept/Reject top-level).
+        // Invitation routes — scoped admin-only mutations under {slug}/invitations/
+        // (plan 02-05, REQ-2.4, threats T-2-token [BLOCKING] + T-2-replay [BLOCKING]).
+        var invitations = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/invitations")
+            .WithTags("WorkspaceInvitations")
+            .WithApiVersionSet(apiVersionSet);
+
+        invitations.MapCreateInvitationEndpoint();
+        invitations.MapListInvitationsEndpoint();
+        invitations.MapRevokeInvitationEndpoint();
+
+        // Accept + Reject are top-level (no {slug}): the invitee may not yet be a member of any
+        // workspace, so workspace-scope authz does not apply. The token hash + IsValid check is
+        // the load-bearing gate (threat T-2-acceptpublic mitigation).
+        endpoints.MapAcceptInvitationEndpoint();
+        endpoints.MapRejectInvitationEndpoint();
     }
 }
