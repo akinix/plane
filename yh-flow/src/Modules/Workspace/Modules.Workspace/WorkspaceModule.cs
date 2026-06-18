@@ -1,5 +1,6 @@
 using Finbuckle.MultiTenant;
 using Finbuckle.MultiTenant.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using YH.Framework.Persistence;
 using YH.Framework.Shared.Multitenancy;
 using YH.Framework.Web.Modules;
+using YH.Modules.Workspace.Authorization;
 using YH.Modules.Workspace.Contracts;
 using YH.Modules.Workspace.Data;
 using YH.Modules.Workspace.Middleware;
@@ -81,9 +83,12 @@ public sealed class WorkspaceModule : IModule
         builder.Services.TryAddEnumerable(ServiceDescriptor.Scoped<
             IMultiTenantStore<AppTenantInfo>, WorkspaceTenantStore>());
 
-        // D-11 — workspace-role authorization handler registration is added in Task 3 alongside
-        // the RequireWorkspaceRoleAttribute / RequireWorkspaceRoleAuthorizationHandler /
-        // RequireWorkspaceRoleExtensions triple.
+        // D-11 — workspace-role authorization handler. Reads pre-populated ICurrentWorkspaceContext
+        // (no DB hit — populated by WorkspaceMembershipMiddleware above). Multi-registered alongside
+        // Identity's RequiredPermissionAuthorizationHandler via IAuthorizationHandler IEnumerable;
+        // the two coexist without conflict because each handles its own requirement type.
+        builder.Services.TryAddEnumerable(ServiceDescriptor.Scoped<
+            IAuthorizationHandler, RequireWorkspaceRoleAuthorizationHandler>());
 
         // TODO 02-05: workspace services (ISlugGenerator + SlugGenerator,
         // IInvitationTokenService + InvitationTokenService, WorkspaceMembershipService).
