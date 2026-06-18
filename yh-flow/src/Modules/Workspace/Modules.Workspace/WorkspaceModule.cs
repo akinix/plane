@@ -11,6 +11,7 @@ using YH.Framework.Shared.Multitenancy;
 using YH.Framework.Web.Modules;
 using YH.Modules.Workspace.Contracts;
 using YH.Modules.Workspace.Data;
+using YH.Modules.Workspace.Middleware;
 using YH.Modules.Workspace.MultiTenancy;
 
 namespace YH.Modules.Workspace;
@@ -80,6 +81,10 @@ public sealed class WorkspaceModule : IModule
         builder.Services.TryAddEnumerable(ServiceDescriptor.Scoped<
             IMultiTenantStore<AppTenantInfo>, WorkspaceTenantStore>());
 
+        // D-11 — workspace-role authorization handler registration is added in Task 3 alongside
+        // the RequireWorkspaceRoleAttribute / RequireWorkspaceRoleAuthorizationHandler /
+        // RequireWorkspaceRoleExtensions triple.
+
         // TODO 02-05: workspace services (ISlugGenerator + SlugGenerator,
         // IInvitationTokenService + InvitationTokenService, WorkspaceMembershipService).
     }
@@ -87,8 +92,12 @@ public sealed class WorkspaceModule : IModule
     public void ConfigureMiddleware(IApplicationBuilder app)
     {
         ArgumentNullException.ThrowIfNull(app);
-        // TODO 02-03: app.UseMiddleware<WorkspaceMembershipMiddleware>() (D-02 — populates
-        // ICurrentWorkspaceContext after Finbuckle resolves the tenant and after authentication).
+
+        // D-02 — populate ICurrentWorkspaceContext after Finbuckle resolves the tenant and after
+        // authentication. Module Order=200 guarantees this runs after Identity/Multitenancy's
+        // middleware (auth + tenant resolution) but before Auditing (300). The middleware is the
+        // SINGLE writer of ICurrentWorkspaceContext per scope (threat T-2-memberskip).
+        app.UseMiddleware<WorkspaceMembershipMiddleware>();
     }
 
     public void MapEndpoints(IEndpointRouteBuilder endpoints)

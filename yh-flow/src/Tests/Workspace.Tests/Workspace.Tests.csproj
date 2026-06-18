@@ -25,10 +25,11 @@
   </ItemGroup>
   <ItemGroup>
     <!--
-      Wave 0 (02-01) only verifies Finbuckle DI behaviour for the Q1 spike; the implementation
-      Modules.Workspace module is added by plan 02-02. Workspace.Contracts (DTOs/interfaces/constants)
-      is available here so test code can reference WorkspaceRole etc.
+      Wave 2 (02-03) adds the implementation module + ASP.NET Core for middleware / authorization
+      integration tests. Wave 0 (02-01) only verified Finbuckle DI behaviour; the implementation
+      Modules.Workspace module is now needed for the middleware / handler tests.
     -->
+    <ProjectReference Include="..\..\Modules\Workspace\Modules.Workspace\Modules.Workspace.csproj" />
     <ProjectReference Include="..\..\Modules\Workspace\Modules.Workspace.Contracts\Modules.Workspace.Contracts.csproj" />
     <!--
       Modules.Multitenancy carries the Finbuckle package references (AddMultiTenant<AppTenantInfo>,
