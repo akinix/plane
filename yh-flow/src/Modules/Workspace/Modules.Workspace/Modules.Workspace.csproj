@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>YH.Modules.Workspace</RootNamespace>
+		<AssemblyName>YH.Modules.Workspace</AssemblyName>
+		<NoWarn>$(NoWarn);CA1031;CA1056;CA1716;CA1812;S1135;S125;S2094;S3267;S1144</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\BuildingBlocks\Caching\Caching.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\Core\Core.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\Persistence\Persistence.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\Web\Web.csproj" />
+		<ProjectReference Include="..\Modules.Workspace.Contracts\Modules.Workspace.Contracts.csproj" />
+		<ProjectReference Include="..\..\Identity\Modules.Identity.Contracts\Modules.Identity.Contracts.csproj" />
+		<!--
+			Multitenancy carries the Finbuckle packages (IMultiTenantStrategy / IMultiTenantStore<T> /
+			AppTenantInfo) used by the slug strategy + tenant store wiring (D-01). Referencing the
+			implementation module is safe — it does NOT re-invoke AddMultiTenant<AppTenantInfo>() (Pitfall 1).
+		-->
+		<ProjectReference Include="..\..\Multitenancy\Modules.Multitenancy\Modules.Multitenancy.csproj" />
+	</ItemGroup>
+
+</Project>
