@@ -123,7 +123,7 @@ Plans:
 
 **Wave 2** _(blocked on Wave 1 completion)_
 
-- [ ] 02-03-PLAN.md — Wave 2：[BLOCKING] EF 迁移应用 + DbMigrator/Api Program.cs wiring + WorkspaceMembershipMiddleware（D-02）+ [RequireWorkspaceRole] authz（D-11）
+- [x] 02-03-PLAN.md — Wave 2：[BLOCKING] EF 迁移应用 + DbMigrator/Api Program.cs wiring + WorkspaceMembershipMiddleware（D-02）+ [RequireWorkspaceRole] authz（D-11）
 
 **Wave 3** _(blocked on Wave 2 completion)_
 
