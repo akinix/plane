@@ -3,21 +3,21 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 current_phase: 02
-status: ready_to_execute
-last_updated: "2026-06-17T23:28:55.329Z"
+status: in_progress_manual_smoke_pending
+last_updated: "2026-06-18T03:47:00.000Z"
 progress:
   total_phases: 14
-  completed_phases: 2
+  completed_phases: 1
   total_plans: 14
-  completed_plans: 8
-  percent: 14
+  completed_plans: 9
+  percent: 16
 ---
 
 # YH.Flow — Project State
 
-**Last Updated:** 2026-06-17
-**Current Phase:** 02
-**Active Workstream:** None
+**Last Updated:** 2026-06-18
+**Current Phase:** 02 (closeout — manual smoke pending)
+**Active Workstream:** Phase 2 verification
 
 ---
 
@@ -58,7 +58,8 @@ progress:
 
 ### Pending
 
-- [ ] Phase 2-8: Core & Extended Domain
+- [ ] Phase 2 manual smoke (11 steps — recorded in 02-VERIFICATION.md §Human Verification; orchestrator consolidates into HUMAN-UAT.md)
+- [ ] Phase 3-8: Core & Extended Domain
 - [ ] Phase 9-12: Infrastructure & Cross-cutting
 - [ ] Phase 13: Flow Web — 前端
 
@@ -114,6 +115,8 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 ## Next Steps
 
-Phase 2 (Workspace) is **planned** — 6 plans across 6 waves (Wave 0 spike → Wave 5 regression/smoke). Run `/gsd-execute-phase 2` to start execution. Artifacts: `.planning/phases/02-workspace/02-RESEARCH.md`, `02-PATTERNS.md`, `02-VALIDATION.md`, `02-PLAN-00-INDEX.md` + `02-01..06-PLAN.md`.
+Phase 2 (Workspace) automated gates are GREEN — 6 plans shipped across 5 waves (Wave 0 spike + Finbuckle DI; Wave 1 Domain + DbContext + slug strategy/store; Wave 2 migration + middleware + authz; Wave 3 CRUD + SlugGenerator; Wave 4 Members + Invitations + Identity batch service; Wave 5 regression + smoke + role matrix). The 11-step manual smoke against a live Aspire stack + real JWTs is the remaining human gate — orchestrator's verify_phase_goal will consolidate it into HUMAN-UAT.md.
+
+**Phase 2 final state:** Workspace.Tests 96/96 ✅; Identity.Tests 412/412 ✅ (zero regression); Architecture.Tests 0 NEW Workspace violations (3 Phase-1 baseline fails documented out of scope). Verification report: `.planning/phases/02-workspace/02-VERIFICATION.md`.
 
 Phase 1 (Foundation) is complete — auth system (JWT + API Key + Session Cookie + OAuth framework), API infrastructure (Plane error/pagination format, CORS, rate limiting), EF Core migration pipeline, and multi-tenancy base are all in place and DB-migrated.

@@ -135,7 +135,7 @@ Plans:
 
 **Wave 5** _(blocked on Wave 4 completion)_
 
-- [ ] 02-06-PLAN.md — Wave 5：[BLOCKING] 全量回归 + WorkspaceLifecycleSmoke + WorkspaceRoleCapability + checkpoint:human-verify 手工 smoke
+- [x] 02-06-PLAN.md — Wave 5：[BLOCKING] 全量回归 + WorkspaceLifecycleSmoke + WorkspaceRoleCapability + checkpoint:human-verify 手工 smoke（automated ✅; manual smoke pending HUMAN-UAT.md）
 
 **Deliverables:**
 
