@@ -277,7 +277,10 @@ public class EndpointConventionTests
                                name.StartsWith("Send", StringComparison.Ordinal) ||
                                name.StartsWith("Discover", StringComparison.Ordinal) ||
                                name.StartsWith("Pin", StringComparison.Ordinal) ||
-                               name.StartsWith("Unpin", StringComparison.Ordinal);
+                               name.StartsWith("Unpin", StringComparison.Ordinal) ||
+                               name.StartsWith("Leave", StringComparison.Ordinal) ||
+                               name.StartsWith("Accept", StringComparison.Ordinal) ||
+                               name.StartsWith("Reject", StringComparison.Ordinal);
 
                 if (!hasVerb)
                 {

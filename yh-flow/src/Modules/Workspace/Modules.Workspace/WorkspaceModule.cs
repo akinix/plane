@@ -13,6 +13,7 @@ using YH.Framework.Persistence;
 using YH.Framework.Shared.Multitenancy;
 using YH.Framework.Web.Modules;
 using YH.Modules.Workspace.Authorization;
+using YH.Modules.Workspace.Configuration;
 using YH.Modules.Workspace.Contracts;
 using YH.Modules.Workspace.Data;
 using YH.Modules.Workspace.Features.v1.Workspaces.CheckWorkspaceSlug;
@@ -21,6 +22,15 @@ using YH.Modules.Workspace.Features.v1.Workspaces.DeleteWorkspace;
 using YH.Modules.Workspace.Features.v1.Workspaces.GetWorkspace;
 using YH.Modules.Workspace.Features.v1.Workspaces.ListUserWorkspaces;
 using YH.Modules.Workspace.Features.v1.Workspaces.UpdateWorkspace;
+using YH.Modules.Workspace.Features.v1.Members.LeaveWorkspace;
+using YH.Modules.Workspace.Features.v1.Members.ListMembers;
+using YH.Modules.Workspace.Features.v1.Members.RemoveMember;
+using YH.Modules.Workspace.Features.v1.Members.UpdateMemberRole;
+using YH.Modules.Workspace.Features.v1.Invitations.AcceptInvitation;
+using YH.Modules.Workspace.Features.v1.Invitations.CreateInvitation;
+using YH.Modules.Workspace.Features.v1.Invitations.ListInvitations;
+using YH.Modules.Workspace.Features.v1.Invitations.RejectInvitation;
+using YH.Modules.Workspace.Features.v1.Invitations.RevokeInvitation;
 using YH.Modules.Workspace.Middleware;
 using YH.Modules.Workspace.MultiTenancy;
 using YH.Modules.Workspace.Services;
@@ -101,9 +111,17 @@ public sealed class WorkspaceModule : IModule
 
         // D-07/D-08/D-09 — slug generation service (plan 02-04). Scoped because it depends on the
         // scoped WorkspaceDbContext (collision probe in GenerateUniqueSlugAsync).
-        // TODO 02-05: workspace services (IInvitationTokenService + InvitationTokenService,
-        // WorkspaceMembershipService) — additive; do not re-register the strategy/store above.
         builder.Services.AddScoped<ISlugGenerator, SlugGenerator>();
+
+        // D-12 — invitation token service (plan 02-05). Scoped because it depends on the scoped
+        // WorkspaceDbContext + WorkspaceTokenOptions (bound from Workspace:InvitationTokenTtlDays).
+        builder.Services.Configure<WorkspaceTokenOptions>(
+            builder.Configuration.GetSection("Workspace"));
+        builder.Services.AddScoped<IInvitationTokenService, InvitationTokenService>();
+
+        // D-04/D-06 — single entry point for workspace membership mutations (plan 02-05). Scoped
+        // because it depends on the scoped WorkspaceDbContext.
+        builder.Services.AddScoped<WorkspaceMembershipService>();
     }
 
     public void ConfigureMiddleware(IApplicationBuilder app)
@@ -153,7 +171,33 @@ public sealed class WorkspaceModule : IModule
         scoped.MapUpdateWorkspaceEndpoint();
         scoped.MapDeleteWorkspaceEndpoint();
 
-        // TODO 02-05: {slug}-scoped member + invitation endpoints
-        // (MapGroup("api/v{version:apiVersion}/workspaces/{slug}/members") etc.).
+        // Member routes under {slug}/members/ (plan 02-05, REQ-2.2). Separate scoped group so
+        // .RequireWorkspaceRole decoration is applied per-endpoint without bleed onto CRUD.
+        var members = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/members")
+            .WithTags("WorkspaceMembers")
+            .WithApiVersionSet(apiVersionSet);
+
+        members.MapListMembersEndpoint();
+        members.MapUpdateMemberRoleEndpoint();
+        members.MapRemoveMemberEndpoint();
+        members.MapLeaveWorkspaceEndpoint();
+
+        // Invitation routes — scoped admin-only mutations under {slug}/invitations/
+        // (plan 02-05, REQ-2.4, threats T-2-token [BLOCKING] + T-2-replay [BLOCKING]).
+        var invitations = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/invitations")
+            .WithTags("WorkspaceInvitations")
+            .WithApiVersionSet(apiVersionSet);
+
+        invitations.MapCreateInvitationEndpoint();
+        invitations.MapListInvitationsEndpoint();
+        invitations.MapRevokeInvitationEndpoint();
+
+        // Accept + Reject are top-level (no {slug}): the invitee may not yet be a member of any
+        // workspace, so workspace-scope authz does not apply. The token hash + IsValid check is
+        // the load-bearing gate (threat T-2-acceptpublic mitigation).
+        endpoints.MapAcceptInvitationEndpoint();
+        endpoints.MapRejectInvitationEndpoint();
     }
 }

@@ -117,6 +117,11 @@ public class IdentityModule : IModule
         // Facade for backward compatibility
         services.AddTransient<IUserService, UserService>();
 
+        // D-04/D-05 — cross-module batch user resolution (CONTEXT plan 02-05). Scoped because
+        // UserManager<FshUser> is itself scoped. The Workspace module's ListMembers handler
+        // depends on this to avoid an N+1 (threat T-2-n1 [BLOCKING]).
+        services.AddScoped<IUserIdentityService, UserIdentityService>();
+
         services.AddTransient<IRoleService, RoleService>();
         services.AddHeroStorage(builder.Configuration);
         services.AddScoped<IIdentityService, IdentityService>();
