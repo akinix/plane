@@ -118,7 +118,7 @@ Plans:
 **Wave 1**
 
 - [ ] 02-PLAN-00-INDEX.md — Phase 2 计划索引（wave/plan/REQ/decision 覆盖矩阵）
-- [ ] 02-01-PLAN.md — Wave 0：spike Q1（Finbuckle 外部追加 strategy）+ Workspace.Tests 脚手架 + Workspace.Contracts 契约 + Identity.Contracts 扩展
+- [x] 02-01-PLAN.md — Wave 0：spike Q1（Finbuckle 外部追加 strategy）+ Workspace.Tests 脚手架 + Workspace.Contracts 契约 + Identity.Contracts 扩展
 - [ ] 02-02-PLAN.md — Wave 1：Domain 实体（Workspace/Member/Invitation）+ WorkspaceDbContext + 3 个 IEntityTypeConfiguration + Finbuckle slug strategy/store wiring（D-01）
 
 **Wave 2** _(blocked on Wave 1 completion)_

@@ -23,7 +23,11 @@
     "strategy": "modular-monolith-migration",
     "apiCompatibility": true,
     "ci_cd": false,
-    "realTimeCollaboration": false
+    "realTimeCollaboration": false,
+    "_auto_chain_active": false,
+    "build_command": "dotnet build yh-flow/src/YH.Flow.slnx --nologo",
+    "test_command": "dotnet test yh-flow/src/Tests/Workspace.Tests --nologo --verbosity minimal && dotnet test yh-flow/src/Tests/Identity.Tests --nologo --verbosity minimal",
+    "_test_scope_note": "Gated to migration-scoped GREEN projects for a clean per-wave signal. OUT OF SCOPE (pre-existing red, not caused by current phase): Integration.Tests (fullstackhero template e2e: tenant/billing/webhook, 345 fails) and Architecture.Tests (3 fails on Phase-1 Identity debt: endpoint verb-naming, missing validators, feature->AspNetCore dependency). Re-check Architecture.Tests manually at Wave 3 (when Workspace features land) and at phase verification to ensure no NEW Workspace violations."
   },
   "codebaseMap": ".planning/codebase/",
   "gsd": {
