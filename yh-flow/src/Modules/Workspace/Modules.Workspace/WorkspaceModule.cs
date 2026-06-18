@@ -13,6 +13,7 @@ using YH.Framework.Persistence;
 using YH.Framework.Shared.Multitenancy;
 using YH.Framework.Web.Modules;
 using YH.Modules.Workspace.Authorization;
+using YH.Modules.Workspace.Configuration;
 using YH.Modules.Workspace.Contracts;
 using YH.Modules.Workspace.Data;
 using YH.Modules.Workspace.Features.v1.Workspaces.CheckWorkspaceSlug;
@@ -101,9 +102,17 @@ public sealed class WorkspaceModule : IModule
 
         // D-07/D-08/D-09 — slug generation service (plan 02-04). Scoped because it depends on the
         // scoped WorkspaceDbContext (collision probe in GenerateUniqueSlugAsync).
-        // TODO 02-05: workspace services (IInvitationTokenService + InvitationTokenService,
-        // WorkspaceMembershipService) — additive; do not re-register the strategy/store above.
         builder.Services.AddScoped<ISlugGenerator, SlugGenerator>();
+
+        // D-12 — invitation token service (plan 02-05). Scoped because it depends on the scoped
+        // WorkspaceDbContext + WorkspaceTokenOptions (bound from Workspace:InvitationTokenTtlDays).
+        builder.Services.Configure<WorkspaceTokenOptions>(
+            builder.Configuration.GetSection("Workspace"));
+        builder.Services.AddScoped<IInvitationTokenService, InvitationTokenService>();
+
+        // D-04/D-06 — single entry point for workspace membership mutations (plan 02-05). Scoped
+        // because it depends on the scoped WorkspaceDbContext.
+        builder.Services.AddScoped<WorkspaceMembershipService>();
     }
 
     public void ConfigureMiddleware(IApplicationBuilder app)
