@@ -2,22 +2,37 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 02
-status: in_progress_manual_smoke_pending
-last_updated: "2026-06-18T03:47:00.000Z"
+current_phase: 02 (automated complete — 3 CRITICAL code-review gaps → gap-closure; manual smoke deferred)
+status: gap_closure_pending
+last_updated: "2026-06-18T04:30:50.446Z"
 progress:
   total_phases: 14
-  completed_phases: 1
-  total_plans: 14
-  completed_plans: 9
-  percent: 16
+  completed_phases: 2
+  total_plans: 15
+  completed_plans: 14
+  percent: 14
 ---
 
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-18
-**Current Phase:** 02 (closeout — manual smoke pending)
-**Active Workstream:** Phase 2 verification
+**Current Phase:** 02 (automated complete — 3 CRITICAL code-review gaps → gap-closure; manual smoke deferred)
+**Active Workstream:** Phase 2 gap-closure
+
+> **⚠ Phase 02 BLOCKER (gap-closure pending):** Code review (`02-REVIEW.md`) found 3 CRITICAL
+> tenant-scoping defects that the InMemory test suite is structurally unable to catch:
+>
+> - **CR-01** — accept-invitation (`POST /api/v1/workspaces/invitations/{token}/accept/`) lacks
+>   `IgnoreQueryFilters`; handler comment claims tenant filter is disabled but code does not. On
+>   the top-level route `TenantInfo` is null (claim strategy no-ops before auth); production
+>   behavior (404/500/works) under Finbuckle 10.1.0 is UNVERIFIED — needs real-DB test.
+> - **CR-02** — `ListUserWorkspaces` cross-workspace aggregate tenant scoping (REQ-2.1).
+> - **CR-03** — re-inviting a removed member throws on `(TenantId,UserId)` unique index.
+>   Automated gates are otherwise GREEN (build 0/0; Workspace.Tests 96/96; Identity.Tests 412/412;
+>   Architecture.Tests 0 new Workspace violations). All 6 plans executed; 02-06 automated task done
+>   (SUMMARY Self-Check PASSED). **Manual 11-step smoke deferred to `02-HUMAN-UAT.md` until gaps fixed.**
+>   **Next:** `/gsd-plan-phase 02 --gaps` → `/gsd-execute-phase 02 --gaps-only`. Does not block Phase 3
+>   (downstream depends on `ICurrentWorkspaceContext` / `[RequireWorkspaceRole]` / Workspace DbContext).
 
 ---
 
