@@ -22,6 +22,10 @@ using YH.Modules.Workspace.Features.v1.Workspaces.DeleteWorkspace;
 using YH.Modules.Workspace.Features.v1.Workspaces.GetWorkspace;
 using YH.Modules.Workspace.Features.v1.Workspaces.ListUserWorkspaces;
 using YH.Modules.Workspace.Features.v1.Workspaces.UpdateWorkspace;
+using YH.Modules.Workspace.Features.v1.Members.LeaveWorkspace;
+using YH.Modules.Workspace.Features.v1.Members.ListMembers;
+using YH.Modules.Workspace.Features.v1.Members.RemoveMember;
+using YH.Modules.Workspace.Features.v1.Members.UpdateMemberRole;
 using YH.Modules.Workspace.Middleware;
 using YH.Modules.Workspace.MultiTenancy;
 using YH.Modules.Workspace.Services;
@@ -162,7 +166,18 @@ public sealed class WorkspaceModule : IModule
         scoped.MapUpdateWorkspaceEndpoint();
         scoped.MapDeleteWorkspaceEndpoint();
 
-        // TODO 02-05: {slug}-scoped member + invitation endpoints
-        // (MapGroup("api/v{version:apiVersion}/workspaces/{slug}/members") etc.).
+        // Member routes under {slug}/members/ (plan 02-05, REQ-2.2). Separate scoped group so
+        // .RequireWorkspaceRole decoration is applied per-endpoint without bleed onto CRUD.
+        var members = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/members")
+            .WithTags("WorkspaceMembers")
+            .WithApiVersionSet(apiVersionSet);
+
+        members.MapListMembersEndpoint();
+        members.MapUpdateMemberRoleEndpoint();
+        members.MapRemoveMemberEndpoint();
+        members.MapLeaveWorkspaceEndpoint();
+
+        // TODO 02-05: {slug}-scoped invitation endpoints (Create/List/Revoke scoped; Accept/Reject top-level).
     }
 }
