@@ -49,5 +49,13 @@
     -->
     <ProjectReference Include="..\..\Modules\Multitenancy\Modules.Multitenancy\Modules.Multitenancy.csproj" />
     <ProjectReference Include="..\..\Modules\Multitenancy\Modules.Multitenancy.Contracts\Modules.Multitenancy.Contracts.csproj" />
+    <!--
+      Wave 6 (02-07): the relational fixture's DbContextOptionsBuilder.UseNpgsql(sql =>
+      sql.MigrationsAssembly("YH.Flow.Migrations.PostgreSQL")) needs the migration assembly to be
+      loadable at runtime so EF Core can discover the InitialWorkspace migration on the Testcontainers
+      PG container. ProjectReference (not a loose bin copy) so the assembly resolves via the test
+      project's deps.json.
+    -->
+    <ProjectReference Include="..\..\Host\YH.Flow.Migrations.PostgreSQL\YH.Flow.Migrations.PostgreSQL.csproj" />
   </ItemGroup>
 </Project>
