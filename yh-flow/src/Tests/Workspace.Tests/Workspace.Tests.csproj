@@ -22,6 +22,18 @@
     <PackageReference Include="AutoFixture" />
     <PackageReference Include="NSubstitute" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+    <!--
+      Wave 6 (02-07) adds a relational PG fixture, required for CR-01/02/03 coverage that the
+      InMemory suite cannot provide (InMemory provider does not apply Finbuckle AdjustUniqueIndexes
+      nor tenant query filters; see 02-REVIEW.md Notes on the 02-06 closeout tests).
+
+      Npgsql.EntityFrameworkCore.PostgreSQL, Finbuckle.MultiTenant (.EntityFrameworkCore), and
+      Microsoft.Extensions.Hosting.Abstractions arrive transitively via Modules.Workspace /
+      Modules.Multitenancy ProjectReferences (verified via "dotnet list package" with the
+      include-transitive flag). Adding them explicitly would cause TreatWarningsAsErrors
+      duplicate-reference errors (CS1703 / NU1108), so ONLY Testcontainers.PostgreSql is added.
+    -->
+    <PackageReference Include="Testcontainers.PostgreSql" />
   </ItemGroup>
   <ItemGroup>
     <!--
