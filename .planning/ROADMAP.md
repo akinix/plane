@@ -117,7 +117,7 @@ Plans:
 
 **Wave 1**
 
-- [ ] 02-PLAN-00-INDEX.md — Phase 2 计划索引（wave/plan/REQ/decision 覆盖矩阵）
+- [x] 02-PLAN-00-INDEX.md — Phase 2 计划索引（wave/plan/REQ/decision 覆盖矩阵） (completed 2026-06-22)
 - [x] 02-01-PLAN.md — Wave 0：spike Q1（Finbuckle 外部追加 strategy）+ Workspace.Tests 脚手架 + Workspace.Contracts 契约 + Identity.Contracts 扩展
 - [x] 02-02-PLAN.md — Wave 1：Domain 实体（Workspace/Member/Invitation）+ WorkspaceDbContext + 3 个 IEntityTypeConfiguration + Finbuckle slug strategy/store wiring（D-01）
 
@@ -143,7 +143,7 @@ Plans:
 
 **Wave 7** _(blocked on Wave 6 completion — gap-closure from 02-REVIEW.md CR-01 + CR-03)_
 
-- [ ] 02-08-PLAN.md — Wave 7：[gap-closure] CR-01 修复（InvitationTokenService.ValidateAsync + AcceptInvitationCommandHandler 跨租户 SaveChanges 作用域切换）+ CR-03 修复（既有成员 Activate 复用，避免 UniqueConstraintException）+ AcceptInvitationAcrossTenantsTests + ReAcceptAfterRemovalTests（REQ-2.2, REQ-2.4, NFR-2）
+- [x] 02-08-PLAN.md — Wave 7：[gap-closure] CR-01 修复（InvitationTokenService.ValidateAsync + AcceptInvitationCommandHandler 跨租户 SaveChanges 作用域切换 — 显式 DI 注入 IMultiTenantContextSetter + try/finally 重绑 setter.MultiTenantContext AND 缓存的 DbContext.TenantInfo via 反射委托）+ CR-03 修复（既有成员 Activate + UpdateRole 复用，避免 UniqueConstraintException）+ BLOCKER 1（RejectInvitationCommandHandler.cs:58-60 IgnoreQueryFilters 同步修复）+ AcceptInvitationAcrossTenantsTests + ReAcceptAfterRemovalTests（REQ-2.1, REQ-2.2, REQ-2.4, NFR-2）✅ 2026-06-22 — 100/100 Workspace.Tests（96 InMemory + 4 PG）；Identity.Tests 412/412 零回归；Phase 02 gap-closure 三 CRITICAL 全部修复，可进入 HUMAN-UAT 11 步人工冒烟
 
 **Deliverables:**
 

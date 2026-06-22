@@ -2,39 +2,45 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 02 (gap-closure in progress — 02-07 DONE; 02-08 next)
-status: gap_closure_in_progress
-last_updated: "2026-06-22T03:00:00.000Z"
+current_phase: 02 (gap-closure COMPLETE — all 3 CRITICAL CR-01/02/03 fixed)
+status: gap_closure_complete
+last_updated: "2026-06-22T03:54:13.540Z"
 progress:
   total_phases: 14
-  completed_phases: 2
-  total_plans: 17
-  completed_plans: 14
-  percent: 14
+  completed_phases: 3
+  total_plans: 16
+  completed_plans: 16
+  percent: 21
 ---
 
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-22
-**Current Phase:** 02 (gap-closure in progress — 02-07 DONE; 02-08 next)
-**Active Workstream:** Phase 2 gap-closure (02-07 done Wave 6; 02-08 ready Wave 7)
+**Current Phase:** 02 (gap-closure COMPLETE — all 3 CRITICAL CR-01/02/03 fixed)
+**Active Workstream:** Phase 2 ready for HUMAN-UAT 11-step smoke; Phase 3 planning next
 
-> **⚠ Phase 02 BLOCKER (gap-closure pending):** Code review (`02-REVIEW.md`) found 3 CRITICAL
-> tenant-scoping defects that the InMemory test suite is structurally unable to catch:
+> **✅ Phase 02 BLOCKER RESOLVED (gap-closure complete):** Code review (`02-REVIEW.md`) found 3
+> CRITICAL tenant-scoping defects that the InMemory test suite was structurally unable to catch.
+> ALL THREE ARE NOW FIXED:
 >
-> - **CR-01** — accept-invitation (`POST /api/v1/workspaces/invitations/{token}/accept/`) lacks
->   `IgnoreQueryFilters`; handler comment claims tenant filter is disabled but code does not. On
->   the top-level route `TenantInfo` is null (claim strategy no-ops before auth); production
->   behavior (404/500/works) under Finbuckle 10.1.0 is UNVERIFIED — needs real-DB test.
-> - **CR-02** — `ListUserWorkspaces` cross-workspace aggregate tenant scoping (REQ-2.1).
-> - **CR-03** — re-inviting a removed member throws on `(TenantId,UserId)` unique index.
->   Automated gates are otherwise GREEN (build 0/0; Workspace.Tests 96/96; Identity.Tests 412/412;
->   Architecture.Tests 0 new Workspace violations). All 6 plans executed; 02-06 automated task done
->   (SUMMARY Self-Check PASSED). **Manual 11-step smoke deferred to `02-HUMAN-UAT.md` until gaps fixed.**
->   **Next:** `/gsd-plan-phase 02 --gaps` → `/gsd-execute-phase 02 --gaps-only`. Does not block Phase 3
->   (downstream depends on `ICurrentWorkspaceContext` / `[RequireWorkspaceRole]` / Workspace DbContext).
+> - **CR-01** ✅ RESOLVED (02-08) — accept/reject-invitation top-level endpoints use
+>   `IgnoreQueryFilters` + handler rebinds both `IMultiTenantContextSetter.MultiTenantContext` AND
+>   the cached `DbContext.TenantInfo` during SaveChanges so the new WorkspaceMember row's TenantId
+>   shadow property is stamped with the invitation's workspace id. Covered by
+>   `AcceptInvitationAcrossTenantsTests` on real PG.
+> - **CR-02** ✅ RESOLVED (02-07) — `ListUserWorkspaces` cross-workspace aggregate uses
+>   `IgnoreQueryFilters`. Covered by `CrossTenantListUserWorkspacesTests`.
+> - **CR-03** ✅ RESOLVED (02-08) — re-inviting a removed member reuses the existing deactivated
+>   row via `Activate() + UpdateRole()` (no duplicate insert, no UniqueConstraintException). Covered
+>   by `ReAcceptAfterRemovalTests`.
 >
-> **Gap-closure progress (2026-06-22):** plan 02-07-PLAN.md DONE (Wave 6 — Testcontainers PG fixture WorkspacePostgresFixture + FinbuckleTestTenantScope + CR-02 ListUserWorkspaces IgnoreQueryFilters; Workspace.Tests 98/98 = 96 InMemory + 2 relational). WorkspacePostgresFixture + IMultiTenantContextSetter DI resolution path are now ready for 02-08 reuse. Next: `/gsd-execute-phase 02 --gaps-only` to drive plan 02-08 (CR-01 + CR-03).
+> Automated gates: build 0/0; Workspace.Tests 100/100 (96 InMemory + 4 relational PG);
+> Identity.Tests 412/412 (zero regression). **The 11-step manual smoke in `02-HUMAN-UAT.md` is
+> the remaining human gate** — 🟥 steps 5/6/7/10/11 depend on the gap-closure fixes.
+>
+> **Next:** user runs HUMAN-UAT 11-step smoke; on success, `/gsd-plan-phase 03` to begin Phase 3
+> (downstream depends on `ICurrentWorkspaceContext` / `[RequireWorkspaceRole]` / Workspace DbContext
+> — all delivered + cross-tenant-verified).
 
 ---
 
