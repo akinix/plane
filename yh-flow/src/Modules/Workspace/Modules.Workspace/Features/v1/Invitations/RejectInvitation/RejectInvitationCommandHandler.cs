@@ -55,7 +55,10 @@ public sealed class RejectInvitationCommandHandler : ICommandHandler<RejectInvit
             return new RejectInvitationResponse(Success: false);
         }
 
+        // CR-01 (02-REVIEW.md:75): reject handler 同源缺陷同步修复——invitation.Id 查找租户无关。
+        // 顶层 reject 端点 DbContext 作用域 ≠ 邀请所属 workspace，必须 IgnoreQueryFilters 才能找到邀请。
         var tracked = await _db.Invitations
+            .IgnoreQueryFilters()
             .FirstOrDefaultAsync(i => i.Id == invitation.Id, cancellationToken)
             .ConfigureAwait(false);
 

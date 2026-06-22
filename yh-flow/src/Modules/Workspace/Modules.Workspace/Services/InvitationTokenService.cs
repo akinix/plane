@@ -131,7 +131,11 @@ public sealed class InvitationTokenService : IInvitationTokenService
         }
 
         var hash = HashToken(rawToken);
+        // CR-01 (02-REVIEW.md): hash 全局唯一、租户无关查找；顶层 accept 端点 DbContext 作用域 ≠
+        // 邀请所属 workspace，必须 IgnoreQueryFilters 才能找到邀请。TokenHash 是 256-bit
+        // CSPRNG 的 SHA-256 hex（不可枚举），与 T-2-token 威胁登记一致。
         var invitation = await _db.Invitations
+            .IgnoreQueryFilters()
             .AsNoTracking()
             .FirstOrDefaultAsync(i => i.TokenHash == hash, cancellationToken)
             .ConfigureAwait(false);

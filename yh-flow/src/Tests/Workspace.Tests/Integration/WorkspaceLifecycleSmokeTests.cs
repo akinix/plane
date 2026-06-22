@@ -68,7 +68,22 @@ public sealed class WorkspaceLifecycleSmokeTests
         // handlers under test. The token service shares the DbContext so created
         // invitations persist across the Accept call within the same test.
         // ───────────────────────────────────────────────────────────────────────────
-        await using var db = NewInMemoryContext();
+        // CR-01 (02-08): AcceptInvitationCommandHandler now explicitly DI-injects
+        // IMultiTenantContextSetter (BLOCKER 2 path A) + IMultiTenantContextAccessor<AppTenantInfo>
+        // for SaveChanges- scoped TenantInfo switching. AsyncLocalMultiTenantContextAccessor<AppTenantInfo>
+        // implements both interfaces on a single instance — the same DI wiring pattern the 02-07
+        // WorkspacePostgresFixture uses, so the InMemory smoke test mirrors production semantics.
+        var tenantAccessor = new AsyncLocalMultiTenantContextAccessor<AppTenantInfo>();
+        var bootTenant = new AppTenantInfo(
+            id: Guid.NewGuid().ToString(),
+            identifier: "smoke-boot",
+            name: "Smoke Boot Tenant");
+        // AsyncLocalMultiTenantContextAccessor.MultiTenantContext is get-only on the concrete type;
+        // the setter is exposed via IMultiTenantContextSetter (set-only interface, Finbuckle design).
+        ((IMultiTenantContextSetter)tenantAccessor).MultiTenantContext =
+            new MultiTenantContext<AppTenantInfo>(bootTenant);
+
+        await using var db = NewInMemoryContext(tenantAccessor);
         var slugGenerator = new SlugGenerator(db);
         var tokenOptions = Options.Create(new WorkspaceTokenOptions());
         var tokenService = new InvitationTokenService(db, tokenOptions);
@@ -79,7 +94,11 @@ public sealed class WorkspaceLifecycleSmokeTests
 
         var createHandler = new CreateWorkspaceCommandHandler(db, slugGenerator);
         var createInviteHandler = new CreateInvitationCommandHandler(tokenService, tokenOptions);
-        var acceptHandler = new AcceptInvitationCommandHandler(tokenService, db);
+        var acceptHandler = new AcceptInvitationCommandHandler(
+            tokenService,
+            db,
+            tenantAccessor,
+            tenantAccessor);
         var listMembersHandler = new ListMembersQueryHandler(db, identity);
         var updateRoleHandler = new UpdateMemberRoleCommandHandler(db, membershipService);
         var deleteHandler = new DeleteWorkspaceCommandHandler(db, tenantStore);
@@ -101,6 +120,33 @@ public sealed class WorkspaceLifecycleSmokeTests
         ownerMember.UserId.ShouldBe(OwnerUserId.ToString());
         ownerMember.Role.ShouldBe((int)WorkspaceRole.Admin); // D-06 — creator is the first Admin
         ownerMember.IsActive.ShouldBeTrue();
+
+        // CR-01 (02-08): rebind the DbContext + accessor tenant to the freshly-created workspace.
+        // Production create-invitation is a workspace-scoped endpoint, so the invitation's TenantId
+        // shadow property = invitation.WorkspaceId. Pre-02-08 the smoke test used a fixed random
+        // "smokeTenant" Guid for the whole lifecycle, which silently diverged from production
+        // (InMemory provider never enforced the mismatch). Now that the Accept handler correctly
+        // switches the DbContext TenantInfo to invitation.WorkspaceId during SaveChanges, the
+        // fixture must mirror production: bind the tenant to workspace.Id BEFORE Step 3 creates
+        // the invitation.
+        var workspaceTenant = new AppTenantInfo(
+            id: workspace.Id.ToString(),
+            identifier: workspace.Id.ToString(),
+            name: workspace.Name);
+        ((IMultiTenantContextSetter)tenantAccessor).MultiTenantContext =
+            new MultiTenantContext<AppTenantInfo>(workspaceTenant);
+        SetDbContextTenantInfo(db, workspaceTenant);
+
+        // The owner member was created by CreateWorkspaceCommandHandler while the DbContext was
+        // still bound to bootTenant (workspace did not exist yet, so its tenant id was unknown).
+        // In production the create-workspace endpoint runs top-level and Finbuckle stamps the
+        // owner row with the caller's current tenant — a known pre-existing fixture divergence
+        // that the InMemory suite never enforced. Re-stamp the owner member's TenantId here so
+        // subsequent workspace-scoped ListMembers queries surface it (this mirrors what the
+        // production WorkspaceSlugStrategy would resolve on the next workspace-scoped request).
+        var ownerEntry = db.Entry(ownerMember);
+        ownerEntry.Property<string>("TenantId").CurrentValue = workspaceTenant.Id;
+        await db.SaveChangesAsync(CancellationToken.None);
 
         // ───────────────────────────────────────────────────────────────────────────
         // Step 2 — slug-check the just-created slug + a restricted word (D-09).
@@ -283,15 +329,8 @@ public sealed class WorkspaceLifecycleSmokeTests
         return identity;
     }
 
-    private static WorkspaceDbContext NewInMemoryContext()
+    private static WorkspaceDbContext NewInMemoryContext(AsyncLocalMultiTenantContextAccessor<AppTenantInfo> accessor)
     {
-        var accessor = Substitute.For<IMultiTenantContextAccessor<AppTenantInfo>>();
-        var tenant = new AppTenantInfo(
-            id: Guid.NewGuid().ToString(),
-            identifier: "smoke-test",
-            name: "Smoke Test Workspace");
-        accessor.MultiTenantContext.Returns(new MultiTenantContext<AppTenantInfo>(tenant));
-
         var options = new DbContextOptionsBuilder<WorkspaceDbContext>()
             .UseInMemoryDatabase($"ws-smoke-{Guid.NewGuid()}")
             .Options;
@@ -300,5 +339,22 @@ public sealed class WorkspaceLifecycleSmokeTests
         environment.EnvironmentName.Returns(Environments.Development);
 
         return new WorkspaceDbContext(accessor, options, databaseOptions, environment);
+    }
+
+    /// <summary>
+    /// Rebinds the cached <c>MultiTenantDbContext.TenantInfo</c> on an already-constructed
+    /// <see cref="WorkspaceDbContext"/>. Required because Finbuckle's
+    /// <c>MultiTenantDbContext</c> captures <c>TenantInfo</c> at construction; the
+    /// <c>IMultiTenantDbContext</c> interface only exposes a getter, but the concrete type
+    /// declares a public setter (verified via reflection). The same pattern is used by the
+    /// production <c>AcceptInvitationCommandHandler</c> (CR-01 fix, plan 02-08).
+    /// </summary>
+    private static void SetDbContextTenantInfo(WorkspaceDbContext db, AppTenantInfo tenant)
+    {
+        var prop = typeof(WorkspaceDbContext).GetProperty(
+            "TenantInfo",
+            System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public)
+            ?? throw new InvalidOperationException("MultiTenantDbContext.TenantInfo property not found.");
+        prop.SetValue(db, tenant);
     }
 }
