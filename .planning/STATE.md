@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 02 (automated complete — 3 CRITICAL code-review gaps → gap-closure; manual smoke deferred)
-status: gap_closure_pending
-last_updated: "2026-06-18T04:30:50.446Z"
+current_phase: 02 (gap-closure planned — 02-07 fixture+CR-02 / 02-08 CR-01+CR-03 ready for execution)
+status: gap_closure_planned
+last_updated: "2026-06-22T00:00:00.000Z"
 progress:
   total_phases: 14
   completed_phases: 2
-  total_plans: 15
+  total_plans: 17
   completed_plans: 14
   percent: 14
 ---
@@ -16,8 +16,8 @@ progress:
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-18
-**Current Phase:** 02 (automated complete — 3 CRITICAL code-review gaps → gap-closure; manual smoke deferred)
-**Active Workstream:** Phase 2 gap-closure
+**Current Phase:** 02 (gap-closure planned — 02-07 + 02-08 ready for /gsd-execute-phase 02 --gaps-only)
+**Active Workstream:** Phase 2 gap-closure (02-07 + 02-08 planned across waves 6-7)
 
 > **⚠ Phase 02 BLOCKER (gap-closure pending):** Code review (`02-REVIEW.md`) found 3 CRITICAL
 > tenant-scoping defects that the InMemory test suite is structurally unable to catch:
@@ -33,6 +33,8 @@ progress:
 >   (SUMMARY Self-Check PASSED). **Manual 11-step smoke deferred to `02-HUMAN-UAT.md` until gaps fixed.**
 >   **Next:** `/gsd-plan-phase 02 --gaps` → `/gsd-execute-phase 02 --gaps-only`. Does not block Phase 3
 >   (downstream depends on `ICurrentWorkspaceContext` / `[RequireWorkspaceRole]` / Workspace DbContext).
+>
+> **Gap-closure plans READY (2026-06-22):** plan 02-07-PLAN.md (Wave 6 — Testcontainers PG fixture + CR-02 ListUserWorkspaces IgnoreQueryFilters) and plan 02-08-PLAN.md (Wave 7 — CR-01 accept-invitation cross-tenant SaveChanges + CR-03 re-accept Activate reuse). Both depend on Docker (Testcontainers postgres:17-alpine). Next: /gsd-execute-phase 02 --gaps-only
 
 ---
 

@@ -111,7 +111,7 @@ Plans:
 
 ### Plans
 
-**Plans:** 6 plans (6 waves)
+**Plans:** 8 plans (8 waves) [6 baseline + 2 gap-closure]
 
 Plans:
 
@@ -136,6 +136,14 @@ Plans:
 **Wave 5** _(blocked on Wave 4 completion)_
 
 - [x] 02-06-PLAN.md — Wave 5：[BLOCKING] 全量回归 + WorkspaceLifecycleSmoke + WorkspaceRoleCapability + checkpoint:human-verify 手工 smoke（automated ✅; manual smoke pending HUMAN-UAT.md）
+
+**Wave 6** _(blocked on Wave 5 completion — gap-closure from 02-REVIEW.md CR-02)_
+
+- [ ] 02-07-PLAN.md — Wave 6：[gap-closure] Testcontainers Postgres 关系 fixture（WorkspacePostgresFixture + FinbuckleTestTenantScope）+ CR-02 修复（ListUserWorkspacesQueryHandler.IgnoreQueryFilters）+ CrossTenantListUserWorkspacesTests（REQ-2.1, NFR-2）
+
+**Wave 7** _(blocked on Wave 6 completion — gap-closure from 02-REVIEW.md CR-01 + CR-03)_
+
+- [ ] 02-08-PLAN.md — Wave 7：[gap-closure] CR-01 修复（InvitationTokenService.ValidateAsync + AcceptInvitationCommandHandler 跨租户 SaveChanges 作用域切换）+ CR-03 修复（既有成员 Activate 复用，避免 UniqueConstraintException）+ AcceptInvitationAcrossTenantsTests + ReAcceptAfterRemovalTests（REQ-2.2, REQ-2.4, NFR-2）
 
 **Deliverables:**
 
