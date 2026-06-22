@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 02 (gap-closure planned — 02-07 fixture+CR-02 / 02-08 CR-01+CR-03 ready for execution)
-status: gap_closure_planned
-last_updated: "2026-06-22T00:00:00.000Z"
+current_phase: 02 (gap-closure in progress — 02-07 DONE; 02-08 next)
+status: gap_closure_in_progress
+last_updated: "2026-06-22T03:00:00.000Z"
 progress:
   total_phases: 14
   completed_phases: 2
@@ -15,9 +15,9 @@ progress:
 
 # YH.Flow — Project State
 
-**Last Updated:** 2026-06-18
-**Current Phase:** 02 (gap-closure planned — 02-07 + 02-08 ready for /gsd-execute-phase 02 --gaps-only)
-**Active Workstream:** Phase 2 gap-closure (02-07 + 02-08 planned across waves 6-7)
+**Last Updated:** 2026-06-22
+**Current Phase:** 02 (gap-closure in progress — 02-07 DONE; 02-08 next)
+**Active Workstream:** Phase 2 gap-closure (02-07 done Wave 6; 02-08 ready Wave 7)
 
 > **⚠ Phase 02 BLOCKER (gap-closure pending):** Code review (`02-REVIEW.md`) found 3 CRITICAL
 > tenant-scoping defects that the InMemory test suite is structurally unable to catch:
@@ -34,7 +34,7 @@ progress:
 >   **Next:** `/gsd-plan-phase 02 --gaps` → `/gsd-execute-phase 02 --gaps-only`. Does not block Phase 3
 >   (downstream depends on `ICurrentWorkspaceContext` / `[RequireWorkspaceRole]` / Workspace DbContext).
 >
-> **Gap-closure plans READY (2026-06-22):** plan 02-07-PLAN.md (Wave 6 — Testcontainers PG fixture + CR-02 ListUserWorkspaces IgnoreQueryFilters) and plan 02-08-PLAN.md (Wave 7 — CR-01 accept-invitation cross-tenant SaveChanges + CR-03 re-accept Activate reuse). Both depend on Docker (Testcontainers postgres:17-alpine). Next: /gsd-execute-phase 02 --gaps-only
+> **Gap-closure progress (2026-06-22):** plan 02-07-PLAN.md DONE (Wave 6 — Testcontainers PG fixture WorkspacePostgresFixture + FinbuckleTestTenantScope + CR-02 ListUserWorkspaces IgnoreQueryFilters; Workspace.Tests 98/98 = 96 InMemory + 2 relational). WorkspacePostgresFixture + IMultiTenantContextSetter DI resolution path are now ready for 02-08 reuse. Next: `/gsd-execute-phase 02 --gaps-only` to drive plan 02-08 (CR-01 + CR-03).
 
 ---
 

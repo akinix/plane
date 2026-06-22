@@ -139,7 +139,7 @@ Plans:
 
 **Wave 6** _(blocked on Wave 5 completion — gap-closure from 02-REVIEW.md CR-02)_
 
-- [ ] 02-07-PLAN.md — Wave 6：[gap-closure] Testcontainers Postgres 关系 fixture（WorkspacePostgresFixture + FinbuckleTestTenantScope）+ CR-02 修复（ListUserWorkspacesQueryHandler.IgnoreQueryFilters）+ CrossTenantListUserWorkspacesTests（REQ-2.1, NFR-2）
+- [x] 02-07-PLAN.md — Wave 6：[gap-closure] Testcontainers Postgres 关系 fixture（WorkspacePostgresFixture + FinbuckleTestTenantScope）+ CR-02 修复（ListUserWorkspacesQueryHandler.IgnoreQueryFilters）+ CrossTenantListUserWorkspacesTests（REQ-2.1, NFR-2）✅ 2026-06-22 — 98/98 Workspace.Tests（96 InMemory + 2 PG）；fixture + IMultiTenantContextSetter DI 路径已就绪供 02-08 复用
 
 **Wave 7** _(blocked on Wave 6 completion — gap-closure from 02-REVIEW.md CR-01 + CR-03)_
 
