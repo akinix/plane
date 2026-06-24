@@ -9,6 +9,14 @@ using YH.Framework.Persistence;
 using YH.Framework.Web.Modules;
 using YH.Modules.WorkItems.Data;
 using YH.Modules.WorkItems.Services;
+using YH.Modules.WorkItems.Features.v1.Estimates.CreateEstimate;
+using YH.Modules.WorkItems.Features.v1.Estimates.CreateEstimatePoint;
+using YH.Modules.WorkItems.Features.v1.Estimates.DeleteEstimate;
+using YH.Modules.WorkItems.Features.v1.Estimates.DeleteEstimatePoint;
+using YH.Modules.WorkItems.Features.v1.Estimates.GetEstimate;
+using YH.Modules.WorkItems.Features.v1.Estimates.ListEstimates;
+using YH.Modules.WorkItems.Features.v1.Estimates.UpdateEstimate;
+using YH.Modules.WorkItems.Features.v1.Estimates.UpdateEstimatePoint;
 using YH.Modules.WorkItems.Features.v1.Labels.CreateLabel;
 using YH.Modules.WorkItems.Features.v1.Labels.DeleteLabel;
 using YH.Modules.WorkItems.Features.v1.Labels.GetLabel;
@@ -71,18 +79,29 @@ public sealed class WorkItemsModule : IModule
             .ReportApiVersions()
             .Build();
 
-        // WorkItems route group under /workspaces/{slug}/projects/{projectId}/work-items/
-        var workItems = endpoints
-            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/work-items")
-            .WithTags("WorkItems")
+        // WorkItems route group — endpoints wired in subsequent tasks
+        // TODO: Wire Issue endpoints (Wave 3)
+        // TODO: Wire Intake endpoints (Wave 4)
+        // TODO: Wire Import/Export endpoints (Wave 4)
+        var estimates = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/estimates")
+            .WithTags("Estimates")
             .WithApiVersionSet(apiVersionSet);
 
-        // TODO: Wire endpoints in subsequent waves:
-        // - Issue endpoints (Wave 2/3)
-        // - Estimate endpoints (Wave 3)
-        // - Intake endpoints (Wave 4)
-        // - Import/Export endpoints (Wave 4)
-        _ = workItems;
+        estimates.MapCreateEstimateEndpoint();
+        estimates.MapListEstimatesEndpoint();
+        estimates.MapGetEstimateEndpoint();
+        estimates.MapUpdateEstimateEndpoint();
+        estimates.MapDeleteEstimateEndpoint();
+
+        // EstimatePoint endpoints nested under estimates group
+        estimates.MapCreateEstimatePointEndpoint();
+        estimates.MapUpdateEstimatePointEndpoint();
+        estimates.MapDeleteEstimatePointEndpoint();
+
+        // TODO: Wire Issue endpoints (Wave 3)
+        // TODO: Wire Intake endpoints (Wave 4)
+        // TODO: Wire Import/Export endpoints (Wave 4)
 
         // State route group under /workspaces/{slug}/projects/{projectId}/states/
         var states = endpoints
