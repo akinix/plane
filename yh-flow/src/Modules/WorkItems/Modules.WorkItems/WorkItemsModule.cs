@@ -46,6 +46,12 @@ using YH.Modules.WorkItems.Features.v1.Intake.ListIntakeIssues;
 using YH.Modules.WorkItems.Features.v1.Intake.UpdateIntakeIssue;
 using YH.Modules.WorkItems.Features.v1.ImportExport.ExportIssues;
 using YH.Modules.WorkItems.Features.v1.ImportExport.ImportIssues;
+using YH.Modules.WorkItems.Features.v1.Cycles.CreateCycle;
+using YH.Modules.WorkItems.Features.v1.Cycles.GetCycle;
+using YH.Modules.WorkItems.Features.v1.Cycles.UpdateCycle;
+using YH.Modules.WorkItems.Features.v1.Cycles.DeleteCycle;
+using YH.Modules.WorkItems.Features.v1.Cycles.ListCycles;
+using YH.Modules.WorkItems.Features.v1.Cycles.DateCheckCycle;
 
 namespace YH.Modules.WorkItems;
 
@@ -53,7 +59,7 @@ namespace YH.Modules.WorkItems;
 /// WorkItems module entry point.
 /// </summary>
 /// <remarks>
-/// <b>Wave 4 wiring status (plan 04-04):</b>
+/// <b>Wave 4 wiring status (plan 04-04) + Wave 5 (plan 05-02):</b>
 /// <list type="bullet">
 ///   <item><see cref="ConfigureServices"/> registers <see cref="WorkItemsDbContext"/> + health check.</item>
 ///   <item><see cref="MapEndpoints"/> registers all state, label, estimate, issue, issue-link endpoints.</item>
@@ -185,10 +191,16 @@ public sealed class WorkItemsModule : IModule
         labels.MapDeleteLabelEndpoint();
 
         // Cycle route group under /workspaces/{slug}/projects/{projectId}/cycles/
-        // (endpoints will be registered in Wave 2)
-        _ = endpoints
+        var cycles = endpoints
             .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/cycles")
             .WithTags("Cycles")
             .WithApiVersionSet(apiVersionSet);
+
+        cycles.MapCreateCycleEndpoint();
+        cycles.MapListCyclesEndpoint();
+        cycles.MapGetCycleEndpoint();
+        cycles.MapUpdateCycleEndpoint();
+        cycles.MapDeleteCycleEndpoint();
+        cycles.MapDateCheckCycleEndpoint();
     }
 }
