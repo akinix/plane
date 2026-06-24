@@ -8,6 +8,11 @@ using Microsoft.Extensions.Hosting;
 using YH.Framework.Persistence;
 using YH.Framework.Web.Modules;
 using YH.Modules.WorkItems.Data;
+using YH.Modules.WorkItems.Features.v1.Labels.CreateLabel;
+using YH.Modules.WorkItems.Features.v1.Labels.DeleteLabel;
+using YH.Modules.WorkItems.Features.v1.Labels.GetLabel;
+using YH.Modules.WorkItems.Features.v1.Labels.ListLabels;
+using YH.Modules.WorkItems.Features.v1.Labels.UpdateLabel;
 using YH.Modules.WorkItems.Features.v1.States.CreateState;
 using YH.Modules.WorkItems.Features.v1.States.DeleteState;
 using YH.Modules.WorkItems.Features.v1.States.GetState;
@@ -25,9 +30,11 @@ namespace YH.Modules.WorkItems;
 ///   <item><see cref="ConfigureServices"/> registers <see cref="WorkItemsDbContext"/> + health check.</item>
 ///   <item><see cref="MapEndpoints"/> registers all 5 state CRUD endpoints under
 ///     <c>/api/v1/workspaces/{slug}/projects/{projectId}/states/</c>.</item>
+///   <item><see cref="MapEndpoints"/> registers all 5 label CRUD endpoints under
+///     <c>/api/v1/workspaces/{slug}/projects/{projectId}/labels/</c>.</item>
 /// </list>
 /// <para>
-/// <b>Next:</b> Wave 2 continued — Label CRUD endpoints + Issue entity.
+/// <b>Next:</b> Wave 3 — Issue CRUD endpoints.
 /// </para>
 /// </remarks>
 public sealed class WorkItemsModule : IModule
@@ -84,5 +91,17 @@ public sealed class WorkItemsModule : IModule
         states.MapGetStateEndpoint();
         states.MapUpdateStateEndpoint();
         states.MapDeleteStateEndpoint();
+
+        // Label route group under /workspaces/{slug}/projects/{projectId}/labels/
+        var labels = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/labels")
+            .WithTags("Labels")
+            .WithApiVersionSet(apiVersionSet);
+
+        labels.MapCreateLabelEndpoint();
+        labels.MapListLabelsEndpoint();
+        labels.MapGetLabelEndpoint();
+        labels.MapUpdateLabelEndpoint();
+        labels.MapDeleteLabelEndpoint();
     }
 }
