@@ -6,6 +6,7 @@ using YH.Modules.Identity.Contracts.v1.Tokens.TokenGeneration;
 using YH.Modules.Identity.Features.v1.Tokens.TokenGeneration;
 using YH.Modules.Multitenancy;
 using YH.Modules.Multitenancy.Contracts.v1.GetTenantStatus;
+using YH.Modules.Project;
 using YH.Modules.Webhooks;
 using YH.Modules.Multitenancy.Features.v1.GetTenantStatus;
 using System.Reflection;
@@ -51,7 +52,8 @@ builder.Services.AddMediator(o =>
         typeof(YH.Modules.Files.Contracts.v1.Commands.RequestUploadUrlCommand),
         typeof(YH.Modules.Files.FilesModule),
         typeof(YH.Modules.Notifications.Contracts.v1.Commands.MarkNotificationReadCommand),
-        typeof(YH.Modules.Notifications.NotificationsModule)];
+        typeof(YH.Modules.Notifications.NotificationsModule),
+        typeof(YH.Modules.Project.Contracts.ProjectConstants)];
 });
 
 var moduleAssemblies = new Assembly[]
@@ -63,6 +65,7 @@ var moduleAssemblies = new Assembly[]
     typeof(WebhooksModule).Assembly,
     typeof(YH.Modules.Notifications.NotificationsModule).Assembly,
     typeof(YH.Modules.Workspace.WorkspaceModule).Assembly,
+    typeof(ProjectModule).Assembly,
 };
 
 builder.AddHeroPlatform(o =>

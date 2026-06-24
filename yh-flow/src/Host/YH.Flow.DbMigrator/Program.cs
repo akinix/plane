@@ -14,6 +14,8 @@ using YH.Modules.Multitenancy.Contracts;
 using YH.Modules.Multitenancy.Contracts.v1.GetTenantStatus;
 using YH.Modules.Multitenancy.Data;
 using YH.Modules.Multitenancy.Features.v1.GetTenantStatus;
+using YH.Modules.Project;
+using YH.Modules.Project.Contracts;
 using YH.Modules.Tickets;
 using YH.Modules.Webhooks;
 using YH.Flow.DbMigrator;
@@ -103,6 +105,7 @@ builder.Services.AddMediator(o =>
         typeof(YH.Modules.Notifications.NotificationsModule),
         typeof(YH.Modules.Workspace.Contracts.WorkspaceRole),
         typeof(YH.Modules.Workspace.WorkspaceModule),
+        typeof(ProjectConstants),
     ];
 });
 
@@ -119,6 +122,7 @@ var moduleAssemblies = new Assembly[]
     typeof(YH.Modules.Chat.ChatModule).Assembly,
     typeof(YH.Modules.Notifications.NotificationsModule).Assembly,
     typeof(YH.Modules.Workspace.WorkspaceModule).Assembly,
+    typeof(ProjectModule).Assembly,
 };
 
 // Disable runtime-only concerns; persistence + multitenancy stay on so DbInitializers resolve. Caching
