@@ -250,6 +250,7 @@ plane/
 ## Key File Locations
 
 **Entry Points:**
+
 - `apps/web/app/entry.client.tsx`: Web app hydration entry
 - `apps/web/app/root.tsx`: Root HTML shell and layout
 - `apps/web/app/provider.tsx`: App-level provider composition
@@ -260,6 +261,7 @@ plane/
 - `apps/api/manage.py`: Django management entry point
 
 **Configuration:**
+
 - `turbo.json`: Turborepo task pipeline and env vars
 - `pnpm-workspace.yaml`: Workspace definition, catalog deps, overrides
 - `package.json`: Root package scripts (dev, build, check, fix)
@@ -271,6 +273,7 @@ plane/
 - `apps/live/tsconfig.json`: Live server TypeScript config
 
 **Core Logic:**
+
 - `apps/web/core/store/root.store.ts`: Root MobX store composing all sub-stores
 - `apps/web/core/lib/store-context.tsx`: MobX StoreProvider with React Context
 - `apps/web/core/lib/wrappers/`: Authentication wrapper, store wrapper, instance wrapper
@@ -281,6 +284,7 @@ plane/
 - `packages/services/src/api.service.ts`: APIService base class for HTTP requests
 
 **Testing:**
+
 - `apps/api/plane/tests/`: Django tests (contract, smoke, unit)
 - `apps/live/tests/`: Live server tests (Vitest)
 - `packages/codemods/tests/`: Codemod tests
@@ -288,6 +292,7 @@ plane/
 ## Naming Conventions
 
 **Files:**
+
 - TypeScript: kebab-case for files (`issue.store.ts`, `project-page.service.ts`, `authentication-wrapper.tsx`), PascalCase for component files that export a default component
 - Python: snake_case (`api_authentication.py`, `issue.py`, `base.py`)
 - Index files: `index.ts` or `index.tsx` for barrel exports
@@ -296,6 +301,7 @@ plane/
 - Caddy: `Caddyfile`, `Caddyfile.*`
 
 **Directories:**
+
 - Apps: short descriptive names (`web`, `space`, `admin`, `api`, `live`, `proxy`)
 - Packages: scope-prefixed with `@plane/` (`@plane/editor`, `@plane/types`)
 - Feature modules: kebab-case directories (`rich-filters`, `work-item-filters`, `base-layouts`)
@@ -303,12 +309,14 @@ plane/
 - React Router routes: Group folders like `(all)`, `(home)`, `(projects)`, `(settings)` for layout grouping; dynamic segments with brackets `[workspaceSlug]`, `[projectId]`
 
 **Package Names:**
+
 - All internal packages: `@plane/<name>` (e.g., `@plane/ui`, `@plane/editor`)
 - Apps: plain names (`web`, `space`, `admin`, `live`)
 
 ## Where to Add New Code
 
 **New Feature (Web App):**
+
 - Routes: `apps/web/app/routes/core.ts` (or `extended.ts` for EE)
 - Pages: `apps/web/app/(all)/[workspaceSlug]/(projects)/<feature>/`
 - Components: `apps/web/core/components/<feature>/` (CE base), `apps/web/ce/components/<feature>/` (EE extensions)
@@ -318,6 +326,7 @@ plane/
 - Types: `packages/types/src/<feature>/`
 
 **New Feature (API Backend):**
+
 - Models: `apps/api/plane/db/models/<feature>.py` + migration
 - Views: `apps/api/plane/api/views/<feature>.py`
 - Serializers: `apps/api/plane/api/serializers/<feature>/`
@@ -325,6 +334,7 @@ plane/
 - Permissions: `apps/api/plane/app/permissions/<feature>.py`
 
 **New Shared Package:**
+
 - Create directory: `packages/<name>/`
 - Add to `pnpm-workspace.yaml` (already covered by `packages/*`)
 - Package name: `@plane/<name>`
@@ -333,15 +343,18 @@ plane/
 - TypeScript: extend `@plane/typescript-config/base.json`
 
 **New Component (Design System):**
+
 - Add to `packages/propel/src/<component-name>/` for new design system components
 - Add to `packages/ui/src/<component-name>/` for legacy UI components
 - Include Storybook stories (follow existing pattern)
 
 **New Translation/String:**
+
 - Add keys in `packages/i18n/src/locales/en/` JSON files
 - Import namespace, use `useTranslation()` hook or `t()` function
 
 **Tests:**
+
 - Django tests: `apps/api/plane/tests/` (contract, smoke, or unit subdirectories)
 - Live server tests: `apps/live/tests/` (Vitest, co-located pattern)
 - No frontend test suite detected for web/space/admin apps
@@ -368,4 +381,4 @@ plane/
 
 ---
 
-*Structure analysis: 2026-06-16*
+_Structure analysis: 2026-06-16_

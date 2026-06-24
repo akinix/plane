@@ -6,18 +6,18 @@
 
 ### Core Entities
 
-| Entity | Description | Relationships |
-|--------|-------------|---------------|
-| **Workspace** | 顶层租户容器，隔离不同团队/组织的数据 | 1:N Projects, 1:N Members |
-| **Project** | 工作区内的项目，包含所有工作项和配置 | N:1 Workspace, 1:N Issues/Cycles/Modules/Pages/Views |
-| **Issue** | 核心工作项（任务、Bug、功能请求等） | N:1 Project, N:1 State, N:N Labels, 1:N Comments |
-| **Cycle** | 时间盒迭代/冲刺，组织 Issues 的周期 | N:1 Project, N:N Issues |
-| **Module** | 功能分组/史诗，跨周期的 Issue 分组 | N:1 Project, N:N Issues |
-| **Page** | 富文本文档，支持嵌入工作区/项目级别 | N:1 Workspace 或 N:1 Project |
-| **View** | 保存的筛选器和展示配置 | N:1 Project |
-| **State** | Issue 工作流状态（Backlog → Todo → In Progress → Done） | N:1 Project |
-| **Label** | 标签/分类 | N:1 Project, N:N Issues |
-| **Estimate** | 工作量估算系统 | N:1 Project, 1:N Issues |
+| Entity        | Description                                             | Relationships                                        |
+| ------------- | ------------------------------------------------------- | ---------------------------------------------------- |
+| **Workspace** | 顶层租户容器，隔离不同团队/组织的数据                   | 1:N Projects, 1:N Members                            |
+| **Project**   | 工作区内的项目，包含所有工作项和配置                    | N:1 Workspace, 1:N Issues/Cycles/Modules/Pages/Views |
+| **Issue**     | 核心工作项（任务、Bug、功能请求等）                     | N:1 Project, N:1 State, N:N Labels, 1:N Comments     |
+| **Cycle**     | 时间盒迭代/冲刺，组织 Issues 的周期                     | N:1 Project, N:N Issues                              |
+| **Module**    | 功能分组/史诗，跨周期的 Issue 分组                      | N:1 Project, N:N Issues                              |
+| **Page**      | 富文本文档，支持嵌入工作区/项目级别                     | N:1 Workspace 或 N:1 Project                         |
+| **View**      | 保存的筛选器和展示配置                                  | N:1 Project                                          |
+| **State**     | Issue 工作流状态（Backlog → Todo → In Progress → Done） | N:1 Project                                          |
+| **Label**     | 标签/分类                                               | N:1 Project, N:N Issues                              |
+| **Estimate**  | 工作量估算系统                                          | N:1 Project, 1:N Issues                              |
 
 ### Workflow Concepts
 
@@ -40,15 +40,16 @@
 
 ## User Roles & Permissions
 
-| Role | Level | Description |
-|------|-------|-------------|
-| **Admin** | 20 | 完全控制工作区和所有项目 |
-| **Member** | 15 | 可创建/编辑项目和内容 |
-| **Guest** | 5 | 只读访问特定项目 |
+| Role       | Level | Description              |
+| ---------- | ----- | ------------------------ |
+| **Admin**  | 20    | 完全控制工作区和所有项目 |
+| **Member** | 15    | 可创建/编辑项目和内容    |
+| **Guest**  | 5     | 只读访问特定项目         |
 
 ### Permission Granularity
 
 权限系统支持：
+
 - **Workspace-level**: 管理工作区设置、成员、计费
 - **Project-level**: 管理项目设置、成员
 - **Entity-level**: 创建/编辑/删除 Issue、Cycle、Module 等

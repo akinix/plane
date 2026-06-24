@@ -97,8 +97,8 @@ completed: 2026-06-17
 
 ## Accomplishments
 
-- **Task 1 — API Token CRUD:** ApiTokenService 完整实现（pk_ 前缀密钥生成、SHA-256 哈希存储、验证、列出、撤销），3 个端点（POST/GET/DELETE /auth/api-tokens），Mediator 命令处理器，IApiTokenService 签名调整返回元组。
-- **Task 2 — OAuth Provider 管理 + Plane 格式:** 5 个管理端点（CRUD + toggle），PlanePagedResult<T> 分页格式（count/next/previous/results），GlobalExceptionHandler 添加 IsPlaneRoute 检查（/auth/* 返回 Plane 格式，/api/* 保持 RFC 7807）。
+- **Task 1 — API Token CRUD:** ApiTokenService 完整实现（pk\_ 前缀密钥生成、SHA-256 哈希存储、验证、列出、撤销），3 个端点（POST/GET/DELETE /auth/api-tokens），Mediator 命令处理器，IApiTokenService 签名调整返回元组。
+- **Task 2 — OAuth Provider 管理 + Plane 格式:** 5 个管理端点（CRUD + toggle），PlanePagedResult<T> 分页格式（count/next/previous/results），GlobalExceptionHandler 添加 IsPlaneRoute 检查（/auth/_ 返回 Plane 格式，/api/_ 保持 RFC 7807）。
 - **Task 3 — CORS + 配置:** appsettings.json 添加 x-api-key 和 x-tenant 到 CORS AllowedHeaders，启用 RateLimiting。
 
 ## Task Commits
@@ -108,7 +108,7 @@ completed: 2026-06-17
 
 ## Files Created/Modified
 
-- `Modules.Identity/Services/ApiTokenService.cs` — API Token 服务：pk_ 前缀密钥生成、SHA-256 哈希、CRUD、验证
+- `Modules.Identity/Services/ApiTokenService.cs` — API Token 服务：pk\_ 前缀密钥生成、SHA-256 哈希、CRUD、验证
 - `Modules.Identity/Features/v1/ApiTokens/Create/` — POST /auth/api-tokens 端点 + 命令处理器
 - `Modules.Identity/Features/v1/ApiTokens/List/` — GET /auth/api-tokens 端点 + 查询处理器
 - `Modules.Identity/Features/v1/ApiTokens/Revoke/` — DELETE /auth/api-tokens/{id} 端点 + 命令处理器
@@ -133,18 +133,21 @@ completed: 2026-06-17
 ### Auto-fixed Issues
 
 **1. [Non-blocking] IApiTokenService.CreateAsync 签名变更**
+
 - **Found during:** Task 1 实现
 - **Issue:** 计划指定返回 APITokenDto，但端点需要明文 Key 返回给用户
 - **Fix:** 改为返回 `(APITokenDto Dto, string RawKey)` 元组
 - **Verification:** Build passes, tests pass
 
 **2. [Non-blocking] CA1000 泛型类静态成员**
+
 - **Found during:** Task 2 实现
 - **Issue:** `PlanePagedResult<T>.FromPagedResponse` 触发 CA1000
 - **Fix:** 创建 `PlanePagedResultFactory` 非泛型类承载静态方法
 - **Verification:** Build passes, 0 warnings
 
 **3. [Non-blocking] ApiTokenService 测试简化**
+
 - **Found during:** Task 1 测试
 - **Issue:** IdentityDbContext 依赖多租户基础设施，单元测试无法简单 mock
 - **Fix:** 简化为测试密钥生成和哈希核心逻辑，完整集成测试留待后续阶段
@@ -157,13 +160,13 @@ completed: 2026-06-17
 
 ## Threat Mitigations Applied
 
-| Threat ID | Component | Mitigation | Status |
-|-----------|-----------|------------|--------|
-| T-01-15 | API Key creation | Plaintext key returned only in Create response, never again | ✅ Mitigated |
-| T-01-16 | RevokeApiTokenEndpoint | Service verifies userId match before revoking | ✅ Mitigated |
-| T-01-17 | ValidateAndGetOwnerAsync | SHA-256 hash comparison, claims from DB only | ✅ Mitigated |
-| T-01-18 | OAuth Provider CRUD | Admin endpoints, ClientSecret excluded from DTO | ✅ Mitigated |
-| T-01-19 | PlanePagedResult URLs | Built from request path/query, no sensitive data | ✅ Accepted |
+| Threat ID | Component                | Mitigation                                                  | Status       |
+| --------- | ------------------------ | ----------------------------------------------------------- | ------------ |
+| T-01-15   | API Key creation         | Plaintext key returned only in Create response, never again | ✅ Mitigated |
+| T-01-16   | RevokeApiTokenEndpoint   | Service verifies userId match before revoking               | ✅ Mitigated |
+| T-01-17   | ValidateAndGetOwnerAsync | SHA-256 hash comparison, claims from DB only                | ✅ Mitigated |
+| T-01-18   | OAuth Provider CRUD      | Admin endpoints, ClientSecret excluded from DTO             | ✅ Mitigated |
+| T-01-19   | PlanePagedResult URLs    | Built from request path/query, no sensitive data            | ✅ Accepted  |
 
 ## Verification
 
@@ -171,7 +174,7 @@ completed: 2026-06-17
 - `dotnet test src/Tests/Identity.Tests/` — 412 passed, 0 failed, 0 skipped
 - API Token 3 endpoints registered at /auth/api-tokens
 - OAuth Provider 5 endpoints registered at /oauth-providers
-- GlobalExceptionHandler serves Plane format for /auth/* routes
+- GlobalExceptionHandler serves Plane format for /auth/\* routes
 
 ## Next Phase Readiness
 
@@ -179,8 +182,10 @@ completed: 2026-06-17
 - Phase 1 will be complete after 01-05
 
 ---
-*Phase: 01-foundation*
-*Completed: 2026-06-17*
+
+_Phase: 01-foundation_
+_Completed: 2026-06-17_
 
 ## Self-Check: PASSED
+
 All 26 files in 1 commit verified. Full solution builds (33 projects, 0 errors). 412 tests passing.

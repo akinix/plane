@@ -56,13 +56,13 @@ fullstackhero-dotnet-starter-kit/
 
 ### 1.2 命名空间约定
 
-| 层级 | 模板命名空间 | 目标命名空间 (D-05) |
-|------|-------------|-------------------|
-| BuildingBlocks | `FSH.Framework.{Name}` | `YH.Framework.{Name}` |
-| Modules | `FSH.Modules.{Name}` | `YH.Modules.{Name}` |
-| Host (API) | `FSH.Starter.Api` | `YH.Flow.Api` |
-| Host (DbMigrator) | `FSH.Starter.DbMigrator` | `YH.Flow.DbMigrator` |
-| Host (AppHost) | `FSH.Starter.AppHost` | `YH.Flow.AppHost` |
+| 层级              | 模板命名空间                        | 目标命名空间 (D-05)             |
+| ----------------- | ----------------------------------- | ------------------------------- |
+| BuildingBlocks    | `FSH.Framework.{Name}`              | `YH.Framework.{Name}`           |
+| Modules           | `FSH.Modules.{Name}`                | `YH.Modules.{Name}`             |
+| Host (API)        | `FSH.Starter.Api`                   | `YH.Flow.Api`                   |
+| Host (DbMigrator) | `FSH.Starter.DbMigrator`            | `YH.Flow.DbMigrator`            |
+| Host (AppHost)    | `FSH.Starter.AppHost`               | `YH.Flow.AppHost`               |
 | Host (Migrations) | `FSH.Starter.Migrations.PostgreSQL` | `YH.Flow.Migrations.PostgreSQL` |
 
 ### 1.3 构建系统
@@ -92,18 +92,18 @@ fullstackhero-dotnet-starter-kit/
 
 ### 2.1 资源清单
 
-| 资源 | 类型 | 端口 | 生命周期 | 备注 |
-|------|------|------|----------|------|
-| postgres | AddPostgres | 默认 | Persistent | 含 pgAdmin :5050 |
-| fsh-db | PostgreSQL DB | - | - | 数据库名 → `yhflow-db` (D-12) |
-| redis | Container (valkey/valkey:9.1.0) | 6379 | Persistent | 含 RedisInsight :5540 |
-| minio | Container (minio/minio) | 9000/9001 | Persistent | Bucket: `yhflow-uploads` (D-12) |
-| minio-init | Container (minio/mc) | - | - | 初始化 bucket |
-| db-migrator | Project (DbMigrator) | - | - | 迁移 + 种子数据 |
-| demo-seeder | Project (DbMigrator) | - | - | 演示租户 (acme/globex) |
-| api | Project (Api) | - | - | 主 API 服务 |
-| admin | JavaScriptApp | :5173 | - | 前端管理端 (D-11: 注释掉) |
-| dashboard | JavaScriptApp | :5174 | - | 前端仪表板 (D-11: 注释掉) |
+| 资源        | 类型                            | 端口      | 生命周期   | 备注                            |
+| ----------- | ------------------------------- | --------- | ---------- | ------------------------------- |
+| postgres    | AddPostgres                     | 默认      | Persistent | 含 pgAdmin :5050                |
+| fsh-db      | PostgreSQL DB                   | -         | -          | 数据库名 → `yhflow-db` (D-12)   |
+| redis       | Container (valkey/valkey:9.1.0) | 6379      | Persistent | 含 RedisInsight :5540           |
+| minio       | Container (minio/minio)         | 9000/9001 | Persistent | Bucket: `yhflow-uploads` (D-12) |
+| minio-init  | Container (minio/mc)            | -         | -          | 初始化 bucket                   |
+| db-migrator | Project (DbMigrator)            | -         | -          | 迁移 + 种子数据                 |
+| demo-seeder | Project (DbMigrator)            | -         | -          | 演示租户 (acme/globex)          |
+| api         | Project (Api)                   | -         | -          | 主 API 服务                     |
+| admin       | JavaScriptApp                   | :5173     | -          | 前端管理端 (D-11: 注释掉)       |
+| dashboard   | JavaScriptApp                   | :5174     | -          | 前端仪表板 (D-11: 注释掉)       |
 
 ### 2.2 编排依赖链
 
@@ -118,6 +118,7 @@ minio ──→ minio-init ─────────────────�
 ### 2.3 关键环境变量
 
 API 服务接收以下环境变量（通过 WithEnvironment 注入）：
+
 - `DatabaseOptions__Provider=POSTGRESQL`
 - `DatabaseOptions__ConnectionString` (来自 postgres)
 - `DatabaseOptions__MigrationsAssembly=FSH.Starter.Migrations.PostgreSQL` → 需改为 `YH.Flow.Migrations.PostgreSQL`
@@ -135,6 +136,7 @@ API 服务接收以下环境变量（通过 WithEnvironment 注入）：
 模板的 `Program.cs` 通过两个地方注册模块：
 
 **1. Mediator 注册 (AddMediator):**
+
 ```csharp
 builder.Services.AddMediator(o => {
     o.Assemblies = [
@@ -153,6 +155,7 @@ builder.Services.AddMediator(o => {
 ```
 
 **2. 模块程序集注册 (AddModules):**
+
 ```csharp
 var moduleAssemblies = new Assembly[] {
     // ...保留的模块...
@@ -169,12 +172,12 @@ builder.AddModules(moduleAssemblies);
 
 按 D-02 要求，需要移除以下 4 个模块的 DI 注册：
 
-| 模块 | using 语句 | AddMediator 条目 | AddModules 条目 |
-|------|-----------|------------------|----------------|
-| Catalog | `using FSH.Modules.Catalog;` | `CatalogContractsMarker`, `CatalogModule` | `typeof(CatalogModule).Assembly` |
-| Tickets | `using FSH.Modules.Tickets;` | `TicketsContractsMarker`, `TicketsModule` | `typeof(TicketsModule).Assembly` |
-| Chat | `using FSH.Modules.Chat;` + `using FSH.Modules.Chat.Contracts...` | `CreateChannelCommand`, `ChatModule` | `typeof(ChatModule).Assembly` |
-| Billing | `using FSH.Modules.Billing;` | `BillingContractsMarker`, `BillingModule` | `typeof(BillingModule).Assembly` |
+| 模块    | using 语句                                                        | AddMediator 条目                          | AddModules 条目                  |
+| ------- | ----------------------------------------------------------------- | ----------------------------------------- | -------------------------------- |
+| Catalog | `using FSH.Modules.Catalog;`                                      | `CatalogContractsMarker`, `CatalogModule` | `typeof(CatalogModule).Assembly` |
+| Tickets | `using FSH.Modules.Tickets;`                                      | `TicketsContractsMarker`, `TicketsModule` | `typeof(TicketsModule).Assembly` |
+| Chat    | `using FSH.Modules.Chat;` + `using FSH.Modules.Chat.Contracts...` | `CreateChannelCommand`, `ChatModule`      | `typeof(ChatModule).Assembly`    |
+| Billing | `using FSH.Modules.Billing;`                                      | `BillingContractsMarker`, `BillingModule` | `typeof(BillingModule).Assembly` |
 
 **重要：** 项目文件 (.csproj) 保留在解决方案中参与编译（D-02），只移除运行时注册。
 
@@ -184,31 +187,33 @@ builder.AddModules(moduleAssemblies);
 
 ### 4.1 需要替换的范围
 
-| 类别 | 具体文件/内容 | 说明 |
-|------|-------------|------|
-| csproj | AssemblyName, RootNamespace | 所有 30+ 个 .csproj 文件 |
-| .cs | 所有 namespace 声明 | `FSH.` → `YH.` |
-| .cs | using 语句 | `using FSH.` → `using YH.` |
-| launchSettings.json | 应用名称 | 如有引用 |
-| appsettings*.json | 配置键中的引用 | `FSH.Starter.Migrations.PostgreSQL` → `YH.Flow.Migrations.PostgreSQL` |
-| AppHost.cs | `Projects.FSH_Starter_*` 类型引用 | Aspire 自动生成的类型名 |
-| AppHost.cs | 环境变量值 | `FSH.Starter.Migrations.PostgreSQL` → `YH.Flow.Migrations.PostgreSQL` |
-| AppHost.cs | `appPrefix` 计算逻辑 | 自动从 AssemblyName 推导，重命名后自动生效 |
-| Dockerfile | 标签 | 如有引用 |
-| README | 项目名称引用 | 全文替换 |
-| .slnx | 项目名称和路径 | 解决方案文件中的引用 |
-| Directory.Build.props | Authors, Company, PackageTags 等元数据 | FSH → YH |
+| 类别                  | 具体文件/内容                          | 说明                                                                  |
+| --------------------- | -------------------------------------- | --------------------------------------------------------------------- |
+| csproj                | AssemblyName, RootNamespace            | 所有 30+ 个 .csproj 文件                                              |
+| .cs                   | 所有 namespace 声明                    | `FSH.` → `YH.`                                                        |
+| .cs                   | using 语句                             | `using FSH.` → `using YH.`                                            |
+| launchSettings.json   | 应用名称                               | 如有引用                                                              |
+| appsettings\*.json    | 配置键中的引用                         | `FSH.Starter.Migrations.PostgreSQL` → `YH.Flow.Migrations.PostgreSQL` |
+| AppHost.cs            | `Projects.FSH_Starter_*` 类型引用      | Aspire 自动生成的类型名                                               |
+| AppHost.cs            | 环境变量值                             | `FSH.Starter.Migrations.PostgreSQL` → `YH.Flow.Migrations.PostgreSQL` |
+| AppHost.cs            | `appPrefix` 计算逻辑                   | 自动从 AssemblyName 推导，重命名后自动生效                            |
+| Dockerfile            | 标签                                   | 如有引用                                                              |
+| README                | 项目名称引用                           | 全文替换                                                              |
+| .slnx                 | 项目名称和路径                         | 解决方案文件中的引用                                                  |
+| Directory.Build.props | Authors, Company, PackageTags 等元数据 | FSH → YH                                                              |
 
 ### 4.2 PowerShell 脚本方案
 
 建议创建 `scripts/rename-fsh-to-yh.ps1`，分 4 个阶段：
 
 **阶段 1: 目录重命名**
+
 - `src/BuildingBlocks/` 下各 .csproj 中的 `<RootNamespace>` 和 `<AssemblyName>`
 - `src/Modules/` 下各 .csproj
 - `src/Host/` 下各项目：`FSH.Starter.Api` → `YH.Flow.Api` 等
 
 **阶段 2: 文件内容替换**
+
 - 递归搜索 `*.cs`, `*.csproj`, `*.json`, `*.props`, `*.slnx`, `*.md`
 - 正则替换 `FSH\.` → `YH.` (注意 `FSH.` 作为命名空间前缀)
 - 正则替换 `FSH_` → `YH_` (Aspire 生成的 `Projects.FSH_Starter_*` 类型)
@@ -216,12 +221,14 @@ builder.AddModules(moduleAssemblies);
 - 替换 `fullstackhero` / `FullStackHero` → 项目名 (在元数据中)
 
 **阶段 3: 目录物理重命名**
+
 - 将 `FSH.Starter.Api/` 目录重命名为 `YH.Flow.Api/`
 - 将 `FSH.Starter.AppHost/` 目录重命名为 `YH.Flow.AppHost/`
 - 将 `FSH.Starter.DbMigrator/` 目录重命名为 `YH.Flow.DbMigrator/`
 - 将 `FSH.Starter.Migrations.PostgreSQL/` 目录重命名为 `YH.Flow.Migrations.PostgreSQL/`
 
 **阶段 4: 验证**
+
 - `dotnet build` 确保编译通过
 - 检查所有 `FSH` 引用是否清除
 
@@ -243,20 +250,25 @@ AppHost.cs 中使用的 `Projects.FSH_Starter_Api` 和 `Projects.FSH_Starter_DbM
 ## 6. 前端客户端处理 (D-11, D-13)
 
 ### 6.1 当前结构
+
 - `clients/admin/` — 完整的 React + Vite 管理端
 - `clients/dashboard/` — 完整的 React + Vite 仪表板
 
 ### 6.2 Phase 0 处理
+
 - **D-11:** 在 AppHost.cs 中注释掉 `AddJavaScriptApp` 调用（模板已有 `#if (frontend)` 条件编译）
 - **D-13:** 保留 `clients/` 目录结构，每个客户端仅保留 `package.json`
 - **D-14:** 实际的 Flow Web 前端在 Phase 13 于 `clients/web/` 实现
 
 ### 6.3 MinIO CORS 配置
+
 AppHost.cs 中设置了 CORS:
+
 ```csharp
 const string AdminOrigin = "http://localhost:5173";
 const string DashboardOrigin = "http://localhost:5174";
 ```
+
 Phase 0 可暂时保留这些值，Phase 13 时更新为新的前端端口。
 
 ---
@@ -264,19 +276,23 @@ Phase 0 可暂时保留这些值，Phase 13 时更新为新的前端端口。
 ## 7. 关键风险和注意事项
 
 ### 7.1 编译依赖
+
 - 移除 DI 注册后，被禁用模块的代码仍在编译范围内
 - 如果模块间有编译依赖（如 Catalog 引用 Core），需确保 BuildingBlocks 的引用链完整
 - 被禁用模块的 `using` 语句必须从 Program.cs 移除，否则编译警告（未使用的 using）
 
 ### 7.2 Aspire 类型安全
+
 - AppHost.cs 中的 `Projects.FSH_Starter_*` 类型是编译时生成的
 - 目录重命名后必须清理 `obj/` 目录并重新编译，否则缓存的旧类型名会导致编译错误
 
 ### 7.3 NuGet.Config 路径
+
 - 当前 NuGet.Config 位于仓库根目录（非 src/），包含华为云镜像和全局包路径配置
 - 复制时需确认路径 `F:\nuget\packages` 在目标机器上可用，或改为可移植配置
 
 ### 7.4 项目物理位置
+
 - 目标位置: `d:/github/akinix-plane/yh-flow/`
 - 模板位置: `D:/github/fullstackhero-dotnet-starter-kit/`
 - 两者为独立目录，不涉及 git submodule

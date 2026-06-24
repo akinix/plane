@@ -6,51 +6,51 @@
 
 ## File Classification
 
-| New/Modified File | Role | Data Flow | Closest Analog | Match Quality |
-|-------------------|------|-----------|----------------|---------------|
-| `BuildingBlocks/Web/Auth/ApiKeyAuthenticationHandler.cs` | middleware | request-response | `Authorization/Jwt/ConfigureJwtBearerOptions.cs` | role-match |
-| `BuildingBlocks/Web/Auth/ApiKeyAuthenticationOptions.cs` | config | — | `Authorization/Jwt/JwtOptions.cs` | exact |
-| `BuildingBlocks/Web/Auth/SessionCookieAuthenticationExtensions.cs` | middleware | request-response | `Authorization/Jwt/JwtAuthenticationExtensions.cs` | exact |
-| `Modules.Identity/Authorization/ApiKey/ApiKeyAuthenticationHandler.cs` | middleware | request-response | `Authorization/Jwt/ConfigureJwtBearerOptions.cs` | role-match |
-| `Modules.Identity/Authorization/ApiKey/ApiKeyAuthenticationExtensions.cs` | config | — | `Authorization/Jwt/JwtAuthenticationExtensions.cs` | exact |
-| `Modules.Identity/Authorization/SessionCookie/SessionCookieAuthenticationExtensions.cs` | config | — | `Authorization/Jwt/JwtAuthenticationExtensions.cs` | exact |
-| `Modules.Identity/Domain/APIToken.cs` | model | CRUD | `Domain/UserSession.cs` | exact |
-| `Modules.Identity/Domain/OAuthProviderSettings.cs` | model | CRUD | `Domain/ImpersonationGrant.cs` | exact |
-| `Modules.Identity/Data/Configurations/APITokenConfiguration.cs` | config | CRUD | `Data/Configurations/UserSessionConfiguration.cs` | exact |
-| `Modules.Identity/Data/Configurations/OAuthProviderSettingsConfiguration.cs` | config | CRUD | `Data/ImpersonationGrantConfig.cs` | exact |
-| `Modules.Identity/Data/IdentityDbContext.cs` | model | CRUD | (self — 修改) | — |
-| `Modules.Identity/Features/v1/Auth/AuthEndpoints.cs` | route | request-response | `IdentityModule.cs` (MapEndpoints) | role-match |
-| `Modules.Identity/Features/v1/Auth/SignIn/PlaneSignInEndpoint.cs` | controller | request-response | `Features/v1/Tokens/TokenGeneration/GenerateTokenEndpoint.cs` | exact |
-| `Modules.Identity/Features/v1/Auth/SignUp/PlaneSignUpEndpoint.cs` | controller | request-response | `Features/v1/Users/RegisterUser/RegisterUserEndpoint.cs` | role-match |
-| `Modules.Identity/Features/v1/Auth/SignOut/PlaneSignOutEndpoint.cs` | controller | request-response | `Features/v1/Sessions/RevokeSession/RevokeSessionEndpoint.cs` | role-match |
-| `Modules.Identity/Features/v1/Auth/Me/PlaneMeEndpoint.cs` | controller | request-response | `Features/v1/Sessions/GetMySessions/GetMySessionsEndpoint.cs` | role-match |
-| `Modules.Identity/Features/v1/ApiTokens/Create/CreateApiTokenEndpoint.cs` | controller | CRUD | `Features/v1/Tokens/TokenGeneration/GenerateTokenEndpoint.cs` | role-match |
-| `Modules.Identity/Features/v1/ApiTokens/List/ListApiTokensEndpoint.cs` | controller | CRUD | `Features/v1/Sessions/GetMySessions/GetMySessionsEndpoint.cs` | role-match |
-| `Modules.Identity/Features/v1/ApiTokens/Revoke/RevokeApiTokenEndpoint.cs` | controller | CRUD | `Features/v1/Sessions/RevokeSession/RevokeSessionEndpoint.cs` | role-match |
-| `Modules.Identity/Features/v1/OAuth/IOAuthProvider.cs` | model | — | (新建 — 无 analog) | no-analog |
-| `Modules.Identity/Features/v1/OAuth/OAuthProviderRegistry.cs` | service | CRUD | (新建 — 无 analog) | no-analog |
-| `Modules.Identity/Features/v1/OAuth/OAuthCallbackEndpoint.cs` | controller | request-response | `Features/v1/Tokens/TokenGeneration/GenerateTokenEndpoint.cs` | role-match |
-| `Modules.Identity/Features/v1/OAuth/OAuthInitiateEndpoint.cs` | controller | request-response | `Features/v1/Tokens/TokenGeneration/GenerateTokenEndpoint.cs` | role-match |
-| `Modules.Identity/Features/v1/OAuth/Manage/ManageOAuthProviderEndpoint.cs` | controller | CRUD | `Features/v1/Roles/UpsertRole/CreateOrUpdateRoleEndpoint.cs` | role-match |
-| `Modules.Identity/Services/ApiTokenService.cs` | service | CRUD | `Services/TokenService.cs` | role-match |
-| `Modules.Identity/Services/OAuthProviderService.cs` | service | CRUD | `Services/TokenService.cs` | role-match |
-| `Modules.Identity/IdentityModule.cs` | config | — | (self — 修改) | — |
-| `BuildingBlocks/Web/Exceptions/GlobalExceptionHandler.cs` | middleware | request-response | (self — 修改) | — |
-| `BuildingBlocks/Web/Pagination/PlanePagedResponse.cs` | model | — | `Shared/Persistence/PagedResponse.cs` | exact |
-| `BuildingBlocks/Shared/Persistence/PlanePagedResult.cs` | model | — | `Shared/Persistence/PagedResponse.cs` | exact |
-| `Modules.Identity.Contracts/v1/ApiTokens/*.cs` | model | CRUD | `Contracts/v1/Tokens/TokenGeneration/GenerateTokenCommand.cs` | exact |
-| `Modules.Identity.Contracts/v1/OAuth/*.cs` | model | CRUD | `Contracts/v1/Sessions/GetMySessions/GetMySessionsQuery.cs` | role-match |
-| `Modules.Identity.Contracts/DTOs/APITokenDto.cs` | model | — | `Contracts/DTOs/UserSessionDto.cs` | exact |
-| `Modules.Identity.Contracts/DTOs/OAuthProviderSettingsDto.cs` | model | — | `Contracts/DTOs/UserSessionDto.cs` | role-match |
-| `Modules.Identity.Contracts/Services/IApiTokenService.cs` | model | — | `Contracts/Services/ITokenService.cs` | exact |
-| `Modules.Identity.Contracts/Services/IOAuthProviderService.cs` | model | — | `Contracts/Services/ITokenService.cs` | role-match |
-| `Host/YH.Flow.Api/Program.cs` | config | — | (self — 修改) | — |
-| `Host/YH.Flow.DbMigrator/Program.cs` | config | — | (self — 修改) | — |
-| `Host/YH.Flow.Api/appsettings.json` | config | — | (self — 修改) | — |
-| `Tests/Identity.Tests/Authorization/ApiKeyAuthenticationTests.cs` | test | — | `Tests/Identity.Tests/Services/TokenServiceTests.cs` | role-match |
-| `Tests/Identity.Tests/Authorization/SessionCookieAuthenticationTests.cs` | test | — | `Tests/Identity.Tests/Services/TokenServiceTests.cs` | role-match |
-| `Tests/Identity.Tests/Authorization/OAuthProviderFrameworkTests.cs` | test | — | `Tests/Identity.Tests/Services/TokenServiceTests.cs` | role-match |
-| `Tests/Identity.Tests/Handlers/PlaneFormatAdapterTests.cs` | test | — | `Tests/Identity.Tests/Handlers/GenerateTokenCommandHandlerTests.cs` | role-match |
+| New/Modified File                                                                       | Role       | Data Flow        | Closest Analog                                                      | Match Quality |
+| --------------------------------------------------------------------------------------- | ---------- | ---------------- | ------------------------------------------------------------------- | ------------- |
+| `BuildingBlocks/Web/Auth/ApiKeyAuthenticationHandler.cs`                                | middleware | request-response | `Authorization/Jwt/ConfigureJwtBearerOptions.cs`                    | role-match    |
+| `BuildingBlocks/Web/Auth/ApiKeyAuthenticationOptions.cs`                                | config     | —                | `Authorization/Jwt/JwtOptions.cs`                                   | exact         |
+| `BuildingBlocks/Web/Auth/SessionCookieAuthenticationExtensions.cs`                      | middleware | request-response | `Authorization/Jwt/JwtAuthenticationExtensions.cs`                  | exact         |
+| `Modules.Identity/Authorization/ApiKey/ApiKeyAuthenticationHandler.cs`                  | middleware | request-response | `Authorization/Jwt/ConfigureJwtBearerOptions.cs`                    | role-match    |
+| `Modules.Identity/Authorization/ApiKey/ApiKeyAuthenticationExtensions.cs`               | config     | —                | `Authorization/Jwt/JwtAuthenticationExtensions.cs`                  | exact         |
+| `Modules.Identity/Authorization/SessionCookie/SessionCookieAuthenticationExtensions.cs` | config     | —                | `Authorization/Jwt/JwtAuthenticationExtensions.cs`                  | exact         |
+| `Modules.Identity/Domain/APIToken.cs`                                                   | model      | CRUD             | `Domain/UserSession.cs`                                             | exact         |
+| `Modules.Identity/Domain/OAuthProviderSettings.cs`                                      | model      | CRUD             | `Domain/ImpersonationGrant.cs`                                      | exact         |
+| `Modules.Identity/Data/Configurations/APITokenConfiguration.cs`                         | config     | CRUD             | `Data/Configurations/UserSessionConfiguration.cs`                   | exact         |
+| `Modules.Identity/Data/Configurations/OAuthProviderSettingsConfiguration.cs`            | config     | CRUD             | `Data/ImpersonationGrantConfig.cs`                                  | exact         |
+| `Modules.Identity/Data/IdentityDbContext.cs`                                            | model      | CRUD             | (self — 修改)                                                       | —             |
+| `Modules.Identity/Features/v1/Auth/AuthEndpoints.cs`                                    | route      | request-response | `IdentityModule.cs` (MapEndpoints)                                  | role-match    |
+| `Modules.Identity/Features/v1/Auth/SignIn/PlaneSignInEndpoint.cs`                       | controller | request-response | `Features/v1/Tokens/TokenGeneration/GenerateTokenEndpoint.cs`       | exact         |
+| `Modules.Identity/Features/v1/Auth/SignUp/PlaneSignUpEndpoint.cs`                       | controller | request-response | `Features/v1/Users/RegisterUser/RegisterUserEndpoint.cs`            | role-match    |
+| `Modules.Identity/Features/v1/Auth/SignOut/PlaneSignOutEndpoint.cs`                     | controller | request-response | `Features/v1/Sessions/RevokeSession/RevokeSessionEndpoint.cs`       | role-match    |
+| `Modules.Identity/Features/v1/Auth/Me/PlaneMeEndpoint.cs`                               | controller | request-response | `Features/v1/Sessions/GetMySessions/GetMySessionsEndpoint.cs`       | role-match    |
+| `Modules.Identity/Features/v1/ApiTokens/Create/CreateApiTokenEndpoint.cs`               | controller | CRUD             | `Features/v1/Tokens/TokenGeneration/GenerateTokenEndpoint.cs`       | role-match    |
+| `Modules.Identity/Features/v1/ApiTokens/List/ListApiTokensEndpoint.cs`                  | controller | CRUD             | `Features/v1/Sessions/GetMySessions/GetMySessionsEndpoint.cs`       | role-match    |
+| `Modules.Identity/Features/v1/ApiTokens/Revoke/RevokeApiTokenEndpoint.cs`               | controller | CRUD             | `Features/v1/Sessions/RevokeSession/RevokeSessionEndpoint.cs`       | role-match    |
+| `Modules.Identity/Features/v1/OAuth/IOAuthProvider.cs`                                  | model      | —                | (新建 — 无 analog)                                                  | no-analog     |
+| `Modules.Identity/Features/v1/OAuth/OAuthProviderRegistry.cs`                           | service    | CRUD             | (新建 — 无 analog)                                                  | no-analog     |
+| `Modules.Identity/Features/v1/OAuth/OAuthCallbackEndpoint.cs`                           | controller | request-response | `Features/v1/Tokens/TokenGeneration/GenerateTokenEndpoint.cs`       | role-match    |
+| `Modules.Identity/Features/v1/OAuth/OAuthInitiateEndpoint.cs`                           | controller | request-response | `Features/v1/Tokens/TokenGeneration/GenerateTokenEndpoint.cs`       | role-match    |
+| `Modules.Identity/Features/v1/OAuth/Manage/ManageOAuthProviderEndpoint.cs`              | controller | CRUD             | `Features/v1/Roles/UpsertRole/CreateOrUpdateRoleEndpoint.cs`        | role-match    |
+| `Modules.Identity/Services/ApiTokenService.cs`                                          | service    | CRUD             | `Services/TokenService.cs`                                          | role-match    |
+| `Modules.Identity/Services/OAuthProviderService.cs`                                     | service    | CRUD             | `Services/TokenService.cs`                                          | role-match    |
+| `Modules.Identity/IdentityModule.cs`                                                    | config     | —                | (self — 修改)                                                       | —             |
+| `BuildingBlocks/Web/Exceptions/GlobalExceptionHandler.cs`                               | middleware | request-response | (self — 修改)                                                       | —             |
+| `BuildingBlocks/Web/Pagination/PlanePagedResponse.cs`                                   | model      | —                | `Shared/Persistence/PagedResponse.cs`                               | exact         |
+| `BuildingBlocks/Shared/Persistence/PlanePagedResult.cs`                                 | model      | —                | `Shared/Persistence/PagedResponse.cs`                               | exact         |
+| `Modules.Identity.Contracts/v1/ApiTokens/*.cs`                                          | model      | CRUD             | `Contracts/v1/Tokens/TokenGeneration/GenerateTokenCommand.cs`       | exact         |
+| `Modules.Identity.Contracts/v1/OAuth/*.cs`                                              | model      | CRUD             | `Contracts/v1/Sessions/GetMySessions/GetMySessionsQuery.cs`         | role-match    |
+| `Modules.Identity.Contracts/DTOs/APITokenDto.cs`                                        | model      | —                | `Contracts/DTOs/UserSessionDto.cs`                                  | exact         |
+| `Modules.Identity.Contracts/DTOs/OAuthProviderSettingsDto.cs`                           | model      | —                | `Contracts/DTOs/UserSessionDto.cs`                                  | role-match    |
+| `Modules.Identity.Contracts/Services/IApiTokenService.cs`                               | model      | —                | `Contracts/Services/ITokenService.cs`                               | exact         |
+| `Modules.Identity.Contracts/Services/IOAuthProviderService.cs`                          | model      | —                | `Contracts/Services/ITokenService.cs`                               | role-match    |
+| `Host/YH.Flow.Api/Program.cs`                                                           | config     | —                | (self — 修改)                                                       | —             |
+| `Host/YH.Flow.DbMigrator/Program.cs`                                                    | config     | —                | (self — 修改)                                                       | —             |
+| `Host/YH.Flow.Api/appsettings.json`                                                     | config     | —                | (self — 修改)                                                       | —             |
+| `Tests/Identity.Tests/Authorization/ApiKeyAuthenticationTests.cs`                       | test       | —                | `Tests/Identity.Tests/Services/TokenServiceTests.cs`                | role-match    |
+| `Tests/Identity.Tests/Authorization/SessionCookieAuthenticationTests.cs`                | test       | —                | `Tests/Identity.Tests/Services/TokenServiceTests.cs`                | role-match    |
+| `Tests/Identity.Tests/Authorization/OAuthProviderFrameworkTests.cs`                     | test       | —                | `Tests/Identity.Tests/Services/TokenServiceTests.cs`                | role-match    |
+| `Tests/Identity.Tests/Handlers/PlaneFormatAdapterTests.cs`                              | test       | —                | `Tests/Identity.Tests/Handlers/GenerateTokenCommandHandlerTests.cs` | role-match    |
 
 ## Pattern Assignments
 
@@ -59,6 +59,7 @@
 **Analog:** `Modules.Identity/Authorization/Jwt/JwtAuthenticationExtensions.cs`
 
 **Extension 注册模式** (lines 1-42):
+
 ```csharp
 // Source: JwtAuthenticationExtensions.cs
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -93,6 +94,7 @@ internal static class JwtAuthenticationExtensions
 ```
 
 **新建 ApiKeyAuthenticationExtensions 应遵循的模式:**
+
 ```csharp
 // 新建: Modules.Identity/Authorization/ApiKey/ApiKeyAuthenticationExtensions.cs
 namespace YH.Modules.Identity.Authorization.ApiKey;
@@ -117,6 +119,7 @@ internal static class ApiKeyAuthenticationExtensions
 ```
 
 **ApiKeyAuthenticationHandler 模式** (参考 RESEARCH.md Pattern 2):
+
 ```csharp
 // 新建: Modules.Identity/Authorization/ApiKey/ApiKeyAuthenticationHandler.cs
 // 关键：通过 DI 获取 IApiTokenService，不直接访问 DbContext
@@ -156,6 +159,7 @@ public sealed class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAu
 **Analog:** `Modules.Identity/Authorization/Jwt/JwtAuthenticationExtensions.cs`
 
 **Session Cookie 注册模式:**
+
 ```csharp
 // 新建: Modules.Identity/Authorization/SessionCookie/SessionCookieAuthenticationExtensions.cs
 namespace YH.Modules.Identity.Authorization.SessionCookie;
@@ -194,12 +198,14 @@ internal static class SessionCookieAuthenticationExtensions
 **Analog:** `Modules.Identity/IdentityModule.cs` (ConfigureServices, line 168)
 
 **当前注册点:**
+
 ```csharp
 // Source: IdentityModule.cs line 168
 services.ConfigureJwtAuth();
 ```
 
 **修改为多 Scheme 注册:**
+
 ```csharp
 // IdentityModule.ConfigureServices 中扩展
 services.ConfigureJwtAuth();               // 已有 — JWT Bearer
@@ -217,6 +223,7 @@ services.ConfigureSessionCookieAuth();     // 新增 — Session Cookie
 **Analog:** `Modules.Identity/Domain/UserSession.cs`
 
 **实体模式** (lines 1-95):
+
 ```csharp
 // Source: UserSession.cs
 using YH.Framework.Core.Domain;
@@ -251,6 +258,7 @@ public class UserSession : IHasDomainEvents
 ```
 
 **APIToken 应遵循的模式:**
+
 ```csharp
 // 新建: Modules.Identity/Domain/APIToken.cs
 // 使用 IHasTenant 实现租户隔离（多租户 API Key）
@@ -287,6 +295,7 @@ public class APIToken : IHasDomainEvents, IHasTenant
 **Analog:** `Modules.Identity/Domain/ImpersonationGrant.cs`
 
 **IGlobalEntity 模式** (lines 17-50):
+
 ```csharp
 // Source: ImpersonationGrant.cs
 using YH.Framework.Core.Domain;
@@ -312,6 +321,7 @@ public class ImpersonationGrant : IGlobalEntity
 ```
 
 **OAuthProviderSettings 应遵循的模式:**
+
 ```csharp
 // 新建: Modules.Identity/Domain/OAuthProviderSettings.cs
 // 使用 IGlobalEntity — 全局配置，不按租户隔离（一期）
@@ -341,6 +351,7 @@ public class OAuthProviderSettings : IGlobalEntity
 **Analog:** `Modules.Identity/Data/Configurations/UserSessionConfiguration.cs` + `Data/ImpersonationGrantConfig.cs`
 
 **租户隔离实体配置模式** (UserSessionConfiguration.cs, lines 1-79):
+
 ```csharp
 // Source: UserSessionConfiguration.cs
 using YH.Modules.Identity.Domain;
@@ -373,6 +384,7 @@ public class UserSessionConfiguration : IEntityTypeConfiguration<UserSession>
 ```
 
 **全局实体配置模式** (ImpersonationGrantConfig.cs, lines 7-53):
+
 ```csharp
 // Source: ImpersonationGrantConfig.cs
 // 注意: IGlobalEntity 不需要显式配置多租户 — ApplyTenantIsolationByDefault 会跳过
@@ -395,6 +407,7 @@ public class ImpersonationGrantConfig : IEntityTypeConfiguration<ImpersonationGr
 ```
 
 **Schema 常量** (IdentityModuleConstants.cs, line 12):
+
 ```csharp
 // Source: IdentityModuleConstants.cs
 public const string SchemaName = "identity";
@@ -407,6 +420,7 @@ public const string SchemaName = "identity";
 **Analog:** `Modules.Identity/Data/IdentityDbContext.cs`
 
 **当前 DbSet 注册模式** (lines 29-43):
+
 ```csharp
 // Source: IdentityDbContext.cs
 public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
@@ -420,12 +434,14 @@ public DbSet<ImpersonationGrant> ImpersonationGrants => Set<ImpersonationGrant>(
 ```
 
 **需添加:**
+
 ```csharp
 public DbSet<APIToken> ApiTokens => Set<APIToken>();
 public DbSet<OAuthProviderSettings> OAuthProviderSettings => Set<OAuthProviderSettings>();
 ```
 
 **OnModelCreating 顺序** (lines 59-72):
+
 ```csharp
 protected override void OnModelCreating(ModelBuilder builder)
 {
@@ -445,6 +461,7 @@ protected override void OnModelCreating(ModelBuilder builder)
 **Analog:** `Features/v1/Tokens/TokenGeneration/GenerateTokenEndpoint.cs`
 
 **Endpoint 注册模式** (lines 1-68):
+
 ```csharp
 // Source: GenerateTokenEndpoint.cs
 using YH.Modules.Identity.Contracts.DTOs;
@@ -487,6 +504,7 @@ public static class GenerateTokenEndpoint
 ```
 
 **简单查询 Endpoint 模式** (GetMySessionsEndpoint.cs, lines 1-26):
+
 ```csharp
 // Source: GetMySessionsEndpoint.cs
 public static class GetMySessionsEndpoint
@@ -511,6 +529,7 @@ public static class GetMySessionsEndpoint
 **Analog:** `Contracts/v1/Tokens/TokenGeneration/GenerateTokenCommand.cs` + `Features/v1/Tokens/TokenGeneration/GenerateTokenCommandHandler.cs`
 
 **Command 定义模式** (Contracts):
+
 ```csharp
 // Source: GenerateTokenCommand.cs
 using YH.Modules.Identity.Contracts.DTOs;
@@ -526,6 +545,7 @@ public record GenerateTokenCommand(
 ```
 
 **Handler 模式** (lines 16-152):
+
 ```csharp
 // Source: GenerateTokenCommandHandler.cs
 public sealed class GenerateTokenCommandHandler
@@ -584,6 +604,7 @@ public interface ITokenService
 ```
 
 **新建 IApiTokenService 应遵循的模式:**
+
 ```csharp
 // 新建: Modules.Identity.Contracts/Services/IApiTokenService.cs
 namespace YH.Modules.Identity.Contracts.Services;
@@ -621,6 +642,7 @@ public sealed record TokenResponse(
 **Analog:** `BuildingBlocks/Web/Exceptions/GlobalExceptionHandler.cs`
 
 **当前完整实现** (lines 1-107):
+
 ```csharp
 // Source: GlobalExceptionHandler.cs
 public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
@@ -651,6 +673,7 @@ public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IE
 ```
 
 **需要添加的 Plane 格式适配:**
+
 ```csharp
 // 在 WriteAsJsonAsync 之前添加判断
 private static bool IsPlaneRoute(HttpContext context)
@@ -679,6 +702,7 @@ await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 **Analog:** `BuildingBlocks/Shared/Persistence/PagedResponse.cs`
 
 **FSH 当前分页格式** (lines 1-18):
+
 ```csharp
 // Source: PagedResponse.cs
 namespace YH.Framework.Shared.Persistence;
@@ -696,6 +720,7 @@ public sealed class PagedResponse<T>
 ```
 
 **新建 Plane 分页格式:**
+
 ```csharp
 // 新建: BuildingBlocks/Shared/Persistence/PlanePagedResult.cs
 namespace YH.Framework.Shared.Persistence;
@@ -735,6 +760,7 @@ public sealed class PlanePagedResult<T>
 **Analog:** `Modules.Identity/IdentityModule.cs` (MapEndpoints, lines 171-259)
 
 **当前端点注册模式:**
+
 ```csharp
 // Source: IdentityModule.cs MapEndpoints
 public void MapEndpoints(IEndpointRouteBuilder endpoints)
@@ -760,6 +786,7 @@ public void MapEndpoints(IEndpointRouteBuilder endpoints)
 ```
 
 **需要添加的 Plane 认证端点组:**
+
 ```csharp
 // 在 MapEndpoints 中添加 /auth/* 路由组
 endpoints.MapPlaneAuthEndpoints();  // 新的扩展方法，注册 /auth/* 路由
@@ -772,12 +799,14 @@ endpoints.MapPlaneAuthEndpoints();  // 新的扩展方法，注册 /auth/* 路�
 **Analog:** `Tests/Identity.Tests/Services/TokenServiceTests.cs`
 
 **Test 项目结构:**
+
 ```csharp
 // Source: Identity.Tests.csproj
 // 测试框架: xunit + Shouldly + AutoFixture + NSubstitute
 ```
 
 **Test 模式** (lines 18-56):
+
 ```csharp
 // Source: TokenServiceTests.cs
 namespace Identity.Tests.Services;
@@ -816,8 +845,10 @@ public sealed class TokenServiceTests : IDisposable
 ## Shared Patterns
 
 ### Authentication Scheme 注册
+
 **Source:** `Modules.Identity/Authorization/Jwt/JwtAuthenticationExtensions.cs`
 **Apply to:** ApiKeyAuthenticationExtensions, SessionCookieAuthenticationExtensions
+
 ```csharp
 // 所有 Scheme 注册遵循相同模式：
 // 1. AddOptions<T>().BindConfiguration().ValidateDataAnnotations().ValidateOnStart()
@@ -826,8 +857,10 @@ public sealed class TokenServiceTests : IDisposable
 ```
 
 ### EF Core Entity 模式
+
 **Source:** `Domain/UserSession.cs` + `Domain/ImpersonationGrant.cs`
 **Apply to:** APIToken, OAuthProviderSettings
+
 ```csharp
 // 1. private 构造函数 (EF Core materialization)
 // 2. static Create() 工厂方法
@@ -837,8 +870,10 @@ public sealed class TokenServiceTests : IDisposable
 ```
 
 ### EF Core Configuration 模式
+
 **Source:** `Data/Configurations/UserSessionConfiguration.cs` + `Data/ImpersonationGrantConfig.cs`
 **Apply to:** APITokenConfiguration, OAuthProviderSettingsConfiguration
+
 ```csharp
 // 1. IEntityTypeConfiguration<T> 接口
 // 2. ToTable("TableName", IdentityModuleConstants.SchemaName) — Schema 固定 "identity"
@@ -848,8 +883,10 @@ public sealed class TokenServiceTests : IDisposable
 ```
 
 ### Endpoint + Mediator CQRS 模式
+
 **Source:** `GenerateTokenEndpoint.cs` + `GenerateTokenCommandHandler.cs`
 **Apply to:** 所有新建 Feature Endpoint
+
 ```csharp
 // 1. Endpoint: static class + MapXxxEndpoint 扩展方法
 // 2. 使用 Minimal API + TypedResults
@@ -859,8 +896,10 @@ public sealed class TokenServiceTests : IDisposable
 ```
 
 ### Rate Limiting 策略
+
 **Source:** `BuildingBlocks/Web/RateLimiting/Extensions.cs`
-**Apply to:** /auth/* 端点
+**Apply to:** /auth/\* 端点
+
 ```csharp
 // 认证端点使用 .RequireRateLimiting("auth") — 10/60s 策略
 // 已在 RateLimitingExtensions.cs 第 109-113 行定义 "auth" policy
@@ -868,10 +907,10 @@ public sealed class TokenServiceTests : IDisposable
 
 ## No Analog Found
 
-| File | Role | Data Flow | Reason |
-|------|------|-----------|--------|
-| `Features/v1/OAuth/IOAuthProvider.cs` | model | — | 新建抽象接口，无现有 OAuth 框架 |
-| `Features/v1/OAuth/OAuthProviderRegistry.cs` | service | CRUD | 新建注册表，无现有 Provider 注册机制 |
+| File                                         | Role    | Data Flow | Reason                               |
+| -------------------------------------------- | ------- | --------- | ------------------------------------ |
+| `Features/v1/OAuth/IOAuthProvider.cs`        | model   | —         | 新建抽象接口，无现有 OAuth 框架      |
+| `Features/v1/OAuth/OAuthProviderRegistry.cs` | service | CRUD      | 新建注册表，无现有 Provider 注册机制 |
 
 **说明:** OAuth Provider 框架是 Phase 1 全新搭建的抽象层，RESEARCH.md Pattern 4 提供了详细的参考设计。
 

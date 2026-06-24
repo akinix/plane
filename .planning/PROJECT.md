@@ -58,6 +58,7 @@
 ### 3.3 API 兼容性
 
 新 .NET API 必须保持与 Plane 现有 API (Django REST Framework) 的接口兼容：
+
 - **URL 路径**: 保持一致的 `/api/v1/` 前缀和路由结构
 - **认证方式**: 同时支持 Session Cookie 和 API Key (`X-Api-Key` header)
 - **响应格式**: 保持 JSON 结构一致
@@ -65,62 +66,62 @@
 
 ## 4. Module Mapping
 
-| Plane Django App | YH.Flow .NET Module | Type | Notes |
-|-----------------|---------------------|------|-------|
-| `plane.db` (models) | `YH.Modules.Workspace` | New | 多租户 + 工作区 CRUD |
-| — | `YH.Modules.Project` | New | 项目 CRUD + 成员 |
-| — | `YH.Modules.WorkItems` | New | 问题 + 状态 + 标签 + 估算 |
-| — | `YH.Modules.Cycle` | New | 迭代/冲刺管理 |
-| — | `YH.Modules.Module` | New | 功能分组/史诗 |
-| — | `YH.Modules.Page` | New | 文档管理 |
-| — | `YH.Modules.View` | New | 视图/筛选器 |
-| — | `YH.Modules.Integration` | New | GitHub/GitLab/Gitea/Slack |
-| — | `YH.Modules.Analytics` | New | 仪表板分析 |
-| `plane.authentication` | `YH.Modules.Identity` | Adapted | 用户、角色、权限、OAuth |
-| — | `YH.Modules.Multitenancy` | Adapted | Finbuckle 多租户 |
-| — | `YH.Modules.Auditing` | Adapted | 审计日志 |
-| `plane.bgtasks` (webhook) | `YH.Modules.Webhooks` | Adapted | 外发 Webhook |
-| `plane.bgtasks` (email) | `YH.Modules.Notifications` | Adapted | 通知系统 |
-| `plane.settings/storage` | `YH.Modules.Files` | Adapted | 文件上传/存储 |
-| `plane.license` | `YH.Modules.Billing` | Adapted (Optional) | 许可证/订阅 |
+| Plane Django App          | YH.Flow .NET Module        | Type               | Notes                     |
+| ------------------------- | -------------------------- | ------------------ | ------------------------- |
+| `plane.db` (models)       | `YH.Modules.Workspace`     | New                | 多租户 + 工作区 CRUD      |
+| —                         | `YH.Modules.Project`       | New                | 项目 CRUD + 成员          |
+| —                         | `YH.Modules.WorkItems`     | New                | 问题 + 状态 + 标签 + 估算 |
+| —                         | `YH.Modules.Cycle`         | New                | 迭代/冲刺管理             |
+| —                         | `YH.Modules.Module`        | New                | 功能分组/史诗             |
+| —                         | `YH.Modules.Page`          | New                | 文档管理                  |
+| —                         | `YH.Modules.View`          | New                | 视图/筛选器               |
+| —                         | `YH.Modules.Integration`   | New                | GitHub/GitLab/Gitea/Slack |
+| —                         | `YH.Modules.Analytics`     | New                | 仪表板分析                |
+| `plane.authentication`    | `YH.Modules.Identity`      | Adapted            | 用户、角色、权限、OAuth   |
+| —                         | `YH.Modules.Multitenancy`  | Adapted            | Finbuckle 多租户          |
+| —                         | `YH.Modules.Auditing`      | Adapted            | 审计日志                  |
+| `plane.bgtasks` (webhook) | `YH.Modules.Webhooks`      | Adapted            | 外发 Webhook              |
+| `plane.bgtasks` (email)   | `YH.Modules.Notifications` | Adapted            | 通知系统                  |
+| `plane.settings/storage`  | `YH.Modules.Files`         | Adapted            | 文件上传/存储             |
+| `plane.license`           | `YH.Modules.Billing`       | Adapted (Optional) | 许可证/订阅               |
 
 ## 5. Technology Stack
 
 ### 5.1 Backend (YH.Flow)
 
-| Component | Technology | Version |
-|-----------|-----------|---------|
-| Runtime | .NET SDK | 10.0.100 |
-| Language | C# | latest |
-| Web Framework | ASP.NET Core | 10.0 |
-| ORM | EF Core | 10.0 |
-| Database | PostgreSQL | 16+ |
-| Cache | Redis (Valkey) | 7.2+ |
-| Message Broker | RabbitMQ | 3.13+ |
-| Auth | ASP.NET Identity + JWT | — |
-| Multi-Tenant | Finbuckle | 10.x |
-| CQRS | Mediator | 3.x (source-gen) |
-| Validation | FluentValidation | latest |
-| Background Jobs | Hangfire | latest |
-| Object Storage | MinIO / S3 | — |
-| API Docs | Scalar / OpenAPI | — |
-| Observability | Serilog + OpenTelemetry | latest |
-| Orchestration | .NET Aspire | latest |
+| Component       | Technology              | Version          |
+| --------------- | ----------------------- | ---------------- |
+| Runtime         | .NET SDK                | 10.0.100         |
+| Language        | C#                      | latest           |
+| Web Framework   | ASP.NET Core            | 10.0             |
+| ORM             | EF Core                 | 10.0             |
+| Database        | PostgreSQL              | 16+              |
+| Cache           | Redis (Valkey)          | 7.2+             |
+| Message Broker  | RabbitMQ                | 3.13+            |
+| Auth            | ASP.NET Identity + JWT  | —                |
+| Multi-Tenant    | Finbuckle               | 10.x             |
+| CQRS            | Mediator                | 3.x (source-gen) |
+| Validation      | FluentValidation        | latest           |
+| Background Jobs | Hangfire                | latest           |
+| Object Storage  | MinIO / S3              | —                |
+| API Docs        | Scalar / OpenAPI        | —                |
+| Observability   | Serilog + OpenTelemetry | latest           |
+| Orchestration   | .NET Aspire             | latest           |
 
 ### 5.2 Frontend (Flow Web)
 
-| Component | Technology | Version |
-|-----------|-----------|---------|
-| Framework | React | 19 |
-| Language | TypeScript | 5.x |
-| Build | Vite | 7.x |
-| Routing | React Router | 7.x |
-| Server State | TanStack Query | 5.x |
-| Styling | Tailwind CSS | 4.x |
-| UI Primitives | Radix UI | latest |
-| Forms | React Hook Form + Zod | latest |
-| HTTP Client | apiFetch (custom) | — |
-| Real-time | SSE (Server-Sent Events) | — |
+| Component     | Technology               | Version |
+| ------------- | ------------------------ | ------- |
+| Framework     | React                    | 19      |
+| Language      | TypeScript               | 5.x     |
+| Build         | Vite                     | 7.x     |
+| Routing       | React Router             | 7.x     |
+| Server State  | TanStack Query           | 5.x     |
+| Styling       | Tailwind CSS             | 4.x     |
+| UI Primitives | Radix UI                 | latest  |
+| Forms         | React Hook Form + Zod    | latest  |
+| HTTP Client   | apiFetch (custom)        | —       |
+| Real-time     | SSE (Server-Sent Events) | —       |
 
 ## 6. Constraints
 

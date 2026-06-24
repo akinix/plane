@@ -86,34 +86,34 @@ completed: 2026-06-17
 
 ## Design Decision Verification
 
-| 编号 | 决策 | 状态 | 实现位置 |
-|------|------|------|----------|
-| D-01 | PolicyScheme 双认证选择器 | ✅ | JwtAuthenticationExtensions.cs: SmartSelector |
-| D-02 | 双重 JWT + Cookie 签发 | ✅ | PlaneSignInEndpoint.cs + PlaneAuthHelpers.cs |
-| D-03 | 多 API Key 支持 | ✅ | APIToken entity + ApiTokenService |
-| D-04 | /auth/* Plane 兼容端点 | ✅ | 6 个端点（sign-in, sign-up, sign-out, me, oauth/*） |
-| D-05 | Phase 1 OAuth 框架 | ✅ | IOAuthProvider + OAuthProviderRegistry |
-| D-07 | OAuth Provider 数据库管理 | ✅ | OAuthProviderSettings + CRUD endpoints |
-| D-09 | FSH 四层限流 | ✅ | appsettings.json: RateLimitingOptions.Enabled = true |
-| D-12 | 模块独立 Schema | ✅ | IdentityModuleConstants.SchemaName = "identity" |
+| 编号 | 决策                      | 状态 | 实现位置                                             |
+| ---- | ------------------------- | ---- | ---------------------------------------------------- |
+| D-01 | PolicyScheme 双认证选择器 | ✅   | JwtAuthenticationExtensions.cs: SmartSelector        |
+| D-02 | 双重 JWT + Cookie 签发    | ✅   | PlaneSignInEndpoint.cs + PlaneAuthHelpers.cs         |
+| D-03 | 多 API Key 支持           | ✅   | APIToken entity + ApiTokenService                    |
+| D-04 | /auth/\* Plane 兼容端点   | ✅   | 6 个端点（sign-in, sign-up, sign-out, me, oauth/\*） |
+| D-05 | Phase 1 OAuth 框架        | ✅   | IOAuthProvider + OAuthProviderRegistry               |
+| D-07 | OAuth Provider 数据库管理 | ✅   | OAuthProviderSettings + CRUD endpoints               |
+| D-09 | FSH 四层限流              | ✅   | appsettings.json: RateLimitingOptions.Enabled = true |
+| D-12 | 模块独立 Schema           | ✅   | IdentityModuleConstants.SchemaName = "identity"      |
 
 ## Test Results
 
-| 项目 | 通过 | 失败 | 总计 |
-|------|------|------|------|
-| Identity.Tests | 412 | 0 | 412 |
-| Framework.Tests | 92 | 0 | 92 |
-| Multitenancy.Tests | 90 | 0 | 90 |
-| Billing.Tests | 91 | 0 | 91 |
-| Catalog.Tests | 75 | 0 | 75 |
-| Auditing.Tests | 63 | 0 | 63 |
-| Webhooks.Tests | 54 | 0 | 54 |
-| Generic.Tests | 43 | 0 | 43 |
-| Chat.Tests | 36 | 0 | 36 |
-| Caching.Tests | 33 | 0 | 33 |
-| Files.Tests | 23 | 0 | 23 |
-| Integration.Middleware.Tests | 5 | 0 | 5 |
-| **总计** | **1,017** | **0** | **1,017** |
+| 项目                         | 通过      | 失败  | 总计      |
+| ---------------------------- | --------- | ----- | --------- |
+| Identity.Tests               | 412       | 0     | 412       |
+| Framework.Tests              | 92        | 0     | 92        |
+| Multitenancy.Tests           | 90        | 0     | 90        |
+| Billing.Tests                | 91        | 0     | 91        |
+| Catalog.Tests                | 75        | 0     | 75        |
+| Auditing.Tests               | 63        | 0     | 63        |
+| Webhooks.Tests               | 54        | 0     | 54        |
+| Generic.Tests                | 43        | 0     | 43        |
+| Chat.Tests                   | 36        | 0     | 36        |
+| Caching.Tests                | 33        | 0     | 33        |
+| Files.Tests                  | 23        | 0     | 23        |
+| Integration.Middleware.Tests | 5         | 0     | 5         |
+| **总计**                     | **1,017** | **0** | **1,017** |
 
 ### 已知非阻塞问题
 
@@ -125,6 +125,7 @@ completed: 2026-06-17
 ### Auto-fixed Issues
 
 **1. [Non-blocking] 数据库迁移手动执行**
+
 - **Found during:** Task 2 执行
 - **Issue:** PostgreSQL 容器存在但未运行，无法自动执行 DbMigrator
 - **Fix:** 迁移文件已生成并提交，用户可手动启动容器后运行 DbMigrator
@@ -146,6 +147,7 @@ completed: 2026-06-17
 ## User Setup Required
 
 启动 PostgreSQL 容器并执行数据库迁移:
+
 ```bash
 docker start <postgres-container-id>
 cd yh-flow && dotnet run --project src/Host/YH.Flow.DbMigrator/
@@ -156,10 +158,11 @@ cd yh-flow && dotnet run --project src/Host/YH.Flow.DbMigrator/
 🟢 **Phase 1: Foundation — COMPLETE** (pending DB migration)
 
 **已交付:**
+
 - 3 个认证方案（JWT Bearer + API Key + Session Cookie）+ SmartSelector 路由器
 - 2 个新领域实体（APIToken + OAuthProviderSettings）+ EF 配置
 - OAuth Provider 框架（IOAuthProvider + Registry + SettingsService）
-- 6 个 Plane 兼容认证端点（/auth/*）
+- 6 个 Plane 兼容认证端点（/auth/\*）
 - 3 个 API Token CRUD 端点
 - 5 个 OAuth Provider 管理端点
 - Plane 格式适配（错误格式 + 分页格式）
@@ -168,8 +171,10 @@ cd yh-flow && dotnet run --project src/Host/YH.Flow.DbMigrator/
 - Serilog + OpenTelemetry 可观测性
 
 ---
-*Phase: 01-foundation*
-*Completed: 2026-06-17*
+
+_Phase: 01-foundation_
+_Completed: 2026-06-17_
 
 ## Self-Check: PASSED
+
 Migration files exist and contain correct DDL. Full solution builds (51 projects, 0 errors). 1,017 unit tests pass. 8/8 design decisions verified.

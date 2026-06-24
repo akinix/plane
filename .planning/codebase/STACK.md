@@ -5,10 +5,12 @@
 ## Languages
 
 **Primary:**
+
 - TypeScript 5.8.3 - All frontend apps (`apps/web`, `apps/admin`, `apps/space`), all packages (`packages/*`), real-time server (`apps/live`)
 - Python (Django 4.2.30) - Backend API server (`apps/api`)
 
 **Secondary:**
+
 - PostgreSQL SQL - Database migrations and queries
 - CSS (via Tailwind CSS 4.1.17) - Application styling
 - Dockerfile / YAML - Infrastructure configuration
@@ -17,21 +19,25 @@
 ## Runtime
 
 **Environment:**
+
 - Node.js >= 22.18.0 (required by `engines` field in root `package.json`)
 - Python 3.x (Django backend, version not pinned explicitly)
 
 **Package Manager:**
+
 - pnpm 11.3.0 (exact version pinned via `packageManager` field in root `package.json`)
 - Lockfile: `pnpm-lock.yaml` (present)
 - Python: pip + requirements text files
 
 **Monorepo Orchestration:**
+
 - Turbo 2.9.18 - Task runner and build pipeline
 - pnpm Workspaces (with catalog-based dependency versions)
 
 ## Frameworks
 
 **Core:**
+
 - **React 18.3.1** - Frontend UI framework (all apps and packages)
 - **React Router 7.15.0** - Routing (replaces Next.js — migrated away per react-router.config.ts and Next.js compatibility shims)
 - **Django 4.2.30** - Backend API framework (`apps/api`)
@@ -39,6 +45,7 @@
 - **Express 4.22.0** - HTTP server for the real-time collaboration server (`apps/live`)
 
 **State Management:**
+
 - **MobX 6.12.0** - Core state management library across all frontend apps
 - **mobx-react 9.1.1** - React bindings for MobX
 - **mobx-utils 6.0.8** - Utility functions for MobX
@@ -46,6 +53,7 @@
 - `packages/shared-state` - Internal MobX-based shared state store used across apps
 
 **Styling:**
+
 - **Tailwind CSS 4.1.17** - Utility-first CSS framework
 - **@tailwindcss/typography 0.5.19** - Prose styling plugin
 - **@tailwindcss/postcss 4.1.17** - PostCSS plugin for Tailwind
@@ -55,6 +63,7 @@
 - **clsx 2.1.1** - Conditional className utility
 
 **Real-time Collaboration:**
+
 - **Yjs 13.6.20** - CRDT-based real-time collaborative editing library
 - **Hocuspocus 2.15.2** - WebSocket-based backend server for Yjs collaboration
 - **y-prosemirror 1.3.7** - Yjs binding for ProseMirror
@@ -62,6 +71,7 @@
 - **y-indexeddb 9.0.12** - Yjs persistence using IndexedDB (browser)
 
 **Rich Text Editing:**
+
 - **TipTap 2.22.3** - Headless rich text editor (based on ProseMirror)
 - ProseMirror (via `@tiptap/pm` 2.22.3) - Core editor engine
 - **tiptap-markdown 0.8.10** - Markdown serialization/deserialization for TipTap
@@ -69,6 +79,7 @@
 - `packages/editor` - Internal wrapper package for the TipTap editor with collaboration, markdown conversion, and plane-specific extensions
 
 **Testing:**
+
 - **Vitest 4.1.8** - Vite-native test runner (frontend)
 - **@vitest/coverage-v8 4.1.8** - Code coverage for Vitest
 - **pytest 9.0.3** - Backend test framework
@@ -79,6 +90,7 @@
 - **Storybook 9.1.19** - UI component development and documentation (`packages/ui/.storybook`)
 
 **Build/Dev:**
+
 - **Vite 7.3.2** - Build tool (all frontend apps)
 - **tsdown 0.16.0** - TypeScript bundler for packages (used in place of tsc for package outputs)
 - **esbuild 0.28.1** - Bundler (explicitly overridden in pnpm-workspace.yaml)
@@ -88,6 +100,7 @@
 ## Key Dependencies
 
 **Critical:**
+
 - **Axios 1.16.0** - HTTP client for all frontend-to-backend API calls (`packages/services` uses this as its core HTTP transport)
 - **Zod 3.25.76** - Schema validation (used extensively in `packages/shared-state` for store models and `apps/live` for env validation)
 - **ioredis 5.7.0** - Redis client for Node.js (used by `apps/live` and Hocuspocus Redis extension)
@@ -105,15 +118,18 @@
 - **sanitize-html 2.17.0** - HTML sanitization
 
 **Drag and Drop:**
+
 - **@atlaskit/pragmatic-drag-and-drop 1.7.4** - Atlassian's drag-and-drop library
 - **@atlaskit/pragmatic-drag-and-drop-auto-scroll 1.4.0** - Auto-scroll extension
 - **@atlaskit/pragmatic-drag-and-drop-hitbox 1.1.0** - Hitbox extension
 
 **Authentication:**
+
 - **PyJWT 2.12.0** - JWT handling in the backend
 - **cryptography 46.0.7** - Cryptographic operations
 
 **Infrastructure:**
+
 - **boto3 1.34.96** - AWS S3 SDK (Python, used for S3/MinIO storage)
 - **redis 5.0.4** - Python Redis client
 - **django-redis 5.4.0** - Django Redis cache backend
@@ -128,6 +144,7 @@
 - **django-cors-headers 4.3.1** - CORS handling
 
 **Monitoring & Observability:**
+
 - **scout-apm 3.1.0** - APM agent (production only)
 - **opentelemetry-api 1.28.1** / **opentelemetry-sdk 1.28.1** - OpenTelemetry instrumentation
 - **opentelemetry-instrumentation-django 0.49b1** - Django auto-instrumentation
@@ -137,11 +154,13 @@
 - **python-json-logger 4.0.0** - JSON log formatting for Python
 
 **AI/LLM:**
+
 - **openai 1.63.2** - OpenAI API client
 - **Effect 3.20.0** / **@effect/platform 0.94.0** - Effect system used in live server for structured error handling and service modeling
 - **posthog 3.5.0** - Product analytics
 
 **Other Libraries:**
+
 - **emoji-picker-react 4.5.16** - Emoji picker component
 - **highlight.js 11.8.0** - Syntax highlighting
 - **lowlight 3.0.0** - Virtual syntax highlighting (used in editor)
@@ -160,15 +179,17 @@
 ## Configuration
 
 **Environment:**
+
 - Root `.env` file (not committed) — shared infrastructure variables (PostgreSQL, Redis, RabbitMQ, MinIO/AWS, proxy ports)
 - `apps/api/.env` — backend-specific variables (debug, CORS, all service URLs, secrets)
-- `apps/web/.env` — frontend-specific variables (VITE_-prefixed API base URLs)
+- `apps/web/.env` — frontend-specific variables (VITE\_-prefixed API base URLs)
 - `apps/admin/.env` — admin panel variables
 - `apps/space/.env` — public space variables
 - `apps/live/.env` — real-time server variables
 - `.env.example` files present at root and each app directory
 
 **Build:**
+
 - `turbo.json` — Turbo pipeline configuration at project root
 - `pnpm-workspace.yaml` — Workspace definition with shared catalog
 - `tsconfig.json` (per app/package) — TypeScript configuration
@@ -181,18 +202,21 @@
 - `apps/proxy/Caddyfile.ce` — Caddy reverse proxy configuration
 
 **Linting & Formatting:**
+
 - **oxlint 1.51.0** — Linting (all TypeScript/JavaScript — no ESLint found)
 - **oxfmt 0.35.0** — Code formatting (all TypeScript/JavaScript — no Prettier found)
 - **lint-staged 16.2.7** — Pre-commit hook runner (formats with oxfmt, lints with oxlint)
 - **husky 9.1.7** — Git hooks manager
 
 **Formatting Configuration (inline via lint-staged):**
+
 - oxfmt is used for: `*.{js,jsx,ts,tsx,cjs,mjs,cts,mts,json,css,md}`
 - oxlint with `--fix --deny-warnings` for: `*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}`
 
 ## Platform Requirements
 
 **Development:**
+
 - Node.js >= 22.18.0
 - pnpm 11.3.0
 - Python 3.x (for backend development)
@@ -203,9 +227,10 @@
 - Docker & Docker Compose (for local infrastructure)
 
 **Production:**
+
 - Docker Compose deployment (main docker-compose.yml)
 - Services: web (Node.js), admin (Node.js), space (Node.js), api (Django+Gunicorn), worker (Celery), beat-worker (Celery Beat), migrator (Django migrations), live (Node.js/Hocuspocus), plane-db (PostgreSQL), plane-redis (Valkey), plane-mq (RabbitMQ), plane-minio (MinIO), proxy (Caddy)
 
 ---
 
-*Stack analysis: 2026-06-16*
+_Stack analysis: 2026-06-16_

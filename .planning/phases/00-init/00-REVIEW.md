@@ -42,6 +42,7 @@ Phase 00 成功将 fullstackhero 模板复制到 `yh-flow/` 并完成 FSH→YH �
 **File:** `yh-flow/src/Host/YH.Flow.AppHost/YH.Flow.AppHost.csproj:12`
 **Issue:** `AppHost.cs` 中没有任何 `AddNodeApp()`、`AddNpmApp()` 等 JavaScript 资源调用（第 140-142 行注释明确说明前端将在 Phase 13 添加）。该包是模板遗留，增加不必要的依赖和恢复时间。
 **Fix:**
+
 ```xml
 <!-- 删除此行，Phase 13 需要时再加回 -->
 <!-- <PackageReference Include="Aspire.Hosting.JavaScript" /> -->
@@ -55,6 +56,7 @@ Phase 00 成功将 fullstackhero 模板复制到 `yh-flow/` 并完成 FSH→YH �
 **Also:** `yh-flow/src/Host/YH.Flow.DbMigrator/YH.Flow.DbMigrator.csproj:17`
 **Issue:** `ContainerRepository` 值分别为 `fsh-api` 和 `fsh-db-migrator`，未跟随 FSH→YH 重命名。容器镜像名称是对外可见的产物标识。
 **Fix:**
+
 ```xml
 <!-- Api.csproj -->
 <ContainerRepository>yh-flow-api</ContainerRepository>
@@ -75,6 +77,7 @@ Phase 00 成功将 fullstackhero 模板复制到 `yh-flow/` 并完成 FSH→YH �
 **File:** `yh-flow/src/Host/YH.Flow.Api/YH.Flow.Api.csproj:37-46`
 **Issue:** Billing、Catalog、Tickets、Chat 的运行时 + Contracts 项目引用（共 8 个 ProjectReference）仍然存在，而 Program.cs 中这些模块的 DI 注册已被移除。项目引用可能是为了保持编译可用性和迁移支持，但缺少注释说明保留意图。
 **Fix:** 添加注释说明保留原因，例如：
+
 ```xml
 <!-- Disabled modules: code retained for future re-enablement.
      DI registrations removed in Program.cs (Phase 00).

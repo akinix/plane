@@ -87,7 +87,7 @@ completed: 2026-06-17
 
 # Phase 1 Plan 03: OAuth Provider Framework + Plane Auth Endpoints Summary
 
-**OAuth Provider 框架（IOAuthProvider + Registry + SettingsService）+ 6 个 Plane 兼容认证端点（/auth/*）+ 42 个新测试**
+**OAuth Provider 框架（IOAuthProvider + Registry + SettingsService）+ 6 个 Plane 兼容认证端点（/auth/\*）+ 42 个新测试**
 
 ## Performance
 
@@ -108,7 +108,7 @@ completed: 2026-06-17
 1. **Task 1: OAuth Provider 框架（接口 + 注册表 + 服务）**
    - `bcbb363` (feat) — IOAuthProvider, OAuthProviderRegistry, OAuthUserInfo, OAuthProviderSettingsService, IdentityModule DI, 13 tests
 2. **Tasks 2 + 3: Plane 认证端点 + OAuth 端点 + 42 个测试**
-   - `dc20e7c` (feat) — All 6 /auth/* endpoints, contracts, helpers, route registration with metadata, 42 tests
+   - `dc20e7c` (feat) — All 6 /auth/\* endpoints, contracts, helpers, route registration with metadata, 42 tests
 
 ## Files Created/Modified
 
@@ -149,6 +149,7 @@ completed: 2026-06-17
 ### Auto-fixed Issues
 
 **1. [Non-blocking] Endpoint return type change**
+
 - **Found during:** Task 2 implementation
 - **Issue:** Original plan had endpoints returning `IEndpointRouteBuilder`, but AuthEndpoints needs to chain `.AllowAnonymous().RequireRateLimiting("auth")` on the result of each `MapXxxEndpoint` call
 - **Fix:** Changed all 6 endpoint methods to return `RouteHandlerBuilder` (the return type of `MapPost`/`MapGet`)
@@ -156,6 +157,7 @@ completed: 2026-06-17
 - **Committed in:** dc20e7c
 
 **2. [Non-blocking] RequireRateLimiting("auth") without configured policy**
+
 - **Found during:** Task 3 implementation
 - **Issue:** Plan requires `.RequireRateLimiting("auth")` but rate limiter middleware is not yet configured
 - **Fix:** Added the metadata anyway — it's inert without the middleware but ensures endpoints are correctly annotated for when rate limiting is added
@@ -163,6 +165,7 @@ completed: 2026-06-17
 - **Committed in:** dc20e7c
 
 **3. [Non-blocking] Sign-out refresh token revocation deferred**
+
 - **Found during:** Task 2 implementation
 - **Issue:** Plan mentions revoking refresh tokens on sign-out, but the existing RevokeSession infrastructure uses a different command pattern
 - **Fix:** Added "Phase 2 enhancement:" comment in PlaneSignOutEndpoint for session revocation integration
@@ -181,13 +184,13 @@ completed: 2026-06-17
 
 ## Threat Mitigations Applied
 
-| Threat ID | Component | Mitigation | Status |
-|-----------|-----------|------------|--------|
-| T-01-10 | OAuth Callback | Phase 1 endpoints return 501, no actual callback processing (CSRF via state not yet needed) | ✅ Mitigated |
-| T-01-11 | /auth/sign-in | Credentials validated through FSH IIdentityService.ValidateCredentialsAsync (ASP.NET Identity PasswordHasher) | ✅ Mitigated |
-| T-01-12 | /auth/* endpoints | Anonymous endpoints marked with RequireRateLimiting("auth") (policy configured in later phase) | ✅ Mitigated |
-| T-01-13 | PlaneAuthResponse | Response DTOs contain only non-sensitive fields (no passwords, no internal IDs beyond user ID) | ✅ Mitigated |
-| T-01-14 | Session Cookie | Cookie configured with HttpOnly=true, SecurePolicy=Always, SameSite=Lax (from Plan 01) | ✅ Mitigated |
+| Threat ID | Component          | Mitigation                                                                                                    | Status       |
+| --------- | ------------------ | ------------------------------------------------------------------------------------------------------------- | ------------ |
+| T-01-10   | OAuth Callback     | Phase 1 endpoints return 501, no actual callback processing (CSRF via state not yet needed)                   | ✅ Mitigated |
+| T-01-11   | /auth/sign-in      | Credentials validated through FSH IIdentityService.ValidateCredentialsAsync (ASP.NET Identity PasswordHasher) | ✅ Mitigated |
+| T-01-12   | /auth/\* endpoints | Anonymous endpoints marked with RequireRateLimiting("auth") (policy configured in later phase)                | ✅ Mitigated |
+| T-01-13   | PlaneAuthResponse  | Response DTOs contain only non-sensitive fields (no passwords, no internal IDs beyond user ID)                | ✅ Mitigated |
+| T-01-14   | Session Cookie     | Cookie configured with HttpOnly=true, SecurePolicy=Always, SameSite=Lax (from Plan 01)                        | ✅ Mitigated |
 
 ## User Setup Required
 
@@ -200,8 +203,10 @@ None - no external service configuration required.
 - Phase 9 will implement concrete IOAuthProvider providers (GitHub, Google, etc.) using the framework established here
 
 ---
-*Phase: 01-foundation*
-*Completed: 2026-06-17*
+
+_Phase: 01-foundation_
+_Completed: 2026-06-17_
 
 ## Self-Check: PASSED
+
 All 22 files across 2 commits verified. Build passes with 0 errors, 0 warnings. 395 tests pass (42 new).

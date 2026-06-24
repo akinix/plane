@@ -7,6 +7,7 @@
 ### Authentication & OAuth Providers
 
 **GitHub OAuth:**
+
 - OAuth 2.0 login for Plane users
 - Configuration: `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET` (env vars)
 - Optional organization membership gating: `GITHUB_ORGANIZATION_ID`
@@ -17,6 +18,7 @@
 - Used by: `apps/api/plane/authentication/views/app/github.py`, `apps/api/plane/authentication/views/space/github.py`
 
 **GitLab OAuth:**
+
 - OAuth 2.0 login, supports both hosted and self-managed GitLab instances
 - Configuration: `GITLAB_CLIENT_ID`, `GITLAB_CLIENT_SECRET`, `GITLAB_HOST` (env vars, defaults to `https://gitlab.com`)
 - Scopes: `read_user`
@@ -24,6 +26,7 @@
 - Implementation: `apps/api/plane/authentication/provider/oauth/gitlab.py`
 
 **Gitea OAuth:**
+
 - OAuth 2.0 login for self-hosted Gitea instances
 - Configuration: `GITEA_CLIENT_ID`, `GITEA_CLIENT_SECRET`, `GITEA_HOST` (env vars), `IS_GITEA_ENABLED` flag
 - Scopes: `openid email profile`
@@ -31,28 +34,33 @@
 - Implementation: `apps/api/plane/authentication/provider/oauth/gitea.py`
 
 **Google OAuth:**
+
 - OAuth 2.0 login with Google accounts
 - Configuration: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` (env vars)
 - Sync integration: `ENABLE_GOOGLE_SYNC`
 - Implementation: `apps/api/plane/authentication/provider/oauth/google.py`
 
 **Email/Password Authentication:**
+
 - Traditional email + password login
 - Configurable: `ENABLE_EMAIL_PASSWORD` (env var, defaults to `1`/enabled)
 - Implementation: `apps/api/plane/authentication/provider/credentials/email.py`
 
 **Magic Link Authentication:**
+
 - Passwordless email login via magic links
 - Configurable: `ENABLE_MAGIC_LINK_LOGIN` (env var, defaults to `0`/disabled)
 - Implementation: `apps/api/plane/authentication/provider/credentials/magic_code.py`
 
 **API Key Authentication:**
+
 - Per-user API tokens (`plane_api_` prefix) for programmatic access
 - Rate limited: `API_KEY_RATE_LIMIT` (default `60/minute`, DRF SimpleRateThrottle format)
 - Custom header: `X-API-Key`
 - Implementation: `packages/services/src/developer/api-token.service.ts` (frontend), `apps/api/plane/middleware/logger.py` (APITokenLogMiddleware)
 
 **Session Management:**
+
 - Django session-based (server-side sessions stored in database)
 - Session engine: custom `plane.db.models.session`
 - Cookie name: configurable via `SESSION_COOKIE_NAME` (default `session-id`)
@@ -63,6 +71,7 @@
 ### AI / LLM Providers
 
 **OpenAI:**
+
 - SDK: `openai` 1.63.2 (Python)
 - API endpoint: configured via `OPENAI_API_BASE` (deprecated, use `LLM_PROVIDER`/`LLM_MODEL`/`LLM_API_KEY`)
 - Available models: `gpt-3.5-turbo`, `gpt-4o-mini`, `gpt-4o`, `o1-mini`, `o1-preview`
@@ -70,14 +79,17 @@
 - Implementation: `apps/api/plane/app/views/external/base.py` (OpenAIProvider, AnthropicProvider, GeminiProvider)
 
 **Anthropic Claude:**
+
 - SDK: OpenAI-compatible interface (Plane uses a unified LLM abstraction)
 - Available models: `claude-3-5-sonnet-20240620`, `claude-3-haiku-20240307`, `claude-3-opus-20240229`, `claude-3-sonnet-20240229`, `claude-2.1`, `claude-2`, `claude-instant-1.2`, `claude-instant-1`
 
 **Google Gemini:**
+
 - SDK: OpenAI-compatible interface
 - Available models: `gemini-pro`, `gemini-1.5-pro-latest`, `gemini-pro-vision`
 
 **AI Features at Runtime:**
+
 - AI-powered issue creation and description generation
 - Frontend service: `packages/services/src/ai/ai.service.ts`
 - Backend: `apps/api/plane/app/views/external/base.py`
@@ -86,6 +98,7 @@
 ### Email Service
 
 **SMTP:**
+
 - Backend: Django SMTP email backend
 - Configuration: `ENABLE_SMTP` flag, `EMAIL_HOST`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, `EMAIL_PORT` (default 587), `EMAIL_FROM`, `EMAIL_USE_TLS` (default 1), `EMAIL_USE_SSL` (default 0)
 - Uses SMTP for transactional emails: password reset, magic link codes, workspace invitations, project invitations, user activation/deactivation notifications
@@ -94,22 +107,26 @@
 ### Monitoring & Observability
 
 **Scout APM:**
+
 - Production-only APM agent
 - Config: `SCOUT_MONITOR` (bool), `SCOUT_KEY` (secret)
 - Implementation: `apps/api/plane/settings/production.py`
 
 **OpenTelemetry:**
+
 - Distributed tracing via OTLP
 - Django auto-instrumentation
 - Implementation: `apps/api/plane/utils/otlp_endpoints.py`, `apps/api/plane/settings/common.py`
 - Packages: `opentelemetry-api`, `opentelemetry-sdk`, `opentelemetry-instrumentation-django`, `opentelemetry-exporter-otlp-proto-grpc`
 
 **Logging:**
+
 - Backend: JSON-structured logging via `python-json-logger`, console + file handlers
 - Log rotation: `SizedTimedRotatingFileHandler` in `apps/api/plane/utils/logging.py`
 - Frontend/Live server: Winston 3.17.0 + express-winston 4.2.0 via `packages/logger`
 
 **Error Tracking:**
+
 - Custom exception logging via `apps/api/plane/utils/exception_logger.py`
 - Frontend: `packages/logger` (shared logging package)
 
@@ -138,6 +155,7 @@
 ## Data Storage
 
 **Databases:**
+
 - PostgreSQL 15.7 (Alpine Docker image)
   - Connection: via `DATABASE_URL` env var or individual `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_HOST`, `POSTGRES_DB`, `POSTGRES_PORT` env vars
   - Client: `psycopg` 3.3.0 (Python), `dj-database-url` 2.1.0 for URL parsing
@@ -145,6 +163,7 @@
   - Read replica routing: `apps/api/plane/utils/core/dbrouters.py` (ReadReplicaRouter), `apps/api/plane/middleware/db_routing.py` (ReadReplicaRoutingMiddleware)
 
 **File Storage:**
+
 - S3-compatible storage (AWS S3 or MinIO)
   - Client: `boto3` 1.34.96 (Python), with `django-storages` 1.14.2
   - MinIO: `minio/minio` Docker image (local development)
@@ -155,6 +174,7 @@
   - File size limit: `FILE_SIZE_LIMIT` (default 5242880 bytes / 5MB), enforced at Django middleware (`RequestBodySizeLimitMiddleware`) and Caddy proxy level
 
 **Caching:**
+
 - Redis (via Valkey 7.2.11 Docker image)
   - Client: `redis` 5.0.4 (Python), `ioredis` 5.7.0 (Node.js)
   - Django cache backend: `django-redis` 5.4.0
@@ -163,6 +183,7 @@
   - Note: the Docker image uses Valkey (open-source Redis fork), not Redis proper
 
 **Message Queue:**
+
 - RabbitMQ 3.13.6 (Alpine Docker image with management plugin)
   - Used by: Celery for task distribution
   - Config: `RABBITMQ_HOST`, `RABBITMQ_PORT`, `RABBITMQ_USER`, `RABBITMQ_PASSWORD`, `RABBITMQ_VHOST`
@@ -215,6 +236,7 @@
 ```
 
 **Proxy Routing (Caddy):**
+
 - `/*` → `web:3000` (SPA fallback)
 - `/api/*` → `api:8000` (Django REST API)
 - `/auth/*` → `api:8000` (authentication callbacks)
@@ -226,6 +248,7 @@
 - Request body size limit: `${FILE_SIZE_LIMIT}` (enforced at proxy level)
 
 **Service Dependencies (docker-compose.yml):**
+
 - `web`, `space`, `admin`: depend on `api`
 - `api`: depends on `plane-db`, `plane-redis`
 - `worker`, `beat-worker`: depend on `api`, `plane-db`, `plane-redis`
@@ -235,6 +258,7 @@
 ## Authentication & Identity
 
 **Auth Flow:**
+
 1. User authenticates via OAuth provider or email/password
 2. Django creates/updates `db.User` record (custom user model: `AUTH_USER_MODEL = "db.User"`)
 3. Session cookie set with configurable name and domain
@@ -243,6 +267,7 @@
 6. CSRF protection with tokens for state-changing requests
 
 **API Key Auth:**
+
 1. User generates API key from workspace settings
 2. Key prefixed with `plane_api_`
 3. Sent in `X-API-Key` header
@@ -251,12 +276,14 @@
 6. CORS header allowlist includes `X-API-Key`
 
 **Signup Control:**
+
 - `ENABLE_SIGNUP` (env var, default `1`) — controls whether new account registration is allowed
 - `DISABLE_WORKSPACE_CREATION` (env var, default `0`) — controls whether users can create new workspaces
 
 ## Webhook System
 
 **Outgoing Webhooks:**
+
 - Workspace-level webhooks for event notifications
 - Configurable per webhook: URL, secret key, event types (project, issue, module, cycle, issue_comment)
 - Webhook version: `v1` (default)
@@ -269,6 +296,7 @@
 - Delivery logs stored in `WebhookLog` model with request/response headers, body, and retry count
 
 **SSRF Protection for Webhooks:**
+
 - IP allowlist: `WEBHOOK_ALLOWED_IPS` — comma-separated CIDRs that bypass private network checks
 - Hostname allowlist: `WEBHOOK_ALLOWED_HOSTS` — comma-separated hostnames that bypass private IP checks (useful for dynamic DNS in containerized deployments)
 - Disallowed domains: `WEBHOOK_DISALLOWED_DOMAINS` — hostnames that are always rejected
@@ -276,11 +304,13 @@
 - Module: `apps/api/plane/utils/ip_address.py` (resolve_and_validate)
 
 **Webhook Log Retention:**
+
 - Configurable: `WEBHOOK_LOG_RETENTION_DAYS` (default 14 days)
 
 ## Import/Export
 
 **Export:**
+
 - Supported formats: CSV, XLSX, JSON
 - Async via Celery task: `apps/api/plane/bgtasks/export_task.py`
 - Backend endpoint: `apps/api/plane/app/views/exporter/base.py` (ExportIssuesEndpoint)
@@ -291,15 +321,18 @@
 - Frontend: uses `export-to-csv` 1.4.0 npm package for CSV exports
 
 **Import:**
+
 - Supported via `Importer` model (`apps/api/plane/db/models/importer.py`)
 - Serializer: `apps/api/plane/app/serializers/importer.py`
 
 **XLSX Security:**
+
 - XLSX generation uses `openpyxl` 3.1.2 with formula injection sanitization (cells prefixed to prevent `=` formulas)
 
 ## Real-time Collaboration Architecture
 
 **Live Server (`apps/live`):**
+
 - Express 4.22.0 server with WebSocket support (`express-ws`)
 - Hocuspocus 2.15.2 server for Yjs-based collaborative editing
 - CORS: configurable via `CORS_ALLOWED_ORIGINS` env var
@@ -313,6 +346,7 @@
 - Page services: `apps/live/src/services/page/` — multiple service handlers for different page types (core, extended, project-page)
 
 **Collaboration Documents:**
+
 - Yjs document types serve as collaborative data stores
 - Binary format: optimized ProseMirror/Yjs binary encoding for real-time sync
 - IndexedDB persistence: `y-indexeddb` 9.0.12 for offline/local caching in browser
@@ -322,6 +356,7 @@
 ## Environment Configuration
 
 **Critical env vars (root `.env`):**
+
 - `POSTGRES_USER`, `POSTGRES_PASSWORD`, `POSTGRES_DB` — Database credentials
 - `REDIS_HOST`, `REDIS_PORT` — Redis connection
 - `RABBITMQ_HOST`, `RABBITMQ_PORT`, `RABBITMQ_USER`, `RABBITMQ_PASSWORD`, `RABBITMQ_VHOST` — Message queue
@@ -331,6 +366,7 @@
 - `USE_MINIO` — Enable MinIO mode
 
 **Critical env vars (`apps/api/.env`):**
+
 - `DEBUG` — Debug mode (0/1)
 - `SECRET_KEY` — Django secret key
 - `DATABASE_URL` or individual PostgreSQL vars
@@ -343,46 +379,55 @@
 - `API_KEY_RATE_LIMIT` — API key rate limiting (default `60/minute`)
 
 **Secrets location:**
+
 - All secrets via environment variables (env files in Docker Compose, or directly injected)
 - No vault or secret manager detected — standard env-based configuration for self-hosted deployment
 
 ## Webhooks & Callbacks
 
 **Incoming:**
+
 - OAuth callback endpoints at `/auth/{provider}/callback/` for GitHub, GitLab, Gitea, Google
 - No user-facing incoming webhooks detected
 
 **Outgoing:**
+
 - Workspace webhooks (`apps/api/plane/bgtasks/webhook_task.py`) — dispatched asynchronously via Celery for events: project, issue, cycle, module, issue_comment, etc.
 
 ## CI/CD & Deployment
 
 **Hosting:**
+
 - Self-hosted via Docker Compose
 - Community edition Docker Compose: `deployments/cli/community/docker-compose.yml`
 
 **CI Pipeline:**
+
 - Not in source (external CI likely configured — no `.github/workflows` standard configs visible)
 
 **Build:**
+
 - Multi-stage Dockerfiles for each service using Docker BuildKit
 - Turbo-powered monorepo pruning for Docker builds
 
 ## Additional Service Notes
 
 **Background Task Scheduler:**
+
 - Celery Beat for periodic tasks (via `apps/api/plane/bgtasks/`)
 - Scheduled tasks include: issue automation, export expiration cleanup, file asset cleanup, email notifications, data cleanup (HARD_DELETE_AFTER_DAYS), telemetry metrics
 
 **Migrations:**
+
 - Django migrations in `apps/api/plane/db/migrations/` (numbered sequentially)
 - Managed via dedicated `migrator` Docker service (runs once on startup)
 
 **Static Files:**
+
 - Collected to `apps/api/static-assets/collected-static/`
 - Served via Whitenoise (CompressedManifestStaticFilesStorage)
 - Routes through Caddy proxy via `/static/*` → `api:8000`
 
 ---
 
-*Integration audit: 2026-06-16*
+_Integration audit: 2026-06-16_

@@ -17,32 +17,32 @@ A **modular monolith** (Vertical Slice Architecture) backend for project managem
 
 ## Repo map
 
-| Path | What |
-|------|------|
-| `src/BuildingBlocks/` | Shared framework libraries (Core, Persistence, Web, Caching, Eventing, Storage, Quota…). **Protected — see below.** |
-| `src/Modules/{Name}/` | Bounded contexts. Each has a runtime project + a `.Contracts` project (its only public API). |
-| `src/Host/YH.Flow.Api` | Composition-root Web API host. |
-| `src/Host/YH.Flow.AppHost` | .NET Aspire orchestrator (Postgres, Redis, MinIO, migrator, API). |
-| `src/Host/YH.Flow.DbMigrator` | One-shot migrate/seed runner. DB is **not** migrated at API startup. |
-| `src/Host/YH.Flow.Migrations.PostgreSQL` | All EF migrations, organized per-module by folder. |
-| `src/Tests/` | Per-module tests, `Architecture.Tests` (NetArchTest), `Integration.Tests` (Testcontainers). |
-| `src/Tools/CLI` | The `yh` CLI (Spectre.Console). |
-| `clients/web` | Flow Web frontend (Phase 13). |
+| Path                                     | What                                                                                                                |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `src/BuildingBlocks/`                    | Shared framework libraries (Core, Persistence, Web, Caching, Eventing, Storage, Quota…). **Protected — see below.** |
+| `src/Modules/{Name}/`                    | Bounded contexts. Each has a runtime project + a `.Contracts` project (its only public API).                        |
+| `src/Host/YH.Flow.Api`                   | Composition-root Web API host.                                                                                      |
+| `src/Host/YH.Flow.AppHost`               | .NET Aspire orchestrator (Postgres, Redis, MinIO, migrator, API).                                                   |
+| `src/Host/YH.Flow.DbMigrator`            | One-shot migrate/seed runner. DB is **not** migrated at API startup.                                                |
+| `src/Host/YH.Flow.Migrations.PostgreSQL` | All EF migrations, organized per-module by folder.                                                                  |
+| `src/Tests/`                             | Per-module tests, `Architecture.Tests` (NetArchTest), `Integration.Tests` (Testcontainers).                         |
+| `src/Tools/CLI`                          | The `yh` CLI (Spectre.Console).                                                                                     |
+| `clients/web`                            | Flow Web frontend (Phase 13).                                                                                       |
 
 ## Tech stack
 
-| Backend | | Frontend | |
-|---|---|---|---|
-| Framework | .NET 10 / C# latest | Framework | React 19 + Vite 7 + TS 5.x |
-| CQRS | Mediator 3.x (source-gen) | Data | TanStack Query v5 |
-| Validation | FluentValidation 12.x | Routing | React Router 7 |
-| ORM / DB | EF Core 10 / PostgreSQL (Npgsql) | UI | Radix + Tailwind v4 + CVA (shadcn) |
-| Auth | JWT Bearer + ASP.NET Identity | Forms | react-hook-form + zod (**admin only**) |
-| Multitenancy | Finbuckle 10.x | Realtime | `@microsoft/signalr`, SSE (dashboard) |
-| Cache / Jobs | Redis, Hangfire | Tests | Playwright (route-mocked) |
-| Docs | OpenAPI + Scalar | API client | hand-written `apiFetch` (no codegen) |
-| Hosting | .NET Aspire | Env | runtime `/config.json` (not `VITE_*`) |
-| Testing | xUnit, Shouldly, NSubstitute, AutoFixture, NetArchTest, Testcontainers | | |
+| Backend      |                                                                        | Frontend   |                                        |
+| ------------ | ---------------------------------------------------------------------- | ---------- | -------------------------------------- |
+| Framework    | .NET 10 / C# latest                                                    | Framework  | React 19 + Vite 7 + TS 5.x             |
+| CQRS         | Mediator 3.x (source-gen)                                              | Data       | TanStack Query v5                      |
+| Validation   | FluentValidation 12.x                                                  | Routing    | React Router 7                         |
+| ORM / DB     | EF Core 10 / PostgreSQL (Npgsql)                                       | UI         | Radix + Tailwind v4 + CVA (shadcn)     |
+| Auth         | JWT Bearer + ASP.NET Identity                                          | Forms      | react-hook-form + zod (**admin only**) |
+| Multitenancy | Finbuckle 10.x                                                         | Realtime   | `@microsoft/signalr`, SSE (dashboard)  |
+| Cache / Jobs | Redis, Hangfire                                                        | Tests      | Playwright (route-mocked)              |
+| Docs         | OpenAPI + Scalar                                                       | API client | hand-written `apiFetch` (no codegen)   |
+| Hosting      | .NET Aspire                                                            | Env        | runtime `/config.json` (not `VITE_*`)  |
+| Testing      | xUnit, Shouldly, NSubstitute, AutoFixture, NetArchTest, Testcontainers |            |                                        |
 
 ## Build & run
 
@@ -56,6 +56,7 @@ dotnet test src/YH.Flow.slnx                     # tests — integration tests R
 ```
 
 Migrations / seed (DbMigrator, separate step):
+
 ```bash
 dotnet run --project src/Host/YH.Flow.DbMigrator -- apply [--seed]
 dotnet run --project src/Host/YH.Flow.DbMigrator -- list-pending
@@ -84,31 +85,31 @@ Single long-lived branch: **`main`** (the default) — there is **no `develop`**
 
 **Backend / cross-cutting** (`.agents/rules/`)
 
-| Working on… | Read |
-|---|---|
-| Module structure, boundaries, registration, DI, middleware order, config | `architecture.md` |
-| Endpoints, CQRS, validation, exceptions, permissions, versioning | `api-conventions.md` |
-| EF Core, entities, migrations, tenant isolation, query filters | `database.md` |
-| Cross-module events, Outbox/Inbox, idempotent handlers | `eventing.md` |
-| Caching (HybridCache/Redis), keys, invalidation | `caching.md` |
-| Background jobs (Hangfire), recurring jobs | `jobs.md` |
-| Outbound HTTP resilience (Polly) | `resilience.md` |
-| Files/blobs, presigned uploads, providers | `storage.md` |
-| CORS, security headers, rate limiting, idempotency, quotas | `security.md` |
-| SignalR / SSE backend | `realtime.md` |
-| Logging, correlation, OpenTelemetry | `logging.md` |
-| Unit test conventions, NetArchTest | `testing.md` |
-| Integration tests (Testcontainers harness + gotchas) | `integration-testing.md` |
-| **Modifying `src/BuildingBlocks`** (read first — it's protected) | `buildingblocks-protection.md` |
-| A specific module's quirks | `modules/{module}.md` (identity, multitenancy, chat, files, webhooks, auditing, billing, catalog, tickets, notifications) |
+| Working on…                                                              | Read                                                                                                                      |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| Module structure, boundaries, registration, DI, middleware order, config | `architecture.md`                                                                                                         |
+| Endpoints, CQRS, validation, exceptions, permissions, versioning         | `api-conventions.md`                                                                                                      |
+| EF Core, entities, migrations, tenant isolation, query filters           | `database.md`                                                                                                             |
+| Cross-module events, Outbox/Inbox, idempotent handlers                   | `eventing.md`                                                                                                             |
+| Caching (HybridCache/Redis), keys, invalidation                          | `caching.md`                                                                                                              |
+| Background jobs (Hangfire), recurring jobs                               | `jobs.md`                                                                                                                 |
+| Outbound HTTP resilience (Polly)                                         | `resilience.md`                                                                                                           |
+| Files/blobs, presigned uploads, providers                                | `storage.md`                                                                                                              |
+| CORS, security headers, rate limiting, idempotency, quotas               | `security.md`                                                                                                             |
+| SignalR / SSE backend                                                    | `realtime.md`                                                                                                             |
+| Logging, correlation, OpenTelemetry                                      | `logging.md`                                                                                                              |
+| Unit test conventions, NetArchTest                                       | `testing.md`                                                                                                              |
+| Integration tests (Testcontainers harness + gotchas)                     | `integration-testing.md`                                                                                                  |
+| **Modifying `src/BuildingBlocks`** (read first — it's protected)         | `buildingblocks-protection.md`                                                                                            |
+| A specific module's quirks                                               | `modules/{module}.md` (identity, multitenancy, chat, files, webhooks, auditing, billing, catalog, tickets, notifications) |
 
 **Frontend** (`.agents/rules/frontend/`)
 
-| Working on… | Read |
-|---|---|
-| Any React work (shared stack, API client, Query, Tailwind, design language) | `frontend/shared.md` |
-| The operator app (`clients/admin`) | `frontend/admin.md` |
-| The tenant app (`clients/dashboard`) | `frontend/dashboard.md` |
+| Working on…                                                                 | Read                    |
+| --------------------------------------------------------------------------- | ----------------------- |
+| Any React work (shared stack, API client, Query, Tailwind, design language) | `frontend/shared.md`    |
+| The operator app (`clients/admin`)                                          | `frontend/admin.md`     |
+| The tenant app (`clients/dashboard`)                                        | `frontend/dashboard.md` |
 
 ## Coding style (backend)
 

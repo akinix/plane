@@ -13,9 +13,11 @@ Phase 1 的核心工作是在 Phase 0 已搭建的 FSH 脚手架上，扩展和�
 **Primary recommendation:** 以 FSH 现有基础设施为基座，采用「扩展而非重写」策略——在 Identity 模块中添加新 AuthenticationScheme 和端点，在 BuildingBlocks/Web 中添加 Plane 格式适配层，保持 FSH 10 条黄金法则不变。
 
 <user_constraints>
+
 ## User Constraints (from CONTEXT.md)
 
 ### Locked Decisions
+
 - **D-01:** 多 Scheme 自动协商 — JWT Bearer / API Key / Session Cookie 各注册一个 ASP.NET Core AuthenticationScheme，按请求 Header 自动选择
 - **D-02:** OAuth 登录成功后双发 JWT + Session Cookie — 前端可选择用 Cookie（自动携带）或 JWT（手动 Header），兼容 Plane 前端和 API 客户端
 - **D-03:** API Key 数据库存储 + 多 Key 模型 — 参考 Plane APIToken，每个用户可创建多个 API Key，含名称、过期时间。存储在 Identity 模块的数据库表中
@@ -33,6 +35,7 @@ Phase 1 的核心工作是在 Phase 0 已搭建的 FSH 脚手架上，扩展和�
 - **D-15:** DbMigrator 启动时执行迁移 — Aspire 编排中 DbMigrator 先于 API 运行，执行所有模块迁移 + Seed 数据
 
 ### Claude's Discretion
+
 - EF Core 实体配置的具体实现细节（IEntityTypeConfiguration 的组织方式）
 - Serilog Sink 配置和 OpenTelemetry Exporter 的具体选择
 - CORS 策略的具体域名配置（开发阶段可宽松）
@@ -42,6 +45,7 @@ Phase 1 的核心工作是在 Phase 0 已搭建的 FSH 脚手架上，扩展和�
 - Idempotency 中间件的具体实现
 
 ### Deferred Ideas (OUT OF SCOPE)
+
 - **具体 OAuth Provider 实现** — Phase 9 Integration 实现 GitHub/GitLab/Gitea/Google Provider
 - **Slack OAuth 集成** — Phase 9 Integration（REQ-9.4）
 - **端点级限流覆盖** — 后续如有特殊端点需要差异化限流，可在 Phase 2+ 添加
@@ -51,59 +55,60 @@ Phase 1 的核心工作是在 Phase 0 已搭建的 FSH 脚手架上，扩展和�
 </user_constraints>
 
 <phase_requirements>
+
 ## Phase Requirements
 
-| ID | Description | Research Support |
-|----|-------------|------------------|
-| REQ-1.1 | 项目结构初始化 | Phase 0 已完成，Phase 1 在此基础上扩展 |
-| REQ-1.2 | 数据库基础 — PostgreSQL + EF Core + DbMigrator + 多租户 | FSH BaseDbContext、DbMigrator、Finbuckle 已就绪，仅需确认 Schema 策略和迁移管道 |
-| REQ-1.3 | 认证与授权 — JWT + API Key + Session + OAuth 框架 | FSH JWT 完整可复用，需新建 API Key / Session Cookie schemes 和 OAuth 框架 |
-| REQ-1.4 | API 基础设施 — CORS/Headers/RateLimit/异常/分页/OpenAPI/Serilog | FSH 全部已有实现，需适配 Plane 错误格式和分页格式 |
+| ID      | Description                                                     | Research Support                                                                |
+| ------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| REQ-1.1 | 项目结构初始化                                                  | Phase 0 已完成，Phase 1 在此基础上扩展                                          |
+| REQ-1.2 | 数据库基础 — PostgreSQL + EF Core + DbMigrator + 多租户         | FSH BaseDbContext、DbMigrator、Finbuckle 已就绪，仅需确认 Schema 策略和迁移管道 |
+| REQ-1.3 | 认证与授权 — JWT + API Key + Session + OAuth 框架               | FSH JWT 完整可复用，需新建 API Key / Session Cookie schemes 和 OAuth 框架       |
+| REQ-1.4 | API 基础设施 — CORS/Headers/RateLimit/异常/分页/OpenAPI/Serilog | FSH 全部已有实现，需适配 Plane 错误格式和分页格式                               |
 
 </phase_requirements>
 
 ## Architectural Responsibility Map
 
-| Capability | Primary Tier | Secondary Tier | Rationale |
-|------------|-------------|----------------|-----------|
-| 多租户解析 (Header/Query) | API Server (Middleware) | — | Finbuckle 中间件在 UseRouting 前解析租户标识 |
-| JWT Bearer 认证 | API Server (Auth Handler) | — | ASP.NET Core JwtBearerHandler 处理 Authorization header |
-| API Key 认证 | API Server (Auth Handler) | Database (Lookup) | 自定义 AuthenticationHandler 查 DB 验证 Key 哈希 |
-| Session/Cookie 认证 | API Server (Auth Handler) | — | ASP.NET Core CookieHandler 处理 Cookie header |
-| OAuth Provider 框架 | API Server (Endpoint) | Database (Config Store) | 回调端点处理 OAuth flow，配置存储在 DB |
-| Rate Limiting | API Server (Middleware) | — | ASP.NET Core RateLimiter 四层策略 |
-| 全局异常处理 | API Server (Middleware) | — | IExceptionHandler 拦截所有未处理异常 |
-| 分页格式适配 | API Server (Serialization) | — | 自定义 JSON 序列化或 ResultFilter |
-| CORS / Security Headers | API Server (Middleware) | — | ASP.NET Core 内置中间件 |
-| Scalar / OpenAPI | API Server (Endpoint) | — | Scalar + AddOpenApi 自动生成文档 |
-| Serilog + OpenTelemetry | API Server (Infrastructure) | Database (EF Core traces) | 结构化日志 + 分布式追踪 |
-| EF Core 迁移管道 | Database | API Server (DbMigrator) | DbMigrator 控制台执行，迁移文件在 Migrations 项目 |
-| Schema 分离 | Database | API Server (DbContext) | 每个模块 DbContext 设置 DefaultSchema |
+| Capability                | Primary Tier                | Secondary Tier            | Rationale                                               |
+| ------------------------- | --------------------------- | ------------------------- | ------------------------------------------------------- |
+| 多租户解析 (Header/Query) | API Server (Middleware)     | —                         | Finbuckle 中间件在 UseRouting 前解析租户标识            |
+| JWT Bearer 认证           | API Server (Auth Handler)   | —                         | ASP.NET Core JwtBearerHandler 处理 Authorization header |
+| API Key 认证              | API Server (Auth Handler)   | Database (Lookup)         | 自定义 AuthenticationHandler 查 DB 验证 Key 哈希        |
+| Session/Cookie 认证       | API Server (Auth Handler)   | —                         | ASP.NET Core CookieHandler 处理 Cookie header           |
+| OAuth Provider 框架       | API Server (Endpoint)       | Database (Config Store)   | 回调端点处理 OAuth flow，配置存储在 DB                  |
+| Rate Limiting             | API Server (Middleware)     | —                         | ASP.NET Core RateLimiter 四层策略                       |
+| 全局异常处理              | API Server (Middleware)     | —                         | IExceptionHandler 拦截所有未处理异常                    |
+| 分页格式适配              | API Server (Serialization)  | —                         | 自定义 JSON 序列化或 ResultFilter                       |
+| CORS / Security Headers   | API Server (Middleware)     | —                         | ASP.NET Core 内置中间件                                 |
+| Scalar / OpenAPI          | API Server (Endpoint)       | —                         | Scalar + AddOpenApi 自动生成文档                        |
+| Serilog + OpenTelemetry   | API Server (Infrastructure) | Database (EF Core traces) | 结构化日志 + 分布式追踪                                 |
+| EF Core 迁移管道          | Database                    | API Server (DbMigrator)   | DbMigrator 控制台执行，迁移文件在 Migrations 项目       |
+| Schema 分离               | Database                    | API Server (DbContext)    | 每个模块 DbContext 设置 DefaultSchema                   |
 
 ## Standard Stack
 
 ### Core（全部已在 Phase 0 安装）
 
-| Library | Version | Purpose | 状态 |
-|---------|---------|---------|------|
-| ASP.NET Core | 10.0 | Web 框架 + 认证 + 中间件 | ✅ 已安装 |
-| EF Core | 10.0 | ORM + 迁移 | ✅ 已安装 |
-| Finbuckle.MultiTenant | 10.x | 多租户策略 + 隔离 | ✅ 已安装 |
-| ASP.NET Identity | 10.0 | 用户/角色管理 | ✅ 已安装 |
-| Mediator | 3.x (source-gen) | CQRS 命令/查询处理 | ✅ 已安装 |
-| FluentValidation | latest | 请求验证 | ✅ 已安装 |
-| Serilog | latest | 结构化日志 | ✅ 已安装 |
-| OpenTelemetry | latest | 分布式追踪 + 指标 | ✅ 已安装 |
-| Scalar.AspNetCore | latest | API 文档 UI | ✅ 已安装 |
-| Npgsql | latest | PostgreSQL 驱动 | ✅ 已安装 |
-| Hangfire | latest | 后台任务 | ✅ 已安装 |
+| Library               | Version          | Purpose                  | 状态      |
+| --------------------- | ---------------- | ------------------------ | --------- |
+| ASP.NET Core          | 10.0             | Web 框架 + 认证 + 中间件 | ✅ 已安装 |
+| EF Core               | 10.0             | ORM + 迁移               | ✅ 已安装 |
+| Finbuckle.MultiTenant | 10.x             | 多租户策略 + 隔离        | ✅ 已安装 |
+| ASP.NET Identity      | 10.0             | 用户/角色管理            | ✅ 已安装 |
+| Mediator              | 3.x (source-gen) | CQRS 命令/查询处理       | ✅ 已安装 |
+| FluentValidation      | latest           | 请求验证                 | ✅ 已安装 |
+| Serilog               | latest           | 结构化日志               | ✅ 已安装 |
+| OpenTelemetry         | latest           | 分布式追踪 + 指标        | ✅ 已安装 |
+| Scalar.AspNetCore     | latest           | API 文档 UI              | ✅ 已安装 |
+| Npgsql                | latest           | PostgreSQL 驱动          | ✅ 已安装 |
+| Hangfire              | latest           | 后台任务                 | ✅ 已安装 |
 
 ### Supporting（Phase 1 可能需要新增）
 
-| Library | Purpose | 何时使用 |
-|---------|---------|----------|
+| Library                                     | Purpose                 | 何时使用                               |
+| ------------------------------------------- | ----------------------- | -------------------------------------- |
 | Microsoft.AspNetCore.Authentication.Cookies | Session Cookie 认证方案 | T1.6 — ASP.NET Core 内置，无需额外安装 |
-| Microsoft.AspNetCore.Authentication.OAuth | OAuth 基础框架 | T1.7 — ASP.NET Core 内置，无需额外安装 |
+| Microsoft.AspNetCore.Authentication.OAuth   | OAuth 基础框架          | T1.7 — ASP.NET Core 内置，无需额外安装 |
 
 **注意：** Phase 1 不需要安装任何新的 NuGet 包。所有需要的认证方案（JWT Bearer、Cookie、OAuth 基础）都是 ASP.NET Core 10 的内置组件。API Key 认证需要自定义 AuthenticationHandler，不依赖外部库。
 
@@ -487,6 +492,7 @@ public sealed class OAuthProviderSettings : AggregateRoot<Guid>, IGlobalEntity
 **What:** 将 FSH 的 RFC 7807 ProblemDetails 转换为 Plane 前端期望的错误格式。
 
 **Plane 错误格式：**
+
 ```json
 {
   "error": "Error message",
@@ -496,6 +502,7 @@ public sealed class OAuthProviderSettings : AggregateRoot<Guid>, IGlobalEntity
 ```
 
 **FSH 当前格式（RFC 7807 ProblemDetails）：**
+
 ```json
 {
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1",
@@ -535,6 +542,7 @@ if (IsPlaneRoute(httpContext))
 **What:** 将 FSH 的 PagedResponse<T> 转换为 Plane 前端期望的 `{count, next, previous, results}` 格式。
 
 **Plane 分页格式：**
+
 ```json
 {
   "count": 100,
@@ -545,6 +553,7 @@ if (IsPlaneRoute(httpContext))
 ```
 
 **FSH 当前格式：**
+
 ```json
 {
   "items": [...],
@@ -645,22 +654,22 @@ internal static class AuthEndpoints
 - **不要在 OAuth 回调中同步等待外部 HTTP：** OAuth token exchange 和 userinfo 获取使用 async/await + HttpClient，设置超时（30s）。
 - **不要将 API Key 明文存储在数据库：** 只存储 SHA-256 哈希值。验证时计算输入 Key 的哈希并与数据库值比对。
 - **不要忽略 CancellationToken：** FSH 黄金法则 #7，所有异步操作必须传递 CancellationToken。
-- **不要对 /auth/* 端点应用 FSH ProblemDetails 格式：** 这些端点需要 Plane 兼容格式，由前端解析。
+- **不要对 /auth/\* 端点应用 FSH ProblemDetails 格式：** 这些端点需要 Plane 兼容格式，由前端解析。
 
 ## Don't Hand-Roll
 
-| Problem | Don't Build | Use Instead | Why |
-|---------|-------------|-------------|-----|
-| JWT Token 生成 | 手写 HMAC-SHA256 签名 | `System.IdentityModel.Tokens.Jwt` (已有) | Token 验证参数、时钟偏移、密钥轮换等边界条件极多 |
-| 密码哈希 | 手写 SHA-256 哈希 | `ASP.NET Identity PasswordHasher` (已有) | 自动 salt、PBKDF2 迭代、版本升级 |
-| 多租户过滤 | 手写 WHERE tenant_id = @tenant | `Finbuckle.MultiTenant` (已有) | 全局查询过滤器、自动注入、Schema 隔离 |
-| Rate Limiting | 手写计数器 + Redis | `ASP.NET Core RateLimiter` (已有) | 固定窗口/滑动窗口/令牌桶/并发，分区限流 |
-| 分布式追踪 | 手写 trace ID 传播 | `OpenTelemetry SDK` (已有) | 自动 HTTP/EF Core/Redis 注入，W3C TraceContext |
-| API 文档 | 手写 Swagger JSON | `AddOpenApi + Scalar` (已有) | 自动从端点元数据生成，零维护 |
-| 结构化日志 | 手写 string.Format | `Serilog structured logging` (已有) | 属性化日志、多 Sink、OTLP 导出 |
-| 异常处理 | 手写 try-catch 中间件 | `IExceptionHandler` (已有) | 统一入口、与 ProblemDetails 集成 |
-| OAuth 基础流程 | 手写 HTTP 重定向 + code 交换 | `Microsoft.AspNetCore.Authentication.OAuth` (内置) | state 验证、nonce、PKCE 等安全机制 |
-| Cookie 认证 | 手写 session 管理 | `ASP.NET Core Cookie Authentication` (内置) | 自动 cookie 加密、sliding expiration、防篡改 |
+| Problem        | Don't Build                    | Use Instead                                        | Why                                              |
+| -------------- | ------------------------------ | -------------------------------------------------- | ------------------------------------------------ |
+| JWT Token 生成 | 手写 HMAC-SHA256 签名          | `System.IdentityModel.Tokens.Jwt` (已有)           | Token 验证参数、时钟偏移、密钥轮换等边界条件极多 |
+| 密码哈希       | 手写 SHA-256 哈希              | `ASP.NET Identity PasswordHasher` (已有)           | 自动 salt、PBKDF2 迭代、版本升级                 |
+| 多租户过滤     | 手写 WHERE tenant_id = @tenant | `Finbuckle.MultiTenant` (已有)                     | 全局查询过滤器、自动注入、Schema 隔离            |
+| Rate Limiting  | 手写计数器 + Redis             | `ASP.NET Core RateLimiter` (已有)                  | 固定窗口/滑动窗口/令牌桶/并发，分区限流          |
+| 分布式追踪     | 手写 trace ID 传播             | `OpenTelemetry SDK` (已有)                         | 自动 HTTP/EF Core/Redis 注入，W3C TraceContext   |
+| API 文档       | 手写 Swagger JSON              | `AddOpenApi + Scalar` (已有)                       | 自动从端点元数据生成，零维护                     |
+| 结构化日志     | 手写 string.Format             | `Serilog structured logging` (已有)                | 属性化日志、多 Sink、OTLP 导出                   |
+| 异常处理       | 手写 try-catch 中间件          | `IExceptionHandler` (已有)                         | 统一入口、与 ProblemDetails 集成                 |
+| OAuth 基础流程 | 手写 HTTP 重定向 + code 交换   | `Microsoft.AspNetCore.Authentication.OAuth` (内置) | state 验证、nonce、PKCE 等安全机制               |
+| Cookie 认证    | 手写 session 管理              | `ASP.NET Core Cookie Authentication` (内置)        | 自动 cookie 加密、sliding expiration、防篡改     |
 
 ## Common Pitfalls
 
@@ -813,10 +822,12 @@ internal sealed class CreateApiTokenEndpoint
     "MinimumLevel": {
       "Default": "Debug"
     },
-    "WriteTo": [{
-      "Name": "Console",
-      "Args": { "restrictedToMinimumLevel": "Information" }
-    }]
+    "WriteTo": [
+      {
+        "Name": "Console",
+        "Args": { "restrictedToMinimumLevel": "Information" }
+      }
+    ]
   }
 }
 ```
@@ -825,21 +836,21 @@ internal sealed class CreateApiTokenEndpoint
 
 ## State of the Art
 
-| Old Approach | Current Approach | When Changed | Impact |
-|--------------|------------------|--------------|--------|
-| 单一 JWT Scheme | 多 Scheme PolicyScheme 协商 | .NET 8+ | 需要 PolicyScheme 作为路由器 |
-| DRF Pagination | Plane {count/next/previous/results} | 始终 | 需要自定义序列化适配 |
-| DRF Exception Handler | IExceptionHandler + ProblemDetails | .NET 8+ | FSH 已用 IExceptionHandler，需适配 Plane 格式 |
-| Manual EF Migrations | DbMigrator + Advisory Lock | FSH pattern | 已有完整实现 |
-| Header-only Tenant | Multi-strategy Finbuckle chain | FSH pattern | 已有 Header + Query + Claim |
+| Old Approach          | Current Approach                    | When Changed | Impact                                        |
+| --------------------- | ----------------------------------- | ------------ | --------------------------------------------- |
+| 单一 JWT Scheme       | 多 Scheme PolicyScheme 协商         | .NET 8+      | 需要 PolicyScheme 作为路由器                  |
+| DRF Pagination        | Plane {count/next/previous/results} | 始终         | 需要自定义序列化适配                          |
+| DRF Exception Handler | IExceptionHandler + ProblemDetails  | .NET 8+      | FSH 已用 IExceptionHandler，需适配 Plane 格式 |
+| Manual EF Migrations  | DbMigrator + Advisory Lock          | FSH pattern  | 已有完整实现                                  |
+| Header-only Tenant    | Multi-strategy Finbuckle chain      | FSH pattern  | 已有 Header + Query + Claim                   |
 
 ## Assumptions Log
 
-| # | Claim | Section | Risk if Wrong |
-|---|-------|---------|---------------|
-| A1 | ASP.NET Core Cookie Authentication 中间件不需要额外 NuGet 包（内置于 Microsoft.AspNetCore.Authentication） | Pattern 1 | 低 — 这是 ASP.NET Core 标准组件 |
-| A2 | Plane 前端使用 Cookie 名 `.AspNetCore.Session` 或类似格式 | Pattern 1 | 中 — 需要检查 Plane 前端源码中的 cookie 名称 |
-| A3 | OAuth callback 重定向到前端时使用 URL query string 传递 JWT（`?token=xxx`） | Pitfall 2 | 中 — Plane 前端可能使用不同的 token 传递机制 |
+| #   | Claim                                                                                                      | Section   | Risk if Wrong                                |
+| --- | ---------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------- |
+| A1  | ASP.NET Core Cookie Authentication 中间件不需要额外 NuGet 包（内置于 Microsoft.AspNetCore.Authentication） | Pattern 1 | 低 — 这是 ASP.NET Core 标准组件              |
+| A2  | Plane 前端使用 Cookie 名 `.AspNetCore.Session` 或类似格式                                                  | Pattern 1 | 中 — 需要检查 Plane 前端源码中的 cookie 名称 |
+| A3  | OAuth callback 重定向到前端时使用 URL query string 传递 JWT（`?token=xxx`）                                | Pitfall 2 | 中 — Plane 前端可能使用不同的 token 传递机制 |
 
 ## Open Questions (ALL RESOLVED)
 
@@ -860,13 +871,13 @@ internal sealed class CreateApiTokenEndpoint
 
 ## Environment Availability
 
-| Dependency | Required By | Available | Version | Fallback |
-|------------|------------|-----------|---------|----------|
-| .NET SDK 10 | 编译运行 | ✓ | 10.0.x | — |
-| PostgreSQL 16+ | EF Core + 迁移 | ✓ | Aspire 编排 | — |
-| Redis (Valkey) | 缓存 (API Key 验证缓存) | ✓ | Aspire 编排 | InMemory fallback |
-| ASP.NET Core Auth 包 | 多 Scheme 认证 | ✓ | 内置于 .NET 10 | — |
-| Finbuckle 10.x | 多租户 | ✓ | Phase 0 已安装 | — |
+| Dependency           | Required By             | Available | Version        | Fallback          |
+| -------------------- | ----------------------- | --------- | -------------- | ----------------- |
+| .NET SDK 10          | 编译运行                | ✓         | 10.0.x         | —                 |
+| PostgreSQL 16+       | EF Core + 迁移          | ✓         | Aspire 编排    | —                 |
+| Redis (Valkey)       | 缓存 (API Key 验证缓存) | ✓         | Aspire 编排    | InMemory fallback |
+| ASP.NET Core Auth 包 | 多 Scheme 认证          | ✓         | 内置于 .NET 10 | —                 |
+| Finbuckle 10.x       | 多租户                  | ✓         | Phase 0 已安装 | —                 |
 
 **Missing dependencies with no fallback:** None
 
@@ -875,32 +886,36 @@ internal sealed class CreateApiTokenEndpoint
 ## Validation Architecture
 
 ### Test Framework
-| Property | Value |
-|----------|-------|
-| Framework | xunit + Shouldly + AutoFixture (已有) |
-| Config file | `src/Tests/Architecture.Tests/Architecture.Tests.csproj` |
-| Quick run command | `dotnet test src/Tests/Architecture.Tests/ --no-build` |
-| Full suite command | `dotnet test yh-flow/src/Tests/ --no-build` |
+
+| Property           | Value                                                    |
+| ------------------ | -------------------------------------------------------- |
+| Framework          | xunit + Shouldly + AutoFixture (已有)                    |
+| Config file        | `src/Tests/Architecture.Tests/Architecture.Tests.csproj` |
+| Quick run command  | `dotnet test src/Tests/Architecture.Tests/ --no-build`   |
+| Full suite command | `dotnet test yh-flow/src/Tests/ --no-build`              |
 
 ### Phase Requirements → Test Map
-| Req ID | Behavior | Test Type | Automated Command | File Exists? |
-|--------|----------|-----------|-------------------|-------------|
-| REQ-1.2 | DbMigrator 执行所有模块迁移 | integration | `dotnet test --filter "DbMigrator"` | ❌ Wave 0 |
-| REQ-1.3 | JWT Bearer 认证签发和验证 | unit | `dotnet test --filter "JwtAuth"` | ❌ Wave 0 |
-| REQ-1.3 | API Key 认证验证 | unit | `dotnet test --filter "ApiKeyAuth"` | ❌ Wave 0 |
-| REQ-1.3 | Session Cookie 认证验证 | unit | `dotnet test --filter "SessionCookieAuth"` | ❌ Wave 0 |
-| REQ-1.3 | OAuth Provider 框架注册 | unit | `dotnet test --filter "OAuthProvider"` | ❌ Wave 0 |
-| REQ-1.4 | Plane 错误格式输出 | unit | `dotnet test --filter "PlaneError"` | ❌ Wave 0 |
-| REQ-1.4 | Plane 分页格式输出 | unit | `dotnet test --filter "PlanePaging"` | ❌ Wave 0 |
-| REQ-1.4 | Rate Limiting 四层策略 | integration | `dotnet test --filter "RateLimiting"` | ❌ Wave 0 |
-| NFR-2 | 多租户数据隔离 | architecture | `dotnet test --filter "TenantIsolation"` | ✅ 已有 |
+
+| Req ID  | Behavior                    | Test Type    | Automated Command                          | File Exists? |
+| ------- | --------------------------- | ------------ | ------------------------------------------ | ------------ |
+| REQ-1.2 | DbMigrator 执行所有模块迁移 | integration  | `dotnet test --filter "DbMigrator"`        | ❌ Wave 0    |
+| REQ-1.3 | JWT Bearer 认证签发和验证   | unit         | `dotnet test --filter "JwtAuth"`           | ❌ Wave 0    |
+| REQ-1.3 | API Key 认证验证            | unit         | `dotnet test --filter "ApiKeyAuth"`        | ❌ Wave 0    |
+| REQ-1.3 | Session Cookie 认证验证     | unit         | `dotnet test --filter "SessionCookieAuth"` | ❌ Wave 0    |
+| REQ-1.3 | OAuth Provider 框架注册     | unit         | `dotnet test --filter "OAuthProvider"`     | ❌ Wave 0    |
+| REQ-1.4 | Plane 错误格式输出          | unit         | `dotnet test --filter "PlaneError"`        | ❌ Wave 0    |
+| REQ-1.4 | Plane 分页格式输出          | unit         | `dotnet test --filter "PlanePaging"`       | ❌ Wave 0    |
+| REQ-1.4 | Rate Limiting 四层策略      | integration  | `dotnet test --filter "RateLimiting"`      | ❌ Wave 0    |
+| NFR-2   | 多租户数据隔离              | architecture | `dotnet test --filter "TenantIsolation"`   | ✅ 已有      |
 
 ### Sampling Rate
+
 - **Per task commit:** `dotnet test src/Tests/Architecture.Tests/ --no-build`
 - **Per wave merge:** `dotnet test yh-flow/src/Tests/ --no-build`
 - **Phase gate:** Full suite green + 手动验证认证流程
 
 ### Wave 0 Gaps
+
 - [ ] `src/Tests/Identity.Tests/` — 新建测试项目，覆盖 REQ-1.3 认证测试
 - [ ] `src/Tests/Identity.Tests/ApiKeyAuthenticationTests.cs` — API Key 认证
 - [ ] `src/Tests/Identity.Tests/SessionCookieAuthenticationTests.cs` — Session Cookie 认证
@@ -912,28 +927,29 @@ internal sealed class CreateApiTokenEndpoint
 
 ### Applicable ASVS Categories
 
-| ASVS Category | Applies | Standard Control |
-|---------------|---------|-----------------|
-| V2 Authentication | yes | ASP.NET Identity + JWT Bearer + API Key + Cookie |
-| V3 Session Management | yes | Cookie Authentication + Refresh Token rotation |
-| V4 Access Control | yes | Permission-based authorization (RequiredPermission) |
-| V5 Input Validation | yes | FluentValidation on all Commands/Queries |
-| V6 Cryptography | yes | SHA-256 for API Key hashing, HMAC-SHA256 for JWT signing |
+| ASVS Category         | Applies | Standard Control                                         |
+| --------------------- | ------- | -------------------------------------------------------- |
+| V2 Authentication     | yes     | ASP.NET Identity + JWT Bearer + API Key + Cookie         |
+| V3 Session Management | yes     | Cookie Authentication + Refresh Token rotation           |
+| V4 Access Control     | yes     | Permission-based authorization (RequiredPermission)      |
+| V5 Input Validation   | yes     | FluentValidation on all Commands/Queries                 |
+| V6 Cryptography       | yes     | SHA-256 for API Key hashing, HMAC-SHA256 for JWT signing |
 
 ### Known Threat Patterns for Auth Infrastructure
 
-| Pattern | STRIDE | Standard Mitigation |
-|---------|--------|---------------------|
-| API Key 泄露 | Spoofing | 数据库存储哈希而非明文；Key 可撤销；过期时间 |
-| JWT Token 劫持 | Spoofing | HTTPS only；短过期时间（30min）；Refresh Token rotation |
-| OAuth CSRF | Tampering | state 参数验证（ASP.NET Core OAuth 内置） |
-| 暴力破解认证端点 | DoS | Rate Limiting "auth" policy (10/60s)；Account lockout (5 attempts) |
-| SQL Injection in Auth | Tampering | EF Core parameterized queries；无原始 SQL |
-| Multi-tenant 数据泄露 | Information Disclosure | Finbuckle 全局查询过滤器；IHasTenant 默认开启 |
+| Pattern               | STRIDE                 | Standard Mitigation                                                |
+| --------------------- | ---------------------- | ------------------------------------------------------------------ |
+| API Key 泄露          | Spoofing               | 数据库存储哈希而非明文；Key 可撤销；过期时间                       |
+| JWT Token 劫持        | Spoofing               | HTTPS only；短过期时间（30min）；Refresh Token rotation            |
+| OAuth CSRF            | Tampering              | state 参数验证（ASP.NET Core OAuth 内置）                          |
+| 暴力破解认证端点      | DoS                    | Rate Limiting "auth" policy (10/60s)；Account lockout (5 attempts) |
+| SQL Injection in Auth | Tampering              | EF Core parameterized queries；无原始 SQL                          |
+| Multi-tenant 数据泄露 | Information Disclosure | Finbuckle 全局查询过滤器；IHasTenant 默认开启                      |
 
 ## Sources
 
 ### Primary (HIGH confidence)
+
 - `yh-flow/src/Modules/Identity/` — FSH Identity 模块源码（JWT、Token、权限、Session）
 - `yh-flow/src/BuildingBlocks/Web/` — FSH Web 基础设施（RateLimiting、CORS、SecurityHeaders、ExceptionHandling、OpenAPI）
 - `yh-flow/src/BuildingBlocks/Persistence/` — FSH BaseDbContext + TenantIsolation
@@ -943,16 +959,19 @@ internal sealed class CreateApiTokenEndpoint
 - `apps/api/plane/api/middleware/api_authentication.py` — Plane API Key 认证中间件
 
 ### Secondary (MEDIUM confidence)
+
 - `.planning/research/fullstackhero-patterns.md` — FSH 模式适配指南
 - `.planning/research/api-migration-mapping.md` — Django → .NET API 端点映射
 - `.planning/codebase/ARCHITECTURE.md` — Plane 架构分析
 
 ### Tertiary (LOW confidence)
+
 - N/A — 所有关键发现均通过源码验证
 
 ## Metadata
 
 **Confidence breakdown:**
+
 - Standard stack: HIGH — 全部基于 Phase 0 已安装的包，无新增依赖
 - Architecture: HIGH — 基于实际源码分析，FSH 模式清晰可复用
 - Pitfalls: HIGH — 基于 FSH 已有实现中的处理方式和 Plane 参考代码

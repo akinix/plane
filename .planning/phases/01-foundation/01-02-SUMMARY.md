@@ -124,6 +124,7 @@ Each task was committed atomically (TDD tasks have RED/GREEN commit pairs):
 ### Auto-fixed Issues
 
 **1. [Rule 3 - Blocking] S101 analyzer error on APIToken naming**
+
 - **Found during:** Task 1 GREEN phase
 - **Issue:** `TreatWarningsAsErrors=true` + `CodeAnalysisTreatWarningsAsErrors=true` caused S101 (Sonar naming rule) to fail the build for `APITokenDto`, `APIToken`, and `APITokenConfiguration`
 - **Fix:** Added S101 to NoWarn in Modules.Identity.csproj, Modules.Identity.Contracts.csproj, and Identity.Tests.csproj
@@ -132,6 +133,7 @@ Each task was committed atomically (TDD tasks have RED/GREEN commit pairs):
 - **Committed in:** a55cfc3 (Task 1 feat commit)
 
 **2. [Rule 3 - Blocking] CA1062 null check in test DbContext**
+
 - **Found during:** Task 1 GREEN phase
 - **Issue:** APITokenTestDbContext.OnModelCreating missing null validation for modelBuilder parameter
 - **Fix:** Added `ArgumentNullException.ThrowIfNull(modelBuilder)` to test DbContext
@@ -150,12 +152,12 @@ Each task was committed atomically (TDD tasks have RED/GREEN commit pairs):
 
 ## Threat Mitigations Applied
 
-| Threat ID | Component | Mitigation | Status |
-|-----------|-----------|------------|--------|
-| T-01-06 | APIToken.TokenHash | Database stores only SHA-256 hash (MaxLength=64), plaintext returned once at creation | ✅ Mitigated |
-| T-01-07 | OAuthProviderSettings.ClientSecret | DTO excludes ClientSecret field (OAuthProviderSettingsDto has no Secret property) | ✅ Mitigated |
-| T-01-08 | APIToken.IsActive | Property has private set, only modifiable via Revoke() behavior method | ✅ Mitigated |
-| T-01-09 | Multi-tenant API Key isolation | APIToken implements IHasTenant, ApplyTenantIsolationByDefault adds global query filter | ✅ Mitigated |
+| Threat ID | Component                          | Mitigation                                                                             | Status       |
+| --------- | ---------------------------------- | -------------------------------------------------------------------------------------- | ------------ |
+| T-01-06   | APIToken.TokenHash                 | Database stores only SHA-256 hash (MaxLength=64), plaintext returned once at creation  | ✅ Mitigated |
+| T-01-07   | OAuthProviderSettings.ClientSecret | DTO excludes ClientSecret field (OAuthProviderSettingsDto has no Secret property)      | ✅ Mitigated |
+| T-01-08   | APIToken.IsActive                  | Property has private set, only modifiable via Revoke() behavior method                 | ✅ Mitigated |
+| T-01-09   | Multi-tenant API Key isolation     | APIToken implements IHasTenant, ApplyTenantIsolationByDefault adds global query filter | ✅ Mitigated |
 
 ## User Setup Required
 
@@ -168,8 +170,10 @@ None - no external service configuration required.
 - Service interfaces defined for implementation in later plans
 
 ---
-*Phase: 01-foundation*
-*Completed: 2026-06-17*
+
+_Phase: 01-foundation_
+_Completed: 2026-06-17_
 
 ## Self-Check: PASSED
+
 All 11 files and 5 commits verified.

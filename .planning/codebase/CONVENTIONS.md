@@ -5,6 +5,7 @@
 ## Naming Patterns
 
 **Files:**
+
 - React components: PascalCase (`button.tsx`, `not-authorized-view.tsx`)，实际以 kebab-case 为主
 - Utility/helper files: kebab-case (`classname.tsx`, `get-icon-for-link.ts`，`use-translation.ts`)
 - Store files: kebab-case with `.store.ts` suffix (`dashboard.store.ts`，`filter.store.ts`，`user.store.ts`，`workspace.store.ts`)
@@ -13,20 +14,24 @@
 - Storybook stories: `*.stories.tsx`
 
 **Directories:**
+
 - kebab-case for all directories (`shared-state/`，`form-fields/`，`auth-forms/`，`base-layouts/`)
 - Group folders in parentheses for route grouping: `(all)/`, `(projects)/`, `(detail)/`, `(list)/`, `(settings)/`
 
 **Functions:**
+
 - camelCase for functions and methods (`fetchHomeDashboardWidgets`, `getWidgetDetails`, `handleSubmit`, `coerceToString`)
 - Arrow function properties for computed getters in stores: `getWidgetDetails = computedFn(...)`
 - async functions use `async/await` consistently
 
 **Variables:**
+
 - camelCase for variables (`workspaceSlug`, `homeDashboardId`, `widgetStats`, `dashboardService`, `currentWorkspace`)
 - Private class fields prefixed internally (e.g., `_rootStore`), not enforced by convention
 - Unused variables prefixed with `_`
 
 **Types/Interfaces:**
+
 - PascalCase for types and interfaces (`TDashboardProps`, `TWidgetKeys`，`IWorkspaceStore`，`ButtonProps`)
 - Type aliases preferred over interfaces for prop definitions (e.g., `type Props = { ... }` in React components)
 - Interfaces used for Store contracts (`IWorkspaceStore`, `IDashboardStore`)
@@ -35,11 +40,13 @@
 - Discriminated union types via `@plane/types` package
 
 **Enums/Constants:**
+
 - SCREAMING_SNAKE_CASE for constants and enum-like structures (`LOGICAL_OPERATOR`, `FALLBACK_LANGUAGE`，`LANGUAGE_STORAGE_KEY`，`NAMESPACES`，`DEFAULT_NAMESPACE`)
 
 ## Code Style
 
 **Formatting (oxfmt via `.oxfmtrc.json`):**
+
 - Print width: 120 characters
 - Tab width: 2 spaces
 - Trailing commas: `es5` (objects, arrays, but not function params)
@@ -47,6 +54,7 @@
 - Codemods package: 80 character print width override
 
 **Linting (OxLint via `.oxlintrc.json`):**
+
 - Plugins: `react`, `typescript`, `jsx-a11y`, `import`, `promise`, `unicorn`, `oxc`
 - Categories: correctness (warn), suspicious (warn), perf (warn)
 - React: `react-in-jsx-scope: off` (React 17+ JSX transform), `prop-types: off` (TypeScript types used instead)
@@ -55,6 +63,7 @@
 - Ignored paths: `.cache/**`, `.next/**`, `.turbo/**`, `.vite/**`, `dist/**`, `build/**`, `coverage/**`, `storybook-static/**`
 
 **Pre-commit (Husky + lint-staged):**
+
 - `lint-staged` config in root `package.json`
 - `*.{js,jsx,ts,tsx,cjs,mjs,cts,mts,json,css,md}`: run `oxfmt --no-error-on-unmatched-pattern`
 - `*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}`: run `oxlint --fix --deny-warnings`
@@ -62,6 +71,7 @@
 ## TypeScript Configuration
 
 **Base config (`packages/typescript-config/base.json`):**
+
 - `strict: true` (all strict checks enabled)
 - `exactOptionalPropertyTypes: true` (overridden to `false` in most consuming packages)
 - `noUnusedLocals: true` (overridden in many packages), `noUnusedParameters: true`
@@ -72,6 +82,7 @@
 - `incremental: true` (with tsBuildInfoFile: `.turbo/tsconfig.tsbuildinfo`)
 
 **Overrides in consumer packages:**
+
 - `exactOptionalPropertyTypes`, `noUnusedLocals`, `noUnusedParameters`, `noImplicitReturns` often set to `false`
 - Package-specific path aliases: `@/*` → `./src/*` or `./core/*`
 - React packages add `jsx: react-jsx` and DOM libs
@@ -79,6 +90,7 @@
 ## React Component Patterns
 
 **Component declaration:**
+
 ```tsx
 // Functional component with forwardRef (when ref forwarding needed)
 const Button = React.forwardRef(function Button(props: ButtonProps, ref: React.ForwardedRef<HTMLButtonElement>) {
@@ -99,6 +111,7 @@ export const NotAuthorizedView = observer(function NotAuthorizedView(props: Prop
 ```
 
 **Props typing pattern:**
+
 ```tsx
 // Type alias for props (not interface)
 type Props = {
@@ -120,11 +133,13 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 **Default props:** Destructured directly in function parameters with default values (`size = "md"`，`showTooltip = true`).
 
 **Component export patterns:**
+
 - Named exports preferred: `export function Avatar(props: Props)`, `export { Button }`
 - Default exports for page-level components wrapped in `observer`: `export default observer(WorkspaceDashboardPage)`
 - Barrel exports from `index.ts` files: `export * from "./avatar"`
 
 **File structure per component:**
+
 ```
 src/
   component-name/
@@ -137,6 +152,7 @@ src/
 ## MobX State Management Patterns
 
 **Store class structure (`apps/web/core/store/*.store.ts`):**
+
 ```typescript
 import { action, computed, makeObservable, observable, runInAction } from "mobx";
 import { computedFn } from "mobx-utils";
@@ -172,7 +188,9 @@ export class ExampleStore implements IExampleStore {
   }
 
   // Computed property (getter)
-  get processedData() { /* ... */ }
+  get processedData() {
+    /* ... */
+  }
 
   // Computed with parameters (computedFn from mobx-utils)
   getDetails = computedFn((id: string) => {
@@ -198,6 +216,7 @@ export class ExampleStore implements IExampleStore {
 ```
 
 **Key patterns:**
+
 - `makeObservable` with explicit field declarations (never `makeAutoObservable`)
 - `observable.ref` for scalar values and non-collection objects
 - `observable` (default) for Maps, Arrays, and nested objects requiring deep observation
@@ -208,6 +227,7 @@ export class ExampleStore implements IExampleStore {
 - Stores receive `CoreRootStore` reference in constructor for cross-store access
 
 **Root store (`apps/web/core/store/root.store.ts`):**
+
 - Central `CoreRootStore` class instantiates all sub-stores
 - Each store typed via interface (`IExampleStore`)
 - `enableStaticRendering(typeof window === "undefined")` for SSR compatibility
@@ -216,6 +236,7 @@ export class ExampleStore implements IExampleStore {
 ## Import Organization
 
 **Import order convention (observed in code):**
+
 1. React/mobx imports: `import React from "react"`, `import { observer } from "mobx-react"`
 2. External libraries: `import { set } from "lodash-es"`
 3. Internal packages (with comment headers):
@@ -231,6 +252,7 @@ export class ExampleStore implements IExampleStore {
    - `// local components` — `import { WorkspaceDashboardHeader } from "./header"`
 
 **Comment headers** 是惯用模式——import 用单行注释分组：
+
 ```typescript
 // ui
 import { Button } from "@plane/ui/button";
@@ -241,6 +263,7 @@ import { UserService } from "@/services/user.service";
 ```
 
 **Path Aliases:**
+
 - `@/*` → `./src/*` (packages) or `./core/*` (apps/web)
 - `@plane/ui` → `packages/ui`
 - `@plane/types` → `packages/types`
@@ -256,12 +279,14 @@ import { UserService } from "@/services/user.service";
 - `@/plane-web/*` → `./ce/*` (community edition / enterprise placeholder)
 
 **Dependency management:**
+
 - Internal packages: `"@plane/types": "workspace:*"`
 - External deps: use `catalog:` protocol declared in `pnpm-workspace.yaml`
 
 ## API Service Patterns
 
 **Abstract base class (`packages/services/src/api.service.ts`):**
+
 ```typescript
 export abstract class APIService {
   protected baseURL: string;
@@ -271,15 +296,26 @@ export abstract class APIService {
     this.axiosInstance = axios.create({ baseURL, withCredentials: true });
   }
 
-  get(url, params = {}, config = {}) { return this.axiosInstance.get(url, { ...params, ...config }); }
-  post(url, data = {}, config = {}) { return this.axiosInstance.post(url, data, config); }
-  put(url, data = {}, config = {}) { return this.axiosInstance.put(url, data, config); }
-  patch(url, data = {}, config = {}) { return this.axiosInstance.patch(url, data, config); }
-  delete(url, data?, config = {}) { return this.axiosInstance.delete(url, { data, ...config }); }
+  get(url, params = {}, config = {}) {
+    return this.axiosInstance.get(url, { ...params, ...config });
+  }
+  post(url, data = {}, config = {}) {
+    return this.axiosInstance.post(url, data, config);
+  }
+  put(url, data = {}, config = {}) {
+    return this.axiosInstance.put(url, data, config);
+  }
+  patch(url, data = {}, config = {}) {
+    return this.axiosInstance.patch(url, data, config);
+  }
+  delete(url, data?, config = {}) {
+    return this.axiosInstance.delete(url, { data, ...config });
+  }
 }
 ```
 
 **Concrete service (`packages/services/src/workspace/workspace.service.ts`):**
+
 - Extends `APIService` with `super(BASE_URL || API_BASE_URL)`
 - Methods return `this.get/post/patch/delete(url, data)`
 - Chained: `.then(response => response?.data).catch(error => { throw error?.response?.data; })`
@@ -288,12 +324,14 @@ export abstract class APIService {
 - Each method has JSDoc with `@param`, `@returns`, `@throws`
 
 **Barrel exports (`packages/services/src/index.ts`):**
+
 - `export * from "./workspace"`, `export * from "./auth"`, etc.
 - All services re-exported from a single entry point
 
 ## Error Handling Patterns
 
 **Service layer (`.catch()` pattern):**
+
 ```typescript
 async retrieve(slug: string): Promise<IWorkspace> {
   return this.get(`/api/workspaces/${slug}/`)
@@ -305,6 +343,7 @@ async retrieve(slug: string): Promise<IWorkspace> {
 ```
 
 **MobX store layer (try-catch with rollback):**
+
 ```typescript
 async updateWidget(id: string, data: Partial<TWidget>) {
   const original = { ...this.widgets[id] };
@@ -320,10 +359,12 @@ async updateWidget(id: string, data: Partial<TWidget>) {
 ```
 
 **i18n layer (crash guard):**
+
 - `coerceToString()` in `packages/i18n/src/hooks/use-translation.ts` prevents React crashes when `t()` returns objects instead of strings
 - Dev-mode console warning for non-string translation values
 
 **React components:**
+
 - Conditional rendering rather than error boundaries for most cases
 - Error states stored in MobX stores (`error: any = null`), components reactively display error UI
 
@@ -332,18 +373,21 @@ async updateWidget(id: string, data: Partial<TWidget>) {
 **Framework:** Tailwind CSS 4 (`packages/tailwind-config/`)
 
 **CSS Layers:**
+
 - Custom design tokens defined as CSS custom properties in `packages/tailwind-config/variables.css`
 - Variables use OKLCH color space (`--alpha-white-*`, `--alpha-black-*`, `--extended-color-*`)
 - Custom variants: `dark`, `dark-high-contrast`, `light-high-contrast` via `data-theme` attribute
 - Custom utilities like `@utility conical-gradient`
 
 **Class composition utility:**
+
 - `cn()` from `@plane/utils` combines `clsx` + `tailwind-merge` with custom configuration
 - Custom typography classes (`text-h1-semibold`，`text-body-md-regular`) are recognized by `tailwind-merge`
 - Custom font size classes (`text-9` through `text-40`)
 - Custom text color classes (`text-primary`, `text-on-color`, `text-secondary`, etc.)
 
 **Styling patterns in components:**
+
 ```tsx
 <div className={cn(
   "grid place-items-center overflow-hidden",
@@ -351,6 +395,7 @@ async updateWidget(id: string, data: Partial<TWidget>) {
   { [sizeInfo.avatarSize]: !isAValidNumber(size) }
 )}>
 ```
+
 - Conditional classes use object syntax in `cn()`
 - Helper functions generate style variants: `getButtonStyling(variant, size, disabled)` returns string
 - Inline styles used sparingly for dynamic values (e.g., computed dimensions)
@@ -360,6 +405,7 @@ async updateWidget(id: string, data: Partial<TWidget>) {
 **Framework:** i18next + react-i18next + i18next-icu (ICU message format)
 
 **Translation file structure:**
+
 ```
 packages/i18n/src/locales/
   en/
@@ -376,11 +422,13 @@ packages/i18n/src/locales/
 ```
 
 **Naming conventions for keys:**
+
 - Nested, snake_case key names: `"issue.label": "Work item"`
 - Top-level namespace keys group related translations
 - ICU format for dynamic values: `"items": "{count, plural, one {Work item} other {Work items}}"`
 
 **Usage in components:**
+
 ```tsx
 import { useTranslation } from "@plane/i18n";
 const { t } = useTranslation();
@@ -389,12 +437,14 @@ const { t } = useTranslation();
 ```
 
 **Hook wrapper (`packages/i18n/src/hooks/use-translation.ts`):**
+
 - Custom `useTranslation()` wraps `react-i18next`'s `useTranslation()` with crash guard
 - No namespace argument — `fallbackNS` config searches all namespaces for any key
 - Returns: `{ t, currentLocale, changeLanguage, languages }`
 - Language persistence in `localStorage` under `LANGUAGE_STORAGE_KEY`
 
 **Adding new translation keys:**
+
 1. Add key to `en/<namespace>.json` (English is base)
 2. Add identical key to ALL other language files (can use English as placeholder)
 3. Keep nesting structure identical across languages
@@ -403,11 +453,13 @@ const { t } = useTranslation();
 ## Git Conventions
 
 **Pre-commit hook (`.husky/pre-commit`):**
+
 - Runs `pnpm lint-staged`
 - oxfmt formatting check + fix for all staged files
 - oxlint check with auto-fix for TypeScript/JavaScript files
 
 **Issue naming:**
+
 - `🐛 Bug: [description]`
 - `🚀 Feature: [description]`
 - `🛠️ Improvement: [description]`
@@ -419,6 +471,7 @@ const { t } = useTranslation();
 ## Python (Backend) Conventions
 
 **Linting/Formatting (ruff via `apps/api/pyproject.toml`):**
+
 - Line length: 120 characters
 - Indent: 4 spaces
 - Quote style: double quotes
@@ -431,6 +484,7 @@ const { t } = useTranslation();
 - isort: combine-as-imports, known-first-party: `plane`
 
 **Naming conventions:**
+
 - snake_case for functions, variables, files (`test_workspace_model.py`, `create_user`)
 - PascalCase for classes (`TestWorkspaceModel`, `WorkspaceMember`)
 - SCREAMING_SNAKE_CASE for constants (`USERS_ME_URL`)
@@ -438,6 +492,7 @@ const { t } = useTranslation();
 ## Documentation Standards
 
 **Copyright headers (EVERY source file):**
+
 ```
 /**
  * Copyright (c) 2023-present Plane Software, Inc. and contributors
@@ -445,14 +500,17 @@ const { t } = useTranslation();
  * See the LICENSE file for details.
  */
 ```
+
 Appears at the top of every `.ts`, `.tsx`, and `.py` file.
 
 **JSDoc/TSDoc (TypeScript):**
+
 - Service methods have full JSDoc: `@param`, `@returns`, `@throws`, `@remarks`
 - Store methods use single-line `@description` format
 - Props have inline JSDoc descriptions with `@default` for optional values
 
 **Python docstrings:**
+
 - Google-style docstrings on class methods
 - Triple-quote block comments for module/file-level descriptions
 - Inline comments for complex logic explanations
@@ -460,11 +518,13 @@ Appears at the top of every `.ts`, `.tsx`, and `.py` file.
 ## Module Design
 
 **Exports:**
+
 - Named exports preferred over default exports
 - Barrel files (`index.ts`) use `export * from "./submodule"` to re-export
 - Types and implementations exported from same package (`@plane/types`, `@plane/services`)
 
 **Package structure:**
+
 ```
 packages/<name>/
   src/
@@ -486,4 +546,4 @@ packages/<name>/
 
 ---
 
-*Convention analysis: 2026-06-16*
+_Convention analysis: 2026-06-16_

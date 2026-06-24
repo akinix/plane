@@ -55,13 +55,13 @@ Reads from the same `appsettings.json` / `appsettings.{Environment}.json`
 as `FSH.Starter.Api` (both files are linked into the project so they
 stay in lock-step). Override anything via environment variables:
 
-| Variable                                  | Notes                                       |
-| ----------------------------------------- | ------------------------------------------- |
-| `DatabaseOptions__Provider`               | `POSTGRESQL` (only provider currently)      |
-| `DatabaseOptions__ConnectionString`       | Use elevated DDL credentials here           |
-| `DatabaseOptions__MigrationsAssembly`     | `FSH.Starter.Migrations.PostgreSQL`         |
-| `CachingOptions__Redis`                   | Optional — only used by module DI graphs    |
-| `Logging__LogLevel__Default`              | `Information` is the default                |
+| Variable                              | Notes                                    |
+| ------------------------------------- | ---------------------------------------- |
+| `DatabaseOptions__Provider`           | `POSTGRESQL` (only provider currently)   |
+| `DatabaseOptions__ConnectionString`   | Use elevated DDL credentials here        |
+| `DatabaseOptions__MigrationsAssembly` | `FSH.Starter.Migrations.PostgreSQL`      |
+| `CachingOptions__Redis`               | Optional — only used by module DI graphs |
+| `Logging__LogLevel__Default`          | `Information` is the default             |
 
 ## Deployment patterns
 
@@ -119,7 +119,7 @@ Run as a step before the deploy step:
 
 ### Local development
 
-There is **no** development-only auto-migration *or* auto-seed in the
+There is **no** development-only auto-migration _or_ auto-seed in the
 API. In every environment, the migrator is the only path that touches
 schema OR data. The two convenient ways to run it locally are:
 

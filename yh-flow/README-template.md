@@ -25,12 +25,12 @@ dotnet run --project src/Host/FSH.Starter.AppHost
 Aspire starts Postgres, Redis, and MinIO, runs database migrations, then launches the API
 **and both React apps**.
 
-| Surface | URL |
-|---|---|
-| Aspire dashboard | https://localhost:15888 |
+| Surface           | URL                           |
+| ----------------- | ----------------------------- |
+| Aspire dashboard  | https://localhost:15888       |
 | API + Scalar docs | https://localhost:7030/scalar |
-| Admin console | http://localhost:5173 |
-| Tenant dashboard | http://localhost:5174 |
+| Admin console     | http://localhost:5173         |
+| Tenant dashboard  | http://localhost:5174         |
 
 ### Backend only
 

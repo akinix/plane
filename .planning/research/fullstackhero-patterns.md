@@ -6,18 +6,18 @@
 
 ## 10 Golden Rules (Must Follow)
 
-| # | Rule | Implementation |
-|---|------|---------------|
-| 1 | **Module boundary enforcement** | 模块间只能通过 `.Contracts` 项目通信 |
-| 2 | **4-places registration** | 新模块必须在 API + DbMigrator 各注册 Mediator assemblies + module assemblies |
-| 3 | **Tenant isolation default-ON** | 所有实体自动多租户隔离，除非标记 `IGlobalEntity` |
-| 4 | **BuildingBlocks modification protection** | 不修改 BuildingBlocks，除非有充分理由 |
-| 5 | **Mediator handler conventions** | `public sealed class`, `ValueTask<T>`, `.ConfigureAwait(false)` |
-| 6 | **Structured logging** | 使用 Serilog structured logging，不字符串插值 |
-| 7 | **CancellationToken propagation** | 所有异步操作传递 CancellationToken |
-| 8 | **Validator requirement** | 所有 Command + 分页 Query 必须有 FluentValidation validator |
-| 9 | **Frontend mutation patterns** | 使用 TanStack Query mutations + zod 验证 |
-| 10 | **Docs-with-changelog** | 模块变更必须有文档 + CHANGELOG |
+| #   | Rule                                       | Implementation                                                               |
+| --- | ------------------------------------------ | ---------------------------------------------------------------------------- |
+| 1   | **Module boundary enforcement**            | 模块间只能通过 `.Contracts` 项目通信                                         |
+| 2   | **4-places registration**                  | 新模块必须在 API + DbMigrator 各注册 Mediator assemblies + module assemblies |
+| 3   | **Tenant isolation default-ON**            | 所有实体自动多租户隔离，除非标记 `IGlobalEntity`                             |
+| 4   | **BuildingBlocks modification protection** | 不修改 BuildingBlocks，除非有充分理由                                        |
+| 5   | **Mediator handler conventions**           | `public sealed class`, `ValueTask<T>`, `.ConfigureAwait(false)`              |
+| 6   | **Structured logging**                     | 使用 Serilog structured logging，不字符串插值                                |
+| 7   | **CancellationToken propagation**          | 所有异步操作传递 CancellationToken                                           |
+| 8   | **Validator requirement**                  | 所有 Command + 分页 Query 必须有 FluentValidation validator                  |
+| 9   | **Frontend mutation patterns**             | 使用 TanStack Query mutations + zod 验证                                     |
+| 10  | **Docs-with-changelog**                    | 模块变更必须有文档 + CHANGELOG                                               |
 
 ## Module Structure Convention
 
@@ -158,6 +158,7 @@ endpoints.MapGet("/api/v1/workspaces/{slug}/projects", async (string slug, ...) 
 
 Plane 使用 Session + API Key 双重认证。
 **策略**: 注册自定义 AuthenticationHandler 支持：
+
 - `X-Api-Key` header → API Key 验证
 - Cookie → JWT / Session 验证
 - `Authorization: Bearer` → JWT 验证（FSH 默认）
@@ -166,6 +167,7 @@ Plane 使用 Session + API Key 双重认证。
 
 Plane 使用 Django REST Framework 的分页格式。
 **策略**: 自定义 `IPagedQuery` 和 `PagedResponse<T>` 以匹配 Plane 格式：
+
 ```json
 { "count": N, "next": "...", "previous": "...", "results": [...] }
 ```
@@ -188,6 +190,7 @@ Plane 使用 `deleted_at` 字段进行软删除，60 天后硬删除。
 ```
 
 必须在 4 个位置注册：
+
 1. `Program.cs` Mediator assemblies
 2. `Program.cs` moduleAssemblies
 3. `DbMigrator/Program.cs` Mediator assemblies

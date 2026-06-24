@@ -231,5 +231,13 @@ public sealed class WorkItemsModule : IModule
 
         archived.MapListArchivedCyclesEndpoint();
         archived.MapUnarchiveCycleEndpoint();
+
+        // Module route group (Phase 6) — endpoints registered in plans 06-02 and 06-03
+#pragma warning disable S1481 // Stub — endpoints added in 06-02/06-03
+        var modules = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/modules")
+            .WithTags("Modules")
+            .WithApiVersionSet(apiVersionSet);
+#pragma warning restore S1481
     }
 }

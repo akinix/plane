@@ -216,6 +216,7 @@ describe("effect-utils", () => {
 ```
 
 **Key patterns:**
+
 - `describe` blocks for module grouping, nested `describe` for function/feature grouping
 - `it("should ...")` naming convention
 - `async/await` with `Effect.runPromise()` for Effect-TS integration
@@ -246,6 +247,7 @@ class TestWorkspaceModel:
 ```
 
 **Key patterns:**
+
 - `@pytest.mark.unit` / `@pytest.mark.contract` / `@pytest.mark.smoke` on test classes
 - `@pytest.mark.django_db` on methods requiring database access
 - Fixture injection via function parameters (`create_user`，`api_client`，`api_key_client`)
@@ -254,6 +256,7 @@ class TestWorkspaceModel:
 - Standard `assert` for all assertions (no `self.assertEqual`)
 
 **Contract tests pattern:**
+
 ```python
 import pytest
 from rest_framework import status
@@ -299,6 +302,7 @@ export const Large: Story = {
 ```
 
 **Pattern:**
+
 - CSF3 (Component Story Format v3) with `Meta` and `StoryObj` types
 - Default export: `Meta<typeof Component>` with `title` and `component`
 - Named exports for each story variant
@@ -352,6 +356,7 @@ def session_client(api_client, create_user):
 ```
 
 **Key patterns:**
+
 - Fixture chaining: `api_key_client` depends on `api_client` + `api_token`; `api_token` depends on `create_user`
 - Separate fixtures for data (`user_data`), model creation (`create_user`), and auth (`api_key_client`，`session_client`)
 - `scope="session"` for DB setup fixture
@@ -359,6 +364,7 @@ def session_client(api_client, create_user):
 ### Frontend
 
 **No centralized fixture system detected.** Test data is created inline within test files:
+
 ```typescript
 const doc: TipTapDocument = { type: "doc", content: [...] };
 const metadata: PDFExportMetadata = { userMentions: [{ id: "user-123", display_name: "John Doe" }] };
@@ -388,6 +394,7 @@ class TestMagicLinkGenerate:
 ```
 
 **Key patterns:**
+
 - `unittest.mock.patch` decorator on test methods
 - Patches placed on the method, not the import location (Django convention)
 - Mocked return values set inline or via `return_value`
@@ -410,6 +417,7 @@ No external mocking library configured. Effect-TS tests use `Effect.fail()` / `E
 | `api-tests` | Built from `apps/api/Dockerfile.dev` | Installs `requirements/test.txt`, runs pytest |
 
 **Key characteristics:**
+
 - All data directories use `tmpfs` — every run starts clean
 - Health checks on all services before tests start
 - `DJANGO_SETTINGS_MODULE=plane.settings.test`
@@ -463,6 +471,7 @@ pnpm build-storybook                  # Build static storybook
 ### Build and lint web apps (`.github/workflows/pull-request-build-lint-web-apps.yml`)
 
 Triggers on PR to `preview` branch. Runs 4 parallel/consecutive jobs:
+
 1. **check:format** — `pnpm turbo run check:format --affected` (no build dependency)
 2. **Build packages** — `pnpm turbo run build --affected` (prerequisite for type checking)
 3. **check:lint** — `pnpm turbo run check:lint --affected` (no build dependency)
@@ -475,9 +484,11 @@ Turbo `--affected` filter uses `TURBO_SCM_BASE` (PR base SHA) and `TURBO_SCM_HEA
 ### Build and lint API (`.github/workflows/pull-request-build-lint-api.yml`)
 
 Triggers on PR to `preview` branch when `apps/api/**` changes. Runs:
+
 1. **Lint API** — Python 3.12, ruff check + fix
 
 ### Other CI checks:
+
 - `build-branch.yml` — Full branch build
 - `check-version.yml` — Version consistency check
 - `codeql.yml` — CodeQL security analysis
@@ -518,6 +529,7 @@ Triggers on PR to `preview` branch when `apps/api/**` changes. Runs:
 ## Test Documentation
 
 **Key documentation files:**
+
 - `AGENTS.md` — Brief testing section with Docker commands
 - `apps/api/tests/RUNNING_TESTS.md` — Comprehensive guide: prerequisites, full suite, filtered runs, teardown, architecture, troubleshooting
 - `apps/api/tests/TESTING_GUIDE.md` — (referenced but not read) Test conventions and fixtures
@@ -541,4 +553,4 @@ Triggers on PR to `preview` branch when `apps/api/**` changes. Runs:
 
 ---
 
-*Testing analysis: 2026-06-16*
+_Testing analysis: 2026-06-16_
