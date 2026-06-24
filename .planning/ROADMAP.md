@@ -301,7 +301,7 @@ Plans:
 
 **Wave 1**
 
-- [ ] 06-01-PLAN.md — Domain entities（Module/ModuleIssue/ModuleMember/ModuleLink）+ EF configurations + WorkItemsDbContext update + AddModules migration + Contracts DTOs + test scaffolds（REQ-6.1, REQ-6.2）
+- [x] 06-01-PLAN.md — Domain entities（Module/ModuleIssue/ModuleMember/ModuleLink）+ EF configurations + WorkItemsDbContext update + AddModules migration + Contracts DTOs + test scaffolds（REQ-6.1, REQ-6.2）
 
 **Wave 2** _(blocked on Wave 1 completion)_
 
