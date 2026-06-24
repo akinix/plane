@@ -44,6 +44,8 @@ using YH.Modules.WorkItems.Features.v1.Issues.BulkUpdateIssues;
 using YH.Modules.WorkItems.Features.v1.Intake.CreateIntakeIssue;
 using YH.Modules.WorkItems.Features.v1.Intake.ListIntakeIssues;
 using YH.Modules.WorkItems.Features.v1.Intake.UpdateIntakeIssue;
+using YH.Modules.WorkItems.Features.v1.ImportExport.ExportIssues;
+using YH.Modules.WorkItems.Features.v1.ImportExport.ImportIssues;
 
 namespace YH.Modules.WorkItems;
 
@@ -63,10 +65,11 @@ namespace YH.Modules.WorkItems;
 ///     <c>/work-items/bulk/</c>.</item>
 ///   <item><see cref="MapEndpoints"/> registers Intake CRUD (3 endpoints) under
 ///     <c>/work-items/intake/</c>.</item>
+///   <item><see cref="MapEndpoints"/> registers ExportIssues endpoint under
+///     <c>/work-items/export-issues/</c>.</item>
+///   <item><see cref="MapEndpoints"/> registers ImportIssues endpoint under
+///     <c>/work-items/import-issues/</c>.</item>
 /// </list>
-/// <para>
-/// <b>Next:</b> Import/Export endpoints + migration.
-/// </para>
 /// </remarks>
 public sealed class WorkItemsModule : IModule
 {
@@ -134,6 +137,10 @@ public sealed class WorkItemsModule : IModule
         workItems.MapCreateIntakeIssueEndpoint();
         workItems.MapListIntakeIssuesEndpoint();
         workItems.MapUpdateIntakeIssueEndpoint();
+
+        // Export/Import endpoints (/export-issues/, /import-issues/)
+        workItems.MapExportIssuesEndpoint();
+        workItems.MapImportIssuesEndpoint();
 
         // Estimate route group under /workspaces/{slug}/projects/{projectId}/estimates/
         var estimates = endpoints
