@@ -1,5 +1,6 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -7,6 +8,11 @@ using Microsoft.Extensions.Hosting;
 using YH.Framework.Persistence;
 using YH.Framework.Web.Modules;
 using YH.Modules.Project.Data;
+using YH.Modules.Project.Features.v1.Projects.CreateProject;
+using YH.Modules.Project.Features.v1.Projects.DeleteProject;
+using YH.Modules.Project.Features.v1.Projects.GetProject;
+using YH.Modules.Project.Features.v1.Projects.ListProjects;
+using YH.Modules.Project.Features.v1.Projects.UpdateProject;
 
 namespace YH.Modules.Project;
 
@@ -14,12 +20,15 @@ namespace YH.Modules.Project;
 /// Project module entry point.
 /// </summary>
 /// <remarks>
-/// <b>Wave 2 wiring status (plan 03-02 complete):</b>
+/// <b>Wave 3 wiring status (plan 03-03 complete):</b>
 /// <list type="bullet">
 ///   <item><see cref="ConfigureServices"/> registers <see cref="ProjectDbContext"/> + health check.</item>
-///   <item><see cref="MapEndpoints"/> is a placeholder — Wave 3 (03-03) will add project route group,
-///     Wave 4 (03-04) will add member route group.</item>
+///   <item><see cref="MapEndpoints"/> registers all 5 project CRUD endpoints under
+///     <c>/api/v1/workspaces/{slug}/projects/</c>.</item>
 /// </list>
+/// <para>
+/// <b>Wave 4 (03-04):</b> will add member route group under <c>/workspaces/{slug}/projects/{projectId}/members/</c>.
+/// </para>
 /// </remarks>
 public sealed class ProjectModule : IModule
 {
@@ -46,22 +55,25 @@ public sealed class ProjectModule : IModule
     {
         ArgumentNullException.ThrowIfNull(endpoints);
 
-        // TODO (03-03): Register project route group under /workspaces/{slug}/projects/
-        // var apiVersionSet = endpoints.NewApiVersionSet()
-        //     .HasApiVersion(new ApiVersion(1))
-        //     .ReportApiVersions()
-        //     .Build();
-        //
-        // var projects = endpoints
-        //     .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects")
-        //     .WithTags("Projects")
-        //     .WithApiVersionSet(apiVersionSet);
-        //
-        // projects.MapCreateProjectEndpoint();
-        // projects.MapListProjectsEndpoint();
-        // projects.MapGetProjectEndpoint();
-        // projects.MapUpdateProjectEndpoint();
-        // projects.MapDeleteProjectEndpoint();
+        var apiVersionSet = endpoints.NewApiVersionSet()
+            .HasApiVersion(new ApiVersion(1))
+            .ReportApiVersions()
+            .Build();
+
+        // Project routes under /workspaces/{slug}/projects/
+        var projects = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects")
+            .WithTags("Projects")
+            .WithApiVersionSet(apiVersionSet);
+
+        // Create + List bind to "/" on the projects group
+        projects.MapCreateProjectEndpoint();
+        projects.MapListProjectsEndpoint();
+
+        // Get / Update / Delete bind to "/{projectId}" on the same group
+        projects.MapGetProjectEndpoint();
+        projects.MapUpdateProjectEndpoint();
+        projects.MapDeleteProjectEndpoint();
 
         // TODO (03-04): Register member route group under /workspaces/{slug}/projects/{projectId}/members/
         // var members = endpoints
