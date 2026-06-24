@@ -16,6 +16,7 @@ using YH.Modules.Multitenancy.Data;
 using YH.Modules.Multitenancy.Features.v1.GetTenantStatus;
 using YH.Modules.Project;
 using YH.Modules.Project.Contracts;
+using YH.Modules.WorkItems;
 using YH.Modules.Tickets;
 using YH.Modules.Webhooks;
 using YH.Flow.DbMigrator;
@@ -123,6 +124,7 @@ var moduleAssemblies = new Assembly[]
     typeof(YH.Modules.Notifications.NotificationsModule).Assembly,
     typeof(YH.Modules.Workspace.WorkspaceModule).Assembly,
     typeof(ProjectModule).Assembly,
+    typeof(WorkItemsModule).Assembly,
 };
 
 // Disable runtime-only concerns; persistence + multitenancy stay on so DbInitializers resolve. Caching

@@ -22,6 +22,7 @@
       <ProjectReference Include="..\..\Modules\Files\Modules.Files\Modules.Files.csproj" />
       <ProjectReference Include="..\..\Modules\Workspace\Modules.Workspace\Modules.Workspace.csproj" />
       <ProjectReference Include="..\..\Modules\Project\Modules.Project\Modules.Project.csproj" />
+      <ProjectReference Include="..\..\Modules\WorkItems\Modules.WorkItems\Modules.WorkItems.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -35,6 +36,7 @@
       <Folder Include="Files\" />
       <Folder Include="Workspace\" />
       <Folder Include="Project\" />
+      <Folder Include="WorkItems\" />
     </ItemGroup>
 
 </Project>

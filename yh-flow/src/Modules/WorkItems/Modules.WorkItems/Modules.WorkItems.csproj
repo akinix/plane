@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>YH.Modules.WorkItems</RootNamespace>
+        <AssemblyName>YH.Modules.WorkItems</AssemblyName>
+        <NoWarn>$(NoWarn);CA1027;CA1031;CA1056;CA1716;CA1812;S1135;S125;S2094;S3267;S1144</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\BuildingBlocks\Caching\Caching.csproj" />
+        <ProjectReference Include="..\..\..\BuildingBlocks\Core\Core.csproj" />
+        <ProjectReference Include="..\..\..\BuildingBlocks\Persistence\Persistence.csproj" />
+        <ProjectReference Include="..\..\..\BuildingBlocks\Web\Web.csproj" />
+        <ProjectReference Include="..\Modules.WorkItems.Contracts\Modules.WorkItems.Contracts.csproj" />
+        <ProjectReference Include="..\..\Identity\Modules.Identity.Contracts\Modules.Identity.Contracts.csproj" />
+        <ProjectReference Include="..\..\Workspace\Modules.Workspace.Contracts\Modules.Workspace.Contracts.csproj" />
+        <ProjectReference Include="..\..\Project\Modules.Project.Contracts\Modules.Project.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>
