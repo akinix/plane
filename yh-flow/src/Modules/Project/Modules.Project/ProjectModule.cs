@@ -8,6 +8,10 @@ using Microsoft.Extensions.Hosting;
 using YH.Framework.Persistence;
 using YH.Framework.Web.Modules;
 using YH.Modules.Project.Data;
+using YH.Modules.Project.Features.v1.Members.AddMember;
+using YH.Modules.Project.Features.v1.Members.ListMembers;
+using YH.Modules.Project.Features.v1.Members.RemoveMember;
+using YH.Modules.Project.Features.v1.Members.UpdateMemberRole;
 using YH.Modules.Project.Features.v1.Projects.CreateProject;
 using YH.Modules.Project.Features.v1.Projects.DeleteProject;
 using YH.Modules.Project.Features.v1.Projects.GetProject;
@@ -20,14 +24,16 @@ namespace YH.Modules.Project;
 /// Project module entry point.
 /// </summary>
 /// <remarks>
-/// <b>Wave 3 wiring status (plan 03-03 complete):</b>
+/// <b>Wave 4 wiring status (plan 03-04 complete):</b>
 /// <list type="bullet">
 ///   <item><see cref="ConfigureServices"/> registers <see cref="ProjectDbContext"/> + health check.</item>
 ///   <item><see cref="MapEndpoints"/> registers all 5 project CRUD endpoints under
 ///     <c>/api/v1/workspaces/{slug}/projects/</c>.</item>
+///   <item><see cref="MapEndpoints"/> registers all 4 project member endpoints under
+///     <c>/api/v1/workspaces/{slug}/projects/{projectId}/members/</c>.</item>
 /// </list>
 /// <para>
-/// <b>Wave 4 (03-04):</b> will add member route group under <c>/workspaces/{slug}/projects/{projectId}/members/</c>.
+/// <b>Next:</b> Phase 3 verification or Phase 4 WorkItems.
 /// </para>
 /// </remarks>
 public sealed class ProjectModule : IModule
@@ -75,15 +81,15 @@ public sealed class ProjectModule : IModule
         projects.MapUpdateProjectEndpoint();
         projects.MapDeleteProjectEndpoint();
 
-        // TODO (03-04): Register member route group under /workspaces/{slug}/projects/{projectId}/members/
-        // var members = endpoints
-        //     .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/members")
-        //     .WithTags("ProjectMembers")
-        //     .WithApiVersionSet(apiVersionSet);
-        //
-        // members.MapAddMemberEndpoint();
-        // members.MapListMembersEndpoint();
-        // members.MapUpdateMemberRoleEndpoint();
-        // members.MapRemoveMemberEndpoint();
+        // Member route group under /workspaces/{slug}/projects/{projectId}/members/
+        var members = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/members")
+            .WithTags("ProjectMembers")
+            .WithApiVersionSet(apiVersionSet);
+
+        members.MapAddMemberEndpoint();
+        members.MapListMembersEndpoint();
+        members.MapUpdateMemberRoleEndpoint();
+        members.MapRemoveMemberEndpoint();
     }
 }
