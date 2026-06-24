@@ -68,6 +68,13 @@ using YH.Modules.WorkItems.Features.v1.Modules.ListModules;
 using YH.Modules.WorkItems.Features.v1.Modules.ArchiveModule;
 using YH.Modules.WorkItems.Features.v1.Modules.UnarchiveModule;
 using YH.Modules.WorkItems.Features.v1.Modules.ListArchivedModules;
+using YH.Modules.WorkItems.Features.v1.Modules.Issues.AddIssuesToModule;
+using YH.Modules.WorkItems.Features.v1.Modules.Issues.RemoveIssueFromModule;
+using YH.Modules.WorkItems.Features.v1.Modules.Issues.ListModuleIssues;
+using YH.Modules.WorkItems.Features.v1.Modules.GetModuleProgress;
+using YH.Modules.WorkItems.Features.v1.Modules.Links.AddModuleLink;
+using YH.Modules.WorkItems.Features.v1.Modules.Links.RemoveModuleLink;
+using YH.Modules.WorkItems.Features.v1.Modules.Links.ListModuleLinks;
 
 namespace YH.Modules.WorkItems;
 
@@ -252,6 +259,19 @@ public sealed class WorkItemsModule : IModule
         modules.MapUpdateModuleEndpoint();
         modules.MapDeleteModuleEndpoint();
         modules.MapArchiveModuleEndpoint();
+
+        // Module-Issue endpoints
+        modules.MapAddIssuesToModuleEndpoint();
+        modules.MapRemoveIssueFromModuleEndpoint();
+        modules.MapListModuleIssuesEndpoint();
+
+        // Module progress
+        modules.MapGetModuleProgressEndpoint();
+
+        // ModuleLink endpoints
+        modules.MapAddModuleLinkEndpoint();
+        modules.MapRemoveModuleLinkEndpoint();
+        modules.MapListModuleLinksEndpoint();
 
         // Archived modules route group
         var archivedModules = endpoints
