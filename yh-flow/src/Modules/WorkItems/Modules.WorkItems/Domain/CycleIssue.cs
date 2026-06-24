@@ -54,4 +54,12 @@ public sealed class CycleIssue : IHasTenant, ISoftDeletable
             CreatedOnUtc = DateTimeOffset.UtcNow,
         };
     }
+
+    /// <summary>Soft-deletes this cycle-issue association (idempotent).</summary>
+    public void SoftDelete(DateTimeOffset now)
+    {
+        if (IsDeleted) return;
+        IsDeleted = true;
+        DeletedOnUtc = now;
+    }
 }
