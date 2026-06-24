@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Identity\Modules.Identity.Contracts\Modules.Identity.Contracts.csproj" />
+        <ProjectReference Include="..\..\Workspace\Modules.Workspace.Contracts\Modules.Workspace.Contracts.csproj" />
     </ItemGroup>
 
 </Project>
