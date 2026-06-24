@@ -18,11 +18,16 @@ namespace YH.Modules.Project.Data.Configurations;
 /// <c>TenantId</c> column AND widens every unique index to include it. NO explicit
 /// <c>IsMultiTenant()</c> call appears here.
 /// <para>
-/// <b>Uniqueness invariants:</b> <see cref="ProjectEntity.Slug"/> and <see cref="ProjectEntity.Identifier"/>
-/// each have a unique index that is widened to <c>(TenantId, Slug)</c> / <c>(TenantId, Identifier)</c>
-/// by <c>AdjustUniqueIndexes()</c>, enforcing per-workspace uniqueness. On soft delete the values
-/// are rewritten with <c>__{epoch}</c> (see <see cref="ProjectEntity.SoftDelete"/>), so the unique
-/// constraint never blocks reuse of a released slug/identifier (D-08 pattern).
+/// <b>Uniqueness invariants:</b>
+/// <list type="bullet">
+///   <item><b>(TenantId, Identifier) — conditional unique index</b> with
+///     <c>HasFilter("[DeletedOnUtc] IS NULL")</c>: soft-deleted rows do not block identifier
+///     reuse (plan T-3-domain-03 mitigation, contrast with Slug which is epoch-modified).</item>
+///   <item><b>(TenantId, Name) — conditional unique index</b> with
+///     <c>HasFilter("[DeletedOnUtc] IS NULL")</c>: same release-on-delete pattern.</item>
+///   <item><b>Slug — unconditional unique index</b>: <see cref="ProjectEntity.SoftDelete"/>
+///     rewrites Slug with <c>__{epoch}</c> so the unique constraint never blocks reuse.</item>
+/// </list>
 /// </para>
 /// </remarks>
 public sealed class ProjectConfiguration : IEntityTypeConfiguration<ProjectEntity>
@@ -43,15 +48,22 @@ public sealed class ProjectConfiguration : IEntityTypeConfiguration<ProjectEntit
         builder.Property(x => x.Description)
             .HasMaxLength(ProjectConstants.DescriptionMaxLength); // 5000
 
+        builder.Property(x => x.DescriptionText)
+            .HasMaxLength(ProjectConstants.DescriptionMaxLength);
+
+        builder.Property(x => x.DescriptionHtml)
+            .HasMaxLength(ProjectConstants.DescriptionMaxLength);
+
         builder.Property(x => x.Network)
             .HasConversion<int>()
-            .IsRequired();
+            .IsRequired()
+            .HasDefaultValue(ProjectNetwork.Public);
 
         builder.Property(x => x.Identifier)
             .IsRequired()
             .HasMaxLength(ProjectConstants.IdentifierMaxLength); // 12
 
-        // D-08: unique on active slug. SoftDelete(now) rewrites Slug with __{epoch}.
+        // D-08: unconditional unique index on Slug — SoftDelete rewrites with __{epoch}.
         builder.Property(x => x.Slug)
             .IsRequired()
             .HasMaxLength(ProjectConstants.SlugMaxLength); // 100
@@ -60,10 +72,18 @@ public sealed class ProjectConfiguration : IEntityTypeConfiguration<ProjectEntit
             .IsUnique()
             .HasDatabaseName("IX_Projects_Slug");
 
-        // D-08: unique on active identifier. SoftDelete(now) rewrites with __{epoch}.
-        builder.HasIndex(x => x.Identifier)
+        // T-3-domain-03: conditional unique index on (TenantId, Identifier).
+        // AdjustUniqueIndexes() widens to (TenantId, Identifier); HasFilter releases on delete.
+        builder.HasIndex(x => new { x.TenantId, x.Identifier })
             .IsUnique()
-            .HasDatabaseName("IX_Projects_Identifier");
+            .HasDatabaseName("IX_Projects_Tenant_Identifier")
+            .HasFilter("[DeletedOnUtc] IS NULL");
+
+        // Conditional unique index on (TenantId, Name) — name release on delete.
+        builder.HasIndex(x => new { x.TenantId, x.Name })
+            .IsUnique()
+            .HasDatabaseName("IX_Projects_Tenant_Name")
+            .HasFilter("[DeletedOnUtc] IS NULL");
 
         // Scalar user references (NO FK to Identity per D-06)
         builder.Property(x => x.OwnerId)
@@ -86,6 +106,7 @@ public sealed class ProjectConfiguration : IEntityTypeConfiguration<ProjectEntit
         builder.Property(x => x.LogoProps)
             .HasMaxLength(1000);
 
+        // Timezone
         builder.Property(x => x.TimeZone)
             .IsRequired()
             .HasMaxLength(64)
@@ -106,15 +127,22 @@ public sealed class ProjectConfiguration : IEntityTypeConfiguration<ProjectEntit
         builder.Property(x => x.CloseIn).IsRequired();
         builder.Property(x => x.ArchivedAt);
 
-        // Sort order index — for listing projects in user-defined order within a tenant.
-        builder.Property(x => x.SortOrder);
-        builder.HasIndex(x => x.SortOrder)
-            .HasDatabaseName("IX_Projects_SortOrder");
+        // External source / id (Plane compatibility)
+        builder.Property(x => x.ExternalSource).HasMaxLength(256);
+        builder.Property(x => x.ExternalId).HasMaxLength(256);
 
-        // Active project listing path: "show me active projects for this workspace".
-        // ArchivedAt is null for active projects; the index covers the common tenant-scoped query.
+        // Sort order — default 65535.0 per Plane convention.
+        builder.Property(x => x.SortOrder)
+            .IsRequired()
+            .HasDefaultValue(65535.0);
+
+        // Active project listing index.
         builder.HasIndex(x => new { x.ArchivedAt, x.SortOrder })
             .HasDatabaseName("IX_Projects_ArchivedAt_SortOrder");
+
+        // OwnerId performance index.
+        builder.HasIndex(x => x.OwnerId)
+            .HasDatabaseName("IX_Projects_Owner");
 
         // Audit + soft-delete columns populated by AuditableEntitySaveChangesInterceptor.
         builder.Property(x => x.CreatedOnUtc).IsRequired();

@@ -42,7 +42,12 @@ public sealed class ProjectMemberConfiguration : IEntityTypeConfiguration<Projec
             .IsRequired();
 
         builder.Property(x => x.IsActive)
-            .IsRequired();
+            .IsRequired()
+            .HasDefaultValue(true);
+
+        builder.Property(x => x.SortOrder)
+            .IsRequired()
+            .HasDefaultValue(65535.0);
 
         // CRITICAL: one active membership per (project, user). TenantId is
         // auto-added by ApplyTenantIsolationByDefault; the composite here is the load-bearing
@@ -52,8 +57,8 @@ public sealed class ProjectMemberConfiguration : IEntityTypeConfiguration<Projec
             .HasDatabaseName("IX_ProjectMembers_Tenant_Project_User");
 
         // "Who is in this project?" — the hot list path.
-        builder.HasIndex(x => new { x.TenantId, x.ProjectId, x.IsActive })
-            .HasDatabaseName("IX_ProjectMembers_Tenant_Project_Active");
+        builder.HasIndex(x => new { x.ProjectId, x.IsActive })
+            .HasDatabaseName("IX_ProjectMembers_Project_Active");
 
         // "What projects does this user belong to?" — cross-project membership query.
         builder.HasIndex(x => new { x.TenantId, x.UserId, x.IsActive })

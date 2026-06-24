@@ -7,8 +7,8 @@ namespace YH.Modules.Project.Domain;
 /// </summary>
 /// <remarks>
 /// <b>Tenant isolation:</b> this entity is NOT <see cref="IGlobalEntity"/>; <c>BaseDbContext</c>
-/// auto-applies <c>IsMultiTenant()</c>, so Finbuckle injects the <see cref="TenantId"/> shadow
-/// property (set to the resolved workspace's <c>Id</c>). The composite unique index
+/// auto-applies <c>IsMultiTenant()</c>, so Finbuckle injects the <see cref="TenantId"/> property
+/// (set to the resolved workspace's <c>Id</c>). The composite unique index
 /// <c>(TenantId, ProjectId, UserId)</c> enforces "one membership per user per project".
 /// <para>
 /// <b>Cross-module userId (D-04):</b> <see cref="UserId"/> is a scalar <c>string</c> (matches
@@ -51,6 +51,9 @@ public sealed class ProjectMember : IHasDomainEvents, IHasTenant, ISoftDeletable
     /// <summary>Soft-deactivation flag (separate from <see cref="ISoftDeletable.IsDeleted"/>).</summary>
     public bool IsActive { get; private set; }
 
+    /// <summary>Custom sort order for member listing. Default 65535.0 (Plane convention).</summary>
+    public double SortOrder { get; private set; } = 65535.0;
+
     // IAuditableEntity
     public DateTimeOffset CreatedOnUtc { get; private set; }
     public string? CreatedBy { get; private set; }
@@ -74,7 +77,8 @@ public sealed class ProjectMember : IHasDomainEvents, IHasTenant, ISoftDeletable
     /// <param name="userId">User id (scalar string per D-04).</param>
     /// <param name="role">Role code (Guest=5 / Member=15 / Admin=20).</param>
     /// <param name="isActive">Initial active state (default true).</param>
-    public static ProjectMember Create(Guid projectId, string userId, int role, bool isActive = true)
+    /// <param name="sortOrder">Custom sort order (default 65535.0).</param>
+    public static ProjectMember Create(Guid projectId, string userId, int role, bool isActive = true, double sortOrder = 65535.0)
     {
         if (projectId == Guid.Empty)
             throw new ArgumentException("Project id is required.", nameof(projectId));
@@ -88,6 +92,7 @@ public sealed class ProjectMember : IHasDomainEvents, IHasTenant, ISoftDeletable
             UserId = userId,
             Role = role,
             IsActive = isActive,
+            SortOrder = sortOrder,
             CreatedOnUtc = DateTimeOffset.UtcNow,
         };
     }
@@ -112,6 +117,13 @@ public sealed class ProjectMember : IHasDomainEvents, IHasTenant, ISoftDeletable
     {
         if (IsActive) return;
         IsActive = true;
+        LastModifiedOnUtc = DateTimeOffset.UtcNow;
+    }
+
+    /// <summary>Updates the sort order value for member listing.</summary>
+    public void SetSortOrder(double sortOrder)
+    {
+        SortOrder = sortOrder;
         LastModifiedOnUtc = DateTimeOffset.UtcNow;
     }
 }
