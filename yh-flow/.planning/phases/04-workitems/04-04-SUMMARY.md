@@ -152,7 +152,7 @@ Build succeeded.
 | `171e68155` | feat(04-04): IssueComment CRUD + IssueActivity domain events + Batch operations |
 | `ce774dc00` | feat(04-04): IntakeIssue CRUD — Create/List/Update with status transitions      |
 | `7720413ba` | feat(04-04): Import/Export + StateSeeder — Task 3 of Wave 4                     |
-| (pending)   | Migration + SUMMARY (docs commit)                                               |
+| `87c79c206` | docs(04-04): complete Wave 4 Comments/Activities/Intake/Import/Export plan      |
 
 ## Plan Completion
 
