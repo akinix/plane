@@ -86,6 +86,7 @@ public sealed class WorkItemsModule : IModule
 
         // Domain services
         builder.Services.AddScoped<IIssueSequenceService, IssueSequenceService>();
+        builder.Services.AddScoped<IBurndownCalculator, BurndownCalculator>();
     }
 
     public void ConfigureMiddleware(IApplicationBuilder app)
@@ -182,5 +183,12 @@ public sealed class WorkItemsModule : IModule
         labels.MapGetLabelEndpoint();
         labels.MapUpdateLabelEndpoint();
         labels.MapDeleteLabelEndpoint();
+
+        // Cycle route group under /workspaces/{slug}/projects/{projectId}/cycles/
+        // (endpoints will be registered in Wave 2)
+        _ = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/cycles")
+            .WithTags("Cycles")
+            .WithApiVersionSet(apiVersionSet);
     }
 }

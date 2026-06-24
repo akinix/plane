@@ -35,5 +35,7 @@
       "enabled": true
     },
     "modelProfile": "opus"
-  }
+  },
+  "response_language": "Chinese",
+  "context_window": 1000000
 }
