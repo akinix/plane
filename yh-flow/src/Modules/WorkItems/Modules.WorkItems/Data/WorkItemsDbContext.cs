@@ -63,6 +63,12 @@ public sealed class WorkItemsDbContext : BaseDbContext
     /// <summary>IssueActivities table (Wave 4).</summary>
     public DbSet<IssueActivity> IssueActivities => Set<IssueActivity>();
 
+    /// <summary>Cycles table (Wave 5).</summary>
+    public DbSet<Cycle> Cycles => Set<Cycle>();
+
+    /// <summary>Cycle-Issue M2M through table (Wave 5).</summary>
+    public DbSet<CycleIssue> CycleIssues => Set<CycleIssue>();
+
     /// <summary>IntakeIssues table (Wave 4).</summary>
     public DbSet<IntakeIssue> IntakeIssues => Set<IntakeIssue>();
 
