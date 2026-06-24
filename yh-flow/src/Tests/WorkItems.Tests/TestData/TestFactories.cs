@@ -151,6 +151,30 @@ internal static class TestIntakeFactory
     }
 }
 
+/// <summary>Factory helpers for creating <see cref="Cycle"/> instances in tests.</summary>
+internal static class TestCycleFactory
+{
+    public static Cycle CreateValid(
+        string name = "Sprint 1",
+        Guid? projectId = null,
+        DateTimeOffset? startDate = null,
+        DateTimeOffset? endDate = null,
+        string? description = null)
+    {
+        return Cycle.Create(name,
+            projectId ?? Guid.Parse("00000000-0000-0000-0000-000000000001"),
+            startDate, endDate, description);
+    }
+
+    public static Cycle CreateBacklog(
+        string name = "Backlog",
+        Guid? projectId = null)
+    {
+        return Cycle.Create(name,
+            projectId ?? Guid.Parse("00000000-0000-0000-0000-000000000001"));
+    }
+}
+
 /// <summary>Factory helpers for creating <see cref="IssueActivity"/> instances in tests.</summary>
 internal static class TestActivityFactory
 {
