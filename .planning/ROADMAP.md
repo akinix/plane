@@ -309,7 +309,7 @@ Plans:
 
 **Wave 3** _(blocked on Wave 2 completion)_
 
-- [ ] 06-03-PLAN.md — Module-Issue association（Add/Remove/List）+ ModuleLink CRUD（Add/Remove/List）+ Module progress tracking（real-time aggregation）+ integration tests（REQ-6.2）
+- [x] 06-03-PLAN.md — Module-Issue association（Add/Remove/List）+ ModuleLink CRUD（Add/Remove/List）+ Module progress tracking（real-time aggregation）+ integration tests（REQ-6.2）
 
 **Deliverables:**
 
