@@ -305,7 +305,7 @@ Plans:
 
 **Wave 2** _(blocked on Wave 1 completion)_
 
-- [ ] 06-02-PLAN.md — Module CRUD endpoints（Create/Get/Update/Delete/List）+ ModuleDtoMapper + Archive/Unarchive/ListArchivedModules + WorkItemsModule routing（REQ-6.1）
+- [x] 06-02-PLAN.md — Module CRUD endpoints（Create/Get/Update/Delete/List）+ ModuleDtoMapper + Archive/Unarchive/ListArchivedModules + WorkItemsModule routing（REQ-6.1）
 
 **Wave 3** _(blocked on Wave 2 completion)_
 
