@@ -220,6 +220,32 @@ Plans:
 - T4.14: 创建 WorkItemsDbContext + 迁移
 - T4.15: 实现 WorkItems 权限
 
+### Plans
+
+**Plans:** 5 plans (5 waves)
+
+Plans:
+
+**Wave 1**
+
+- [ ] 04-01-PLAN.md — Scaffold (Contracts + Module csproj + Test project + Host wiring), base domain entities (State, Label, Estimate, EstimatePoint), WorkItemsDbContext + EF configurations + migration. T4.1, T4.2, T4.3, T4.14, T4.15
+
+**Wave 2** _(blocked on Wave 1 completion)_
+
+- [ ] 04-02-PLAN.md — State CRUD endpoints (Create/Get/Update/Delete/List), Label CRUD endpoints, Issue entity (all Plane fields + IssueAssignee/IssueLabel M2M through tables + SequenceId service). T4.4, T4.5 (part: SequenceId)
+
+**Wave 3** _(blocked on Wave 2 completion)_
+
+- [ ] 04-03-PLAN.md — Estimate + EstimatePoint CRUD endpoints, Issue CRUD endpoints (Create/Get/Update/Delete/List with multidimensional filtering + plane-compatible pagination + closed-state semantics + completed_at sync), IssueLink entity + CRUD. T4.3, T4.5 (part: IssueLink), T4.8
+
+**Wave 4** _(blocked on Wave 3 completion)_
+
+- [ ] 04-04-PLAN.md — IssueComment CRUD, IssueActivity domain events + list, batch operations, IntakeIssue CRUD (draft->accept/reject/snooze/duplicate), Import/Export endpoints (CSV/JSON with formula injection protection), State seed data. T4.6, T4.7, T4.9, T4.10, T4.11, T4.12, T4.13
+
+**Wave 5** _(blocked on Wave 4 completion)_
+
+- [ ] 04-05-PLAN.md — Full test suite (30+ unit + integration tests), architecture tests, full regression verification
+
 **Deliverables:**
 
 - 完整工作项管理 API
