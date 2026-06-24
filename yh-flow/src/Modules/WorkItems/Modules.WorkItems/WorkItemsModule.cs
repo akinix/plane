@@ -2,8 +2,12 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
+using YH.Framework.Persistence;
 using YH.Framework.Web.Modules;
+using YH.Modules.WorkItems.Data;
 
 namespace YH.Modules.WorkItems;
 
@@ -11,14 +15,13 @@ namespace YH.Modules.WorkItems;
 /// WorkItems module entry point.
 /// </summary>
 /// <remarks>
-/// <b>Wave 1 wiring status (plan 04-01):</b>
+/// <b>Wave 1 wiring status (plan 04-01 complete):</b>
 /// <list type="bullet">
-///   <item><see cref="ConfigureServices"/> has TODO placeholder — full DbContext + health check
-///     registration deferred to Task 3 after domain entities and data layer are created.</item>
+///   <item><see cref="ConfigureServices"/> registers <see cref="WorkItemsDbContext"/> + health check.</item>
 ///   <item><see cref="MapEndpoints"/> registers the route group with TODO endpoints for subsequent waves.</item>
 /// </list>
 /// <para>
-/// <b>Next:</b> Task 2 creates domain entities, then Task 3 completes this module registration.
+/// <b>Next:</b> Wave 2 — Issue entity + core CRUD endpoints.
 /// </para>
 /// </remarks>
 public sealed class WorkItemsModule : IModule
@@ -27,12 +30,12 @@ public sealed class WorkItemsModule : IModule
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        // TODO(Task 3): Register WorkItemsDbContext + health check after domain entities are created.
-        // builder.Services.AddHeroDbContext<WorkItemsDbContext>();
-        // builder.Services.AddHealthChecks()
-        //     .AddDbContextCheck<WorkItemsDbContext>(
-        //         name: "db:work-items",
-        //         failureStatus: HealthStatus.Unhealthy);
+        // DbContext + health check.
+        builder.Services.AddHeroDbContext<WorkItemsDbContext>();
+        builder.Services.AddHealthChecks()
+            .AddDbContextCheck<WorkItemsDbContext>(
+                name: "db:work-items",
+                failureStatus: HealthStatus.Unhealthy);
     }
 
     public void ConfigureMiddleware(IApplicationBuilder app)
