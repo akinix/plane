@@ -269,15 +269,15 @@ Plans:
 
 **Wave 1**
 
-- [ ] 05-01-PLAN.md — Domain 实体（Cycle + CycleIssue）、EF 配置、WorkItemsDbContext 更新、AddCycles 迁移、Contracts DTOs、BurndownCalculator 服务、测试脚手架（REQ-5.1, REQ-5.2）
+- [x] 05-01-PLAN.md — Domain 实体（Cycle + CycleIssue）、EF 配置、WorkItemsDbContext 更新、AddCycles 迁移、Contracts DTOs、BurndownCalculator 服务、测试脚手架（REQ-5.1, REQ-5.2）
 
 **Wave 2** _(blocked on Wave 1 completion)_
 
-- [ ] 05-02-PLAN.md — Cycle CRUD 端点（Create/Get/Update/Delete/List/DateCheck），COMPLETED 编辑限制（D-03），动态状态计算，cycle_view 筛选（REQ-5.1）
+- [x] 05-02-PLAN.md — Cycle CRUD 端点（Create/Get/Update/Delete/List/DateCheck），COMPLETED 编辑限制（D-03），动态状态计算，cycle_view 筛选（REQ-5.1）
 
 **Wave 3** _(blocked on Wave 2 completion)_
 
-- [ ] 05-03-PLAN.md — Cycle-Issue 关联（Add/Remove/List）、Burndown 实时计算（D-02）、Issue 迁移冻结快照、归档/取消归档、集成测试（REQ-5.2）
+- [x] 05-03-PLAN.md — Cycle-Issue 关联（Add/Remove/List）、Burndown 实时计算（D-02）、Issue 迁移冻结快照、归档/取消归档、集成测试（REQ-5.2）
 
 **Deliverables:**
 
@@ -293,19 +293,27 @@ Plans:
 **Duration Estimate:** 2-3 days  
 **Requirements:** REQ-6.1 ~ REQ-6.2
 
-### Tasks
+### Plans
 
-- T6.1: 创建 Module 实体和领域模型
-- T6.2: 创建 ModuleIssue 关联实体
-- T6.3: 实现 Module CRUD 端点
-- T6.4: 实现 Module-Issue 关联端点
-- T6.5: 实现 Module 进度跟踪
-- T6.6: 创建 ModuleDbContext + 迁移
-- T6.7: 实现 Module 权限
+**Plans:** 3 plans (3 waves)
+
+Plans:
+
+**Wave 1**
+
+- [ ] 06-01-PLAN.md — Domain entities（Module/ModuleIssue/ModuleMember/ModuleLink）+ EF configurations + WorkItemsDbContext update + AddModules migration + Contracts DTOs + test scaffolds（REQ-6.1, REQ-6.2）
+
+**Wave 2** _(blocked on Wave 1 completion)_
+
+- [ ] 06-02-PLAN.md — Module CRUD endpoints（Create/Get/Update/Delete/List）+ ModuleDtoMapper + Archive/Unarchive/ListArchivedModules + WorkItemsModule routing（REQ-6.1）
+
+**Wave 3** _(blocked on Wave 2 completion)_
+
+- [ ] 06-03-PLAN.md — Module-Issue association（Add/Remove/List）+ ModuleLink CRUD（Add/Remove/List）+ Module progress tracking（real-time aggregation）+ integration tests（REQ-6.2）
 
 **Deliverables:**
 
-- 完整模块管理 API
+- 完整模块管理 API（15 个端点：5 CRUD + 3 archive + 3 Module-Issue + 3 ModuleLink + 1 Progress）
 
 ---
 
