@@ -52,6 +52,14 @@ using YH.Modules.WorkItems.Features.v1.Cycles.UpdateCycle;
 using YH.Modules.WorkItems.Features.v1.Cycles.DeleteCycle;
 using YH.Modules.WorkItems.Features.v1.Cycles.ListCycles;
 using YH.Modules.WorkItems.Features.v1.Cycles.DateCheckCycle;
+using YH.Modules.WorkItems.Features.v1.Cycles.Issues.AddIssuesToCycle;
+using YH.Modules.WorkItems.Features.v1.Cycles.Issues.RemoveIssueFromCycle;
+using YH.Modules.WorkItems.Features.v1.Cycles.Issues.ListCycleIssues;
+using YH.Modules.WorkItems.Features.v1.Cycles.TransferCycleIssues;
+using YH.Modules.WorkItems.Features.v1.Cycles.GetCycleProgress;
+using YH.Modules.WorkItems.Features.v1.Cycles.ArchiveCycle;
+using YH.Modules.WorkItems.Features.v1.Cycles.UnarchiveCycle;
+using YH.Modules.WorkItems.Features.v1.Cycles.ListArchivedCycles;
 
 namespace YH.Modules.WorkItems;
 
@@ -202,5 +210,26 @@ public sealed class WorkItemsModule : IModule
         cycles.MapUpdateCycleEndpoint();
         cycles.MapDeleteCycleEndpoint();
         cycles.MapDateCheckCycleEndpoint();
+
+        // Cycle-Issue endpoints
+        cycles.MapAddIssuesToCycleEndpoint();
+        cycles.MapRemoveIssueFromCycleEndpoint();
+        cycles.MapListCycleIssuesEndpoint();
+
+        // Transfer + Progress
+        cycles.MapTransferCycleIssuesEndpoint();
+        cycles.MapGetCycleProgressEndpoint();
+
+        // Archive
+        cycles.MapArchiveCycleEndpoint();
+
+        // Archived cycles route group
+        var archived = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/archived-cycles")
+            .WithTags("Cycles (Archived)")
+            .WithApiVersionSet(apiVersionSet);
+
+        archived.MapListArchivedCyclesEndpoint();
+        archived.MapUnarchiveCycleEndpoint();
     }
 }
