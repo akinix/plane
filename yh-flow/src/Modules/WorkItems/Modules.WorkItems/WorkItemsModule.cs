@@ -41,6 +41,9 @@ using YH.Modules.WorkItems.Features.v1.IssueComments.UpdateIssueComment;
 using YH.Modules.WorkItems.Features.v1.IssueComments.DeleteIssueComment;
 using YH.Modules.WorkItems.Features.v1.IssueActivities.ListIssueActivities;
 using YH.Modules.WorkItems.Features.v1.Issues.BulkUpdateIssues;
+using YH.Modules.WorkItems.Features.v1.Intake.CreateIntakeIssue;
+using YH.Modules.WorkItems.Features.v1.Intake.ListIntakeIssues;
+using YH.Modules.WorkItems.Features.v1.Intake.UpdateIntakeIssue;
 
 namespace YH.Modules.WorkItems;
 
@@ -58,9 +61,11 @@ namespace YH.Modules.WorkItems;
 ///     <c>/work-items/{issueId}/activities/</c>.</item>
 ///   <item><see cref="MapEndpoints"/> registers BulkUpdateIssues endpoint under
 ///     <c>/work-items/bulk/</c>.</item>
+///   <item><see cref="MapEndpoints"/> registers Intake CRUD (3 endpoints) under
+///     <c>/work-items/intake/</c>.</item>
 /// </list>
 /// <para>
-/// <b>Next:</b> Wave 5 — Intake + Import/Export endpoints.
+/// <b>Next:</b> Import/Export endpoints + migration.
 /// </para>
 /// </remarks>
 public sealed class WorkItemsModule : IModule
@@ -124,6 +129,11 @@ public sealed class WorkItemsModule : IModule
 
         // Batch operations (/bulk/)
         workItems.MapBulkUpdateIssuesEndpoint();
+
+        // Intake endpoints (/intake/, /intake/{intakeIssueId})
+        workItems.MapCreateIntakeIssueEndpoint();
+        workItems.MapListIntakeIssuesEndpoint();
+        workItems.MapUpdateIntakeIssueEndpoint();
 
         // Estimate route group under /workspaces/{slug}/projects/{projectId}/estimates/
         var estimates = endpoints

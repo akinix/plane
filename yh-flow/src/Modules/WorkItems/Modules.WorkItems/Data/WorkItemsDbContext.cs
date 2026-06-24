@@ -63,7 +63,8 @@ public sealed class WorkItemsDbContext : BaseDbContext
     /// <summary>IssueActivities table (Wave 4).</summary>
     public DbSet<IssueActivity> IssueActivities => Set<IssueActivity>();
 
-    // TODO(Wave 4): IntakeIssues
+    /// <summary>IntakeIssues table (Wave 4).</summary>
+    public DbSet<IntakeIssue> IntakeIssues => Set<IntakeIssue>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
