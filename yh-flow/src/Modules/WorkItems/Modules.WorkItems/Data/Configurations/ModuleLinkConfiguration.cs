@@ -31,8 +31,7 @@ public sealed class ModuleLinkConfiguration : IEntityTypeConfiguration<ModuleLin
             .IsRequired()
             .HasMaxLength(2048);
 
-        builder.Property(x => x.Metadata)
-            .HasColumnType("nvarchar(max)");
+        builder.Property(x => x.Metadata);
 
         builder.Property(x => x.ModuleId)
             .IsRequired();

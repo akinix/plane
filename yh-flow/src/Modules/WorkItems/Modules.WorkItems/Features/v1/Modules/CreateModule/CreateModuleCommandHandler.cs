@@ -1,6 +1,7 @@
 using System.Net;
 using Mediator;
 using YH.Framework.Core.Exceptions;
+using YH.Modules.WorkItems.Contracts.Constants;
 using YH.Modules.WorkItems.Contracts.v1.Modules.CreateModule;
 using YH.Modules.WorkItems.Data;
 using YH.Modules.WorkItems.Domain;
@@ -30,7 +31,7 @@ public sealed class CreateModuleCommandHandler : ICommandHandler<CreateModuleCom
         var module = Module.Create(
             name: command.Name,
             projectId: command.ProjectId,
-            status: command.Status ?? "planned",
+            status: command.Status ?? ModuleConstants.DefaultStatus,
             startDate: command.StartDate,
             targetDate: command.TargetDate,
             description: command.Description,

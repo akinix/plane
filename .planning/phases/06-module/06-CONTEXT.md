@@ -37,12 +37,14 @@
 - Module 实体放在 WorkItemsDbContext（与 Cycle 一致）
 - Status 字段: `string` enum values `"backlog"` / `"planned"` / `"in-progress"` / `"paused"` / `"completed"` / `"cancelled"`，默认 `"planned"`
 - 日期字段: `DateTimeOffset?` StartDate / TargetDate（与 Cycle 模式保持一致）
+
 - 描述字段: 仅 `Description` (string, max 10000)，暂不包含富文本 JSON 字段
 
 ### Relationship Design
 
 - 包含 ModuleMember M2M through 实体（与 Plane 一致）
 - 包含 ModuleLink 实体（title/url/metadata）
+
 - 唯一约束: (TenantId, ProjectId, Name) WHERE deleted_at IS NULL; (TenantId, ModuleId, IssueId) WHERE deleted_at IS NULL
 - ModuleUserProperties 推迟
 
@@ -50,6 +52,7 @@
 
 - 路由: `/projects/{projectId}/modules/`（与 Cycle 一致）
 - 标准 5 端点: Create / Get / Update / Delete / List
+
 - Module-Issue 端点: AddIssuesToModule / RemoveIssueFromModule / ListModuleIssues
 - Archive/Unarchive: ArchiveModule / UnarchiveModule / ListArchivedModules
 - 进度跟踪: GetModuleProgress（实时聚合）
@@ -58,6 +61,7 @@
 
 - Module CRUD: Admin/Member 可写，Guest 只读
 - Module-Issue 管理: Admin/Member 可添加/移除
+
 - Status 变更: Admin/Member（与更新相同）
 - Lead（负责人）：语义角色，不做特殊权限控制
 
@@ -70,6 +74,7 @@
 ### Reusable Assets
 
 - **Cycle 实体模式**: `Cycle.cs` 实现了 IHasTenant + ISoftDeletable + IAuditableEntity 接口，有 Factory 方法 + Update/Archive/Unarchive/SoftDelete 行为方法
+
 - **CycleIssue 模式**: `CycleIssue.cs` 实现了 IHasTenant + ISoftDeletable，Factory + SoftDelete
 - **CycleConfiguration**: `CycleConfiguration.cs` 定义了表名 `WorkItemsModuleConstants.SchemaName`，索引设计（Project_SortOrder + Tenant_Deleted_Project）
 - **CycleIssueConfiguration**: 唯一索引 `(TenantId, CycleId, IssueId)` + HasFilter
@@ -89,6 +94,7 @@
 ### Integration Points
 
 - WorkItemsDbContext 需注册 Module/ModuleIssue/ModuleMember/ModuleLink DbSet
+
 - Routes 通过 WorkItemsModule 的 route builder 注册
 - 契约（Commands/DTOs/Constants）在 `Modules.WorkItems.Contracts` 中
 - 迁移在 `YH.Flow.Migrations.PostgreSQL/WorkItems/` 中

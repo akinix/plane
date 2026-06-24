@@ -19,4 +19,12 @@ public static class ModuleConstants
 
     /// <summary>Maximum status string length (longest: "in-progress" = 11, plus buffer).</summary>
     public const int StatusMaxLength = 20;
+
+    /// <summary>Valid status values.</summary>
+    public static readonly string[] ValidStatuses =
+        ["backlog", "planned", "in-progress", "paused", "completed", "cancelled"];
+
+    /// <summary>Checks whether <paramref name="status"/> is a valid module status value.</summary>
+    public static bool IsValidStatus(string? status) =>
+        status is not null && ValidStatuses.Contains(status);
 }

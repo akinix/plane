@@ -12,7 +12,7 @@ using YH.Modules.WorkItems.Data;
 namespace YH.Flow.Migrations.PostgreSQL.WorkItems
 {
     [DbContext(typeof(WorkItemsDbContext))]
-    [Migration("20260624095427_AddModules")]
+    [Migration("20260624103616_AddModules")]
     partial class AddModules
     {
         /// <inheritdoc />
@@ -975,7 +975,7 @@ namespace YH.Flow.Migrations.PostgreSQL.WorkItems
                         .HasColumnType("boolean");
 
                     b.Property<string>("Metadata")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("ModuleId")
                         .HasColumnType("uuid");

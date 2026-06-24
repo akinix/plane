@@ -98,6 +98,8 @@ public sealed class Module : IHasTenant, ISoftDeletable, IAuditableEntity
             throw new ArgumentException("Module name is required.", nameof(name));
         if (projectId == Guid.Empty)
             throw new ArgumentException("Project id is required.", nameof(projectId));
+        if (status is not null && !ModuleConstants.IsValidStatus(status))
+            throw new ArgumentException($"Invalid status '{status}'. Valid values: backlog, planned, in-progress, paused, completed, cancelled.", nameof(status));
 
         return new Module
         {
@@ -136,7 +138,11 @@ public sealed class Module : IHasTenant, ISoftDeletable, IAuditableEntity
             Description = description;
 
         if (status is not null)
+        {
+            if (!ModuleConstants.IsValidStatus(status))
+                throw new ArgumentException($"Invalid status '{status}'.", nameof(status));
             Status = status;
+        }
 
         if (startDate is not null)
             StartDate = startDate;
@@ -159,7 +165,11 @@ public sealed class Module : IHasTenant, ISoftDeletable, IAuditableEntity
     public void UpdateStatus(string? status)
     {
         if (status is not null)
+        {
+            if (!ModuleConstants.IsValidStatus(status))
+                throw new ArgumentException($"Invalid status '{status}'.", nameof(status));
             Status = status;
+        }
 
         LastModifiedOnUtc = DateTimeOffset.UtcNow;
     }

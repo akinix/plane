@@ -972,7 +972,7 @@ namespace YH.Flow.Migrations.PostgreSQL.WorkItems
                         .HasColumnType("boolean");
 
                     b.Property<string>("Metadata")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<Guid>("ModuleId")
                         .HasColumnType("uuid");
