@@ -160,20 +160,37 @@ Plans:
 **Duration Estimate:** 2-3 days  
 **Requirements:** REQ-3.1 ~ REQ-3.3
 
-### Tasks
+### Plans
 
-- T3.1: 创建 Project 实体和领域模型
-- T3.2: 创建 ProjectMember 实体
-- T3.3: 实现 Project CRUD 端点
-- T3.4: 实现 Project Member 端点
-- T3.5: 实现 Project 设置端点
-- T3.6: 实现 Unsplash 封面图片搜索
-- T3.7: 创建 ProjectDbContext + 迁移
-- T3.8: 实现 Project 权限
+**Plans:** 4 plans (4 waves)
+
+Plans:
+
+**Wave 1**
+
+- [ ] 03-01-PLAN.md — Wave 0：Scaffold（Modules.Project + Contracts csproj / DTOs / AssemblyInfo + Project.Tests + slnx/host wiring）
+
+**Wave 2** _(blocked on Wave 1 completion)_
+
+- [ ] 03-02-PLAN.md — Wave 1：Domain（Project + ProjectMember entity + ProjectDbContext + EF configurations + migration + ProjectModule route groups）
+
+**Wave 3** _(blocked on Wave 2 completion)_
+
+- [ ] 03-03-PLAN.md — Wave 2：Project CRUD（Create/Get/Update/Delete/List + identifier validation + network filter + auto-owner membership）— REQ-3.1
+
+**Wave 4** _(blocked on Wave 3 completion)_
+
+- [ ] 03-04-PLAN.md — Wave 3：ProjectMember（Add/List/UpdateRole/Remove + batch user resolution + role authz）— REQ-3.2
+
+**Notes:**
+
+- REQ-3.3（项目设置：封面图片、标识符、描述、可见性）由 03-03 UpdateProject 端点覆盖
+- Unsplash 封面搜索端点 deferred（前端直调 Unsplash API 或 Phase 9 实现）
+- 项目归档功能 deferred
 
 **Deliverables:**
 
-- 完整项目管理 API
+- 完整项目管理 API（Project CRUD + ProjectMember CRUD）
 
 ---
 
