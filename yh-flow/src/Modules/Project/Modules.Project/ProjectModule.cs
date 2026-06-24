@@ -1,7 +1,12 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
+using YH.Framework.Persistence;
 using YH.Framework.Web.Modules;
+using YH.Modules.Project.Data;
 
 namespace YH.Modules.Project;
 
@@ -9,10 +14,9 @@ namespace YH.Modules.Project;
 /// Project module entry point.
 /// </summary>
 /// <remarks>
-/// <b>Wave 1 wiring status (plan 03-01 complete):</b>
+/// <b>Wave 2 wiring status (plan 03-02 complete):</b>
 /// <list type="bullet">
-///   <item><see cref="ConfigureServices"/> is a placeholder — Wave 2 (03-02) will register
-///     ProjectDbContext + health check.</item>
+///   <item><see cref="ConfigureServices"/> registers <see cref="ProjectDbContext"/> + health check.</item>
 ///   <item><see cref="MapEndpoints"/> is a placeholder — Wave 3 (03-03) will add project route group,
 ///     Wave 4 (03-04) will add member route group.</item>
 /// </list>
@@ -23,12 +27,12 @@ public sealed class ProjectModule : IModule
     {
         ArgumentNullException.ThrowIfNull(builder);
 
-        // TODO (03-02): Register ProjectDbContext + health check
-        // builder.Services.AddHeroDbContext<ProjectDbContext>();
-        // builder.Services.AddHealthChecks()
-        //     .AddDbContextCheck<ProjectDbContext>(
-        //         name: "db:project",
-        //         failureStatus: HealthStatus.Unhealthy);
+        // DbContext + health check.
+        builder.Services.AddHeroDbContext<ProjectDbContext>();
+        builder.Services.AddHealthChecks()
+            .AddDbContextCheck<ProjectDbContext>(
+                name: "db:project",
+                failureStatus: HealthStatus.Unhealthy);
     }
 
     public void ConfigureMiddleware(IApplicationBuilder app)
