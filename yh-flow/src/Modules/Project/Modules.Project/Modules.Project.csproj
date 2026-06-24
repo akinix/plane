@@ -3,7 +3,7 @@
     <PropertyGroup>
         <RootNamespace>YH.Modules.Project</RootNamespace>
         <AssemblyName>YH.Modules.Project</AssemblyName>
-        <NoWarn>$(NoWarn);CA1031;CA1056;CA1716;CA1812;S1135;S125;S2094;S3267;S1144</NoWarn>
+        <NoWarn>$(NoWarn);CA1027;CA1031;CA1056;CA1716;CA1812;S1135;S125;S2094;S3267;S1144</NoWarn>
     </PropertyGroup>
 
     <ItemGroup>
