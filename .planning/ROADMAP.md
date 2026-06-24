@@ -261,15 +261,23 @@ Plans:
 **Duration Estimate:** 2-3 days  
 **Requirements:** REQ-5.1 ~ REQ-5.2
 
-### Tasks
+### Plans
 
-- T5.1: 创建 Cycle 实体和领域模型
-- T5.2: 创建 CycleIssue 关联实体
-- T5.3: 实现 Cycle CRUD 端点
-- T5.4: 实现 Cycle-Issue 关联端点
-- T5.5: 实现 Cycle 进度跟踪
-- T5.6: 创建 CycleDbContext + 迁移
-- T5.7: 实现 Cycle 权限
+**Plans:** 3 plans (3 waves)
+
+Plans:
+
+**Wave 1**
+
+- [ ] 05-01-PLAN.md — Domain 实体（Cycle + CycleIssue）、EF 配置、WorkItemsDbContext 更新、AddCycles 迁移、Contracts DTOs、BurndownCalculator 服务、测试脚手架（REQ-5.1, REQ-5.2）
+
+**Wave 2** _(blocked on Wave 1 completion)_
+
+- [ ] 05-02-PLAN.md — Cycle CRUD 端点（Create/Get/Update/Delete/List/DateCheck），COMPLETED 编辑限制（D-03），动态状态计算，cycle_view 筛选（REQ-5.1）
+
+**Wave 3** _(blocked on Wave 2 completion)_
+
+- [ ] 05-03-PLAN.md — Cycle-Issue 关联（Add/Remove/List）、Burndown 实时计算（D-02）、Issue 迁移冻结快照、归档/取消归档、集成测试（REQ-5.2）
 
 **Deliverables:**
 
