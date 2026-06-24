@@ -1,5 +1,6 @@
 using System.Text.RegularExpressions;
 using YH.Framework.Core.Domain;
+using YH.Modules.WorkItems.Domain.Events;
 
 namespace YH.Modules.WorkItems.Domain;
 
@@ -238,8 +239,7 @@ public sealed class Issue : IHasDomainEvents, IHasTenant, ISoftDeletable, IAudit
 
         if (changes.Count > 0)
         {
-            // TODO(Wave 3): emit IssueUpdatedDomainEvent for activity logging
-            // _domainEvents.Add(new IssueUpdatedDomainEvent(Id, changes, LastModifiedBy ?? "unknown"));
+            _domainEvents.Add(new IssueUpdatedDomainEvent(Id, changes, LastModifiedBy ?? "unknown"));
         }
     }
 
@@ -251,6 +251,7 @@ public sealed class Issue : IHasDomainEvents, IHasTenant, ISoftDeletable, IAudit
     /// <param name="isCancelledGroup">Whether the new state is in the Cancelled group.</param>
     public void UpdateState(Guid stateId, bool isCompletedGroup, bool isCancelledGroup)
     {
+        var oldStateId = StateId;
         StateId = stateId;
 
         // CompletedAt sync: set when entering completed group, clear when leaving
@@ -268,9 +269,8 @@ public sealed class Issue : IHasDomainEvents, IHasTenant, ISoftDeletable, IAudit
 
         LastModifiedOnUtc = DateTimeOffset.UtcNow;
 
-        // TODO(Wave 3): emit IssueUpdatedDomainEvent for activity logging
-        // var stateChanges = new List<FieldChange> { new("state_id", oldStateId?.ToString(), stateId.ToString()) };
-        // _domainEvents.Add(new IssueUpdatedDomainEvent(Id, stateChanges, LastModifiedBy ?? "unknown"));
+        var stateChanges = new List<FieldChange> { new("state_id", oldStateId?.ToString(), stateId.ToString()) };
+        _domainEvents.Add(new IssueUpdatedDomainEvent(Id, stateChanges, LastModifiedBy ?? "unknown"));
     }
 
     /// <summary>

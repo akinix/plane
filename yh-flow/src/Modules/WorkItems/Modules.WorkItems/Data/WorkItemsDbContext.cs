@@ -57,7 +57,13 @@ public sealed class WorkItemsDbContext : BaseDbContext
     /// <summary>IssueLinks table (Wave 3).</summary>
     public DbSet<IssueLink> IssueLinks => Set<IssueLink>();
 
-    // TODO(Wave 4): IssueComments, IssueActivities, IntakeIssues
+    /// <summary>IssueComments table (Wave 4).</summary>
+    public DbSet<IssueComment> IssueComments => Set<IssueComment>();
+
+    /// <summary>IssueActivities table (Wave 4).</summary>
+    public DbSet<IssueActivity> IssueActivities => Set<IssueActivity>();
+
+    // TODO(Wave 4): IntakeIssues
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

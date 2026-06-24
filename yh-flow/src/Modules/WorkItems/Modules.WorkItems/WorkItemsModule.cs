@@ -35,6 +35,12 @@ using YH.Modules.WorkItems.Features.v1.IssueLinks.CreateIssueLink;
 using YH.Modules.WorkItems.Features.v1.IssueLinks.DeleteIssueLink;
 using YH.Modules.WorkItems.Features.v1.IssueLinks.ListIssueLinks;
 using YH.Modules.WorkItems.Features.v1.States.UpdateState;
+using YH.Modules.WorkItems.Features.v1.IssueComments.CreateIssueComment;
+using YH.Modules.WorkItems.Features.v1.IssueComments.ListIssueComments;
+using YH.Modules.WorkItems.Features.v1.IssueComments.UpdateIssueComment;
+using YH.Modules.WorkItems.Features.v1.IssueComments.DeleteIssueComment;
+using YH.Modules.WorkItems.Features.v1.IssueActivities.ListIssueActivities;
+using YH.Modules.WorkItems.Features.v1.Issues.BulkUpdateIssues;
 
 namespace YH.Modules.WorkItems;
 
@@ -42,20 +48,19 @@ namespace YH.Modules.WorkItems;
 /// WorkItems module entry point.
 /// </summary>
 /// <remarks>
-/// <b>Wave 3 wiring status (plan 04-03):</b>
+/// <b>Wave 4 wiring status (plan 04-04):</b>
 /// <list type="bullet">
 ///   <item><see cref="ConfigureServices"/> registers <see cref="WorkItemsDbContext"/> + health check.</item>
-///   <item><see cref="MapEndpoints"/> registers all 5 state CRUD endpoints under
-///     <c>/api/v1/workspaces/{slug}/projects/{projectId}/states/</c>.</item>
-///   <item><see cref="MapEndpoints"/> registers all 5 label CRUD endpoints under
-///     <c>/api/v1/workspaces/{slug}/projects/{projectId}/labels/</c>.</item>
-///   <item><see cref="MapEndpoints"/> registers all 8 Estimate + EstimatePoint endpoints under
-///     <c>/api/v1/workspaces/{slug}/projects/{projectId}/estimates/</c>.</item>
-///   <item><see cref="MapEndpoints"/> registers all 5 Issue CRUD endpoints under
-///     <c>/api/v1/workspaces/{slug}/projects/{projectId}/work-items/</c>.</item>
+///   <item><see cref="MapEndpoints"/> registers all state, label, estimate, issue, issue-link endpoints.</item>
+///   <item><see cref="MapEndpoints"/> registers IssueComment CRUD (4 endpoints) under
+///     <c>/work-items/{issueId}/comments/</c>.</item>
+///   <item><see cref="MapEndpoints"/> registers IssueActivity list endpoint under
+///     <c>/work-items/{issueId}/activities/</c>.</item>
+///   <item><see cref="MapEndpoints"/> registers BulkUpdateIssues endpoint under
+///     <c>/work-items/bulk/</c>.</item>
 /// </list>
 /// <para>
-/// <b>Next:</b> Wave 4 — Intake + Import/Export endpoints.
+/// <b>Next:</b> Wave 5 — Intake + Import/Export endpoints.
 /// </para>
 /// </remarks>
 public sealed class WorkItemsModule : IModule
@@ -108,8 +113,17 @@ public sealed class WorkItemsModule : IModule
         workItems.MapListIssueLinksEndpoint();
         workItems.MapDeleteIssueLinkEndpoint();
 
-        // TODO: Intake endpoints (Wave 4)
-        // TODO: Import/Export endpoints (Wave 4)
+        // IssueComment endpoints (/{issueId}/comments/)
+        workItems.MapCreateIssueCommentEndpoint();
+        workItems.MapListIssueCommentsEndpoint();
+        workItems.MapUpdateIssueCommentEndpoint();
+        workItems.MapDeleteIssueCommentEndpoint();
+
+        // IssueActivity endpoint (/{issueId}/activities/)
+        workItems.MapListIssueActivitiesEndpoint();
+
+        // Batch operations (/bulk/)
+        workItems.MapBulkUpdateIssuesEndpoint();
 
         // Estimate route group under /workspaces/{slug}/projects/{projectId}/estimates/
         var estimates = endpoints
@@ -127,10 +141,6 @@ public sealed class WorkItemsModule : IModule
         estimates.MapCreateEstimatePointEndpoint();
         estimates.MapUpdateEstimatePointEndpoint();
         estimates.MapDeleteEstimatePointEndpoint();
-
-        // TODO: Wire Issue endpoints (Wave 3)
-        // TODO: Wire Intake endpoints (Wave 4)
-        // TODO: Wire Import/Export endpoints (Wave 4)
 
         // State route group under /workspaces/{slug}/projects/{projectId}/states/
         var states = endpoints
