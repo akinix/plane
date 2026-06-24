@@ -54,8 +54,10 @@ public sealed class WorkItemsDbContext : BaseDbContext
     /// <summary>Issue-Label M2M through table (Wave 2).</summary>
     public DbSet<IssueLabel> IssueLabels => Set<IssueLabel>();
 
-    // TODO(Wave 3): IssueLinks, IssueComments, IssueActivities
-    // TODO(Wave 4): IntakeIssues
+    /// <summary>IssueLinks table (Wave 3).</summary>
+    public DbSet<IssueLink> IssueLinks => Set<IssueLink>();
+
+    // TODO(Wave 4): IssueComments, IssueActivities, IntakeIssues
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

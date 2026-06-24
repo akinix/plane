@@ -31,6 +31,9 @@ using YH.Modules.WorkItems.Features.v1.Issues.GetIssue;
 using YH.Modules.WorkItems.Features.v1.Issues.UpdateIssue;
 using YH.Modules.WorkItems.Features.v1.Issues.DeleteIssue;
 using YH.Modules.WorkItems.Features.v1.Issues.ListIssues;
+using YH.Modules.WorkItems.Features.v1.IssueLinks.CreateIssueLink;
+using YH.Modules.WorkItems.Features.v1.IssueLinks.DeleteIssueLink;
+using YH.Modules.WorkItems.Features.v1.IssueLinks.ListIssueLinks;
 using YH.Modules.WorkItems.Features.v1.States.UpdateState;
 
 namespace YH.Modules.WorkItems;
@@ -99,6 +102,11 @@ public sealed class WorkItemsModule : IModule
         workItems.MapGetIssueEndpoint();
         workItems.MapUpdateIssueEndpoint();
         workItems.MapDeleteIssueEndpoint();
+
+        // IssueLink endpoints nested under work-items group (/{issueId}/links/)
+        workItems.MapCreateIssueLinkEndpoint();
+        workItems.MapListIssueLinksEndpoint();
+        workItems.MapDeleteIssueLinkEndpoint();
 
         // TODO: Intake endpoints (Wave 4)
         // TODO: Import/Export endpoints (Wave 4)
