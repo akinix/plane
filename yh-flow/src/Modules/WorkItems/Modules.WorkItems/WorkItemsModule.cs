@@ -60,6 +60,14 @@ using YH.Modules.WorkItems.Features.v1.Cycles.GetCycleProgress;
 using YH.Modules.WorkItems.Features.v1.Cycles.ArchiveCycle;
 using YH.Modules.WorkItems.Features.v1.Cycles.UnarchiveCycle;
 using YH.Modules.WorkItems.Features.v1.Cycles.ListArchivedCycles;
+using YH.Modules.WorkItems.Features.v1.Modules.CreateModule;
+using YH.Modules.WorkItems.Features.v1.Modules.GetModule;
+using YH.Modules.WorkItems.Features.v1.Modules.UpdateModule;
+using YH.Modules.WorkItems.Features.v1.Modules.DeleteModule;
+using YH.Modules.WorkItems.Features.v1.Modules.ListModules;
+using YH.Modules.WorkItems.Features.v1.Modules.ArchiveModule;
+using YH.Modules.WorkItems.Features.v1.Modules.UnarchiveModule;
+using YH.Modules.WorkItems.Features.v1.Modules.ListArchivedModules;
 
 namespace YH.Modules.WorkItems;
 
@@ -232,12 +240,26 @@ public sealed class WorkItemsModule : IModule
         archived.MapListArchivedCyclesEndpoint();
         archived.MapUnarchiveCycleEndpoint();
 
-        // Module route group (Phase 6) — endpoints registered in plans 06-02 and 06-03
-#pragma warning disable S1481 // Stub — endpoints added in 06-02/06-03
+        // Module route group (Phase 6)
         var modules = endpoints
             .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/modules")
             .WithTags("Modules")
             .WithApiVersionSet(apiVersionSet);
-#pragma warning restore S1481
+
+        modules.MapCreateModuleEndpoint();
+        modules.MapListModulesEndpoint();
+        modules.MapGetModuleEndpoint();
+        modules.MapUpdateModuleEndpoint();
+        modules.MapDeleteModuleEndpoint();
+        modules.MapArchiveModuleEndpoint();
+
+        // Archived modules route group
+        var archivedModules = endpoints
+            .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/archived-modules")
+            .WithTags("Modules (Archived)")
+            .WithApiVersionSet(apiVersionSet);
+
+        archivedModules.MapListArchivedModulesEndpoint();
+        archivedModules.MapUnarchiveModuleEndpoint();
     }
 }
