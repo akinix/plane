@@ -38,7 +38,17 @@ public sealed class DeleteLabelCommandHandler : ICommandHandler<DeleteLabelComma
         }
 
         // T-4-crud-04: check if any Issues reference this label via IssueLabels table.
-        // NOTE: IssueLabels check deferred to Task 3 when IssueLabel entity + DbSet exist.
+        var hasIssues = await _db.IssueLabels
+            .AnyAsync(il => il.LabelId == command.LabelId, cancellationToken)
+            .ConfigureAwait(false);
+
+        if (hasIssues)
+        {
+            throw new CustomException(
+                "Cannot delete this label because it is referenced by one or more issues.",
+                Array.Empty<string>(),
+                HttpStatusCode.Conflict);
+        }
 
         label.SoftDelete(DateTimeOffset.UtcNow);
         await _db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);

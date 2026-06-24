@@ -38,7 +38,17 @@ public sealed class DeleteStateCommandHandler : ICommandHandler<DeleteStateComma
         }
 
         // T-4-crud-03: check if any Issues reference this state before deleting.
-        // NOTE: Issues check deferred to Task 3 when Issue entity + DbSet exist.
+        var hasIssues = await _db.Issues
+            .AnyAsync(i => i.StateId == command.StateId && !i.IsDeleted, cancellationToken)
+            .ConfigureAwait(false);
+
+        if (hasIssues)
+        {
+            throw new CustomException(
+                "Cannot delete this state because it is referenced by one or more issues.",
+                Array.Empty<string>(),
+                HttpStatusCode.Conflict);
+        }
 
         state.SoftDelete(DateTimeOffset.UtcNow);
         await _db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);

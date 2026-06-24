@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using YH.Framework.Persistence;
 using YH.Framework.Web.Modules;
 using YH.Modules.WorkItems.Data;
+using YH.Modules.WorkItems.Services;
 using YH.Modules.WorkItems.Features.v1.Labels.CreateLabel;
 using YH.Modules.WorkItems.Features.v1.Labels.DeleteLabel;
 using YH.Modules.WorkItems.Features.v1.Labels.GetLabel;
@@ -49,6 +50,9 @@ public sealed class WorkItemsModule : IModule
             .AddDbContextCheck<WorkItemsDbContext>(
                 name: "db:work-items",
                 failureStatus: HealthStatus.Unhealthy);
+
+        // Domain services
+        builder.Services.AddScoped<IIssueSequenceService, IssueSequenceService>();
     }
 
     public void ConfigureMiddleware(IApplicationBuilder app)

@@ -45,7 +45,15 @@ public sealed class WorkItemsDbContext : BaseDbContext
     /// <summary>EstimatePoints table.</summary>
     public DbSet<EstimatePoint> EstimatePoints => Set<EstimatePoint>();
 
-    // TODO(Wave 2): Issues, IssueAssignees, IssueLabels
+    /// <summary>Issues table (Wave 2).</summary>
+    public DbSet<Issue> Issues => Set<Issue>();
+
+    /// <summary>Issue-Author M2M through table (Wave 2).</summary>
+    public DbSet<IssueAssignee> IssueAssignees => Set<IssueAssignee>();
+
+    /// <summary>Issue-Label M2M through table (Wave 2).</summary>
+    public DbSet<IssueLabel> IssueLabels => Set<IssueLabel>();
+
     // TODO(Wave 3): IssueLinks, IssueComments, IssueActivities
     // TODO(Wave 4): IntakeIssues
 
