@@ -2,24 +2,22 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 03 (planning complete — 4 plans in 4 waves)
-status: ready_to_execute
-last_updated: "2026-06-24T03:54:54.167Z"
+current_phase: 05
+status: ready_to_plan
+last_updated: "2026-06-24T16:05:00.000Z"
 progress:
   total_phases: 14
-  completed_phases: 3
-  total_plans: 20
-  completed_plans: 16
-  percent: 21
+  completed_phases: 4
+  total_plans: 25
+  completed_plans: 23
+  percent: 29
 ---
 
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-24
-**Current Phase:** 03 (planning complete — 4 plans in 4 waves)
-**Active Workstream:** Phase 3 execution ready; Phase 2 HUMAN-UAT smoke pending
-
-> **Phase 03 PLANNING COMPLETE:** 4 plans created across 4 waves for Project module (REQ-3.1 ~ REQ-3.3). All 10 locked decisions from CONTEXT.md are covered. Zero new NuGet packages. Execution order: 03-01 (scaffold) → 03-02 (domain) → 03-03 (CRUD) → 03-04 (member).
+**Current Phase:** 05
+**Active Workstream:** Phase 5 context gathered — ready for planning
 
 ---
 
@@ -56,13 +54,17 @@ progress:
 - [x] Phase 1 Plan 04: API Token CRUD + OAuth Provider Management (Wave 3) ✅
 - [x] Phase 1 Plan 05: Schema Push + Full Phase 1 Verification (Wave 4) ✅ — DB migrated & verified
 
-> 🟢 **Phase 1 (Foundation): COMPLETE** — 5 plans done, `AddAPITokenAndOAuthProviderSettings` migration applied to postgres (`identity.ApiTokens` + `identity.OAuthProviderSettings` verified), build clean (51 projects / 0 errors), Identity.Tests 412/412 pass. Ready for Phase 2.
+> 🟢 **Phase 3 (Project Module): COMPLETE** — 4 waves executed, 4 plans done. Project module fully implemented: Project + ProjectMember domain entities, DbContext + migration in `yhschema.Project` schema, 5 CRUD endpoints (Create/Get/Update/Delete/List), 4 member endpoints (Add/List/UpdateRole/Remove). Build 0 errors, full regression green (Workspace 100/100, Identity 412/412). See SUMMARY per wave.
+
+> 🟢 **Phase 4 (WorkItems): COMPLETE** — 5 waves executed, 5 plans done. Full WorkItems module: State/Label/Estimate entities + CRUD, Issue entity (20+ fields, 5 FK, 2 M2M) with SequenceId service, IssueLink, IssueComment, IssueActivity (domain events), BatchOps, Intake, Import/Export, StateSeeder. WorkItemsDbContext (`yhschema.WorkItems`). 181 tests all green. Regression: Workspace 100 + Identity 412 = 693 total passing.
 
 ### Pending
 
-- [ ] Phase 2 manual smoke (11 steps — recorded in 02-VERIFICATION.md §Human Verification; orchestrator consolidates into HUMAN-UAT.md)
-- [x] Phase 3 planning complete (4 plans, 4 waves) — ready for execution
-- [ ] Phase 3-8: Core & Extended Domain
+- [ ] Phase 2 manual smoke (11 steps — blocked by Docker Desktop issue)
+- [ ] Phase 5: Cycle — 周期管理 (depends on Phase 4)
+- [ ] Phase 6: Module — 模块管理 (depends on Phase 4)
+- [ ] Phase 7: Page — 文档页面 (depends on Phase 3)
+- [ ] Phase 8: View — 视图 (depends on Phase 4)
 - [ ] Phase 9-12: Infrastructure & Cross-cutting
 - [ ] Phase 13: Flow Web — 前端
 
@@ -70,23 +72,25 @@ progress:
 
 ## Artifacts
 
-| File                                           | Description                       | Status |
-| ---------------------------------------------- | --------------------------------- | ------ |
-| `.planning/config.json`                        | Project configuration             | ✅     |
-| `.planning/PROJECT.md`                         | Project context & vision          | ✅     |
-| `.planning/REQUIREMENTS.md`                    | Scoped requirements (13 phases)   | ✅     |
-| `.planning/ROADMAP.md`                         | Phase structure with dependencies | ✅     |
-| `.planning/STATE.md`                           | This file                         | ✅     |
-| `.planning/codebase/STACK.md`                  | Tech stack analysis (Plane)       | ✅     |
-| `.planning/codebase/ARCHITECTURE.md`           | Architecture analysis (Plane)     | ✅     |
-| `.planning/codebase/STRUCTURE.md`              | Code structure (Plane)            | ✅     |
-| `.planning/codebase/INTEGRATIONS.md`           | Integrations analysis (Plane)     | ✅     |
-| `.planning/codebase/CONVENTIONS.md`            | Conventions analysis (Plane)      | ✅     |
-| `.planning/codebase/TESTING.md`                | Testing analysis (Plane)          | ✅     |
-| `.planning/codebase/CONCERNS.md`               | Concerns analysis (Plane)         | ✅     |
-| `.planning/research/domain-overview.md`        | Domain entity model               | ✅     |
-| `.planning/research/fullstackhero-patterns.md` | FSH pattern adaptation            | ✅     |
-| `.planning/research/api-migration-mapping.md`  | Django → .NET API mapping         | ✅     |
+| File                                             | Description                       | Status |
+| ------------------------------------------------ | --------------------------------- | ------ |
+| `.planning/config.json`                          | Project configuration             | ✅     |
+| `.planning/PROJECT.md`                           | Project context & vision          | ✅     |
+| `.planning/REQUIREMENTS.md`                      | Scoped requirements (13 phases)   | ✅     |
+| `.planning/ROADMAP.md`                           | Phase structure with dependencies | ✅     |
+| `.planning/STATE.md`                             | This file                         | ✅     |
+| `.planning/codebase/STACK.md`                    | Tech stack analysis (Plane)       | ✅     |
+| `.planning/codebase/ARCHITECTURE.md`             | Architecture analysis (Plane)     | ✅     |
+| `.planning/codebase/STRUCTURE.md`                | Code structure (Plane)            | ✅     |
+| `.planning/codebase/INTEGRATIONS.md`             | Integrations analysis (Plane)     | ✅     |
+| `.planning/codebase/CONVENTIONS.md`              | Conventions analysis (Plane)      | ✅     |
+| `.planning/codebase/TESTING.md`                  | Testing analysis (Plane)          | ✅     |
+| `.planning/codebase/CONCERNS.md`                 | Concerns analysis (Plane)         | ✅     |
+| `.planning/phases/05-cycle/05-CONTEXT.md`        | Phase 5 Context (Cycle)           | ✅     |
+| `.planning/phases/05-cycle/05-DISCUSSION-LOG.md` | Phase 5 Discussion Log            | ✅     |
+| `.planning/research/domain-overview.md`          | Domain entity model               | ✅     |
+| `.planning/research/fullstackhero-patterns.md`   | FSH pattern adaptation            | ✅     |
+| `.planning/research/api-migration-mapping.md`    | Django → .NET API mapping         | ✅     |
 
 ---
 
@@ -120,15 +124,13 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 **Phase 2** final state: Workspace.Tests 100/100 ✅; Identity.Tests 412/412 ✅ (zero regression). The 11-step manual smoke against a live Aspire stack + real JWTs is the remaining human gate pending HUMAN-UAT.md execution.
 
-**Phase 3** planning complete: 4 plans across 4 waves.
+**Phase 5 (Cycle)** context gathered — ready for planning.
 
-| Wave | Plan  | Objective                                              | Tasks | REQ     |
-| ---- | ----- | ------------------------------------------------------ | ----- | ------- |
-| 1    | 03-01 | Scaffold (csproj + DTOs + tests + host wiring)         | 3     | —       |
-| 2    | 03-02 | Domain (entities + DbContext + configs + migration)    | 3     | —       |
-| 3    | 03-03 | Project CRUD endpoints (create/get/update/delete/list) | 2     | REQ-3.1 |
-| 4    | 03-04 | ProjectMember endpoints (add/list/update-role/remove)  | 2     | REQ-3.2 |
+**Decisions locked:**
+| Decision | Value |
+|----------|-------|
+| Module location | Include in WorkItemsDbContext (`yhschema.WorkItems`) |
+| Burndown calculation | API 实时计算 (real-time aggregation) |
+| Completed cycle edits | 严格匹配 Plane (sort_order/name/description only) |
 
-Total: 10 tasks across 4 plans. Zero new NuGet packages. All Phase 2 infrastructure reused (ICurrentWorkspaceContext, [RequireWorkspaceRole], Finbuckle tenant isolation).
-
-**Execute:** `/gsd-execute-phase 03`
+**Next:** `/gsd-plan-phase 05`
