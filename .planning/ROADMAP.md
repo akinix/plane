@@ -327,17 +327,41 @@ Plans:
 
 ### Tasks
 
-- T7.1: 创建 Page 实体和领域模型
-- T7.2: 实现 Page 层级结构（父子关系）
-- T7.3: 实现 Page CRUD 端点
+- T7.1: 创建 Page 实体和领域模型（Page/ProjectPage/PageFavorite）
+- T7.2: 实现 Page 层级结构（自引用 ParentId FK）
+- T7.3: 实现 Page CRUD 端点 + List + Summary
 - T7.4: 实现 Page 归档/恢复
-- T7.5: 实现 Page 访问权限
-- T7.6: 创建 PageDbContext + 迁移
+- T7.5: 实现 Page 访问权限（Private/Public + [RequireWorkspaceRole]）
+- T7.6: 创建 PageDbContext + AddPages 迁移
 - T7.7: 实现 Page 权限
+- T7.8: 实现 Page Description CRUD
+- T7.9: 实现 Page Favorite 管理
+
+### Plans
+
+**Plans:** 3 plans (3 waves)
+
+Plans:
+
+**Wave 1**
+
+- [ ] 07-01-PLAN.md — 模块脚手架（Modules.Page + Contracts csproj + slnx + host wiring）+ Domain 实体（Page/ProjectPage/PageFavorite）+ EF 配置 + PageDbContext（yhschema.Page schema）+ AddPages 迁移 + Contracts DTOs（PageDto/PageDetailDto）+ Command/Query 桩 + 测试脚手架（REQ-7.1, REQ-7.2）
+
+**Wave 2** _(blocked on Wave 1 completion)_
+
+- [ ] 07-02-PLAN.md — DTO Mapper + 核心 CRUD 端点（Create/Get/Update/Delete）+ ListPages + Summary + Archive/Unarchive + Description CRUD + Favorite POST/DELETE + PageModule 完整路由注册（REQ-7.1, REQ-7.2）
+
+**Wave 3** _(blocked on Wave 2 completion)_
+
+- [ ] 07-03-PLAN.md — 领域测试（Page/ProjectPage/PageFavorite）+ Handler 功能测试（CRUD/List/Summary/Archive/Description/Favorite）+ InMemory test fixture + 全量回归验证（REQ-7.1, REQ-7.2）
 
 **Deliverables:**
 
 - 完整文档管理 API（不含实时协作）
+- 17 个 API 端点：Create/Get/Update/Delete/List/Summary/Archive/Unarchive/GetDescription/UpdateDescription/AddFavorite/RemoveFavorite
+- 独立 Page 模块（Modules.Page + Modules.Page.Contracts + yhschema.Page schema）
+- Page 层级结构（自引用 ParentId FK，未使用闭包表）+ ProjectPage 桥接
+- 30+ 测试用例，全回归绿色
 
 ---
 
