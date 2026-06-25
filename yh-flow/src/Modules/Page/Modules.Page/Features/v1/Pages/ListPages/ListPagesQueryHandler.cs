@@ -26,6 +26,7 @@ public sealed class ListPagesQueryHandler : IQueryHandler<ListPagesQuery, List<P
 
         var pageQuery = _db.Pages
             .AsNoTracking()
+            .Where(p => p.ProjectId == query.ProjectId)
             .Where(p => !p.IsDeleted);
 
         // Filter: active vs archived

@@ -55,7 +55,9 @@ builder.Services.AddMediator(o =>
         typeof(YH.Modules.Files.FilesModule),
         typeof(YH.Modules.Notifications.Contracts.v1.Commands.MarkNotificationReadCommand),
         typeof(YH.Modules.Notifications.NotificationsModule),
-        typeof(YH.Modules.Project.Contracts.ProjectConstants)];
+        typeof(YH.Modules.Project.Contracts.ProjectConstants),
+        typeof(YH.Modules.Page.Contracts.v1.Pages.CreatePage.CreatePageCommand),
+        typeof(YH.Modules.Page.Features.v1.Pages.ListPages.ListPagesQueryHandler)];
 });
 
 var moduleAssemblies = new Assembly[]

@@ -20,6 +20,7 @@ public static class CreatePageEndpoint
     internal static RouteHandlerBuilder MapCreatePageEndpoint(this IEndpointRouteBuilder endpoints)
     {
         return endpoints.MapPost("/", async (CreatePageCommand command,
+            string slug,
             Guid projectId,
             ClaimsPrincipal user,
             IMediator mediator,
@@ -34,7 +35,7 @@ public static class CreatePageEndpoint
             command.ProjectId = projectId;
             command.OwnedBy = Guid.Parse(userId);
             var result = await mediator.Send(command, cancellationToken);
-            return TypedResults.Created($"/api/v1/workspaces/{{slug}}/projects/{projectId}/pages/{result.Id}", result);
+            return TypedResults.Created($"/api/v1/workspaces/{slug}/projects/{projectId}/pages/{result.Id}", result);
         })
         .WithName("CreatePage")
         .WithSummary("Create page")

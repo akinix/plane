@@ -25,16 +25,16 @@ public sealed class GetPageSummaryQueryHandler : IQueryHandler<GetPageSummaryQue
         ArgumentNullException.ThrowIfNull(query);
 
         var totalPages = await _db.Pages
-            .CountAsync(p => !p.IsDeleted, cancellationToken)
+            .CountAsync(p => p.ProjectId == query.ProjectId && !p.IsDeleted, cancellationToken)
             .ConfigureAwait(false);
 
         var totalArchived = await _db.Pages
-            .CountAsync(p => !p.IsDeleted && p.ArchivedAt != null, cancellationToken)
+            .CountAsync(p => p.ProjectId == query.ProjectId && !p.IsDeleted && p.ArchivedAt != null, cancellationToken)
             .ConfigureAwait(false);
 
         var recentPages = await _db.Pages
             .AsNoTracking()
-            .Where(p => !p.IsDeleted && p.ArchivedAt == null)
+            .Where(p => p.ProjectId == query.ProjectId && !p.IsDeleted && p.ArchivedAt == null)
             .OrderByDescending(p => p.LastModifiedOnUtc ?? p.CreatedOnUtc)
             .Take(5)
             .Select(p => PageDtoMapper.ToDto(p))
