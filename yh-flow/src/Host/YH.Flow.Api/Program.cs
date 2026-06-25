@@ -9,6 +9,7 @@ using YH.Modules.Multitenancy.Contracts.v1.GetTenantStatus;
 using YH.Modules.Project;
 using YH.Modules.WorkItems;
 using YH.Modules.Page;
+using YH.Modules.View;
 using YH.Modules.Webhooks;
 using YH.Modules.Multitenancy.Features.v1.GetTenantStatus;
 using System.Reflection;
@@ -57,6 +58,7 @@ builder.Services.AddMediator(o =>
         typeof(YH.Modules.Notifications.NotificationsModule),
         typeof(YH.Modules.Project.Contracts.ProjectConstants),
         typeof(YH.Modules.Page.Contracts.v1.Pages.CreatePage.CreatePageCommand),
+        typeof(YH.Modules.View.Contracts.Constants.ViewConstants),
         typeof(YH.Modules.Page.Features.v1.Pages.ListPages.ListPagesQueryHandler)];
 });
 
@@ -72,6 +74,7 @@ var moduleAssemblies = new Assembly[]
     typeof(ProjectModule).Assembly,
     typeof(WorkItemsModule).Assembly,
     typeof(PageModule).Assembly,
+    typeof(ViewModule).Assembly,
 };
 
 builder.AddHeroPlatform(o =>

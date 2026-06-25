@@ -48,6 +48,8 @@
     <ProjectReference Include="..\..\Modules\Tickets\Modules.Tickets.Contracts\Modules.Tickets.Contracts.csproj" />
     <ProjectReference Include="..\..\Modules\Page\Modules.Page\Modules.Page.csproj" />
     <ProjectReference Include="..\..\Modules\Page\Modules.Page.Contracts\Modules.Page.Contracts.csproj" />
+    <ProjectReference Include="..\..\Modules\View\Modules.View\Modules.View.csproj" />
+    <ProjectReference Include="..\..\Modules\View\Modules.View.Contracts\Modules.View.Contracts.csproj" />
     <ProjectReference Include="..\..\Modules\Webhooks\Modules.Webhooks\Modules.Webhooks.csproj" />
     <ProjectReference Include="..\..\Modules\Workspace\Modules.Workspace\Modules.Workspace.csproj" />
     <ProjectReference Include="..\..\Modules\Workspace\Modules.Workspace.Contracts\Modules.Workspace.Contracts.csproj" />
@@ -66,3 +68,4 @@
   </ItemGroup>
 
 </Project>
+

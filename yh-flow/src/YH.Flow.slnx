@@ -69,6 +69,10 @@
     <Project Path="Modules/Page/Modules.Page.Contracts/Modules.Page.Contracts.csproj" />
     <Project Path="Modules/Page/Modules.Page/Modules.Page.csproj" />
   </Folder>
+  <Folder Name="/Modules/View/">
+    <Project Path="Modules/View/Modules.View.Contracts/Modules.View.Contracts.csproj" />
+    <Project Path="Modules/View/Modules.View/Modules.View.csproj" />
+  </Folder>
   <Folder Name="/Host/">
     <Project Path="Host/YH.Flow.Api/YH.Flow.Api.csproj" Id="187ce245-0a57-469c-96c2-a88902f2d40d" />
     <Project Path="Host/YH.Flow.DbMigrator/YH.Flow.DbMigrator.csproj" />
@@ -99,6 +103,7 @@
     <Project Path="Tests/Workspace.Tests/Workspace.Tests.csproj" />
     <Project Path="Tests/Project.Tests/Project.Tests.csproj" />
     <Project Path="Tests/WorkItems.Tests/WorkItems.Tests.csproj" />
+    <Project Path="Tests/View.Tests/View.Tests.csproj" />
   </Folder>
   <!--#if (includeTools) -->
   <Folder Name="/Tools/">

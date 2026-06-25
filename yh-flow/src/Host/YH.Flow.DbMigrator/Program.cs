@@ -18,6 +18,7 @@ using YH.Modules.Project;
 using YH.Modules.Project.Contracts;
 using YH.Modules.WorkItems;
 using YH.Modules.Page;
+using YH.Modules.View;
 using YH.Modules.Tickets;
 using YH.Modules.Webhooks;
 using YH.Flow.DbMigrator;
@@ -127,6 +128,7 @@ var moduleAssemblies = new Assembly[]
     typeof(ProjectModule).Assembly,
     typeof(WorkItemsModule).Assembly,
     typeof(PageModule).Assembly,
+    typeof(ViewModule).Assembly,
 };
 
 // Disable runtime-only concerns; persistence + multitenancy stay on so DbInitializers resolve. Caching

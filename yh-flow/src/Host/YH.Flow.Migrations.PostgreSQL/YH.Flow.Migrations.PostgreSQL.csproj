@@ -24,6 +24,7 @@
       <ProjectReference Include="..\..\Modules\Project\Modules.Project\Modules.Project.csproj" />
       <ProjectReference Include="..\..\Modules\WorkItems\Modules.WorkItems\Modules.WorkItems.csproj" />
       <ProjectReference Include="..\..\Modules\Page\Modules.Page\Modules.Page.csproj" />
+      <ProjectReference Include="..\..\Modules\View\Modules.View\Modules.View.csproj" />
     </ItemGroup>
 
     <ItemGroup>
