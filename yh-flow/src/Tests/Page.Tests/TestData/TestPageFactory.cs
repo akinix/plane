@@ -50,6 +50,20 @@ internal static class TestPageFactory
         page.Archive();
         return page;
     }
+
+    public static PageEntity CreateWithDescription(
+        string html = "<p>Hello</p>",
+        string stripped = "Hello",
+        string? json = null,
+        string name = "Page with Description",
+        Guid? projectId = null)
+    {
+        var page = PageEntity.Create(name,
+            projectId ?? DefaultProjectId,
+            DefaultOwnedBy);
+        page.UpdateDescription(html, stripped, json);
+        return page;
+    }
 }
 
 /// <summary>Factory helpers for creating <see cref="ProjectPage"/> instances in tests.</summary>
