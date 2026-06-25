@@ -58,7 +58,6 @@ builder.Services.AddMediator(o =>
         typeof(YH.Modules.Notifications.NotificationsModule),
         typeof(YH.Modules.Project.Contracts.ProjectConstants),
         typeof(YH.Modules.Page.Contracts.v1.Pages.CreatePage.CreatePageCommand),
-        typeof(YH.Modules.View.Contracts.Constants.ViewConstants),
         typeof(YH.Modules.Page.Features.v1.Pages.ListPages.ListPagesQueryHandler)];
 });
 
