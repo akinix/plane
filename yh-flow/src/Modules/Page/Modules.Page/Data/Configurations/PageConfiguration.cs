@@ -36,13 +36,13 @@ public sealed class PageConfiguration : IEntityTypeConfiguration<PageEntity>
             .HasMaxLength(PageConstants.NameMaxLength); // 255
 
         builder.Property(x => x.DescriptionHtml)
-            .HasColumnType("nvarchar(max)");
+            .HasColumnType("text");
 
         builder.Property(x => x.DescriptionStripped)
-            .HasColumnType("nvarchar(max)");
+            .HasColumnType("text");
 
         builder.Property(x => x.DescriptionJson)
-            .HasColumnType("nvarchar(max)");
+            .HasColumnType("text");
 
         builder.Property(x => x.Access)
             .HasConversion<int>()
@@ -69,10 +69,10 @@ public sealed class PageConfiguration : IEntityTypeConfiguration<PageEntity>
 
         // View/logo props — nvarchar(max)
         builder.Property(x => x.ViewProps)
-            .HasColumnType("nvarchar(max)");
+            .HasColumnType("text");
 
         builder.Property(x => x.LogoProps)
-            .HasColumnType("nvarchar(max)");
+            .HasColumnType("text");
 
         builder.Property(x => x.IsGlobal)
             .HasDefaultValue(false);
