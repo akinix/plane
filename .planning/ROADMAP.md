@@ -345,11 +345,11 @@ Plans:
 
 **Wave 1**
 
-- [ ] 07-01-PLAN.md — 模块脚手架（Modules.Page + Contracts csproj + slnx + host wiring）+ Domain 实体（Page/ProjectPage/PageFavorite）+ EF 配置 + PageDbContext（yhschema.Page schema）+ AddPages 迁移 + Contracts DTOs（PageDto/PageDetailDto）+ Command/Query 桩 + 测试脚手架（REQ-7.1, REQ-7.2）
+- [x] 07-01-PLAN.md — 模块脚手架（Modules.Page + Contracts csproj + slnx + host wiring）+ Domain 实体（Page/ProjectPage/PageFavorite）+ EF 配置 + PageDbContext（yhschema.Page schema）+ AddPages 迁移 + Contracts DTOs（PageDto/PageDetailDto）+ Command/Query 桩 + 测试脚手架（REQ-7.1, REQ-7.2） ✅
 
 **Wave 2** _(blocked on Wave 1 completion)_
 
-- [ ] 07-02-PLAN.md — DTO Mapper + 核心 CRUD 端点（Create/Get/Update/Delete）+ ListPages + Summary + Archive/Unarchive + Description CRUD + Favorite POST/DELETE + PageModule 完整路由注册（REQ-7.1, REQ-7.2）
+- [x] 07-02-PLAN.md — DTO Mapper + 核心 CRUD 端点（Create/Get/Update/Delete）+ ListPages + Summary + Archive/Unarchive + Description CRUD + Favorite POST/DELETE + PageModule 完整路由注册（REQ-7.1, REQ-7.2） ✅
 
 **Wave 3** _(blocked on Wave 2 completion)_
 

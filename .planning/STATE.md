@@ -4,12 +4,12 @@ milestone: v1.0
 milestone_name: milestone
 current_phase: 7
 status: ready_to_execute
-last_updated: "2026-06-25T00:09:04.292Z"
+last_updated: "2026-06-25T01:50:00.000Z"
 progress:
   total_phases: 14
   completed_phases: 5
   total_plans: 34
-  completed_plans: 27
+  completed_plans: 29
   percent: 36
 ---
 
@@ -65,7 +65,7 @@ progress:
 - [ ] Phase 2 manual smoke (11 steps — blocked by Docker Desktop issue)
 - [x] Phase 5: Cycle — 周期管理 ✅（3 waves, 729 全量回归绿色）
 - [ ] Phase 6: Module — 模块管理 (3 plans planned, ready to execute)
-- [ ] Phase 7: Page — 文档管理 (3 plans, 3 waves, ready to execute)
+- [x] Phase 7: Page — 文档管理 (3 plans, 3 waves, ready to execute)
 - [ ] Phase 8: View — 视图 (depends on Phase 4)
 - [ ] Phase 9-12: Infrastructure & Cross-cutting
 - [ ] Phase 13: Flow Web — 前端
@@ -94,6 +94,7 @@ progress:
 | `.planning/phases/07-page/07-01-PLAN.md`       | Phase 7 Wave 1 plan               | ✅     |
 | `.planning/phases/07-page/07-02-PLAN.md`       | Phase 7 Wave 2 plan               | ✅     |
 | `.planning/phases/07-page/07-03-PLAN.md`       | Phase 7 Wave 3 plan               | ✅     |
+| `.planning/phases/07-page/07-02-SUMMARY.md`    | Phase 7 Wave 2 summary            | ✅     |
 | `.planning/research/domain-overview.md`        | Domain entity model               | ✅     |
 | `.planning/research/fullstackhero-patterns.md` | FSH pattern adaptation            | ✅     |
 | `.planning/research/api-migration-mapping.md`  | Django → .NET API mapping         | ✅     |
@@ -102,14 +103,17 @@ progress:
 
 ## Key Decisions Log
 
-| Decision                              | Rationale                                                                                        | Date       |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------- |
-| Use fullstackhero template            | Mature .NET 10 modular monolith with built-in multi-tenancy, CQRS, and all infrastructure needed | 2026-06-16 |
-| Maintain API compatibility            | Existing Plane frontend can be reused; enables incremental migration                             | 2026-06-16 |
-| New database design                   | Full EF Core advantage; no legacy schema constraints                                             | 2026-06-16 |
-| No real-time collaboration in Phase 1 | Reduces complexity; Pages as plain CRUD initially                                                | 2026-06-16 |
-| Project in Plane repo subdirectory    | Easier cross-reference; single repo for migration period                                         | 2026-06-16 |
-| No CI/CD scripts                      | Focus on core functionality first; CI/CD added later                                             | 2026-06-16 |
+| Decision                                              | Rationale                                                                                        | Date       |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ---------- |
+| Use fullstackhero template                            | Mature .NET 10 modular monolith with built-in multi-tenancy, CQRS, and all infrastructure needed | 2026-06-16 |
+| Maintain API compatibility                            | Existing Plane frontend can be reused; enables incremental migration                             | 2026-06-16 |
+| New database design                                   | Full EF Core advantage; no legacy schema constraints                                             | 2026-06-16 |
+| No real-time collaboration in Phase 1                 | Reduces complexity; Pages as plain CRUD initially                                                | 2026-06-16 |
+| Project in Plane repo subdirectory                    | Easier cross-reference; single repo for migration period                                         | 2026-06-16 |
+| No CI/CD scripts                                      | Focus on core functionality first; CI/CD added later                                             | 2026-06-16 |
+| CreatePageCommand uses ProjectId from route           | Prevent client from injecting arbitrary project ID                                               | 2026-06-25 |
+| ListPages defaults to top-level pages                 | Plane-compatible: default view shows pages without parent                                        | 2026-06-25 |
+| Favorite commands extract UserId from ClaimsPrincipal | Spoofing prevention (T-7-02-03): User ID is never client-provided                                | 2026-06-25 |
 
 ---
 
@@ -138,8 +142,8 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 **Phase 7 (Page)** 3 plans created, ready to execute:
 
-- 07-01: Module scaffold + Domain entities + EF configs + migration + Contracts + test scaffolds
-- 07-02: All endpoints (CRUD/List/Summary/Archive/Description/Favorite) + DTO Mapper + routing
-- 07-03: Full test suite (domain tests + handler tests + regression)
+- [x] 07-01: Module scaffold + Domain entities + EF configs + migration + Contracts + test scaffolds ✅
+- [x] 07-02: All endpoints (CRUD/List/Summary/Archive/Description/Favorite) + DTO Mapper + routing ✅
+- [ ] 07-03: Full test suite (domain tests + handler tests + regression)
 
 **Execute:** `/gsd-execute-phase 07`
