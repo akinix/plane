@@ -256,7 +256,7 @@
 
 ## Phase 8: View — 视图管理
 
-### REQ-8.1: View CRUD
+### REQ-8.1: View CRUD [x]
 
 - 创建 View（名称、筛选条件、排序、展示列）
 - 列出项目 Views
@@ -265,7 +265,7 @@
 - 删除 View
 - 设为默认 View
 
-### REQ-8.2: View 筛选
+### REQ-8.2: View 筛选 [x]
 
 - 按状态筛选
 - 按优先级筛选

@@ -375,7 +375,7 @@ Plans:
 
 ### Tasks
 
-- T8.1: 创建 View 实体和领域模型
+- [x] 08-01-PLAN.md — 模块脚手架（Modules.View + Contracts csproj + slnx + host wiring）+ Domain 实体（View/ViewFavorite）+ EF 配置 + ViewDbContext（yhschema.View schema）+ AddViews 迁移 + Contracts DTOs + Command/Query 桩 + 测试脚手架（REQ-8.1, REQ-8.2）
 - T8.2: 实现 View CRUD 端点
 - T8.3: 实现 View 筛选条件校验
 - T8.4: 创建 ViewDbContext + 迁移
