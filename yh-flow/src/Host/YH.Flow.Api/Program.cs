@@ -8,6 +8,7 @@ using YH.Modules.Multitenancy;
 using YH.Modules.Multitenancy.Contracts.v1.GetTenantStatus;
 using YH.Modules.Project;
 using YH.Modules.WorkItems;
+using YH.Modules.Page;
 using YH.Modules.Webhooks;
 using YH.Modules.Multitenancy.Features.v1.GetTenantStatus;
 using System.Reflection;
@@ -68,6 +69,7 @@ var moduleAssemblies = new Assembly[]
     typeof(YH.Modules.Workspace.WorkspaceModule).Assembly,
     typeof(ProjectModule).Assembly,
     typeof(WorkItemsModule).Assembly,
+    typeof(PageModule).Assembly,
 };
 
 builder.AddHeroPlatform(o =>

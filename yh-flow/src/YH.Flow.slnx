@@ -65,6 +65,10 @@
     <Project Path="Modules/WorkItems/Modules.WorkItems.Contracts/Modules.WorkItems.Contracts.csproj" />
     <Project Path="Modules/WorkItems/Modules.WorkItems/Modules.WorkItems.csproj" />
   </Folder>
+  <Folder Name="/Modules/Page/">
+    <Project Path="Modules/Page/Modules.Page.Contracts/Modules.Page.Contracts.csproj" />
+    <Project Path="Modules/Page/Modules.Page/Modules.Page.csproj" />
+  </Folder>
   <Folder Name="/Host/">
     <Project Path="Host/YH.Flow.Api/YH.Flow.Api.csproj" Id="187ce245-0a57-469c-96c2-a88902f2d40d" />
     <Project Path="Host/YH.Flow.DbMigrator/YH.Flow.DbMigrator.csproj" />
