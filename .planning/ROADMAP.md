@@ -353,7 +353,7 @@ Plans:
 
 **Wave 3** _(blocked on Wave 2 completion)_
 
-- [ ] 07-03-PLAN.md — 领域测试（Page/ProjectPage/PageFavorite）+ Handler 功能测试（CRUD/List/Summary/Archive/Description/Favorite）+ InMemory test fixture + 全量回归验证（REQ-7.1, REQ-7.2）
+- [x] 07-03-PLAN.md — 领域测试（Page/ProjectPage/PageFavorite）+ Handler 功能测试（CRUD/List/Summary/Archive/Description/Favorite）+ InMemory test fixture + 全量回归验证（REQ-7.1, REQ-7.2）
 
 **Deliverables:**
 
