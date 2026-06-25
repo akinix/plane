@@ -11,6 +11,10 @@ public sealed class CreatePageCommand : ICommand<CreatePageResponse>
     /// <summary>Display name (Plane: max 255, non-empty).</summary>
     public string Name { get; set; } = default!;
 
+    /// <summary>Project id — set by the endpoint from the route {projectId}, not client-writable.</summary>
+    [JsonIgnore]
+    public Guid ProjectId { get; set; }
+
     /// <summary>Authenticated creator user id — set by the endpoint, NOT client-writable.</summary>
     [JsonIgnore]
     public Guid OwnedBy { get; set; }
