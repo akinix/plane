@@ -2,22 +2,22 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 8
-status: ready_to_execute
-last_updated: "2026-06-25T04:50:48.390Z"
+current_phase: 10
+status: needs_discuss
+last_updated: "2026-06-25T10:30:00.000Z"
 progress:
   total_phases: 14
-  completed_phases: 5
-  total_plans: 37
-  completed_plans: 31
-  percent: 38
+  completed_phases: 9
+  total_plans: 38
+  completed_plans: 32
+  percent: 64
 ---
 
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-25
-**Current Phase:** 8
-**Active Workstream:** Phase 8 (View) — Wave 1 executing
+**Current Phase:** 10
+**Active Workstream:** Phase 9 (Integration) — DEFERRED → Phase 10 (Webhook)
 
 ---
 
@@ -70,8 +70,13 @@ progress:
 > 🟢 **Phase 6 (Module): COMPLETE** — 3 waves executed, 3 plans done. Module entity + CRUD + ModuleIssue/ModuleLink/Progress + integration tests. See 06-03-SUMMARY.md.
 
 - [x] Phase 7: Page — 文档管理 (3 plans, 3 waves) ✅ — Review fixes applied (CR-01/02/03/04)
-- [ ] Phase 8: View — 视图 (depends on Phase 4)
-- [ ] Phase 9-12: Infrastructure & Cross-cutting
+
+> 🟢 **Phase 8 (View): COMPLETE** — 3 waves executed, 3 plans done. View module fully implemented: View/ViewFavorite domain entities, ViewDbContext (yhschema.View schema), AddViews migration (jsonb columns), 14 API endpoints (Create/Get/Update/Delete/List/WorkspaceList/Archive/Unarchive/AddFavorite/RemoveFavorite), DTO mapper + routing. Filters stored as JSON columns (Filters/DisplayFilters/DisplayProperties/RichFilters). All 41 tests green. Full regression: View 41 + Workspace 100 + Identity 412 + WorkItems 264 = zero regression.
+
+- [ ] Phase 9: Integration — 外部集成 (GitHub, GitLab, Gitea, Slack, Unsplash) — **DEFERRED to future milestone**
+- [x] Phase 10: Webhook — Webhook 管理 (needs_discuss)
+- [ ] Phase 11: Notification — 通知系统
+- [ ] Phase 12: Analytics — 分析
 - [ ] Phase 13: Flow Web — 前端
 
 ---
@@ -139,10 +144,6 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 ## Next Steps
 
-**Phase 2** final state: Workspace.Tests 100/100 ✅; Identity.Tests 412/412 ✅ (zero regression). The 11-step manual smoke against a live Aspire stack + real JWTs is the remaining human gate pending HUMAN-UAT.md execution.
+**Phase 9 (Integration)** — DEFERRED to future milestone。所有 5 个外部集成（GitHub, GitLab, Gitea, Slack, Unsplash）不在当前 v1.0 范围内。
 
-**Phase 6 (Module)** 3 plans created, ready to execute:
-
-- 06-01: Domain entities + EF configs + migration + contracts + test scaffolds
-- 06-02: Module CRUD + Archive/Unarchive + routing
-- 06-03: Module-Issue association + ModuleLink + Progress + integration tests
+**Phase 10 (Webhook)** — 下一个讨论阶段。Webhook CRUD、异步投递、签名、SSRF 防护。
