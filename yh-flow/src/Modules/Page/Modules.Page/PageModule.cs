@@ -8,6 +8,17 @@ using Microsoft.Extensions.Hosting;
 using YH.Framework.Persistence;
 using YH.Framework.Web.Modules;
 using YH.Modules.Page.Data;
+using YH.Modules.Page.Features.v1.Pages.AddFavorite;
+using YH.Modules.Page.Features.v1.Pages.ArchivePage;
+using YH.Modules.Page.Features.v1.Pages.CreatePage;
+using YH.Modules.Page.Features.v1.Pages.DeletePage;
+using YH.Modules.Page.Features.v1.Pages.GetPage;
+using YH.Modules.Page.Features.v1.Pages.GetPageDescription;
+using YH.Modules.Page.Features.v1.Pages.GetPageSummary;
+using YH.Modules.Page.Features.v1.Pages.ListPages;
+using YH.Modules.Page.Features.v1.Pages.RemoveFavorite;
+using YH.Modules.Page.Features.v1.Pages.UpdatePage;
+using YH.Modules.Page.Features.v1.Pages.UpdatePageDescription;
 
 namespace YH.Modules.Page;
 
@@ -15,11 +26,11 @@ namespace YH.Modules.Page;
 /// Page module entry point.
 /// </summary>
 /// <remarks>
-/// <b>Wave 1 wiring status (plan 07-01 complete):</b>
+/// <b>Wave 2 wiring status (plan 07-02 complete):</b>
 /// <list type="bullet">
 ///   <item><see cref="ConfigureServices"/> registers <see cref="PageDbContext"/> + health check.</item>
-///   <item><see cref="MapEndpoints"/> registers pages + pages-summary route group stubs
-///     (actual endpoints registered in plan 07-02).</item>
+///   <item><see cref="MapEndpoints"/> registers all 12 page endpoint groups under
+///     <c>/api/v1/workspaces/{slug}/projects/{projectId}/pages/</c>.</item>
 /// </list>
 /// </remarks>
 public sealed class PageModule : IModule
@@ -52,20 +63,37 @@ public sealed class PageModule : IModule
             .ReportApiVersions()
             .Build();
 
-        // Page route group (Phase 7) — endpoints registered in plan 07-02
+        // Page routes under /workspaces/{slug}/projects/{projectId}/pages/
         var pages = endpoints
             .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/pages")
             .WithTags("Pages")
             .WithApiVersionSet(apiVersionSet);
 
-        _ = pages; // placeholder — endpoints added in 07-02
+        // Core CRUD
+        pages.MapCreatePageEndpoint();
+        pages.MapGetPageEndpoint();
+        pages.MapUpdatePageEndpoint();
+        pages.MapDeletePageEndpoint();
+        pages.MapListPagesEndpoint();
 
-        // Page summary route group (Phase 7) — no {pageId} parameter
+        // Archive / Unarchive (bound to /{pageId}/archive)
+        pages.MapArchivePageEndpoint();
+        pages.MapUnarchivePageEndpoint();
+
+        // Description (bound to /{pageId}/description)
+        pages.MapGetPageDescriptionEndpoint();
+        pages.MapUpdatePageDescriptionEndpoint();
+
+        // Favorite (bound to /{pageId}/favorite)
+        pages.MapAddFavoriteEndpoint();
+        pages.MapRemoveFavoriteEndpoint();
+
+        // Page summary route group (no {pageId} parameter)
         var pageSummary = endpoints
             .MapGroup("api/v{version:apiVersion}/workspaces/{slug}/projects/{projectId}/pages-summary")
             .WithTags("Pages")
             .WithApiVersionSet(apiVersionSet);
 
-        _ = pageSummary; // placeholder — endpoints added in 07-02
+        pageSummary.MapGetPageSummaryEndpoint();
     }
 }
