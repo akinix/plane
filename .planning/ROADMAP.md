@@ -481,7 +481,7 @@ Plans:
 
 **Wave 2** _(blocked on Wave 1 completion)_
 
-- [ ] 12-02-PLAN.md — Overview + Stats 端点（Workspace/Project 级概览 + 统计，AnalyticsQueryService 聚合查询）
+- [x] 12-02-PLAN.md — Overview + Stats 端点（Workspace/Project 级概览 + 统计，AnalyticsQueryService 聚合查询）
 
 **Wave 3** _(blocked on Wave 2 completion)_
 
