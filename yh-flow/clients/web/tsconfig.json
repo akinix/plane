@@ -8,10 +8,12 @@
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
     "noEmit": true,
+    "skipLibCheck": true,
     "paths": {
       "@/*": ["./app/*"],
       "@plane/types": ["./src/lib/types"],
       "@plane/utils": ["./src/lib/utils"],
+      "@plane/constants": ["./src/lib/constants"],
       "@plane/ui": ["./src/lib/ui"],
       "@plane/editor": ["./src/lib/editor"]
     }

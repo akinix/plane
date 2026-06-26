@@ -11,6 +11,7 @@ export default defineConfig({
       // FLOW: Vite alias @plane/* → src/lib/* (per D-04)
       "@plane/types": path.resolve(__dirname, "src/lib/types"),
       "@plane/utils": path.resolve(__dirname, "src/lib/utils"),
+      "@plane/constants": path.resolve(__dirname, "src/lib/constants"),
       "@plane/ui": path.resolve(__dirname, "src/lib/ui"),
       "@plane/editor": path.resolve(__dirname, "src/lib/editor"),
     },
