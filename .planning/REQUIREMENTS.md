@@ -1,437 +1,199 @@
 # YH.Flow — Requirements
 
-**Version:** 0.1.0  
-**Date:** 2026-06-16  
-**Status:** Draft
+**Version:** 2.0.0
+**Date:** 2026-06-26
+**Status:** Draft — v2.0 Milestone
 
 ---
 
 ## Architecture Principles
 
-- **AP**: API 兼容优先 — 新 API 路由和响应格式与 Plane 保持一致
-- **MP**: 模块化单体 — 严格模块边界，Contracts 分离
-- **FS**: Fullstackhero 规范 — 遵守 10 条黄金法则
+- **AP**: API 兼容优先 — 前端保持与 Plane Web 一致的 UI 风格和交互模式
+- **PR**: 渐进迁移 — 保留 Plane Web 组件，逐步替换 API 层调用目标
+- **SS**: 严格状态分离 — TanStack Query 管理服务端数据，MobX 仅管理 UI 状态
+- **JM**: JWT 管理 — 统一认证方案为 JWT Bearer，废弃 Session Cookie + CSRF
+- **FD**: Fork 不修改 — Plane 包 fork 后只在必要时修改，用 `// FLOW:` 标记
 - **NC**: 原始代码不可变 — Plane 源码仅作参考
 
 ---
 
-## Phase 1: Foundation — 基础设施搭建
+## v2.0 Requirements
 
-### REQ-1.1: 项目结构初始化
+### 脚手架 & 基础设施 (SCAFF)
 
-- 基于 fullstackhero dotnet-starter-kit 创建 YH.Flow 项目结构
-- 配置 Directory.Build.props、Directory.Packages.props
-- 建立 BuildingBlocks 引用（Core, Shared, Persistence, Web, Caching, Eventing, etc.）
-- 设置 Host 项目（YH.Flow.Api, YH.Flow.DbMigrator）
-- 配置 .NET Aspire AppHost（PostgreSQL, Redis, MinIO, API）
-- 移除不需要的模块（Catalog, Tickets, Chat, Billing）
+- [ ] **SCAFF-01**: Flow Web 开发环境搭建（React 19 + Vite 7 + TypeScript 5 + Tailwind CSS 4）
+- [ ] **SCAFF-02**: Fork @plane/ui 组件库到本地并配置构建流程
+- [ ] **SCAFF-03**: Fork @plane/editor（TipTap）到本地，剥离 Yjs 协作依赖
+- [ ] **SCAFF-04**: Fork @plane/types 和 @plane/utils 到本地
+- [ ] **SCAFF-05**: 配置 Vite proxy 或 CORS 使前端可调用 .NET API
+- [ ] **SCAFF-06**: 配置 .NET 端全局 `JsonNamingPolicy.SnakeCaseLower` 及日期格式
+- [ ] **SCAFF-07**: 实现 Axios 实例 + JWT Bearer 拦截器（替代 `withCredentials`）
+- [ ] **SCAFF-08**: 适配 .NET 错误响应格式为 `{"error": "message"}` 兼容 Plane 前端
+- [ ] **SCAFF-09**: 构建 PlanePagedResult 与前端分页的适配层
 
-### REQ-1.2: 数据库基础
+### 认证 (AUTH)
 
-- 配置 PostgreSQL 连接和 EF Core
-- 建立 DbMigrator 控制台项目
-- 配置 Migration 项目结构
-- 实现多租户基础设施（Finbuckle）
-- 配置 Schema 命名规范
+- [ ] **AUTH-01**: 用户可以在登录页面使用邮箱密码登录（JWT）
+- [ ] **AUTH-02**: 用户可以在注册页面创建账户
+- [ ] **AUTH-03**: 用户可以使用忘记密码/重置密码功能
+- [ ] **AUTH-04**: 用户登录后 session 持久化（JWT token 存储 + 刷新）
+- [ ] **AUTH-05**: 用户可以直接退出登录
+- [ ] **AUTH-06**: 未认证用户自动重定向到登录页
 
-### REQ-1.3: 认证与授权
+### 工作区 (WORK)
 
-- 实现 JWT Bearer 认证
-- 实现 API Key 认证（`X-Api-Key` header）
-- 实现 Session Cookie 认证（兼容 Plane 前端）
-- 实现 OAuth Provider 框架（GitHub, GitLab, Gitea, Google）
-- 实现基于权限的授权（`RequirePermission`）
-- 实现 API Token 管理（CRUD）
+- [ ] **WORK-01**: 用户可以看到工作区仪表板（项目概览、最近活动）
+- [ ] **WORK-02**: 用户可以在工作区之间切换
+- [ ] **WORK-03**: 用户可以管理工作区设置（名称、描述、Logo）
+- [ ] **WORK-04**: 用户可以管理工作区成员（列表、角色管理）
 
-### REQ-1.4: API 基础设施
+### 项目 (PROJ)
 
-- 配置 CORS、Security Headers、Rate Limiting
-- 实现全局异常处理（兼容 Plane 错误格式）
-- 实现分页（兼容 Plane `count/next/previous/results` 格式）
-- 实现 API 版本控制（v1）
-- 配置 Scalar/OpenAPI 文档
-- 实现 Idempotency 中间件
+- [ ] **PROJ-01**: 用户可以在工作区内创建项目
+- [ ] **PROJ-02**: 用户可以看到项目列表（含搜索/排序）
+- [ ] **PROJ-03**: 用户可以看到项目详情/仪表板
+- [ ] **PROJ-04**: 用户可以管理项目成员
+- [ ] **PROJ-05**: 用户可以在项目间导航切换
 
----
+### Issue 列表 & 详情 (ISSU)
 
-## Phase 2: Workspace — 工作区管理
+- [ ] **ISSU-01**: 用户可以在项目下创建 Issue（标题、描述、优先级、负责人、标签）
+- [ ] **ISSU-02**: 用户可以看到 Issue 列表视图（列状态筛选、排序、分页）
+- [ ] **ISSU-03**: 用户可以看到 Issue 详情页（属性面板、评论、活动日志）
+- [ ] **ISSU-04**: 用户可以编辑 Issue 属性（状态、优先级、负责人、标签、估算、截止日期）
+- [ ] **ISSU-05**: 用户可以删除 Issue（软删除）
+- [ ] **ISSU-06**: 用户可以创建/编辑/删除评论
+- [ ] **ISSU-07**: 用户可以对 Issue 执行批量操作（状态变更、指派、删除）
+- [ ] **ISSU-08**: 用户可以在 Issue 描述中使用 TipTap 富文本编辑器
 
-### REQ-2.1: 工作区 CRUD
+### Issue 看板视图 (KANB)
 
-- 创建工作区（含 slug 生成）
-- 获取工作区详情
-- 更新工作区设置
-- 删除工作区（软删除）
-- 列出用户所属工作区
+- [ ] **KANB-01**: 用户可以看到 Issue 看板视图（列 = 状态列）
+- [ ] **KANB-02**: 用户可以通过拖拽在列之间移动 Issue（变更状态）
+- [ ] **KANB-03**: 用户可以在看板中按负责人/优先级等字段分组（Group By）
+- [ ] **KANB-04**: 用户可以在看板中做子分组（Sub-Group By Swimlane）
+- [ ] **KANB-05**: 用户可以在看板内筛选和排序
 
-### REQ-2.2: 工作区成员管理
+### Issue 日历视图 (CALN)
 
-- 邀请成员（生成邀请链接）
-- 列出成员（含角色）
-- 更新成员角色（Admin=20, Member=15, Guest=5）
-- 移除成员
-- 成员加入/离开工作区
+- [ ] **CALN-01**: 用户可以看到 Issue 日历视图（按截止日期/开始日期展示）
+- [ ] **CALN-02**: 用户可以通过拖拽调整 Issue 日期
 
-### REQ-2.3: 工作区设置
+### Issue 甘特图 (GANT)
 
-- 通用设置（名称、描述、Logo）
-- 默认 Issue 状态配置
-- 默认标签配置
-- 估算系统配置
+- [ ] **GANT-01**: 用户可以看到 Issue 甘特图视图
+- [ ] **GANT-02**: 用户可以在甘特图中查看 Issue 依赖关系
 
-### REQ-2.4: 工作区邀请
+### Issue 电子表格 (SHEE)
 
-- 生成邀请链接/邮件
-- 列出待处理邀请
-- 撤销邀请
-- 接受/拒绝邀请
+- [ ] **SHEE-01**: 用户可以看到 Issue 电子表格视图（表格批量编辑）
+- [ ] **SHEE-02**: 用户可以在电子表格中内联编辑属性
 
----
+### 筛选 & 排序引擎 (FILT)
 
-## Phase 3: Project — 项目管理
+- [ ] **FILT-01**: 用户可以按状态、优先级、负责人、标签筛选 Issues
+- [ ] **FILT-02**: 用户可以按任意字段排序 Issues
+- [ ] **FILT-03**: 用户可以自定义显示列
+- [ ] **FILT-04**: 用户可以将筛选配置保存为自定义视图
 
-### REQ-3.1: 项目 CRUD
+### 周期 (CYCLE)
 
-- 在工作区内创建项目
-- 获取项目详情
-- 更新项目设置
-- 删除项目（软删除）
-- 列出工作区项目（支持筛选、排序）
+- [ ] **CYCLE-01**: 用户可以看到 Cycle 列表（活跃/已完成/全部）
+- [ ] **CYCLE-02**: 用户可以看到 Cycle 详情（进度、Burndown、关联 Issues）
+- [ ] **CYCLE-03**: 用户可以在 Cycle 看板中管理 Issue 分配
+- [ ] **CYCLE-04**: 用户可以创建/编辑 Cycle
 
-### REQ-3.2: 项目成员管理
+### 模块 (MODU)
 
-- 添加成员到项目
-- 列出项目成员
-- 更新项目成员角色
-- 移除项目成员
+- [ ] **MODU-01**: 用户可以看到 Module 列表
+- [ ] **MODU-02**: 用户可以看到 Module 详情（进度、关联 Issues）
+- [ ] **MODU-03**: 用户可以创建/编辑 Module
 
-### REQ-3.3: 项目设置
+### 页面 (PAGE)
 
-- 项目封面图片（Unsplash 集成）
-- 项目标识符/前缀
-- 项目描述
-- 项目网络/可见性设置
+- [ ] **PAGE-01**: 用户可以看到 Page 列表（含树形层级）
+- [ ] **PAGE-02**: 用户可以使用 TipTap 编辑器创建/编辑 Page
+- [ ] **PAGE-03**: 用户可以归档/删除 Page
+- [ ] **PAGE-04**: 用户可以为 Page 设置访问权限（Public/Private）
+- [ ] **PAGE-05**: 用户可以收藏/星标 Page
 
----
+### 视图 (VIEW)
 
-## Phase 4: WorkItems — 工作项管理
+- [ ] **VIEW-01**: 用户可以看到已保存的自定义视图列表
+- [ ] **VIEW-02**: 用户可以将当前筛选/排序/分组配置保存为新视图
+- [ ] **VIEW-03**: 用户可以应用已保存的视图
 
-### REQ-4.1: 状态管理 (State)
+### 通知 (NOTI)
 
-- 创建项目工作流状态
-- 列出项目状态（含排序）
-- 更新状态（名称、颜色、顺序）
-- 删除状态（含归档）
-- 默认状态集（Backlog, Todo, In Progress, Done, Cancelled）
+- [ ] **NOTI-01**: 用户可以看到站内通知列表
+- [ ] **NOTI-02**: 用户可以通过 SSE 接收实时通知（自动弹出）
+- [ ] **NOTI-03**: 用户可以标记通知为已读
+- [ ] **NOTI-04**: 用户可以点击通知跳转到关联 Issue/评论
 
-### REQ-4.2: 标签管理 (Label)
+### 分析 (ANAL)
 
-- 创建标签（名称、颜色）
-- 列出项目标签
-- 更新标签
-- 删除标签
-- 按标签筛选 Issues
+- [ ] **ANAL-01**: 用户可以看到工作区分析仪表板（Issue 统计、完成率趋势）
+- [ ] **ANAL-02**: 用户可以在项目级别查看分析图表
+- [ ] **ANAL-03**: 用户可以导出分析数据（CSV）
 
-### REQ-4.3: Issue CRUD
+### 全局 UI & 交互 (UI)
 
-- 创建 Issue（标题、描述、优先级、负责人、状态、标签、估算）
-- 获取 Issue 详情
-- 更新 Issue 属性
-- 删除 Issue（软删除）
-- 列出项目 Issues（支持筛选、排序、分页）
-- 批量操作 Issues（状态变更、指派、删除）
-
-### REQ-4.4: Issue 属性
-
-- 优先级（Urgent, High, Medium, Low, None）
-- 指派（单个/多个成员）
-- 截止日期
-- 开始日期
-- 目标日期
-- 父 Issue / 子 Issue 关联
-- Issue 链接（blocking, blocked_by, relates_to, duplicate, etc.）
-- 附件/文件上传
-- 自定义属性（Properties）
-
-### REQ-4.5: Issue 评论
-
-- 创建评论
-- 列出评论
-- 更新评论
-- 删除评论（软删除）
-- 评论中的 @提及
-
-### REQ-4.6: Issue 活动日志
-
-- 记录所有 Issue 变更（属性修改、状态变更等）
-- 列出 Issue 活动历史
-- 记录评论创建/编辑
-
-### REQ-4.7: 估算管理
-
-- 创建估算点值
-- 列出项目估算点
-- 更新估算点
-- 删除估算点
-- 为 Issue 设置估算
-
-### REQ-4.8: 收件箱 (Intake)
-
-- 列出收件箱 Issues
-- 创建收件箱条目
-- 将收件箱条目转为正式 Issue
-- 删除收件箱条目
-
-### REQ-4.9: 导入/导出
-
-- CSV 导出（含 XLSX 公式注入保护）
-- JSON 导出
-- CSV 导入
-- JSON 导入
-- 异步导出任务（后台处理，生成下载链接）
+- [ ] **UI-01**: 侧边栏导航（工作区/项目树形结构，保持 Plane 风格）
+- [ ] **UI-02**: 顶部导航栏（头像、通知、搜索）
+- [ ] **UI-03**: 暗色/亮色主题切换
+- [ ] **UI-04**: 命令面板（Cmd+K）
+- [ ] **UI-05**: Emoji 图标选择器
+- [ ] **UI-06**: 响应式布局（桌面优先，平板兼容）
 
 ---
 
-## Phase 5: Cycle — 周期管理
+## Deferred to Future Milestones
 
-### REQ-5.1: Cycle CRUD
+| Requirement                               | Reason                   |
+| ----------------------------------------- | ------------------------ |
+| Calendar/Gantt/Spreadsheet 中国际化(i18n) | 一期仅中文               |
+| 实时协作编辑（Yjs/Hocuspocus）            | 技术复杂度高，非核心功能 |
+| PDF/图片导出                              | 按需添加                 |
+| 移动端适配                                | Web 优先，移动端后续     |
+| 集成设置 UI（GitHub/GitLab/Slack）        | 后端 Phase 9 尚未完成    |
 
-- 创建 Cycle（名称、日期范围、描述）
-- 列出项目 Cycles（活跃/已完成/所有）
-- 获取 Cycle 详情
-- 更新 Cycle
-- 删除 Cycle
-- Cycle 状态流转（创建 → 开始 → 完成）
+## Out of Scope
 
-### REQ-5.2: Cycle-Issue 关联
+| Feature             | Reason                             |
+| ------------------- | ---------------------------------- |
+| 修改 Plane 原始代码 | 保持原始代码不变，方便拉取上游更新 |
+| CI/CD 配置          | Phase 0 已决定暂不做               |
+| 实时协作（Pages）   | Phase 0 已决定推迟                 |
 
-- 添加 Issues 到 Cycle
-- 从 Cycle 中移除 Issues（回退到 Backlog）
-- 列出 Cycle 中的 Issues
-- Issue 在 Cycle 之间的迁移
-- Cycle 进度跟踪（Burndown 数据）
+## Traceability
 
----
+| Requirement         | Phase     | Status  |
+| ------------------- | --------- | ------- |
+| SCAFF-01 ~ SCAFF-09 | Phase 1   | Pending |
+| AUTH-01 ~ AUTH-06   | Phase 1   | Pending |
+| WORK-01 ~ WORK-04   | Phase 2   | Pending |
+| PROJ-01 ~ PROJ-05   | Phase 2   | Pending |
+| ISSU-01 ~ ISSU-08   | Phase 3   | Pending |
+| KANB-01 ~ KANB-05   | Phase 3   | Pending |
+| CALN-01 ~ CALN-02   | Phase 4   | Pending |
+| GANT-01 ~ GANT-02   | Phase 4   | Pending |
+| SHEE-01 ~ SHEE-02   | Phase 5   | Pending |
+| FILT-01 ~ FILT-04   | Phase 5   | Pending |
+| CYCLE-01 ~ CYCLE-04 | Phase 5   | Pending |
+| MODU-01 ~ MODU-03   | Phase 5   | Pending |
+| PAGE-01 ~ PAGE-05   | Phase 6   | Pending |
+| VIEW-01 ~ VIEW-03   | Phase 6   | Pending |
+| NOTI-01 ~ NOTI-04   | Phase 7   | Pending |
+| ANAL-01 ~ ANAL-03   | Phase 8   | Pending |
+| UI-01 ~ UI-06       | Phase 1~8 | Pending |
 
-## Phase 6: Module — 模块管理
+**Coverage:**
 
-### REQ-6.1: Module CRUD
-
-- 创建 Module（名称、描述、负责人、日期范围）
-- 列出项目 Modules
-- 获取 Module 详情
-- 更新 Module
-- 删除 Module
-- Module 状态管理（Backlog → Planned → In Progress → Paused → Done → Cancelled）
-
-### REQ-6.2: Module-Issue 关联
-
-- 添加 Issues 到 Module
-- 从 Module 移除 Issues
-- 列出 Module 中的 Issues
-- Module 进度跟踪
-
----
-
-## Phase 7: Page — 文档管理
-
-### REQ-7.1: Page CRUD (无实时协作)
-
-- 创建 Page（标题、内容、访问级别）
-- 获取 Page 详情
-- 更新 Page（保存内容）
-- 删除 Page（软删除）
-- 列出项目/工作区 Pages
-- Page 层级结构（嵌套/树形）
-- Page 归档
-
-### REQ-7.2: Page 功能
-
-- 富文本内容存储（HTML/Markdown）
-- 附件/图片嵌入
-- 访问权限（Public/Private）
-- 收藏/星标
+- v2.0 requirements: 53 total
+- Mapped to phases: 53
+- Unmapped: 0 ✓
 
 ---
 
-## Phase 8: View — 视图管理
-
-### REQ-8.1: View CRUD [x]
-
-- 创建 View（名称、筛选条件、排序、展示列）
-- 列出项目 Views
-- 获取 View 详情
-- 更新 View
-- 删除 View
-- 设为默认 View
-
-### REQ-8.2: View 筛选 [x]
-
-- 按状态筛选
-- 按优先级筛选
-- 按负责人筛选
-- 按标签筛选
-- 按日期范围筛选
-- 自定义排序
-- 自定义显示列
-
----
-
-## Phase 9: Integration — 集成管理
-
-### REQ-9.1: GitHub 集成
-
-- OAuth 连接 GitHub 账户
-- 列出 GitHub 仓库
-- 关联仓库到项目
-- 同步 GitHub Issues 到项目
-- 同步项目 Issues 到 GitHub
-- 双向评论同步
-- 配置同步的项目/标签映射
-
-### REQ-9.2: GitLab 集成
-
-- OAuth 连接 GitLab 账户（含自托管）
-- 列出 GitLab 项目
-- 同步配置和双向同步
-
-### REQ-9.3: Gitea 集成
-
-- OAuth 连接 Gitea 实例
-- 同步配置和双向同步
-
-### REQ-9.4: Slack 集成
-
-- OAuth 连接 Slack 工作区
-- 配置项目通知同步
-- 事件类型筛选（Issue 创建/更新、评论等）
-
-### REQ-9.5: Unsplash 集成
-
-- 搜索 Unsplash 图片
-- 设为项目/工作区封面
-
----
-
-## Phase 10: Webhook — Webhook 管理
-
-### REQ-10.1: Webhook CRUD
-
-- 创建 Webhook（URL、事件类型、密钥）
-- 列出工作区 Webhooks
-- 更新 Webhook
-- 删除 Webhook
-- 启用/禁用 Webhook
-
-### REQ-10.2: Webhook 投递
-
-- 事件触发（Issue/Project/Cycle/Module/Comment 等）
-- 异步投递（Hangfire 后台任务）
-- HMAC-SHA256 签名
-- 重试机制（可配置次数和间隔）
-- SSRF 防护（IP 白名单、域名黑名单）
-- 投递日志（保留 14 天）
-
----
-
-## Phase 11: Notification — 通知系统
-
-### REQ-11.1: 站内通知
-
-- 通知生成（Issue 指派、评论提及、项目邀请等）
-- 通知列表（分页、已读/未读筛选）
-- 标记已读
-- 标记全部已读
-- 通知偏好设置
-
-### REQ-11.2: 邮件通知
-
-- 邮件模板
-- 异步发送（Hangfire）
-- 通知事件配置（用户可选择接收类型）
-
----
-
-## Phase 12: Analytics — 分析仪表板
-
-### REQ-12.1: 工作区分析
-
-- Issue 统计（按状态、优先级、负责人）
-- 完成率趋势
-- Cycle 进度概览
-- 成员工作量分布
-
-### REQ-12.2: 导出报告
-
-- 分析数据导出（CSV/JSON）
-- 图表数据 API
-
----
-
-## Phase 13: Frontend — Flow Web 前端
-
-### REQ-13.1: 项目初始化
-
-- 基于 fullstackhero clients/dashboard 模板创建
-- React 19 + Vite 7 + Tailwind CSS 4 + Radix UI
-- 配置与 .NET API 的连接
-
-### REQ-13.2: 布局与导航
-
-- 侧边栏工作区/项目导航（保持 Plane 风格）
-- 顶部导航栏
-- 面包屑导航
-- 响应式布局
-- 主题切换（亮/暗）
-
-### REQ-13.3: 页面实现
-
-- 工作区仪表板
-- 项目列表/详情
-- Issue 列表/详情/创建/编辑
-- Cycle 列表/看板/详情
-- Module 列表/详情
-- Page 列表/编辑器（基于 TipTap）
-- View 管理
-- 设置页面（工作区、项目、成员）
-
-### REQ-13.4: 表单与交互
-
-- React Hook Form + Zod 验证
-- TanStack Query 数据获取和缓存
-- 乐观更新（Optimistic Updates）
-- 拖拽排序（Pragmatic Drag and Drop）
-- 实时通知（SSE）
-
----
-
-## Non-Functional Requirements
-
-### NFR-1: Performance
-
-- API 响应时间 < 200ms (P95)
-- 支持数据分页（默认 30 条/页）
-- EF Core 查询优化（NoTracking, SplitQuery）
-
-### NFR-2: Security
-
-- 所有端点强制认证（除公开端点）
-- 多租户数据隔离（Finbuckle + `IHasTenant`）
-- SSRF 防护（Webhook 调用）
-- 输入验证（FluentValidation）
-- XSS 防护
-- Rate Limiting（认证端点 10/min）
-
-### NFR-3: Reliability
-
-- 软删除 + 60 天自动清理
-- 后台任务重试机制
-- 全局异常处理
-- Structured Logging (Serilog)
-
-### NFR-4: Maintainability
-
-- 模块化单体 — 模块独立可替换
-- 严格代码规范（.editorconfig, SonarAnalyzer）
-- XML 文档注释
-- 架构测试（NetArchTest）
+_Requirements defined: 2026-06-26_
+_Last updated: 2026-06-26 after v2.0 milestone research_
