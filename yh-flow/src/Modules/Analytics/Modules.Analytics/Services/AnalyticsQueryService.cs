@@ -83,12 +83,17 @@ public sealed class AnalyticsQueryService : IAnalyticsQueryService
 
         var query = BuildIssueWithStateQuery(tenantId, projectIds, dateGte, dateLte);
 
-        var stats = await query
+        var stateStats = await query
             .GroupBy(x => x.StateGroup)
             .Select(g => new StateGroupCount { Group = g.Key, Count = g.LongCount() })
             .ToListAsync(ct);
 
-        return ToWorkItemStats(stats);
+        var priorityStats = await query
+            .GroupBy(x => x.Priority)
+            .Select(g => new PriorityGroupCount { Priority = g.Key, Count = g.LongCount() })
+            .ToListAsync(ct);
+
+        return EnrichWithPriorityCounts(ToWorkItemStats(stateStats), priorityStats);
     }
 
     /// <inheritdoc />
@@ -101,12 +106,17 @@ public sealed class AnalyticsQueryService : IAnalyticsQueryService
         var query = BuildIssueWithStateQuery(tenantId, null, dateGte, dateLte)
             .Where(x => x.ProjectId == projectId);
 
-        var stats = await query
+        var stateStats = await query
             .GroupBy(x => x.StateGroup)
             .Select(g => new StateGroupCount { Group = g.Key, Count = g.LongCount() })
             .ToListAsync(ct);
 
-        return ToWorkItemStats(stats);
+        var priorityStats = await query
+            .GroupBy(x => x.Priority)
+            .Select(g => new PriorityGroupCount { Priority = g.Key, Count = g.LongCount() })
+            .ToListAsync(ct);
+
+        return EnrichWithPriorityCounts(ToWorkItemStats(stateStats), priorityStats);
     }
 
     /// <inheritdoc />
@@ -520,6 +530,7 @@ public sealed class AnalyticsQueryService : IAnalyticsQueryService
         public Guid ProjectId { get; set; }
         public DateTimeOffset CreatedOnUtc { get; set; }
         public StateGroup? StateGroup { get; set; }
+        public string Priority { get; set; } = "none";
     }
 
     /// <summary>
@@ -558,6 +569,28 @@ public sealed class AnalyticsQueryService : IAnalyticsQueryService
             CompletedWorkItems = new CountValue { Count = GetGroupCount(StateGroup.Completed) },
             CancelledWorkItems = new CountValue { Count = GetGroupCount(StateGroup.Cancelled) },
         };
+    }
+
+    /// <summary>
+    /// Computes priority distribution from a list of raw issue states.
+    /// </summary>
+    private static WorkItemStatsDto EnrichWithPriorityCounts(WorkItemStatsDto dto, List<PriorityGroupCount> priorityGroups)
+    {
+        dto.UrgentWorkItems = new CountValue { Count = (int)(priorityGroups.FirstOrDefault(p => p.Priority == "urgent")?.Count ?? 0) };
+        dto.HighPriorityWorkItems = new CountValue { Count = (int)(priorityGroups.FirstOrDefault(p => p.Priority == "high")?.Count ?? 0) };
+        dto.MediumPriorityWorkItems = new CountValue { Count = (int)(priorityGroups.FirstOrDefault(p => p.Priority == "medium")?.Count ?? 0) };
+        dto.LowPriorityWorkItems = new CountValue { Count = (int)(priorityGroups.FirstOrDefault(p => p.Priority == "low")?.Count ?? 0) };
+        dto.NonePriorityWorkItems = new CountValue { Count = (int)(priorityGroups.FirstOrDefault(p => p.Priority == "none")?.Count ?? 0) };
+        return dto;
+    }
+
+    /// <summary>
+    /// Helper class for grouping by priority.
+    /// </summary>
+    private sealed class PriorityGroupCount
+    {
+        public string Priority { get; set; } = "none";
+        public long Count { get; set; }
     }
 
     /// <summary>
@@ -642,6 +675,7 @@ public sealed class AnalyticsQueryService : IAnalyticsQueryService
                         ProjectId = issue.ProjectId,
                         CreatedOnUtc = issue.CreatedOnUtc,
                         StateGroup = state != null ? state.Group : (StateGroup?)null,
+                        Priority = issue.Priority,
                     };
 
         if (!string.IsNullOrEmpty(projectIds))

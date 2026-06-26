@@ -42,7 +42,7 @@ public sealed class AnalyticsModule : IModule
 
         builder.Services.AddHealthChecks()
             .AddDbContextCheck<WorkItemsDbContext>(
-                name: "db:work-items",
+                name: "analytics:work-items",
                 failureStatus: HealthStatus.Unhealthy);
     }
 

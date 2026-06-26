@@ -10,4 +10,11 @@ public sealed class WorkItemStatsDto
     [JsonPropertyName("un_started_work_items")] public CountValue UnStartedWorkItems { get; set; } = new();
     [JsonPropertyName("completed_work_items")] public CountValue CompletedWorkItems { get; set; } = new();
     [JsonPropertyName("cancelled_work_items")] public CountValue CancelledWorkItems { get; set; } = new();
+
+    // ── Priority distribution ─────────────────────────────────────────
+    [JsonPropertyName("urgent_work_items")] public CountValue UrgentWorkItems { get; set; } = new();
+    [JsonPropertyName("high_priority_work_items")] public CountValue HighPriorityWorkItems { get; set; } = new();
+    [JsonPropertyName("medium_priority_work_items")] public CountValue MediumPriorityWorkItems { get; set; } = new();
+    [JsonPropertyName("low_priority_work_items")] public CountValue LowPriorityWorkItems { get; set; } = new();
+    [JsonPropertyName("none_priority_work_items")] public CountValue NonePriorityWorkItems { get; set; } = new();
 }

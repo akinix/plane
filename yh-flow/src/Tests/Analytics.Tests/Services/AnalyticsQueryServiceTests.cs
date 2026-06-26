@@ -158,4 +158,33 @@ public sealed class AnalyticsQueryServiceTests : IClassFixture<AnalyticsTestFixt
         var u2 = result.First(a => a.AssigneeId.ToString() == user2);
         u2.BacklogWorkItems.ShouldBe(1);
     }
+
+    [Fact]
+    public async Task GetWorkItemStatsAsync_IncludesPriorityDistribution()
+    {
+        var (context, accessor) = _fixture.CreateDbContextWithAccessor();
+        var service = new AnalyticsQueryService(context, accessor);
+        var pid = Guid.NewGuid();
+
+        var state = State.Create("Backlog", "#ccc", StateGroup.Backlog, pid, true);
+        context.States.Add(state);
+        await context.SaveChangesAsync();
+
+        var urgent = Issue.Create("Urgent", pid, stateId: state.Id, priority: "urgent");
+        var high = Issue.Create("High", pid, stateId: state.Id, priority: "high");
+        var medium = Issue.Create("Medium", pid, stateId: state.Id, priority: "medium");
+        var low = Issue.Create("Low", pid, stateId: state.Id, priority: "low");
+        var none = Issue.Create("None", pid, stateId: state.Id, priority: "none");
+        context.Issues.AddRange(urgent, high, medium, low, none);
+        await context.SaveChangesAsync();
+
+        var result = await service.GetWorkItemStatsAsync("test-workspace", null, null, null, null, CancellationToken.None);
+
+        result.UrgentWorkItems.Count.ShouldBe(1);
+        result.HighPriorityWorkItems.Count.ShouldBe(1);
+        result.MediumPriorityWorkItems.Count.ShouldBe(1);
+        result.LowPriorityWorkItems.Count.ShouldBe(1);
+        result.NonePriorityWorkItems.Count.ShouldBe(1);
+        result.TotalWorkItems.Count.ShouldBe(5);
+    }
 }
