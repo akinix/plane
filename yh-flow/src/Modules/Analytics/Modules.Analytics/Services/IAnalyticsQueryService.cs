@@ -43,4 +43,24 @@ public interface IAnalyticsQueryService
     /// </summary>
     Task<List<AssigneeStatsDto>> GetAssigneeGroupedStatsAsync(
         string slug, Guid projectId, string? dateFilter, string? startDate, string? endDate, CancellationToken ct);
+
+    // ────────────────────────────── Wave 3: Chart Methods ──────────────────────────────
+
+    /// <summary>
+    /// Workspace monthly issue created/completed trend — TruncMonth aggregation (Plane work_item_completion_chart).
+    /// </summary>
+    Task<AnalyticsChartDto> GetWorkspaceWorkItemChartAsync(
+        string slug, string? dateFilter, string? startDate, string? endDate, string? projectIds, CancellationToken ct);
+
+    /// <summary>
+    /// Workspace summary chart — aggregate counts per category (work_items, cycles, modules, etc.).
+    /// </summary>
+    Task<List<ChartDataPoint>> GetProjectSummaryChartAsync(
+        string slug, string? dateFilter, string? startDate, string? endDate, string? projectIds, CancellationToken ct);
+
+    /// <summary>
+    /// Project-level work item chart — daily (cycle/module scoped) or monthly aggregation.
+    /// </summary>
+    Task<AnalyticsChartDto> GetProjectWorkItemChartAsync(
+        string slug, Guid projectId, string? dateFilter, string? startDate, string? endDate, Guid? cycleId, Guid? moduleId, CancellationToken ct);
 }

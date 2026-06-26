@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using YH.Framework.Web.Modules;
+using YH.Modules.Analytics.Features.v1.Charts.GetProjectChart;
+using YH.Modules.Analytics.Features.v1.Charts.GetWorkspaceChart;
 using YH.Modules.Analytics.Features.v1.Overview.GetProjectAnalytics;
 using YH.Modules.Analytics.Features.v1.Overview.GetWorkspaceAnalytics;
 using YH.Modules.Analytics.Features.v1.Stats.GetProjectStats;
@@ -76,6 +78,12 @@ public sealed class AnalyticsModule : IModule
         projectAnalytics.MapGetProjectAnalyticsEndpoint();       // GET /
         projectAnalytics.MapGetProjectStatsEndpoint();           // GET /stats
 
-        // Wave 3: Chart + Export endpoints will be registered here.
+        // Wave 3: Chart endpoints
+        workspaceAnalytics.MapGetWorkspaceChartEndpoint();       // GET /charts?type=work-items|projects
+
+        // Project-level chart endpoint
+        projectAnalytics.MapGetProjectChartEndpoint();           // GET /charts?type=work-items
+
+        // Wave 3: Export endpoint will be registered here in Task 2.
     }
 }
