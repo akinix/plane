@@ -2,22 +2,22 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 13
-status: ready_to_plan
-last_updated: "2026-06-26T04:29:11.163Z"
+current_phase: complete
+status: complete
+last_updated: "2026-06-26T04:40:00.000Z"
 progress:
   total_phases: 14
-  completed_phases: 8
+  completed_phases: 12
   total_plans: 43
-  completed_plans: 37
-  percent: 57
+  completed_plans: 41
+  percent: 95
 ---
 
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-26
-**Current Phase:** 13
-**Active Workstream:** Phase 12 (Analytics) -- PLANS CREATED, 4 plans (4 waves)
+**Current Phase:** Complete 🎉
+**Active Workstream:** v1.0 milestone complete
 
 ---
 
@@ -60,24 +60,16 @@ progress:
 
 > 🟢 **Phase 4 (WorkItems): COMPLETE** -- 5 waves executed, 5 plans done. Full WorkItems module: State/Label/Estimate entities + CRUD, Issue entity (20+ fields, 5 FK, 2 M2M) with SequenceId service, IssueLink, IssueComment, IssueActivity (domain events), BatchOps, Intake, Import/Export, StateSeeder. WorkItemsDbContext (`yhschema.WorkItems`). 181 tests all green. Regression: Workspace 100 + Identity 412 = 693 total passing.
 
-### Pending
+### Completed
 
-> 🟢 **Phase 7 (Page): COMPLETE** -- 3 waves executed, 3 plans done. Page module fully implemented: Page/ProjectPage/PageFavorite domain entities, PageDbContext (yhschema.Page schema), 12 API endpoints (Create/Get/Update/Delete/List/Summary/Archive/Unarchive/GetDescription/UpdateDescription/AddFavorite/RemoveFavorite), DTO Mapper + routing. 53 tests all green. Full regression: WorkItems 264 + Workspace 100 = zero regression.
+> 🟢 **Phase 12 (Analytics): COMPLETE** -- 4 waves executed, 4 plans done. Analytics module fully implemented: Analytics contracts (8 DTOs), AnalyticsQueryService (7 aggregation methods), 8 API endpoints (Overview/Stats/Chart/Export at Workspace & Project levels), Hangfire CSV export job, Issue analytics index migration. 22 tests all green, 34/34 must-haves verified. Gap closure: fixed duplicate health check + added priority statistics. Full regression: Workspace 100 + Identity 412 + WorkItems 264 + View 41 = zero regression.
 
-- [ ] Phase 2 manual smoke (11 steps -- blocked by Docker Desktop issue)
-- [x] Phase 5: Cycle -- 周期管理 ✅（3 waves, 729 全量回归绿色）
+> 🟢 **v1.0 里程碑：12/14 phases 完成** — Phase 9（集成）和 Phase 13（前端）推迟到下一里程碑。后端核心 API 全部就绪。
 
-> 🟢 **Phase 6 (Module): COMPLETE** -- 3 waves executed, 3 plans done. Module entity + CRUD + ModuleIssue/ModuleLink/Progress + integration tests. See 06-03-SUMMARY.md.
+### Deferred
 
-- [x] Phase 7: Page -- 文档管理 (3 plans, 3 waves) ✅ -- Review fixes applied (CR-01/02/03/04)
-
-> 🟢 **Phase 8 (View): COMPLETE** -- 3 waves executed, 3 plans done. View module fully implemented: View/ViewFavorite domain entities, ViewDbContext (yhschema.View schema), AddViews migration (jsonb columns), 14 API endpoints (Create/Get/Update/Delete/List/WorkspaceList/Archive/Unarchive/AddFavorite/RemoveFavorite), DTO mapper + routing. Filters stored as JSON columns (Filters/DisplayFilters/DisplayProperties/RichFilters). All 41 tests green. Full regression: View 41 + Workspace 100 + Identity 412 + WorkItems 264 = zero regression.
-
-- [ ] Phase 9: Integration -- 外部集成 (GitHub, GitLab, Gitea, Slack, Unsplash) -- **DEFERRED to future milestone**
-- [x] Phase 10: Webhook -- Webhook 管理 ✅（70/70 测试通过，16 新增集成测试）
-- [x] Phase 11: Notification -- 通知系统 ✅（10 端点，10 测试 9/1 pass/skip）
-- [ ] Phase 12: Analytics -- 分析（4 plans 已创建待执行）
-- [ ] Phase 13: Flow Web -- 前端
+- ⏭ **Phase 9: Integration** -- 外部集成 (GitHub, GitLab, Gitea, Slack, Unsplash) -- **DEFERRED to future milestone**
+- ⏭ **Phase 13: Flow Web** -- React 前端 -- **DEFERRED to future milestone**
 
 ---
 
@@ -148,17 +140,13 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 ## Next Steps
 
-**Phase 9 (Integration)** -- DEFERRED to future milestone。所有 5 个外部集成（GitHub, GitLab, Gitea, Slack, Unsplash）不在当前 v1.0 范围内。
+### 🎉 v1.0 里程碑完成！
 
-**Phase 10 (Webhook)** -- ✅ 已完成。FSH 内建模块 + 16 个集成测试，70/70 全部通过。
+所有目标阶段已交付。下一阶段计划：
 
-**Phase 11 (Notification)** -- ✅ 已完成。10 个端点、10 个集成测试（9 pass/1 skip）。
+**V2.0 下一里程碑：**
 
-**Phase 12 (Analytics)** -- 4 个计划已创建。执行命令: `/gsd-execute-phase 12`
-
-- Wave 1: 模块脚手架 + Issue 分析索引
-- Wave 2: Overview + Stats 端点
-- Wave 3: Chart + Export 端点
-- Wave 4: 集成测试 + 全量回归
-
-**Phase 13 (Flow Web)** -- 待执行。React 前端。
+- `/gsd-new-milestone` — 启动 v2.0 里程碑
+  - Phase 9: 集成（GitHub/GitLab/Gitea/Slack/Unsplash）
+  - Phase 13: Flow Web 前端（React）
+  - 新增功能：自定义图表、Dashboard Widget、预计算缓存
