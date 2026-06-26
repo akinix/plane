@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using YH.Framework.Web.Modules;
 using YH.Modules.Analytics.Features.v1.Overview.GetProjectAnalytics;
 using YH.Modules.Analytics.Features.v1.Overview.GetWorkspaceAnalytics;
+using YH.Modules.Analytics.Features.v1.Stats.GetProjectStats;
+using YH.Modules.Analytics.Features.v1.Stats.GetWorkspaceStats;
 using YH.Modules.Analytics.Services;
 using YH.Modules.WorkItems.Data;
 
@@ -17,12 +19,12 @@ namespace YH.Modules.Analytics;
 /// Analytics module entry point.
 /// </summary>
 /// <remarks>
-/// <b>Wave 2 wiring status (plan 12-02):</b>
+/// <b>Wave 2 wiring status (plan 12-02 complete):</b>
 /// <list type="bullet">
 ///   <item><see cref="ConfigureServices"/> registers <see cref="IAnalyticsQueryService"/> and health check.</item>
-///   <item><see cref="MapEndpoints"/> registers Overview endpoint groups.</item>
+///   <item><see cref="MapEndpoints"/> registers Overview + Stats endpoint groups.</item>
 /// </list>
-/// <b>Wave 2 remaining:</b> Stats endpoint registrations to be added next.
+/// <b>Wave 3:</b> Chart + Export endpoints will be registered here.
 /// </remarks>
 public sealed class AnalyticsModule : IModule
 {
@@ -63,6 +65,7 @@ public sealed class AnalyticsModule : IModule
             .WithApiVersionSet(apiVersionSet);
 
         workspaceAnalytics.MapGetWorkspaceAnalyticsEndpoint();   // GET /
+        workspaceAnalytics.MapGetWorkspaceStatsEndpoint();       // GET /stats
 
         // Project-level analytics routes: /api/v1/workspaces/{slug}/projects/{projectId}/analytics
         var projectAnalytics = endpoints
@@ -71,8 +74,8 @@ public sealed class AnalyticsModule : IModule
             .WithApiVersionSet(apiVersionSet);
 
         projectAnalytics.MapGetProjectAnalyticsEndpoint();       // GET /
+        projectAnalytics.MapGetProjectStatsEndpoint();           // GET /stats
 
-        // Wave 2 remaining: Stats endpoints will be registered next.
         // Wave 3: Chart + Export endpoints will be registered here.
     }
 }
