@@ -1,596 +1,230 @@
 # YH.Flow — Roadmap
 
-**Version:** 0.1.0  
-**Date:** 2026-06-16
+**Version:** 2.0.0
+**Date:** 2026-06-26
 
 ---
 
 ## Overview
 
 ```
-Foundation → Workspace → Project → WorkItems → Cycle/Module/Page/View → Integration/Webhook → Notification/Analytics → Frontend
+v1.0 (Backend Core): Phase 0~13 — 完成后端 API 核心
+v2.0 (Flow Web Frontend): Phase 14~20 — 构建完整 React 前端
 ```
 
----
-
-## Phase 0: 项目初始化 & 脚手架
-
-**Goal:** 创建 YH.Flow 项目结构，配置所有基础设施
-
-**Dependencies:** None  
-**Duration Estimate:** 2-3 days
-
-### Tasks
-
-- T0.1: 基于 fullstackhero 模板创建 `yh-flow/` 项目结构
-- T0.2: 移除不需要的模块（Catalog, Tickets, Chat, Billing）
-- T0.3: 配置 Directory.Build.props, Directory.Packages.props, NuGet.Config
-- T0.4: 重命名命名空间 FSH → YH
-- T0.5: 配置 BuildingBlocks 引用
-- T0.6: 创建 YH.Flow.slnx 解决方案文件
-- T0.7: 配置 .NET Aspire AppHost（PostgreSQL, Redis, MinIO, API）
-- T0.8: 验证项目可编译运行
-
-**Deliverables:**
-
-- 可编译的 YH.Flow 解决方案
-- Aspire 编排可启动所有基础设施
+**v2.0 Strategy:** 基于 Plane Web（apps/web/）渐进改造，保留 UI 组件，逐步将 API 层从 Django REST 切换到 .NET 后端。
 
 ---
 
-## Phase 1: Foundation — 基础设施
+## Phases
 
-**Goal:** 认证、授权、API 基础设施、数据库迁移管道
-
-**Dependencies:** Phase 0  
-**Duration Estimate:** 3-5 days
-
-### Tasks
-
-- T1.1: 配置 PostgreSQL 连接和 EF Core
-- T1.2: 建立 DbMigrator + Migrations 项目
-- T1.3: 实现多租户基础设施（Finbuckle header/query-string）
-- T1.4: 实现 JWT Bearer 认证
-- T1.5: 实现 API Key 认证（`X-Api-Key` header）
-- T1.6: 实现 Session/Cookie 认证
-- T1.7: 实现 OAuth Provider 框架
-- T1.8: 配置 CORS, Security Headers, Rate Limiting
-- T1.9: 实现全局异常处理（Plane 兼容格式）
-- T1.10: 实现分页（Plane 兼容格式）
-- T1.11: 配置 Scalar/OpenAPI
-- T1.12: 配置 Serilog + OpenTelemetry
-
-### Plans
-
-**Plans:** 5 plans (4 waves)
-
-Plans:
-**Wave 1**
-
-- [x] 01-01-PLAN.md — 多 Scheme 认证协商（API Key + Session Cookie + PolicyScheme 路由器）
-- [x] 01-02-PLAN.md — Domain 实体 + EF 配置（APIToken + OAuthProviderSettings + IdentityDbContext）
-
-**Wave 2** _(blocked on Wave 1 completion)_
-
-- [ ] 01-03-PLAN.md — OAuth Provider 框架 + Plane 兼容认证端点（/auth/\*）
-
-**Wave 3** _(blocked on Wave 2 completion)_
-
-- [ ] 01-04-PLAN.md — API Token CRUD + OAuth Provider 管理 + Plane 格式适配
-
-**Wave 4** _(blocked on Wave 3 completion)_
-
-- [ ] 01-05-PLAN.md — [BLOCKING] Schema Push + 全阶段验证
-
-**Deliverables:**
-
-- 完整认证流程（JWT + API Key + Session）
-- API 基础设施就绪
+- [ ] **Phase 14: 脚手架 & Auth** — 前端开发环境搭建，Fork Plane 包，JWT 认证流程，API 适配层
+- [ ] **Phase 15: 工作区 & 项目** — 工作区仪表板/设置/成员管理，项目管理，侧边栏/顶栏/Emoji 选择器
+- [ ] **Phase 16: Issue 列表/详情 & 看板** — Issue CRUD、列表视图、详情页、评论、批量操作、看板视图、命令面板
+- [ ] **Phase 17: 日历/甘特/电子表格 & 筛选引擎** — Issue 日历/甘特/电子表格视图，通用筛选/排序/自定义列引擎
+- [ ] **Phase 18: 周期 & 模块** — Cycle 列表/详情/看板，Module 列表/详情
+- [ ] **Phase 19: 页面 & 视图** — Page 树形层级/TipTap 编辑器/权限/收藏，自定义视图保存与应用
+- [ ] **Phase 20: 通知 & 分析** — SSE 实时通知，分析仪表板，响应式布局收尾
 
 ---
 
-## Phase 2: Workspace — 工作区
+## Phase Details
 
-**Goal:** 工作区 CRUD、成员管理、邀请系统
+### Phase 14: 脚手架 & Auth
 
-**Dependencies:** Phase 1  
-**Duration Estimate:** 3-4 days  
-**Requirements:** REQ-2.1 ~ REQ-2.4
+**Goal**: 前端开发环境就绪，已 Fork 的 Plane 包可编译，用户可使用 JWT 认证完成注册/登录/退出
 
-### Tasks
+**Depends on**: Phase 13 (v1.0 后端完成)
 
-- T2.1: 创建 Workspace 实体和领域模型
-- T2.2: 创建 WorkspaceMember 实体
-- T2.3: 创建 WorkspaceInvitation 实体
-- T2.4: 实现 Workspace CRUD 端点
-- T2.5: 实现 Workspace Member 端点
-- T2.6: 实现 Workspace Invitation 端点
-- T2.7: 实现 Workspace 设置端点
-- T2.8: 创建 WorkspaceDbContext + 迁移
-- T2.9: 实现 Workspace 权限
+**Requirements**: SCAFF-01, SCAFF-02, SCAFF-03, SCAFF-04, SCAFF-05, SCAFF-06, SCAFF-07, SCAFF-08, SCAFF-09, AUTH-01, AUTH-02, AUTH-03, AUTH-04, AUTH-05, AUTH-06, UI-03
 
-### Plans
+**Success Criteria** (what must be TRUE):
 
-**Plans:** 8 plans (8 waves) [6 baseline + 2 gap-closure]
+1. 开发环境 React 19 + Vite 7 + TypeScript 5 + Tailwind CSS 4 可运行并显示页面
+2. @plane/ui、@plane/editor、@plane/types、@plane/utils 四个包已 Fork 到 `src/lib/` 目录并可编译通过
+3. 用户在登录页面可用邮箱密码登录（JWT），登录后 token 持久化到 localStorage，刷新页面不丢失会话
+4. 用户可在注册页面创建账户，可使用忘记密码/重置密码功能
+5. 用户可点击退出登录按钮清除 token 并跳转到登录页；未认证用户访问受保护路由自动重定向到登录页
+6. Axios 实例已配置 JWT Bearer 拦截器自动附加 token；.NET API 返回 SnakeCase 格式和 `{"error":"message"}` 统一错误响应；分页响应格式兼容 Plane 前端
+7. 用户可在暗色和亮色主题之间切换，切换后刷新保持偏好
 
-Plans:
-
-**Wave 1**
-
-- [x] 02-PLAN-00-INDEX.md — Phase 2 计划索引（wave/plan/REQ/decision 覆盖矩阵） (completed 2026-06-22)
-- [x] 02-01-PLAN.md — Wave 0：spike Q1（Finbuckle 外部追加 strategy）+ Workspace.Tests 脚手架 + Workspace.Contracts 契约 + Identity.Contracts 扩展
-- [x] 02-02-PLAN.md — Wave 1：Domain 实体（Workspace/Member/Invitation）+ WorkspaceDbContext + 3 个 IEntityTypeConfiguration + Finbuckle slug strategy/store wiring（D-01）
-
-**Wave 2** _(blocked on Wave 1 completion)_
-
-- [x] 02-03-PLAN.md — Wave 2：[BLOCKING] EF 迁移应用 + DbMigrator/Api Program.cs wiring + WorkspaceMembershipMiddleware（D-02）+ [RequireWorkspaceRole] authz（D-11）
-
-**Wave 3** _(blocked on Wave 2 completion)_
-
-- [x] 02-04-PLAN.md — Wave 3：SlugGenerator（D-07/09）+ 6 个 Workspace Feature slice（Create/Get/Update/Delete/ListUserWorkspaces/CheckSlug）
-
-**Wave 4** _(blocked on Wave 3 completion)_
-
-- [x] 02-05-PLAN.md — Wave 4：UserIdentityService（Identity 模块）+ InvitationTokenService（D-12）+ 4 Member + 5 Invitation Feature slice（D-04/05/10/12）
-
-**Wave 5** _(blocked on Wave 4 completion)_
-
-- [x] 02-06-PLAN.md — Wave 5：[BLOCKING] 全量回归 + WorkspaceLifecycleSmoke + WorkspaceRoleCapability + checkpoint:human-verify 手工 smoke（automated ✅; manual smoke pending HUMAN-UAT.md）
-
-**Wave 6** _(blocked on Wave 5 completion — gap-closure from 02-REVIEW.md CR-02)_
-
-- [x] 02-07-PLAN.md — Wave 6：[gap-closure] Testcontainers Postgres 关系 fixture（WorkspacePostgresFixture + FinbuckleTestTenantScope）+ CR-02 修复（ListUserWorkspacesQueryHandler.IgnoreQueryFilters）+ CrossTenantListUserWorkspacesTests（REQ-2.1, NFR-2）✅ 2026-06-22 — 98/98 Workspace.Tests（96 InMemory + 2 PG）；fixture + IMultiTenantContextSetter DI 路径已就绪供 02-08 复用
-
-**Wave 7** _(blocked on Wave 6 completion — gap-closure from 02-REVIEW.md CR-01 + CR-03)_
-
-- [x] 02-08-PLAN.md — Wave 7：[gap-closure] CR-01 修复（InvitationTokenService.ValidateAsync + AcceptInvitationCommandHandler 跨租户 SaveChanges 作用域切换 — 显式 DI 注入 IMultiTenantContextSetter + try/finally 重绑 setter.MultiTenantContext AND 缓存的 DbContext.TenantInfo via 反射委托）+ CR-03 修复（既有成员 Activate + UpdateRole 复用，避免 UniqueConstraintException）+ BLOCKER 1（RejectInvitationCommandHandler.cs:58-60 IgnoreQueryFilters 同步修复）+ AcceptInvitationAcrossTenantsTests + ReAcceptAfterRemovalTests（REQ-2.1, REQ-2.2, REQ-2.4, NFR-2）✅ 2026-06-22 — 100/100 Workspace.Tests（96 InMemory + 4 PG）；Identity.Tests 412/412 零回归；Phase 02 gap-closure 三 CRITICAL 全部修复，可进入 HUMAN-UAT 11 步人工冒烟
-
-**Deliverables:**
-
-- 完整工作区管理 API
-- 多租户数据隔离
+**Plans**: TBD
+**UI hint**: yes
 
 ---
 
-## Phase 3: Project — 项目
+### Phase 15: 工作区 & 项目
 
-**Goal:** 项目 CRUD、成员管理
+**Goal**: 用户可管理工作区和项目，侧边栏/顶栏提供全局导航
 
-**Dependencies:** Phase 2  
-**Duration Estimate:** 2-3 days  
-**Requirements:** REQ-3.1 ~ REQ-3.3
+**Depends on**: Phase 14
 
-### Plans
+**Requirements**: WORK-01, WORK-02, WORK-03, WORK-04, PROJ-01, PROJ-02, PROJ-03, PROJ-04, PROJ-05, UI-01, UI-02, UI-05
 
-**Plans:** 4 plans (4 waves)
+**Success Criteria** (what must be TRUE):
 
-Plans:
+1. 用户登录后可看到工作区仪表板（项目概览、最近活动），可通过下拉菜单在工作区之间切换
+2. 用户可管理工作区设置（名称、描述、Logo）和管理工作区成员（列表展示、角色变更）
+3. 用户可在工作区内创建项目，看到项目列表（含搜索/排序），点击进入项目详情/仪表板
+4. 用户可管理项目成员，通过项目选择器在项目间导航切换
+5. 侧边栏显示工作区/项目的树形结构导航，当前所在位置高亮；顶部导航栏显示用户头像、通知图标和搜索入口
+6. 用户在创建/编辑工作区和项目时可以使用 Emoji 图标选择器
 
-**Wave 1**
-
-- [ ] 03-01-PLAN.md — Wave 0：Scaffold（Modules.Project + Contracts csproj / DTOs / AssemblyInfo + Project.Tests + slnx/host wiring）
-
-**Wave 2** _(blocked on Wave 1 completion)_
-
-- [ ] 03-02-PLAN.md — Wave 1：Domain（Project + ProjectMember entity + ProjectDbContext + EF configurations + migration + ProjectModule route groups）
-
-**Wave 3** _(blocked on Wave 2 completion)_
-
-- [ ] 03-03-PLAN.md — Wave 2：Project CRUD（Create/Get/Update/Delete/List + identifier validation + network filter + auto-owner membership）— REQ-3.1
-
-**Wave 4** _(blocked on Wave 3 completion)_
-
-- [ ] 03-04-PLAN.md — Wave 3：ProjectMember（Add/List/UpdateRole/Remove + batch user resolution + role authz）— REQ-3.2
-
-**Notes:**
-
-- REQ-3.3（项目设置：封面图片、标识符、描述、可见性）由 03-03 UpdateProject 端点覆盖
-- Unsplash 封面搜索端点 deferred（前端直调 Unsplash API 或 Phase 9 实现）
-- 项目归档功能 deferred
-
-**Deliverables:**
-
-- 完整项目管理 API（Project CRUD + ProjectMember CRUD）
+**Plans**: TBD
+**UI hint**: yes
 
 ---
 
-## Phase 4: WorkItems — 工作项
+### Phase 16: Issue 列表/详情 & 看板
 
-**Goal:** State, Label, Issue CRUD, Comments, Activity, Estimate, Intake, Import/Export
+**Goal**: 用户可使用完整 Issue 管理功能，包括列表视图和看板视图
 
-**Dependencies:** Phase 3  
-**Duration Estimate:** 5-7 days  
-**Requirements:** REQ-4.1 ~ REQ-4.9
+**Depends on**: Phase 15
 
-### Tasks
+**Requirements**: ISSU-01, ISSU-02, ISSU-03, ISSU-04, ISSU-05, ISSU-06, ISSU-07, ISSU-08, KANB-01, KANB-02, KANB-03, KANB-04, KANB-05, UI-04
 
-- T4.1: 创建 State 实体 + CRUD 端点
-- T4.2: 创建 Label 实体 + CRUD 端点
-- T4.3: 创建 Estimate 实体 + CRUD 端点
-- T4.4: 创建 Issue 实体（含优先级、日期、指派等）
-- T4.5: 创建 Issue 父子关联 + Issue 链接
-- T4.6: 创建 IssueComment 实体
-- T4.7: 创建 IssueActivity 实体（审计日志）
-- T4.8: 实现 Issue CRUD 端点
-- T4.9: 实现 Issue 批量操作端点
-- T4.10: 实现 Issue 评论端点
-- T4.11: 实现 Issue 活动日志端点
-- T4.12: 实现 Intake 收件箱端点
-- T4.13: 实现 Import/Export 端点
-- T4.14: 创建 WorkItemsDbContext + 迁移
-- T4.15: 实现 WorkItems 权限
+**Success Criteria** (what must be TRUE):
 
-### Plans
+1. 用户可在项目下创建 Issue（填写标题、描述、选择优先级/负责人/标签），创建后自动跳转到详情页
+2. 用户看到 Issue 列表视图，可按状态列筛选、按字段排序、分页浏览
+3. 用户打开 Issue 详情页可看到属性面板（状态/优先级/负责人/标签/估算/截止日期）、评论列表和活动日志
+4. 用户可编辑 Issue 属性（状态、优先级、负责人、标签、估算、截止日期），可软删除 Issue
+5. 用户可创建/编辑/删除评论，可批量选中 Issue 执行状态变更/指派/删除操作
+6. 用户在 Issue 描述中可使用 TipTap 富文本编辑器（加粗、列表、标题等）
+7. 用户看到 Issue 看板视图（列 = 状态列），通过拖拽卡片在列之间移动（即变更状态）
+8. 用户在看板中可按负责人/优先级分组，可设置子分组（Swimlane），可在看板内筛选和排序
+9. 用户可通过 Cmd+K 命令面板快速搜索和导航
 
-**Plans:** 5 plans (5 waves)
-
-Plans:
-
-**Wave 1**
-
-- [ ] 04-01-PLAN.md — Scaffold (Contracts + Module csproj + Test project + Host wiring), base domain entities (State, Label, Estimate, EstimatePoint), WorkItemsDbContext + EF configurations + migration. T4.1, T4.2, T4.3, T4.14, T4.15
-
-**Wave 2** _(blocked on Wave 1 completion)_
-
-- [ ] 04-02-PLAN.md — State CRUD endpoints (Create/Get/Update/Delete/List), Label CRUD endpoints, Issue entity (all Plane fields + IssueAssignee/IssueLabel M2M through tables + SequenceId service). T4.4, T4.5 (part: SequenceId)
-
-**Wave 3** _(blocked on Wave 2 completion)_
-
-- [ ] 04-03-PLAN.md — Estimate + EstimatePoint CRUD endpoints, Issue CRUD endpoints (Create/Get/Update/Delete/List with multidimensional filtering + plane-compatible pagination + closed-state semantics + completed_at sync), IssueLink entity + CRUD. T4.3, T4.5 (part: IssueLink), T4.8
-
-**Wave 4** _(blocked on Wave 3 completion)_
-
-- [ ] 04-04-PLAN.md — IssueComment CRUD, IssueActivity domain events + list, batch operations, IntakeIssue CRUD (draft->accept/reject/snooze/duplicate), Import/Export endpoints (CSV/JSON with formula injection protection), State seed data. T4.6, T4.7, T4.9, T4.10, T4.11, T4.12, T4.13
-
-**Wave 5** _(blocked on Wave 4 completion)_
-
-- [ ] 04-05-PLAN.md — Full test suite (30+ unit + integration tests), architecture tests, full regression verification
-
-**Deliverables:**
-
-- 完整工作项管理 API
-- Import/Export 功能
+**Plans**: TBD
+**UI hint**: yes
 
 ---
 
-## Phase 5: Cycle — 周期管理
+### Phase 17: 日历/甘特/电子表格 & 筛选引擎
 
-**Goal:** Cycle CRUD, Cycle-Issue 关联, Burndown 数据
+**Goal**: 用户可使用多种 Issue 视图和可复用的筛选/排序/自定义列引擎
 
-**Dependencies:** Phase 4  
-**Duration Estimate:** 2-3 days  
-**Requirements:** REQ-5.1 ~ REQ-5.2
+**Depends on**: Phase 16
 
-### Plans
+**Requirements**: CALN-01, CALN-02, GANT-01, GANT-02, SHEE-01, SHEE-02, FILT-01, FILT-02, FILT-03, FILT-04
 
-**Plans:** 3 plans (3 waves)
+**Success Criteria** (what must be TRUE):
 
-Plans:
+1. 用户看到 Issue 日历视图（按截止日期/开始日期在日历上展示），可通过拖拽调整 Issue 日期
+2. 用户看到 Issue 甘特图视图（横向时间轴展示 Issue 跨度），可查看 Issue 依赖关系连线
+3. 用户看到 Issue 电子表格视图（表格形式展示字段列），可在表格中内联编辑 Issue 属性
+4. 用户可按状态、优先级、负责人、标签组合筛选 Issues，可按任意字段升序/降序排序
+5. 用户可自定义列表/看板/日历/甘特/电子表格视图中显示的列，可将当前筛选/排序/列配置保存为自定义视图（保存的视图在 Phase 19 中管理和应用）
 
-**Wave 1**
-
-- [x] 05-01-PLAN.md — Domain 实体（Cycle + CycleIssue）、EF 配置、WorkItemsDbContext 更新、AddCycles 迁移、Contracts DTOs、BurndownCalculator 服务、测试脚手架（REQ-5.1, REQ-5.2）
-
-**Wave 2** _(blocked on Wave 1 completion)_
-
-- [x] 05-02-PLAN.md — Cycle CRUD 端点（Create/Get/Update/Delete/List/DateCheck），COMPLETED 编辑限制（D-03），动态状态计算，cycle_view 筛选（REQ-5.1）
-
-**Wave 3** _(blocked on Wave 2 completion)_
-
-- [x] 05-03-PLAN.md — Cycle-Issue 关联（Add/Remove/List）、Burndown 实时计算（D-02）、Issue 迁移冻结快照、归档/取消归档、集成测试（REQ-5.2）
-
-**Deliverables:**
-
-- 完整周期管理 API
+**Plans**: TBD
+**UI hint**: yes
 
 ---
 
-## Phase 6: Module — 模块管理
+### Phase 18: 周期 & 模块
 
-**Goal:** Module CRUD, Module-Issue 关联
+**Goal**: 用户可使用周期（迭代/冲刺）和模块（功能分组/史诗）管理功能
 
-**Dependencies:** Phase 4  
-**Duration Estimate:** 2-3 days  
-**Requirements:** REQ-6.1 ~ REQ-6.2
+**Depends on**: Phase 17（依赖筛选引擎）
 
-### Plans
+**Requirements**: CYCLE-01, CYCLE-02, CYCLE-03, CYCLE-04, MODU-01, MODU-02, MODU-03
 
-**Plans:** 3 plans (3 waves)
+**Success Criteria** (what must be TRUE):
 
-Plans:
+1. 用户看到 Cycle 列表页面（分为活跃/已完成/全部三个 Tab），可创建/编辑 Cycle（名称、描述、起止日期）
+2. 用户打开 Cycle 详情页可看到进度条、Burndown 图表和关联 Issue 列表
+3. 用户在 Cycle 看板视图中可管理 Issue 分配（将 Issue 添加/移出 Cycle、拖拽排序）
+4. 用户看到 Module 列表页面，可创建/编辑 Module（名称、描述、状态）
+5. 用户打开 Module 详情页可看到进度条和关联 Issue 列表
 
-**Wave 1**
-
-- [x] 06-01-PLAN.md — Domain entities（Module/ModuleIssue/ModuleMember/ModuleLink）+ EF configurations + WorkItemsDbContext update + AddModules migration + Contracts DTOs + test scaffolds（REQ-6.1, REQ-6.2）
-
-**Wave 2** _(blocked on Wave 1 completion)_
-
-- [x] 06-02-PLAN.md — Module CRUD endpoints（Create/Get/Update/Delete/List）+ ModuleDtoMapper + Archive/Unarchive/ListArchivedModules + WorkItemsModule routing（REQ-6.1）
-
-**Wave 3** _(blocked on Wave 2 completion)_
-
-- [x] 06-03-PLAN.md — Module-Issue association（Add/Remove/List）+ ModuleLink CRUD（Add/Remove/List）+ Module progress tracking（real-time aggregation）+ integration tests（REQ-6.2）
-
-**Deliverables:**
-
-- 完整模块管理 API（15 个端点：5 CRUD + 3 archive + 3 Module-Issue + 3 ModuleLink + 1 Progress）
+**Plans**: TBD
+**UI hint**: yes
 
 ---
 
-## Phase 7: Page — 文档管理
+### Phase 19: 页面 & 视图
 
-**Goal:** Page CRUD, 层级结构, 富文本存储
+**Goal**: 用户可使用文档页面（TipTap 编辑器）和管理/应用自定义视图
 
-**Dependencies:** Phase 3  
-**Duration Estimate:** 2-3 days  
-**Requirements:** REQ-7.1 ~ REQ-7.2
+**Depends on**: Phase 18
 
-### Tasks
+**Requirements**: PAGE-01, PAGE-02, PAGE-03, PAGE-04, PAGE-05, VIEW-01, VIEW-02, VIEW-03
 
-- T7.1: 创建 Page 实体和领域模型（Page/ProjectPage/PageFavorite）
-- T7.2: 实现 Page 层级结构（自引用 ParentId FK）
-- T7.3: 实现 Page CRUD 端点 + List + Summary
-- T7.4: 实现 Page 归档/恢复
-- T7.5: 实现 Page 访问权限（Private/Public + [RequireWorkspaceRole]）
-- T7.6: 创建 PageDbContext + AddPages 迁移
-- T7.7: 实现 Page 权限
-- T7.8: 实现 Page Description CRUD
-- T7.9: 实现 Page Favorite 管理
+**Success Criteria** (what must be TRUE):
 
-### Plans
+1. 用户看到 Page 列表（树形层级结构展示），可展开/折叠子页面
+2. 用户使用 TipTap 编辑器创建/编辑 Page 内容，可归档/删除 Page
+3. 用户可将 Page 设置为 Public（工作区内所有人可查看）或 Private（仅创建者可查看），可收藏/星标 Page
+4. 用户看到已保存的自定义视图列表，可点击应用视图（自动切换到该视图的筛选/排序/分组配置）
+5. 用户在任意 Issue 视图中可将当前筛选/排序/分组/列配置保存为新视图
 
-**Plans:** 3 plans (3 waves)
-
-Plans:
-
-**Wave 1**
-
-- [x] 07-01-PLAN.md — 模块脚手架（Modules.Page + Contracts csproj + slnx + host wiring）+ Domain 实体（Page/ProjectPage/PageFavorite）+ EF 配置 + PageDbContext（yhschema.Page schema）+ AddPages 迁移 + Contracts DTOs（PageDto/PageDetailDto）+ Command/Query 桩 + 测试脚手架（REQ-7.1, REQ-7.2） ✅
-
-**Wave 2** _(blocked on Wave 1 completion)_
-
-- [x] 07-02-PLAN.md — DTO Mapper + 核心 CRUD 端点（Create/Get/Update/Delete）+ ListPages + Summary + Archive/Unarchive + Description CRUD + Favorite POST/DELETE + PageModule 完整路由注册（REQ-7.1, REQ-7.2） ✅
-
-**Wave 3** _(blocked on Wave 2 completion)_
-
-- [x] 07-03-PLAN.md — 领域测试（Page/ProjectPage/PageFavorite）+ Handler 功能测试（CRUD/List/Summary/Archive/Description/Favorite）+ InMemory test fixture + 全量回归验证（REQ-7.1, REQ-7.2）
-
-**Deliverables:**
-
-- 完整文档管理 API（不含实时协作）
-- 17 个 API 端点：Create/Get/Update/Delete/List/Summary/Archive/Unarchive/GetDescription/UpdateDescription/AddFavorite/RemoveFavorite
-- 独立 Page 模块（Modules.Page + Modules.Page.Contracts + yhschema.Page schema）
-- Page 层级结构（自引用 ParentId FK，未使用闭包表）+ ProjectPage 桥接
-- 30+ 测试用例，全回归绿色
+**Plans**: TBD
+**UI hint**: yes
 
 ---
 
-## Phase 8: View — 视图管理
+### Phase 20: 通知 & 分析
 
-**Goal:** View CRUD, 筛选条件存储
+**Goal**: 用户可使用实时通知系统和分析仪表板，页面完成响应式适配
 
-**Dependencies:** Phase 4  
-**Duration Estimate:** 1-2 days  
-**Requirements:** REQ-8.1 ~ REQ-8.2
+**Depends on**: Phase 19
 
-### Tasks
+**Requirements**: NOTI-01, NOTI-02, NOTI-03, NOTI-04, ANAL-01, ANAL-02, ANAL-03, UI-06
 
-- [x] 08-01-PLAN.md — 模块脚手架（Modules.View + Contracts csproj + slnx + host wiring）+ Domain 实体（View/ViewFavorite）+ EF 配置 + ViewDbContext（yhschema.View schema）+ AddViews 迁移 + Contracts DTOs + Command/Query 桩 + 测试脚手架（REQ-8.1, REQ-8.2）
-- T8.2: 实现 View CRUD 端点
-- T8.3: 实现 View 筛选条件校验
-- T8.4: 创建 ViewDbContext + 迁移
-- T8.5: 实现 View 权限
+**Success Criteria** (what must be TRUE):
 
-**Deliverables:**
+1. 用户看到站内通知列表（按时间倒序），可通过 SSE 接收实时通知并自动弹出提示
+2. 用户可标记通知为已读（单条/全部），点击通知可跳转到关联的 Issue 或评论
+3. 用户看到工作区分析仪表板（Issue 按状态/优先级的统计图表、完成率月度趋势）
+4. 用户在项目级别查看分析图表，可导出分析数据为 CSV 文件
+5. 所有页面在桌面端和平板设备上均可正常显示和操作（内容不溢出、布局不断裂）
 
-- 完整视图管理 API
-
----
-
-## Phase 9: Integration — 集成
-
-**Goal:** GitHub, GitLab, Gitea, Slack, Unsplash 集成
-
-**Dependencies:** Phase 3, Phase 4  
-**Duration Estimate:** 3-5 days  
-**Requirements:** REQ-9.1 ~ REQ-9.5
-
-### Tasks
-
-- T9.1: 实现 GitHub OAuth + API 客户端
-- T9.2: 实现 GitHub Issue 双向同步
-- T9.3: 实现 GitHub 评论同步
-- T9.4: 实现 GitLab OAuth + 同步
-- T9.5: 实现 Gitea OAuth + 同步
-- T9.6: 实现 Slack OAuth + 通知同步
-- T9.7: 实现 Unsplash 图片搜索
-- T9.8: 创建 IntegrationDbContext + 迁移
-- T9.9: 实现 Integration 权限
-
-**Deliverables:**
-
-- 完整集成管理 API
+**Plans**: TBD
+**UI hint**: yes
 
 ---
 
-## Phase 10: Webhook — Webhook 管理
+## Progress
 
-**Goal:** Webhook CRUD, 异步投递, 签名, SSRF 防护
-
-**Dependencies:** Phase 2  
-**Duration Estimate:** 2-3 days  
-**Requirements:** REQ-10.1 ~ REQ-10.2
-
-### Tasks
-
-- T10.1: 创建 Webhook 实体
-- T10.2: 创建 WebhookLog 实体
-- T10.3: 实现 Webhook CRUD 端点
-- T10.4: 实现 Webhook 投递（Hangfire 后台任务）
-- T10.5: 实现 HMAC-SHA256 签名
-- T10.6: 实现 SSRF 防护
-- T10.7: 实现投递重试
-- T10.8: 创建 WebhookDbContext + 迁移
-
-**Deliverables:**
-
-- 完整 Webhook 系统
+| Phase                             | Plans Complete | Status      | Completed |
+| --------------------------------- | -------------- | ----------- | --------- |
+| 14. 脚手架 & Auth                 | 0/0            | Not started | -         |
+| 15. 工作区 & 项目                 | 0/0            | Not started | -         |
+| 16. Issue 列表/详情 & 看板        | 0/0            | Not started | -         |
+| 17. 日历/甘特/电子表格 & 筛选引擎 | 0/0            | Not started | -         |
+| 18. 周期 & 模块                   | 0/0            | Not started | -         |
+| 19. 页面 & 视图                   | 0/0            | Not started | -         |
+| 20. 通知 & 分析                   | 0/0            | Not started | -         |
 
 ---
 
-## Phase 11: Notification — 通知系统
+## Requirement Coverage Map
 
-**Goal:** 站内通知, 邮件通知
+| Requirement         | Phase    | Status  |
+| ------------------- | -------- | ------- |
+| SCAFF-01 ~ SCAFF-09 | Phase 14 | Pending |
+| AUTH-01 ~ AUTH-06   | Phase 14 | Pending |
+| UI-03               | Phase 14 | Pending |
+| WORK-01 ~ WORK-04   | Phase 15 | Pending |
+| PROJ-01 ~ PROJ-05   | Phase 15 | Pending |
+| UI-01, UI-02, UI-05 | Phase 15 | Pending |
+| ISSU-01 ~ ISSU-08   | Phase 16 | Pending |
+| KANB-01 ~ KANB-05   | Phase 16 | Pending |
+| UI-04               | Phase 16 | Pending |
+| CALN-01 ~ CALN-02   | Phase 17 | Pending |
+| GANT-01 ~ GANT-02   | Phase 17 | Pending |
+| SHEE-01 ~ SHEE-02   | Phase 17 | Pending |
+| FILT-01 ~ FILT-04   | Phase 17 | Pending |
+| CYCLE-01 ~ CYCLE-04 | Phase 18 | Pending |
+| MODU-01 ~ MODU-03   | Phase 18 | Pending |
+| PAGE-01 ~ PAGE-05   | Phase 19 | Pending |
+| VIEW-01 ~ VIEW-03   | Phase 19 | Pending |
+| NOTI-01 ~ NOTI-04   | Phase 20 | Pending |
+| ANAL-01 ~ ANAL-03   | Phase 20 | Pending |
+| UI-06               | Phase 20 | Pending |
 
-**Dependencies:** Phase 2+  
-**Duration Estimate:** 2-3 days  
-**Requirements:** REQ-11.1 ~ REQ-11.2
+**Coverage:**
 
-### Tasks
-
-- T11.1: 创建 Notification 实体
-- T11.2: 实现通知生成（领域事件 → 通知）
-- T11.3: 实现通知列表端点
-- T11.4: 实现已读/未读管理
-- T11.5: 实现邮件通知（Hangfire + MailKit）
-- T11.6: 创建 NotificationDbContext + 迁移
-
-**Deliverables:**
-
-- 完整通知系统
-
----
-
-## Phase 12: Analytics — 分析
-
-**Goal:** 工作区/项目分析数据
-
-**Dependencies:** Phase 4, 5, 6  
-**Duration Estimate:** 2-3 days  
-**Requirements:** REQ-12.1 ~ REQ-12.2
-
-### Plans
-
-**Plans:** 4 plans (4 waves)
-
-Plans:
-
-**Wave 1**
-
-- [x] 12-01-PLAN.md — 模块脚手架（Contracts DTOs + Module csproj + Issue 分析索引迁移 + slnx/host wiring）
-
-**Wave 2** _(blocked on Wave 1 completion)_
-
-- [x] 12-02-PLAN.md — Overview + Stats 端点（Workspace/Project 级概览 + 统计，AnalyticsQueryService 聚合查询）
-
-**Wave 3** _(blocked on Wave 2 completion)_
-
-- [x] 12-03-PLAN.md — Chart + Export 端点（月度趋势图 + Hangfire 后台 CSV 导出）
-
-**Wave 4** _(blocked on Wave 3 completion)_
-
-- [x] 12-04-PLAN.md — 集成测试（5 个测试文件 + AnalyticsTestFixture + 全量回归）
-
-**Deliverables:**
-
-- 完整分析 API
-- 4 个端点组：Overview / Stats / Chart / Export
-- Workspace/Project 级 Issue 统计（按状态/优先级/负责人）
-- 月度完成率趋势 Chart 数据
-- CSV 导出（Hangfire 后台异步）
-
----
-
-## Phase 13: Flow Web — 前端
-
-**Goal:** React Web 前端，UI 风格与 Plane 保持一致
-
-**Dependencies:** Phase 1~12 (后端全部完成)  
-**Duration Estimate:** 10-15 days  
-**Requirements:** REQ-13.1 ~ REQ-13.4
-
-### Tasks
-
-- T13.1: 项目初始化（基于 FSH clients/dashboard 模板）
-- T13.2: 布局框架（侧边栏、导航、面包屑）
-- T13.3: 认证页面（登录、注册、OAuth）
-- T13.4: 工作区管理页面
-- T13.5: 项目管理页面
-- T13.6: Issue 列表/详情/创建/编辑页面
-- T13.7: Cycle 管理页面
-- T13.8: Module 管理页面
-- T13.9: Page 管理页面
-- T13.10: View 管理页面
-- T13.11: 集成管理页面
-- T13.12: Webhook 管理页面
-- T13.13: 通知页面
-- T13.14: 分析仪表板页面
-- T13.15: 设置页面（工作区、项目）
-- T13.16: 主题切换（亮/暗）
-
-**Deliverables:**
-
-- 完整 Flow Web 前端
-
----
-
-## Phase Dependency Graph
-
-```
-Phase 0: Init
-    │
-    ▼
-Phase 1: Foundation
-    │
-    ▼
-Phase 2: Workspace ──────────────────────────┐
-    │                                          │
-    ▼                                          │
-Phase 3: Project ───────────────┐              │
-    │                             │              │
-    ▼                             │              │
-Phase 4: WorkItems ◄──┐          │              │
-    │    │    │    │    │          │              │
-    ▼    ▼    ▼    ▼    │          │              │
-    5    6    8    7    │          │              │
-Cycle Module View Page  │          │              │
-    │    │              │          │              │
-    └────┼──────────────┘          │              │
-         │                          │              │
-         ▼                          │              │
-    Phase 9: Integration ◄─────────┘              │
-         │                                          │
-         ▼                                          │
-    Phase 10: Webhook ◄───────────────────────────┘
-         │
-         ▼
-    Phase 11: Notification (can start after Phase 2)
-         │
-         ▼
-    Phase 12: Analytics
-         │
-         ▼
-    Phase 13: Frontend
-```
-
-## Parallelizable Work
-
-以下 Phase 在依赖满足后可以并行执行：
-
-- **Phase 5 (Cycle) + Phase 6 (Module) + Phase 8 (View)**: 都仅依赖 Phase 4
-- **Phase 7 (Page)**: 仅依赖 Phase 3
-- **Phase 9 (Integration) + Phase 10 (Webhook)**: 依赖不同
-- **Phase 11 (Notification)**: 可以较早开始（Phase 2 完成后即可启动基础结构）
-
-## Total Estimate
-
-| Category        | Phases        | Days           |
-| --------------- | ------------- | -------------- |
-| Foundation      | 0, 1          | 5-8            |
-| Core Domain     | 2, 3, 4       | 10-14          |
-| Extended Domain | 5, 6, 7, 8    | 7-11           |
-| Infrastructure  | 9, 10, 11, 12 | 9-14           |
-| Frontend        | 13            | 10-15          |
-| **Total**       |               | **41-62 days** |
-
-\*With parallel execution of eligible phases: estimated **30-45 working days\***.
+- v2.0 requirements: 75 total
+- Mapped to phases: 75
+- Unmapped: 0 ✓

@@ -167,33 +167,36 @@
 
 ## Traceability
 
-| Requirement         | Phase     | Status  |
-| ------------------- | --------- | ------- |
-| SCAFF-01 ~ SCAFF-09 | Phase 1   | Pending |
-| AUTH-01 ~ AUTH-06   | Phase 1   | Pending |
-| WORK-01 ~ WORK-04   | Phase 2   | Pending |
-| PROJ-01 ~ PROJ-05   | Phase 2   | Pending |
-| ISSU-01 ~ ISSU-08   | Phase 3   | Pending |
-| KANB-01 ~ KANB-05   | Phase 3   | Pending |
-| CALN-01 ~ CALN-02   | Phase 4   | Pending |
-| GANT-01 ~ GANT-02   | Phase 4   | Pending |
-| SHEE-01 ~ SHEE-02   | Phase 5   | Pending |
-| FILT-01 ~ FILT-04   | Phase 5   | Pending |
-| CYCLE-01 ~ CYCLE-04 | Phase 5   | Pending |
-| MODU-01 ~ MODU-03   | Phase 5   | Pending |
-| PAGE-01 ~ PAGE-05   | Phase 6   | Pending |
-| VIEW-01 ~ VIEW-03   | Phase 6   | Pending |
-| NOTI-01 ~ NOTI-04   | Phase 7   | Pending |
-| ANAL-01 ~ ANAL-03   | Phase 8   | Pending |
-| UI-01 ~ UI-06       | Phase 1~8 | Pending |
+| Requirement         | Phase    | Status  |
+| ------------------- | -------- | ------- |
+| SCAFF-01 ~ SCAFF-09 | Phase 14 | Pending |
+| AUTH-01 ~ AUTH-06   | Phase 14 | Pending |
+| UI-03               | Phase 14 | Pending |
+| WORK-01 ~ WORK-04   | Phase 15 | Pending |
+| PROJ-01 ~ PROJ-05   | Phase 15 | Pending |
+| UI-01, UI-02, UI-05 | Phase 15 | Pending |
+| ISSU-01 ~ ISSU-08   | Phase 16 | Pending |
+| KANB-01 ~ KANB-05   | Phase 16 | Pending |
+| UI-04               | Phase 16 | Pending |
+| CALN-01 ~ CALN-02   | Phase 17 | Pending |
+| GANT-01 ~ GANT-02   | Phase 17 | Pending |
+| SHEE-01 ~ SHEE-02   | Phase 17 | Pending |
+| FILT-01 ~ FILT-04   | Phase 17 | Pending |
+| CYCLE-01 ~ CYCLE-04 | Phase 18 | Pending |
+| MODU-01 ~ MODU-03   | Phase 18 | Pending |
+| PAGE-01 ~ PAGE-05   | Phase 19 | Pending |
+| VIEW-01 ~ VIEW-03   | Phase 19 | Pending |
+| NOTI-01 ~ NOTI-04   | Phase 20 | Pending |
+| ANAL-01 ~ ANAL-03   | Phase 20 | Pending |
+| UI-06               | Phase 20 | Pending |
 
 **Coverage:**
 
-- v2.0 requirements: 53 total
-- Mapped to phases: 53
+- v2.0 requirements: 75 total
+- Mapped to phases: 75
 - Unmapped: 0 ✓
 
 ---
 
 _Requirements defined: 2026-06-26_
-_Last updated: 2026-06-26 after v2.0 milestone research_
+_Last updated: 2026-06-26 after v2.0 roadmap creation_

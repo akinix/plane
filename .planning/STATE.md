@@ -6,7 +6,7 @@ status: planning
 last_updated: "2026-06-26T05:55:21.142Z"
 last_activity: 2026-06-26
 progress:
-  total_phases: 0
+  total_phases: 7
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -16,7 +16,7 @@ progress:
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-26
-**Current Phase:** Planning
+**Current Phase:** Planning (Roadmap Created)
 **Active Workstream:** v2.0 milestone — Flow Web 前端
 
 ---
@@ -41,87 +41,76 @@ progress:
 - [x] Codebase map generated (`.planning/codebase/` -- 7 docs)
 - [x] Project initialized (`.planning/PROJECT.md`)
 - [x] Requirements defined (`.planning/REQUIREMENTS.md`)
-- [x] Roadmap defined (`.planning/ROADMAP.md` -- 14 phases)
-- [x] Domain research completed (`.planning/research/` -- 3 docs)
+- [x] Roadmap defined (`.planning/ROADMAP.md` — v1.0 14 phases + v2.0 7 phases)
+- [x] Domain research completed (`.planning/research/` — 3 docs)
 - [x] Configuration set (`.planning/config.json`)
-- [x] Phase 6 plans created (3 plans, 3 waves)
-- [x] Phase 7 plans created (3 plans, 3 waves)
 
-### Phase Progress
+### v1.0 Milestone: COMPLETE (12/14 phases)
 
-- [x] Phase 0: 项目初始化 & scaffolding (plans 01-03) ✅
-- [x] Phase 1 Plan 01: Multi-Scheme Auth (JWT + API Key + Session Cookie) ✅
-- [x] Phase 1 Plan 02: Domain Entities (APIToken + OAuthProviderSettings) ✅
-- [x] Phase 1 Plan 03: OAuth Provider Framework + Plane Auth Endpoints ✅
-- [x] Phase 1 Plan 04: API Token CRUD + OAuth Provider Management (Wave 3) ✅
-- [x] Phase 1 Plan 05: Schema Push + Full Phase 1 Verification (Wave 4) ✅ -- DB migrated & verified
+- [x] Phase 0: 项目初始化 & scaffolding
+- [x] Phase 1: Foundation (Auth, API 基础设施)
+- [x] Phase 2: Workspace (工作区 CRUD, 成员, 邀请)
+- [x] Phase 3: Project (项目 CRUD, 成员)
+- [x] Phase 4: WorkItems (Issue, State, Label, Comment, Activity)
+- [x] Phase 5: Cycle (周期管理)
+- [x] Phase 6: Module (模块管理)
+- [x] Phase 7: Page (文档管理)
+- [x] Phase 8: View (视图管理)
+- [x] Phase 10: Webhook (Webhook 管理)
+- [x] Phase 11: Notification (通知系统)
+- [x] Phase 12: Analytics (分析)
+- [ ] Phase 9: Integration — DEFERRED to future milestone
+- [ ] Phase 13: Flow Web — DEFERRED; now v2.0 Phases 14~20
 
-> 🟢 **Phase 3 (Project Module): COMPLETE** -- 4 waves executed, 4 plans done. Project module fully implemented: Project + ProjectMember domain entities, DbContext + migration in `yhschema.Project` schema, 5 CRUD endpoints (Create/Get/Update/Delete/List), 4 member endpoints (Add/List/UpdateRole/Remove). Build 0 errors, full regression green (Workspace 100/100, Identity 412/412). See SUMMARY per wave.
+### v2.0 Milestone: In Progress
 
-> 🟢 **Phase 4 (WorkItems): COMPLETE** -- 5 waves executed, 5 plans done. Full WorkItems module: State/Label/Estimate entities + CRUD, Issue entity (20+ fields, 5 FK, 2 M2M) with SequenceId service, IssueLink, IssueComment, IssueActivity (domain events), BatchOps, Intake, Import/Export, StateSeeder. WorkItemsDbContext (`yhschema.WorkItems`). 181 tests all green. Regression: Workspace 100 + Identity 412 = 693 total passing.
-
-### Completed
-
-> 🟢 **Phase 12 (Analytics): COMPLETE** -- 4 waves executed, 4 plans done. Analytics module fully implemented: Analytics contracts (8 DTOs), AnalyticsQueryService (7 aggregation methods), 8 API endpoints (Overview/Stats/Chart/Export at Workspace & Project levels), Hangfire CSV export job, Issue analytics index migration. 22 tests all green, 34/34 must-haves verified. Gap closure: fixed duplicate health check + added priority statistics. Full regression: Workspace 100 + Identity 412 + WorkItems 264 + View 41 = zero regression.
-
-> 🟢 **v1.0 里程碑：12/14 phases 完成** — Phase 9（集成）和 Phase 13（前端）推迟到下一里程碑。后端核心 API 全部就绪。
-
-### Deferred
-
-- ⏭ **Phase 9: Integration** -- 外部集成 (GitHub, GitLab, Gitea, Slack, Unsplash) -- **DEFERRED to future milestone**
-- ⏭ **Phase 13: Flow Web** -- React 前端 -- **DEFERRED to future milestone**
+- [ ] **Phase 14: 脚手架 & Auth** — 0/0 plans, Not started
+- [ ] **Phase 15: 工作区 & 项目** — 0/0 plans, Not started
+- [ ] **Phase 16: Issue 列表/详情 & 看板** — 0/0 plans, Not started
+- [ ] **Phase 17: 日历/甘特/电子表格 & 筛选引擎** — 0/0 plans, Not started
+- [ ] **Phase 18: 周期 & 模块** — 0/0 plans, Not started
+- [ ] **Phase 19: 页面 & 视图** — 0/0 plans, Not started
+- [ ] **Phase 20: 通知 & 分析** — 0/0 plans, Not started
 
 ---
 
 ## Artifacts
 
-| File                                           | Description                       | Status |
-| ---------------------------------------------- | --------------------------------- | ------ |
-| `.planning/config.json`                        | Project configuration             | ✅     |
-| `.planning/PROJECT.md`                         | Project context & vision          | ✅     |
-| `.planning/REQUIREMENTS.md`                    | Scoped requirements (13 phases)   | ✅     |
-| `.planning/ROADMAP.md`                         | Phase structure with dependencies | ✅     |
-| `.planning/STATE.md`                           | This file                         | ✅     |
-| `.planning/codebase/STACK.md`                  | Tech stack analysis (Plane)       | ✅     |
-| `.planning/codebase/ARCHITECTURE.md`           | Architecture analysis (Plane)     | ✅     |
-| `.planning/codebase/STRUCTURE.md`              | Code structure (Plane)            | ✅     |
-| `.planning/codebase/INTEGRATIONS.md`           | Integrations analysis (Plane)     | ✅     |
-| `.planning/codebase/CONVENTIONS.md`            | Conventions analysis (Plane)      | ✅     |
-| `.planning/codebase/TESTING.md`                | Testing analysis (Plane)          | ✅     |
-| `.planning/codebase/CONCERNS.md`               | Concerns analysis (Plane)         | ✅     |
-| `.planning/phases/05-cycle/05-CONTEXT.md`      | Phase 5 Context (Cycle)           | ✅     |
-| `.planning/phases/06-module/06-CONTEXT.md`     | Phase 6 Context (Module)          | ✅     |
-| `.planning/phases/07-page/07-CONTEXT.md`       | Phase 7 Context (Page)            | ✅     |
-| `.planning/phases/07-page/07-01-PLAN.md`       | Phase 7 Wave 1 plan               | ✅     |
-| `.planning/phases/07-page/07-02-PLAN.md`       | Phase 7 Wave 2 plan               | ✅     |
-| `.planning/phases/07-page/07-03-PLAN.md`       | Phase 7 Wave 3 plan               | ✅     |
-| `.planning/phases/07-page/07-02-SUMMARY.md`    | Phase 7 Wave 2 summary            | ✅     |
-| .planning/phases/07-page/07-03-SUMMARY.md      | Phase 7 Wave 3 summary            | ✅     |
-| .planning/phases/08-view/08-01-SUMMARY.md      | Phase 8 Wave 1 summary            | ✅     |
-| `.planning/research/domain-overview.md`        | Domain entity model               | ✅     |
-| `.planning/research/fullstackhero-patterns.md` | FSH pattern adaptation            | ✅     |
-| `.planning/research/api-migration-mapping.md`  | Django to .NET API mapping        | ✅     |
-| `.planning/phases/12-analytics/12-01-PLAN.md`  | Phase 12 Wave 1 plan              | ✅     |
-| `.planning/phases/12-analytics/12-02-PLAN.md`  | Phase 12 Wave 2 plan              | ✅     |
-| `.planning/phases/12-analytics/12-03-PLAN.md`  | Phase 12 Wave 3 plan              | ✅     |
-| `.planning/phases/12-analytics/12-04-PLAN.md`  | Phase 12 Wave 4 plan              | ✅     |
+| File                                           | Description                   | Status |
+| ---------------------------------------------- | ----------------------------- | ------ |
+| `.planning/config.json`                        | Project configuration         | ✅     |
+| `.planning/PROJECT.md`                         | Project context & vision      | ✅     |
+| `.planning/REQUIREMENTS.md`                    | v2.0 requirements (75 total)  | ✅     |
+| `.planning/ROADMAP.md`                         | Phase structure (v1.0 + v2.0) | ✅     |
+| `.planning/STATE.md`                           | This file                     | ✅     |
+| `.planning/codebase/STACK.md`                  | Tech stack analysis (Plane)   | ✅     |
+| `.planning/codebase/ARCHITECTURE.md`           | Architecture analysis (Plane) | ✅     |
+| `.planning/codebase/STRUCTURE.md`              | Code structure (Plane)        | ✅     |
+| `.planning/codebase/INTEGRATIONS.md`           | Integrations analysis (Plane) | ✅     |
+| `.planning/codebase/CONVENTIONS.md`            | Conventions analysis (Plane)  | ✅     |
+| `.planning/codebase/TESTING.md`                | Testing analysis (Plane)      | ✅     |
+| `.planning/codebase/CONCERNS.md`               | Concerns analysis (Plane)     | ✅     |
+| `.planning/research/SUMMARY.md`                | Research summary (Plane Web)  | ✅     |
+| `.planning/research/domain-overview.md`        | Domain entity model           | ✅     |
+| `.planning/research/fullstackhero-patterns.md` | FSH pattern adaptation        | ✅     |
+| `.planning/research/api-migration-mapping.md`  | Django to .NET API mapping    | ✅     |
 
 ---
 
 ## Key Decisions Log
 
-| Decision                                                                                 | Rationale                                                                                                                                                                   | Date       |
-| ---------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| Use fullstackhero template                                                               | Mature .NET 10 modular monolith with built-in multi-tenancy, CQRS, and all infrastructure needed                                                                            | 2026-06-16 |
-| Maintain API compatibility                                                               | Existing Plane frontend can be reused; enables incremental migration                                                                                                        | 2026-06-16 |
-| New database design                                                                      | Full EF Core advantage; no legacy schema constraints                                                                                                                        | 2026-06-16 |
-| No real-time collaboration in Phase 1                                                    | Reduces complexity; Pages as plain CRUD initially                                                                                                                           | 2026-06-16 |
-| Project in Plane repo subdirectory                                                       | Easier cross-reference; single repo for migration period                                                                                                                    | 2026-06-16 |
-| No CI/CD scripts                                                                         | Focus on core functionality first; CI/CD added later                                                                                                                        | 2026-06-16 |
-| CreatePageCommand uses ProjectId from route                                              | Prevent client from injecting arbitrary project ID                                                                                                                          | 2026-06-25 |
-| Page tests use IClassFixture<PageTestFixture> + InMemory DB with isolated database names | Each test method uses a unique Guid-named InMemory database (T-7-03-01 Mitigation); handler tests verify both return value and DbContext final state (T-7-03-02 Mitigation) | 2026-06-25 |
-| ListPages defaults to top-level pages                                                    | Plane-compatible: default view shows pages without parent                                                                                                                   | 2026-06-25 |
-| Favorite commands extract UserId from ClaimsPrincipal                                    | Spoofing prevention (T-7-02-03): User ID is never client-provided                                                                                                           | 2026-06-25 |
+| Decision                                                      | Rationale                                                                                                                                                          | Date       |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
+| Use fullstackhero template                                    | Mature .NET 10 modular monolith with built-in multi-tenancy, CQRS, and all infrastructure needed                                                                   | 2026-06-16 |
+| Maintain API compatibility                                    | Existing Plane frontend can be reused; enables incremental migration                                                                                               | 2026-06-16 |
+| New database design                                           | Full EF Core advantage; no legacy schema constraints                                                                                                               | 2026-06-16 |
+| No real-time collaboration in Phase 1                         | Reduces complexity; Pages as plain CRUD initially                                                                                                                  | 2026-06-16 |
+| Project in Plane repo subdirectory                            | Easier cross-reference; single repo for migration period                                                                                                           | 2026-06-16 |
+| No CI/CD scripts                                              | Focus on core functionality first; CI/CD added later                                                                                                               | 2026-06-16 |
+| v2.0: Fork Plane packages instead of rewrite                  | Preserve Plane UI consistency, reduce risk, enable incremental API layer migration                                                                                 | 2026-06-26 |
+| v2.0: TanStack Query for server state, MobX for UI state only | Strict separation of concerns; MobX avoids re-architecting UI state stores from Plane Web                                                                          | 2026-06-26 |
+| v2.0: JWT Bearer replace Session Cookie + CSRF                | Match .NET Identity authentication scheme                                                                                                                          | 2026-06-26 |
+| v2.0: FILT-01~04 assigned to Phase 17 (not Phase 16/18)       | Filter engine built alongside Calendar/Gantt/Spreadsheet views; Issue list uses basic inline filtering (ISSU-02), full generic filter engine delivered in Phase 17 | 2026-06-26 |
 
 ---
 
@@ -140,13 +129,14 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 ## Next Steps
 
-### ◆ v2.0 里程碑启动中
+### ◆ v2.0 里程碑 — 下一步
 
-正在定义 Flow Web 前端里程碑的需求和路线图。
+1. 用户审批 ROADMAP.md
+2. `/gsd-plan-phase 14` — 创建 Phase 14 (脚手架 & Auth) 的执行计划
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: Roadmap created (v2.0 Phases 14~20 defined)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-06-26 — Milestone v2.0 started
+Status: Awaiting user approval
+Last activity: 2026-06-26 — Roadmap v2.0 created
