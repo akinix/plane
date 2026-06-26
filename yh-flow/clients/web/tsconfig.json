@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./app/*"],
+      "@plane/types": ["./src/lib/types"],
+      "@plane/utils": ["./src/lib/utils"],
+      "@plane/ui": ["./src/lib/ui"],
+      "@plane/editor": ["./src/lib/editor"]
+    }
+  },
+  "include": ["app", "src"]
+}

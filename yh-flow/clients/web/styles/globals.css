@@ -1,0 +1,48 @@
+/* FLOW: Forked from Plane packages/tailwind-config/variables.css */
+@import "tailwindcss";
+
+/* FLOW: Light mode theme variables */
+:root {
+  /* Colors */
+  --color-background-primary: oklch(1 0 0);
+  --color-background-secondary: oklch(0.9848 0.0003 230.66);
+  --color-background-tertiary: oklch(0.9543 0.001 230.67);
+  --color-foreground-primary: oklch(0.1472 0.0034 230.83);
+  --color-foreground-secondary: oklch(0.4377 0.0066 230.87);
+  --color-foreground-tertiary: oklch(0.6161 0.009153 230.867);
+  --color-accent-primary: oklch(0.4799 0.1158 242.91);
+  --color-accent-secondary: oklch(0.6766 0.1665 243.91);
+  --color-border-subtle: oklch(0.8925 0.0024 230.7);
+  --color-border-strong: oklch(0.8612 0.0032 230.71);
+  --color-success: oklch(0.632 0.185972 147.3695);
+  --color-warning: oklch(0.7724 0.172798 65.367);
+  --color-danger: oklch(0.6378 0.2373 25.44);
+}
+
+/* FLOW: Dark mode theme variables */
+[data-theme="dark"] {
+  --color-background-primary: oklch(0.1689 0.0021 230.81);
+  --color-background-secondary: oklch(0.1932 0.002 230.81);
+  --color-background-tertiary: oklch(0.2378 0.0029 230.83);
+  --color-foreground-primary: oklch(0.9235 0.001733 230.6853);
+  --color-foreground-secondary: oklch(0.8455 0.0035 230.72);
+  --color-foreground-tertiary: oklch(0.6835 0.0074 230.81);
+  --color-accent-primary: oklch(0.6311 0.126281 238.01);
+  --color-accent-secondary: oklch(0.8318 0.065614 232.07);
+  --color-border-subtle: oklch(0.3999 0.0059 230.87);
+  --color-border-strong: oklch(0.5989 0.0096 230.88);
+  --color-success: oklch(0.7914 0.2091 151.66);
+  --color-warning: oklch(0.829 0.1712 81.04);
+  --color-danger: oklch(0.7022 0.1892 22.23);
+}
+
+/* FLOW: Basic reset and body styles */
+body {
+  font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background-tertiary);
+  color: var(--color-foreground-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
