@@ -1,17 +1,14 @@
 // FLOW: Forked from Plane apps/web/app/root.tsx
 import type { ReactNode } from "react";
 import { Links, Meta, Outlet, Scripts } from "react-router";
-import type { LinksFunction } from "react-router";
 import { ThemeProvider } from "next-themes";
 // FLOW: fonts
 // eslint-disable-next-line import/no-unassigned-import
 import "@fontsource-variable/inter";
 // FLOW: styles
-import globalStyles from "@/styles/globals.css?url";
+import "@/styles/globals.css";
 // FLOW: local imports
 import { AppProvider } from "./provider";
-
-export const links: LinksFunction = () => [{ rel: "stylesheet", href: globalStyles }];
 
 export function Layout({ children }: { children: ReactNode }) {
   return (

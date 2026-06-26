@@ -3,6 +3,7 @@ packages:
   - packages/*
   - "!apps/api"
   - "!apps/proxy"
+  - yh-flow/clients/web
 
 catalog:
   "@atlaskit/pragmatic-drag-and-drop": "1.7.4"
