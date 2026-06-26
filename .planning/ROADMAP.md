@@ -48,7 +48,16 @@ v2.0 (Flow Web Frontend): Phase 14~20 — 构建完整 React 前端
 6. Axios 实例已配置 JWT Bearer 拦截器自动附加 token；.NET API 返回 SnakeCase 格式和 `{"error":"message"}` 统一错误响应；分页响应格式兼容 Plane 前端
 7. 用户可在暗色和亮色主题之间切换，切换后刷新保持偏好
 
-**Plans**: TBD
+**Plans**: 4 plans
+
+```
+Plans:
+- [x] 14-01-PLAN.md — 脚手架 & 主题（Vite + React Router + Tailwind + Fork types/utils + 暗色/亮色主题）
+- [x] 14-02-PLAN.md — Fork UI & 编辑器（Fork @plane/ui + @plane/editor 剥离 Yjs）
+- [x] 14-03-PLAN.md — API 适配层（FlowApiService + JWT + humps + 错误标准化 + Vite proxy + .NET SnakeCase）
+- [x] 14-04-PLAN.md — 认证页面（登录/注册/忘记密码/重置密码 + AuthStore + 路由保护）
+```
+
 **UI hint**: yes
 
 ---
@@ -186,15 +195,15 @@ v2.0 (Flow Web Frontend): Phase 14~20 — 构建完整 React 前端
 
 ## Progress
 
-| Phase                             | Plans Complete | Status      | Completed |
-| --------------------------------- | -------------- | ----------- | --------- |
-| 14. 脚手架 & Auth                 | 0/0            | Not started | -         |
-| 15. 工作区 & 项目                 | 0/0            | Not started | -         |
-| 16. Issue 列表/详情 & 看板        | 0/0            | Not started | -         |
-| 17. 日历/甘特/电子表格 & 筛选引擎 | 0/0            | Not started | -         |
-| 18. 周期 & 模块                   | 0/0            | Not started | -         |
-| 19. 页面 & 视图                   | 0/0            | Not started | -         |
-| 20. 通知 & 分析                   | 0/0            | Not started | -         |
+| Phase                             | Plans Complete | Status           | Completed |
+| --------------------------------- | -------------- | ---------------- | --------- |
+| 14. 脚手架 & Auth                 | 4/4            | Ready to execute | -         |
+| 15. 工作区 & 项目                 | 0/0            | Not started      | -         |
+| 16. Issue 列表/详情 & 看板        | 0/0            | Not started      | -         |
+| 17. 日历/甘特/电子表格 & 筛选引擎 | 0/0            | Not started      | -         |
+| 18. 周期 & 模块                   | 0/0            | Not started      | -         |
+| 19. 页面 & 视图                   | 0/0            | Not started      | -         |
+| 20. 通知 & 分析                   | 0/0            | Not started      | -         |
 
 ---
 
