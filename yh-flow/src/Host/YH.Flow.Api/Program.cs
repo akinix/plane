@@ -14,6 +14,7 @@ using YH.Modules.Analytics;
 using YH.Modules.Webhooks;
 using YH.Modules.Multitenancy.Features.v1.GetTenantStatus;
 using System.Reflection;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +23,17 @@ var builder = WebApplication.CreateBuilder(args);
 // opt back to numeric via their own NumericEnumConverter since comma-joined flag strings break bitwise consumers. Frontends mirror this as string unions.
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
+    options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower; // FLOW: SCAFF-06
     options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull; // FLOW: SCAFF-06
+});
+
+// FLOW: Configure MVC JSON options for [ApiController] endpoints (SCAFF-06)
+builder.Services.Configure<Microsoft.AspNetCore.Mvc.JsonOptions>(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower; // FLOW: SCAFF-06
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull; // FLOW: SCAFF-06
 });
 
 if (builder.Environment.IsProduction())
