@@ -485,7 +485,7 @@ Plans:
 
 **Wave 3** _(blocked on Wave 2 completion)_
 
-- [ ] 12-03-PLAN.md — Chart + Export 端点（月度趋势图 + Hangfire 后台 CSV 导出）
+- [x] 12-03-PLAN.md — Chart + Export 端点（月度趋势图 + Hangfire 后台 CSV 导出）
 
 **Wave 4** _(blocked on Wave 3 completion)_
 
