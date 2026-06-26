@@ -128,6 +128,13 @@ public sealed class IssueConfiguration : IEntityTypeConfiguration<Issue>
         builder.HasIndex(x => new { x.TenantId, x.IsDeleted, x.ProjectId })
             .HasDatabaseName("IX_Issues_Tenant_Deleted_Project");
 
+        // Analytics query index on (TenantId, ProjectId, CreatedOnUtc, StateId)
+        // Covers the most common analytics query pattern: filter by tenant + project,
+        // filter by creation date range, group by state.
+        builder.HasIndex(x => new { x.TenantId, x.ProjectId, x.CreatedOnUtc, x.StateId })
+            .HasDatabaseName("IX_Issues_Tenant_Project_CreatedAt_StateId")
+            .HasFilter("[DeletedOnUtc] IS NULL");
+
         // Audit + soft-delete columns populated by AuditableEntitySaveChangesInterceptor.
         builder.Property(x => x.CreatedOnUtc).IsRequired();
         builder.Property(x => x.CreatedBy).HasMaxLength(450);

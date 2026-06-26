@@ -10,6 +10,7 @@ using YH.Modules.Project;
 using YH.Modules.WorkItems;
 using YH.Modules.Page;
 using YH.Modules.View;
+using YH.Modules.Analytics;
 using YH.Modules.Webhooks;
 using YH.Modules.Multitenancy.Features.v1.GetTenantStatus;
 using System.Reflection;
@@ -74,6 +75,7 @@ var moduleAssemblies = new Assembly[]
     typeof(WorkItemsModule).Assembly,
     typeof(PageModule).Assembly,
     typeof(ViewModule).Assembly,
+    typeof(AnalyticsModule).Assembly,
 };
 
 builder.AddHeroPlatform(o =>
