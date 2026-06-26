@@ -477,7 +477,7 @@ Plans:
 
 **Wave 1**
 
-- [ ] 12-01-PLAN.md — 模块脚手架（Contracts DTOs + Module csproj + Issue 分析索引迁移 + slnx/host wiring）
+- [x] 12-01-PLAN.md — 模块脚手架（Contracts DTOs + Module csproj + Issue 分析索引迁移 + slnx/host wiring）
 
 **Wave 2** _(blocked on Wave 1 completion)_
 
