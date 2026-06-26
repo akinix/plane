@@ -18,7 +18,7 @@ v2.0 (Flow Web Frontend): Phase 14~20 — 构建完整 React 前端
 
 ## Phases
 
-- [ ] **Phase 14: 脚手架 & Auth** — 前端开发环境搭建，Fork Plane 包，JWT 认证流程，API 适配层
+- [x] **Phase 14: 脚手架 & Auth** — 前端开发环境搭建，Fork Plane 包，JWT 认证流程，API 适配层
 - [ ] **Phase 15: 工作区 & 项目** — 工作区仪表板/设置/成员管理，项目管理，侧边栏/顶栏/Emoji 选择器
 - [ ] **Phase 16: Issue 列表/详情 & 看板** — Issue CRUD、列表视图、详情页、评论、批量操作、看板视图、命令面板
 - [ ] **Phase 17: 日历/甘特/电子表格 & 筛选引擎** — Issue 日历/甘特/电子表格视图，通用筛选/排序/自定义列引擎
@@ -197,7 +197,7 @@ Plans:
 
 | Phase                             | Plans Complete | Status           | Completed |
 | --------------------------------- | -------------- | ---------------- | --------- |
-| 14. 脚手架 & Auth                 | 4/4            | Ready to execute | -         |
+| 14. 脚手架 & Auth                 | 4/4 | Delivered  | ✅ |
 | 15. 工作区 & 项目                 | 0/0            | Not started      | -         |
 | 16. Issue 列表/详情 & 看板        | 0/0            | Not started      | -         |
 | 17. 日历/甘特/电子表格 & 筛选引擎 | 0/0            | Not started      | -         |
@@ -211,9 +211,9 @@ Plans:
 
 | Requirement         | Phase    | Status  |
 | ------------------- | -------- | ------- |
-| SCAFF-01 ~ SCAFF-09 | Phase 14 | Pending |
-| AUTH-01 ~ AUTH-06   | Phase 14 | Pending |
-| UI-03               | Phase 14 | Pending |
+| SCAFF-01 ~ SCAFF-09 | Phase 14 | Delivered |
+| AUTH-01 ~ AUTH-06   | Phase 14 | Delivered |
+| UI-03               | Phase 14 | Delivered |
 | WORK-01 ~ WORK-04   | Phase 15 | Pending |
 | PROJ-01 ~ PROJ-05   | Phase 15 | Pending |
 | UI-01, UI-02, UI-05 | Phase 15 | Pending |
