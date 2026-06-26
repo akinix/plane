@@ -469,18 +469,35 @@ Plans:
 **Duration Estimate:** 2-3 days  
 **Requirements:** REQ-12.1 ~ REQ-12.2
 
-### Tasks
+### Plans
 
-- T12.1: 实现 Issue 统计分析
-- T12.2: 实现 Cycle 进度分析
-- T12.3: 实现成员工作量分析
-- T12.4: 实现仪表板数据聚合
-- T12.5: 实现分析数据导出
-- T12.6: 创建 AnalyticsDbContext + 迁移
+**Plans:** 4 plans (4 waves)
+
+Plans:
+
+**Wave 1**
+
+- [ ] 12-01-PLAN.md — 模块脚手架（Contracts DTOs + Module csproj + Issue 分析索引迁移 + slnx/host wiring）
+
+**Wave 2** _(blocked on Wave 1 completion)_
+
+- [ ] 12-02-PLAN.md — Overview + Stats 端点（Workspace/Project 级概览 + 统计，AnalyticsQueryService 聚合查询）
+
+**Wave 3** _(blocked on Wave 2 completion)_
+
+- [ ] 12-03-PLAN.md — Chart + Export 端点（月度趋势图 + Hangfire 后台 CSV 导出）
+
+**Wave 4** _(blocked on Wave 3 completion)_
+
+- [ ] 12-04-PLAN.md — 集成测试（5 个测试文件 + AnalyticsTestFixture + 全量回归）
 
 **Deliverables:**
 
 - 完整分析 API
+- 4 个端点组：Overview / Stats / Chart / Export
+- Workspace/Project 级 Issue 统计（按状态/优先级/负责人）
+- 月度完成率趋势 Chart 数据
+- CSV 导出（Hangfire 后台异步）
 
 ---
 

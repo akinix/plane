@@ -2,22 +2,22 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-current_phase: 10
-status: needs_discuss
-last_updated: "2026-06-25T10:30:00.000Z"
+current_phase: 12
+status: ready_to_execute
+last_updated: "2026-06-26T08:49:00.000Z"
 progress:
   total_phases: 14
-  completed_phases: 9
-  total_plans: 38
-  completed_plans: 32
-  percent: 64
+  completed_phases: 7
+  total_plans: 45
+  completed_plans: 34
+  percent: 51
 ---
 
 # YH.Flow — Project State
 
-**Last Updated:** 2026-06-25
-**Current Phase:** 10
-**Active Workstream:** Phase 9 (Integration) — DEFERRED → Phase 10 (Webhook)
+**Last Updated:** 2026-06-26
+**Current Phase:** 12
+**Active Workstream:** Phase 12 (Analytics) -- PLANS CREATED, 4 plans (4 waves)
 
 ---
 
@@ -27,7 +27,7 @@ progress:
 | ----------------- | ------------------------------------------ |
 | Project           | YH.Flow (Flow)                             |
 | Type              | Backend migration + Full-stack rewrite     |
-| Source Reference  | Plane (AGPL-3.0) — Not modified            |
+| Source Reference  | Plane (AGPL-3.0) -- Not modified           |
 | Template          | fullstackhero/dotnet-starter-kit (.NET 10) |
 | Location          | `d:/github/akinix-plane/yh-flow/`          |
 | API Compatibility | Maintain Plane API contract                |
@@ -38,11 +38,11 @@ progress:
 
 ### Completed
 
-- [x] Codebase map generated (`.planning/codebase/` — 7 docs)
+- [x] Codebase map generated (`.planning/codebase/` -- 7 docs)
 - [x] Project initialized (`.planning/PROJECT.md`)
 - [x] Requirements defined (`.planning/REQUIREMENTS.md`)
-- [x] Roadmap defined (`.planning/ROADMAP.md` — 14 phases)
-- [x] Domain research completed (`.planning/research/` — 3 docs)
+- [x] Roadmap defined (`.planning/ROADMAP.md` -- 14 phases)
+- [x] Domain research completed (`.planning/research/` -- 3 docs)
 - [x] Configuration set (`.planning/config.json`)
 - [x] Phase 6 plans created (3 plans, 3 waves)
 - [x] Phase 7 plans created (3 plans, 3 waves)
@@ -54,30 +54,30 @@ progress:
 - [x] Phase 1 Plan 02: Domain Entities (APIToken + OAuthProviderSettings) ✅
 - [x] Phase 1 Plan 03: OAuth Provider Framework + Plane Auth Endpoints ✅
 - [x] Phase 1 Plan 04: API Token CRUD + OAuth Provider Management (Wave 3) ✅
-- [x] Phase 1 Plan 05: Schema Push + Full Phase 1 Verification (Wave 4) ✅ — DB migrated & verified
+- [x] Phase 1 Plan 05: Schema Push + Full Phase 1 Verification (Wave 4) ✅ -- DB migrated & verified
 
-> 🟢 **Phase 3 (Project Module): COMPLETE** — 4 waves executed, 4 plans done. Project module fully implemented: Project + ProjectMember domain entities, DbContext + migration in `yhschema.Project` schema, 5 CRUD endpoints (Create/Get/Update/Delete/List), 4 member endpoints (Add/List/UpdateRole/Remove). Build 0 errors, full regression green (Workspace 100/100, Identity 412/412). See SUMMARY per wave.
+> 🟢 **Phase 3 (Project Module): COMPLETE** -- 4 waves executed, 4 plans done. Project module fully implemented: Project + ProjectMember domain entities, DbContext + migration in `yhschema.Project` schema, 5 CRUD endpoints (Create/Get/Update/Delete/List), 4 member endpoints (Add/List/UpdateRole/Remove). Build 0 errors, full regression green (Workspace 100/100, Identity 412/412). See SUMMARY per wave.
 
-> 🟢 **Phase 4 (WorkItems): COMPLETE** — 5 waves executed, 5 plans done. Full WorkItems module: State/Label/Estimate entities + CRUD, Issue entity (20+ fields, 5 FK, 2 M2M) with SequenceId service, IssueLink, IssueComment, IssueActivity (domain events), BatchOps, Intake, Import/Export, StateSeeder. WorkItemsDbContext (`yhschema.WorkItems`). 181 tests all green. Regression: Workspace 100 + Identity 412 = 693 total passing.
+> 🟢 **Phase 4 (WorkItems): COMPLETE** -- 5 waves executed, 5 plans done. Full WorkItems module: State/Label/Estimate entities + CRUD, Issue entity (20+ fields, 5 FK, 2 M2M) with SequenceId service, IssueLink, IssueComment, IssueActivity (domain events), BatchOps, Intake, Import/Export, StateSeeder. WorkItemsDbContext (`yhschema.WorkItems`). 181 tests all green. Regression: Workspace 100 + Identity 412 = 693 total passing.
 
 ### Pending
 
-> 🟢 **Phase 7 (Page): COMPLETE** — 3 waves executed, 3 plans done. Page module fully implemented: Page/ProjectPage/PageFavorite domain entities, PageDbContext (yhschema.Page schema), 12 API endpoints (Create/Get/Update/Delete/List/Summary/Archive/Unarchive/GetDescription/UpdateDescription/AddFavorite/RemoveFavorite), DTO Mapper + routing. 53 tests all green. Full regression: WorkItems 264 + Workspace 100 = zero regression.
+> 🟢 **Phase 7 (Page): COMPLETE** -- 3 waves executed, 3 plans done. Page module fully implemented: Page/ProjectPage/PageFavorite domain entities, PageDbContext (yhschema.Page schema), 12 API endpoints (Create/Get/Update/Delete/List/Summary/Archive/Unarchive/GetDescription/UpdateDescription/AddFavorite/RemoveFavorite), DTO Mapper + routing. 53 tests all green. Full regression: WorkItems 264 + Workspace 100 = zero regression.
 
-- [ ] Phase 2 manual smoke (11 steps — blocked by Docker Desktop issue)
-- [x] Phase 5: Cycle — 周期管理 ✅（3 waves, 729 全量回归绿色）
+- [ ] Phase 2 manual smoke (11 steps -- blocked by Docker Desktop issue)
+- [x] Phase 5: Cycle -- 周期管理 ✅（3 waves, 729 全量回归绿色）
 
-> 🟢 **Phase 6 (Module): COMPLETE** — 3 waves executed, 3 plans done. Module entity + CRUD + ModuleIssue/ModuleLink/Progress + integration tests. See 06-03-SUMMARY.md.
+> 🟢 **Phase 6 (Module): COMPLETE** -- 3 waves executed, 3 plans done. Module entity + CRUD + ModuleIssue/ModuleLink/Progress + integration tests. See 06-03-SUMMARY.md.
 
-- [x] Phase 7: Page — 文档管理 (3 plans, 3 waves) ✅ — Review fixes applied (CR-01/02/03/04)
+- [x] Phase 7: Page -- 文档管理 (3 plans, 3 waves) ✅ -- Review fixes applied (CR-01/02/03/04)
 
-> 🟢 **Phase 8 (View): COMPLETE** — 3 waves executed, 3 plans done. View module fully implemented: View/ViewFavorite domain entities, ViewDbContext (yhschema.View schema), AddViews migration (jsonb columns), 14 API endpoints (Create/Get/Update/Delete/List/WorkspaceList/Archive/Unarchive/AddFavorite/RemoveFavorite), DTO mapper + routing. Filters stored as JSON columns (Filters/DisplayFilters/DisplayProperties/RichFilters). All 41 tests green. Full regression: View 41 + Workspace 100 + Identity 412 + WorkItems 264 = zero regression.
+> 🟢 **Phase 8 (View): COMPLETE** -- 3 waves executed, 3 plans done. View module fully implemented: View/ViewFavorite domain entities, ViewDbContext (yhschema.View schema), AddViews migration (jsonb columns), 14 API endpoints (Create/Get/Update/Delete/List/WorkspaceList/Archive/Unarchive/AddFavorite/RemoveFavorite), DTO mapper + routing. Filters stored as JSON columns (Filters/DisplayFilters/DisplayProperties/RichFilters). All 41 tests green. Full regression: View 41 + Workspace 100 + Identity 412 + WorkItems 264 = zero regression.
 
-- [ ] Phase 9: Integration — 外部集成 (GitHub, GitLab, Gitea, Slack, Unsplash) — **DEFERRED to future milestone**
-- [x] Phase 10: Webhook — Webhook 管理 (needs_discuss)
-- [ ] Phase 11: Notification — 通知系统
-- [ ] Phase 12: Analytics — 分析
-- [ ] Phase 13: Flow Web — 前端
+- [ ] Phase 9: Integration -- 外部集成 (GitHub, GitLab, Gitea, Slack, Unsplash) -- **DEFERRED to future milestone**
+- [x] Phase 10: Webhook -- Webhook 管理 ✅（70/70 测试通过，16 新增集成测试）
+- [x] Phase 11: Notification -- 通知系统 ✅（10 端点，10 测试 9/1 pass/skip）
+- [ ] Phase 12: Analytics -- 分析（4 plans 已创建待执行）
+- [ ] Phase 13: Flow Web -- 前端
 
 ---
 
@@ -108,7 +108,11 @@ progress:
 | .planning/phases/08-view/08-01-SUMMARY.md      | Phase 8 Wave 1 summary            | ✅     |
 | `.planning/research/domain-overview.md`        | Domain entity model               | ✅     |
 | `.planning/research/fullstackhero-patterns.md` | FSH pattern adaptation            | ✅     |
-| `.planning/research/api-migration-mapping.md`  | Django → .NET API mapping         | ✅     |
+| `.planning/research/api-migration-mapping.md`  | Django to .NET API mapping        | ✅     |
+| `.planning/phases/12-analytics/12-01-PLAN.md`  | Phase 12 Wave 1 plan              | ✅     |
+| `.planning/phases/12-analytics/12-02-PLAN.md`  | Phase 12 Wave 2 plan              | ✅     |
+| `.planning/phases/12-analytics/12-03-PLAN.md`  | Phase 12 Wave 3 plan              | ✅     |
+| `.planning/phases/12-analytics/12-04-PLAN.md`  | Phase 12 Wave 4 plan              | ✅     |
 
 ---
 
@@ -144,6 +148,17 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 ## Next Steps
 
-**Phase 9 (Integration)** — DEFERRED to future milestone。所有 5 个外部集成（GitHub, GitLab, Gitea, Slack, Unsplash）不在当前 v1.0 范围内。
+**Phase 9 (Integration)** -- DEFERRED to future milestone。所有 5 个外部集成（GitHub, GitLab, Gitea, Slack, Unsplash）不在当前 v1.0 范围内。
 
-**Phase 10 (Webhook)** — 下一个讨论阶段。Webhook CRUD、异步投递、签名、SSRF 防护。
+**Phase 10 (Webhook)** -- ✅ 已完成。FSH 内建模块 + 16 个集成测试，70/70 全部通过。
+
+**Phase 11 (Notification)** -- ✅ 已完成。10 个端点、10 个集成测试（9 pass/1 skip）。
+
+**Phase 12 (Analytics)** -- 4 个计划已创建。执行命令: `/gsd-execute-phase 12`
+
+- Wave 1: 模块脚手架 + Issue 分析索引
+- Wave 2: Overview + Stats 端点
+- Wave 3: Chart + Export 端点
+- Wave 4: 集成测试 + 全量回归
+
+**Phase 13 (Flow Web)** -- 待执行。React 前端。
