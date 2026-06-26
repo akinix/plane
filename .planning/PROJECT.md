@@ -174,6 +174,41 @@ d:/github/akinix-plane/
 - T0.8: ✅ 编译验证通过（51 projects, 0 errors, 0 warnings）
 - ⏳ 待人工验证: Aspire 容器完整启动 + API 健康检查
 
-## 10. Current State
+## 10. Current Milestone: v2.0 Flow Web 前端
 
-Phase 0 完成 — YH.Flow 项目脚手架就绪。编译通过，命名空间替换完成，Aspire 编排配置正确。待 Docker 环境下人工验证容器启动后即可进入 Phase 1 (Foundation)。
+**Goal:** 基于 Plane Web 渐进改造，构建对标 Plane 完整功能的 React 前端
+
+**Target features:**
+
+- 继承 Plane Web 既有 UI 组件和设计系统
+- 逐步将 API 调用层从 Django REST 切换到 .NET 后端
+- 完整页面集：登录/注册、工作区仪表板、Project/Issue/Cycle/Module/Page/View 管理页面
+- TipTap 富文本编辑器、拖拽排序、暗色模式、响应式布局
+- SSE 实时通知
+
+## 11. Current State
+
+v1.0 里程碑完成（12/14 phases）。Phase 9（集成）推迟至后续版本。当前阶段：启动 v2.0 前端里程碑。
+
+## Evolution
+
+This document evolves at phase transitions and milestone boundaries.
+
+**After each phase transition** (via `/gsd-transition`):
+
+1. Requirements invalidated? → Move to Out of Scope with reason
+2. Requirements validated? → Move to Validated with phase reference
+3. New requirements emerged? → Add to Active
+4. Decisions to log? → Add to Key Decisions
+5. "What This Is" still accurate? → Update if drifted
+
+**After each milestone** (via `/gsd-complete-milestone`):
+
+1. Full review of all sections
+2. Core Value check — still the right priority?
+3. Audit Out of Scope — reasons still valid?
+4. Update Context with current state (users, feedback, metrics)
+
+---
+
+_Last updated: 2026-06-26 after v2.0 milestone start_

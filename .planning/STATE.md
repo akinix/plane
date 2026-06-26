@@ -1,23 +1,23 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-current_phase: complete
-status: complete
-last_updated: "2026-06-26T04:40:00.000Z"
+milestone: v2.0
+milestone_name: Flow Web 前端
+status: planning
+last_updated: "2026-06-26T05:55:21.142Z"
+last_activity: 2026-06-26
 progress:
-  total_phases: 14
-  completed_phases: 12
-  total_plans: 43
-  completed_plans: 41
-  percent: 95
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-26
-**Current Phase:** Complete 🎉
-**Active Workstream:** v1.0 milestone complete
+**Current Phase:** Planning
+**Active Workstream:** v2.0 milestone — Flow Web 前端
 
 ---
 
@@ -140,13 +140,13 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 ## Next Steps
 
-### 🎉 v1.0 里程碑完成！
+### ◆ v2.0 里程碑启动中
 
-所有目标阶段已交付。下一阶段计划：
+正在定义 Flow Web 前端里程碑的需求和路线图。
 
-**V2.0 下一里程碑：**
+## Current Position
 
-- `/gsd-new-milestone` — 启动 v2.0 里程碑
-  - Phase 9: 集成（GitHub/GitLab/Gitea/Slack/Unsplash）
-  - Phase 13: Flow Web 前端（React）
-  - 新增功能：自定义图表、Dashboard Widget、预计算缓存
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-06-26 — Milestone v2.0 started
