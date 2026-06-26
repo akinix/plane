@@ -489,7 +489,7 @@ Plans:
 
 **Wave 4** _(blocked on Wave 3 completion)_
 
-- [ ] 12-04-PLAN.md — 集成测试（5 个测试文件 + AnalyticsTestFixture + 全量回归）
+- [x] 12-04-PLAN.md — 集成测试（5 个测试文件 + AnalyticsTestFixture + 全量回归）
 
 **Deliverables:**
 
