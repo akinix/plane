@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 import { reactRouter } from "@react-router/dev/vite";
 import tsconfigPaths from "vite-tsconfig-paths";
 
-// FLOW: Vite config for Flow Web frontend (forked from Plane apps/web/vite.config.ts)
+// FLOW: Vite config for Flow Web frontend (SCAFF-05)
 export default defineConfig({
   plugins: [reactRouter(), tsconfigPaths()],
   resolve: {
@@ -21,5 +21,13 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
+    // FLOW: API proxy to .NET backend (SCAFF-05)
+    proxy: {
+      "/api": {
+        target: process.env.VITE_API_PROXY_TARGET || "https://localhost:7030",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 });

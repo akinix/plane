@@ -14,12 +14,14 @@ export interface IEmailCheckData {
 export interface IEmailCheckResponse {
   status: "MAGIC_CODE" | "CREDENTIAL";
   existing: boolean;
-  is_password_autoset: boolean;
+  // FLOW: snake_case → camelCase post-humps conversion (D-12)
+  isPasswordAutoset: boolean;
 }
 
 export interface ILoginTokenResponse {
-  access_token: string;
-  refresh_token: string;
+  // FLOW: camelCase post-humps conversion (D-12) — .NET API returns snake_case, humps converts at runtime
+  accessToken: string;
+  refreshToken: string;
 }
 
 export interface IMagicSignInData {
@@ -34,5 +36,6 @@ export interface IPasswordSignInData {
 }
 
 export interface ICsrfTokenData {
-  csrf_token: string;
+  // FLOW: camelCase post-humps conversion (D-12)
+  csrfToken: string;
 }

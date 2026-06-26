@@ -1,15 +1,32 @@
-// FLOW: Forked from Plane apps/web/app/provider.tsx
+// FLOW: AppProvider — global providers (StoreProvider, AuthInitializer)
 import type { ReactNode } from "react";
-// FLOW: ThemeProvider is in root.tsx Layout function per Plane pattern
-// FLOW: Subsequent phases will add AuthProvider, StoreProvider, etc.
+import { useEffect } from "react";
+import { useStore } from "@/lib/store-context";
+import { StoreProvider } from "@/lib/store-context";
 
 export interface IAppProvider {
   children: ReactNode;
 }
 
+function AuthInitializer({ children }: { children: ReactNode }) {
+  const { auth } = useStore();
+
+  useEffect(() => {
+    auth.initAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return <>{children}</>;
+}
+
 export function AppProvider(props: IAppProvider) {
   const { children } = props;
 
-  // FLOW: Minimal AppProvider — ThemeProvider is in root.tsx Layout
-  return <>{children}</>;
+  return (
+    <StoreProvider>
+      <AuthInitializer>
+        {children}
+      </AuthInitializer>
+    </StoreProvider>
+  );
 }
