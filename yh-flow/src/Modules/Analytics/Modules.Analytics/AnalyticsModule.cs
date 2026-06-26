@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using YH.Framework.Web.Modules;
 using YH.Modules.Analytics.Features.v1.Charts.GetProjectChart;
 using YH.Modules.Analytics.Features.v1.Charts.GetWorkspaceChart;
+using YH.Modules.Analytics.Features.v1.Export.ExportAnalytics;
 using YH.Modules.Analytics.Features.v1.Overview.GetProjectAnalytics;
 using YH.Modules.Analytics.Features.v1.Overview.GetWorkspaceAnalytics;
 using YH.Modules.Analytics.Features.v1.Stats.GetProjectStats;
@@ -37,6 +38,7 @@ public sealed class AnalyticsModule : IModule
         // Analytics is a pure query module — no independent DbContext.
         // Reuses WorkItemsDbContext for real-time aggregation queries.
         builder.Services.AddScoped<IAnalyticsQueryService, AnalyticsQueryService>();
+        builder.Services.AddTransient<IAnalyticsExportService, AnalyticsExportService>();
 
         builder.Services.AddHealthChecks()
             .AddDbContextCheck<WorkItemsDbContext>(
@@ -84,6 +86,8 @@ public sealed class AnalyticsModule : IModule
         // Project-level chart endpoint
         projectAnalytics.MapGetProjectChartEndpoint();           // GET /charts?type=work-items
 
-        // Wave 3: Export endpoint will be registered here in Task 2.
+        // Wave 3: Export endpoint
+        workspaceAnalytics.MapExportAnalyticsEndpoint();        // POST /export
+
     }
 }
