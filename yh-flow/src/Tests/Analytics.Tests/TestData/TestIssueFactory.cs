@@ -6,19 +6,27 @@ namespace YH.Tests.Analytics.TestData;
 /// <summary>
 /// Factory helpers for creating WorkItems domain entities in Analytics integration tests.
 /// Uses reflection to set private-set properties (CreatedOnUtc, CompletedAt) for
-/// date-sensitive test scenarios.
+/// date-sensitive test scenarios. Auto-assigns unique SequenceId to avoid
+/// unique constraint violations in real database providers.
 /// </summary>
 internal static class TestIssueFactory
 {
+    private static int _nextSequenceId = 1;
+
     private static readonly PropertyInfo CreatedOnUtcProp = typeof(Issue)
         .GetProperty("CreatedOnUtc", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)!;
 
     private static readonly PropertyInfo CompletedAtProp = typeof(Issue)
         .GetProperty("CompletedAt", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)!;
 
+    private static readonly PropertyInfo SequenceIdProp = typeof(Issue)
+        .GetProperty("SequenceId", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)!;
+
     /// <summary>
     /// Creates an <see cref="Issue"/> with optional overrides for testing.
-    /// Uses <see cref="Issue.Create"/> factory then reflection-sets CreatedOnUtc and CompletedAt.
+    /// Uses <see cref="Issue.Create"/> factory then sets SequenceId (internal set)
+    /// and reflection-sets CreatedOnUtc/CompletedAt. Auto-assigns a unique SequenceId
+    /// to avoid (TenantId, ProjectId, SequenceId) unique constraint violations.
     /// </summary>
     internal static Issue CreateIssue(
         string name,
@@ -30,15 +38,14 @@ internal static class TestIssueFactory
     {
         var issue = Issue.Create(name, projectId, stateId: stateId, priority: priority);
 
+        // Auto-assign unique SequenceId to avoid unique constraint violations
+        SequenceIdProp.SetValue(issue, Interlocked.Increment(ref _nextSequenceId));
+
         if (createdAt.HasValue)
-        {
             CreatedOnUtcProp.SetValue(issue, createdAt.Value);
-        }
 
         if (completedAt.HasValue)
-        {
             CompletedAtProp.SetValue(issue, completedAt.Value);
-        }
 
         return issue;
     }

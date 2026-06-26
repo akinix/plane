@@ -213,7 +213,7 @@ public sealed class AnalyticsQueryService : IAnalyticsQueryService
         var start = dateGte?.DateTime
             ?? _dbContext.Issues
                 .Where(i => i.TenantId == tenantId && i.DeletedOnUtc == null)
-                .MinBy(i => i.CreatedOnUtc)?.CreatedOnUtc.DateTime
+                .OrderBy(i => i.CreatedOnUtc).FirstOrDefault()?.CreatedOnUtc.DateTime
             ?? DateTime.UtcNow.AddMonths(-12);
         var end = dateLte?.DateTime ?? DateTime.UtcNow;
         // Ensure start is first day of month
@@ -464,7 +464,7 @@ public sealed class AnalyticsQueryService : IAnalyticsQueryService
 
         var projectStart = dateGte?.DateTime ?? _dbContext.Issues
             .Where(i => i.TenantId == tenantId && i.DeletedOnUtc == null && i.ProjectId == projectId)
-            .MinBy(i => i.CreatedOnUtc)?.CreatedOnUtc.DateTime ?? DateTime.UtcNow.AddMonths(-12);
+            .OrderBy(i => i.CreatedOnUtc).FirstOrDefault()?.CreatedOnUtc.DateTime ?? DateTime.UtcNow.AddMonths(-12);
         var projectEnd = dateLte?.DateTime ?? DateTime.UtcNow;
         projectStart = new DateTime(projectStart.Year, projectStart.Month, 1, 0, 0, 0, DateTimeKind.Utc);
 
