@@ -15,6 +15,8 @@ import {
   PropertyEditorDate,
 } from "./property-editor";
 import { useNavigate } from "react-router";
+import { useCycles } from "@/../src/lib/hooks/use-cycles";
+import { useModules } from "@/../src/lib/hooks/use-modules";
 
 type Props = {
   issue: TIssue;
@@ -31,6 +33,10 @@ export const IssueDetailSidebar = observer(function IssueDetailSidebar({
 }: Props) {
   const navigate = useNavigate();
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const { data: cycles } = useCycles(projectId);
+  const { data: modules } = useModules(projectId);
+  const assignedCycle = cycles?.find((c) => c.id === issue.cycle_id);
+  const assignedModules = modules?.filter((m) => issue.module_ids?.includes(m.id));
 
   const handleDelete = () => {
     navigate(`/workspaces/${workspaceId}/projects/${projectId}/issues`);
@@ -91,6 +97,41 @@ export const IssueDetailSidebar = observer(function IssueDetailSidebar({
           <span className="text-xs text-custom-text-400">截止日期</span>
           <PropertyEditorDate value={issue.target_date} onSelect={(date) => onUpdate({ target_date: date })} />
         </div>
+
+        {/* Cycle — 显示关联周期名称，可点击进入周期详情 */}
+        {issue.cycle_id && assignedCycle && (
+          <div className="flex flex-col gap-1">
+            <span className="text-xs text-custom-text-400">周期</span>
+            <button
+              onClick={() =>
+                navigate(`/workspaces/${workspaceId}/projects/${projectId}/cycles/${issue.cycle_id}`)
+              }
+              className="text-sm text-custom-primary-100 hover:underline text-left transition-colors"
+            >
+              {assignedCycle.name}
+            </button>
+          </div>
+        )}
+
+        {/* Module — 显示关联模块名称列表，每个可点击进入模块详情 */}
+        {assignedModules && assignedModules.length > 0 && (
+          <div className="flex flex-col gap-1">
+            <span className="text-xs text-custom-text-400">模块</span>
+            <div className="flex flex-wrap gap-1">
+              {assignedModules.map((mod) => (
+                <button
+                  key={mod.id}
+                  onClick={() =>
+                    navigate(`/workspaces/${workspaceId}/projects/${projectId}/modules/${mod.id}`)
+                  }
+                  className="text-sm text-custom-primary-100 hover:underline text-left transition-colors"
+                >
+                  {mod.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Delete button */}
