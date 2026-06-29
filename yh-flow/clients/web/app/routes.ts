@@ -24,33 +24,27 @@ export default [
 
     // Workspace pages (15-03)
     route("workspaces/:workspaceId", "app/workspaces/[workspaceId]/page.tsx"),
-    route(
-      "workspaces/:workspaceId/settings/*",
-      "app/workspaces/[workspaceId]/settings/page.tsx",
-    ),
-    route(
-      "workspaces/:workspaceId/members/*",
-      "app/workspaces/[workspaceId]/members/page.tsx",
-    ),
+    route("workspaces/:workspaceId/settings/*", "app/workspaces/[workspaceId]/settings/page.tsx"),
+    route("workspaces/:workspaceId/members/*", "app/workspaces/[workspaceId]/members/page.tsx"),
 
     // ====================================================================
     // PROJECT ROUTES — :projectId before /* to avoid splat hijacking
     // ====================================================================
-    route(
-      "workspaces/:workspaceId/projects/:projectId",
-      "app/workspaces/[workspaceId]/projects/[projectId]/page.tsx",
-    ),
+    route("workspaces/:workspaceId/projects/:projectId", "app/workspaces/[workspaceId]/projects/[projectId]/page.tsx"),
     route(
       "workspaces/:workspaceId/projects/:projectId/settings",
-      "app/workspaces/[workspaceId]/projects/[projectId]/settings/page.tsx",
+      "app/workspaces/[workspaceId]/projects/[projectId]/settings/page.tsx"
     ),
     route(
       "workspaces/:workspaceId/projects/:projectId/members",
-      "app/workspaces/[workspaceId]/projects/[projectId]/members/page.tsx",
+      "app/workspaces/[workspaceId]/projects/[projectId]/members/page.tsx"
     ),
-    route(
-      "workspaces/:workspaceId/projects/*",
-      "app/workspaces/[workspaceId]/projects/page.tsx",
-    ),
+    route("workspaces/:workspaceId/projects/*", "app/workspaces/[workspaceId]/projects/page.tsx"),
+
+    // ====================================================================
+    // ISSUE ROUTES per D-P16-04
+    // ====================================================================
+    route("workspaces/:workspaceId/projects/:projectId/issues", "app/issues/page.tsx"),
+    route("workspaces/:workspaceId/projects/:projectId/issues/:issueId", "app/issues/[issueId]/page.tsx"),
   ]),
 ] satisfies RouteConfig;
