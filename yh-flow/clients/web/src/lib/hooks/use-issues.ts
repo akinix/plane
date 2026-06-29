@@ -1,7 +1,7 @@
 // FLOW: TanStack Query hooks for Issue CRUD (mock data layer per D-P16-02)
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { TIssue, TBulkOperationsPayload } from "@plane/types";
-import { MOCK_ISSUES } from "../mock-data";
+import { MOCK_ISSUES, MOCK_STATES } from "../mock-data";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -47,6 +47,17 @@ export const useIssue = (projectId: string, issueId: string) => {
       return MOCK_ISSUES.find((i) => i.id === issueId && i.project_id === projectId);
     },
     enabled: !!projectId && !!issueId,
+  });
+};
+
+export const useProjectStates = (projectId: string) => {
+  return useQuery({
+    queryKey: ["states", projectId],
+    queryFn: async () => {
+      await delay(150);
+      return MOCK_STATES.filter((s) => s.project_id === projectId);
+    },
+    enabled: !!projectId,
   });
 };
 
@@ -109,20 +120,17 @@ export const useIssueMutations = () => {
     },
     onMutate: async ({ issueId, data }) => {
       await queryClient.cancelQueries({ queryKey: ["issues"] });
-      const previousData = queryClient.getQueryData(["issues"]);
-      queryClient.setQueriesData({ queryKey: ["issues"] }, (old: unknown) => {
-        if (Array.isArray(old)) {
-          return old.map((i: TIssue) =>
-            i.id === issueId ? { ...i, ...data, updated_at: new Date().toISOString() } : i
-          );
-        }
-        return old;
-      });
-      return { previousData };
+      const previousQueries = queryClient.getQueriesData<TIssue[]>({ queryKey: ["issues"] });
+      queryClient.setQueriesData<TIssue[]>({ queryKey: ["issues"] }, (old) =>
+        old?.map((i) => (i.id === issueId ? { ...i, ...data, updated_at: new Date().toISOString() } : i))
+      );
+      return { previousQueries };
     },
     onError: (_err, _vars, context) => {
-      if (context?.previousData) {
-        queryClient.setQueriesData({ queryKey: ["issues"] }, context.previousData);
+      if (context?.previousQueries) {
+        for (const [key, data] of context.previousQueries) {
+          queryClient.setQueryData(key, data);
+        }
       }
     },
     onSettled: () => {
