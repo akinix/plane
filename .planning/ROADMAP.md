@@ -212,7 +212,7 @@ Plans:
 | 14. 脚手架 & Auth                 | 4/4            | Delivered   | ✅         |
 | 15. 工作区 & 项目                 | 4/4            | Delivered   | ✅         |
 | 16. Issue 列表/详情 & 看板        | 5/5            | Complete    | 2026-06-29 |
-| 17. 日历/甘特/电子表格 & 筛选引擎 | 2/6            | In Progress |            |
+| 17. 日历/甘特/电子表格 & 筛选引擎 | 4/6 | In Progress|  |
 | 18. 周期 & 模块                   | 0/0            | Not started | -          |
 | 19. 页面 & 视图                   | 0/0            | Not started | -          |
 | 20. 通知 & 分析                   | 0/0            | Not started | -          |
