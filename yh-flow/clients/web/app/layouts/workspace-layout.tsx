@@ -6,6 +6,7 @@ import { AuthenticationWrapper, EPageTypes } from "@/lib/wrappers/authentication
 // Components (created in Task 2 and Task 3)
 import { WorkspaceSidebar } from "@/components/sidebar/workspace-sidebar";
 import { TopBar } from "@/components/navigation/top-bar";
+import { CommandPalette } from "@/components/command-palette";
 
 const WorkspaceLayout = observer(function WorkspaceLayout() {
   const { workspace: workspaceStore } = useStore();
@@ -13,6 +14,7 @@ const WorkspaceLayout = observer(function WorkspaceLayout() {
 
   return (
     <AuthenticationWrapper pageType={EPageTypes.AUTHENTICATED}>
+      <CommandPalette workspaceId={workspaceStore.currentWorkspaceId} />
       <div className="flex h-full w-full">
         {/* Sidebar */}
         <div className={`${sidebarWidth} flex-shrink-0 transition-all duration-300`}>
