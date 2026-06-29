@@ -7,3 +7,5 @@ export * from "./use-outside-click-detector";
 export * from "./use-platform-os";
 export * from "./use-projects";
 export * from "./use-workspaces";
+export * from "./use-issues";
+export * from "./use-comments";
