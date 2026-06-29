@@ -1,8 +1,9 @@
 // FLOW: Store type interfaces for WorkspaceStore, ProjectStore, and IssueStore (UI state only per D-P15-08)
 import type { IProject, IWorkspace } from "@plane/types";
 import type { IIssueStore } from "./issue.store";
+import type { TViewLayout, TGroupByOptions, TFilterCriteria } from "@/components/issues/filters/types";
 
-export type { IIssueStore };
+export type { IIssueStore, TViewLayout, TGroupByOptions, TFilterCriteria };
 
 export interface IWorkspaceStore {
   workspaceSwitcherOpen: boolean;

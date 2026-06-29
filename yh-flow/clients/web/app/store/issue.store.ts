@@ -1,47 +1,49 @@
 // FLOW: IssueStore — MobX UI state for Issue views (per D-P16-02)
+// Extended for Phase 17: 5 view layouts, visibleColumnIds, TGroupByOptions
 import { action, makeObservable, observable } from "mobx";
+import type { TViewLayout, TGroupByOptions, TFilterCriteria } from "@/components/issues/filters/types";
 
 export interface IIssueStore {
   selectedIssueIds: string[];
-  activeView: "list" | "kanban";
+  activeView: TViewLayout;
   currentPage: number;
   pageSize: number;
-  groupBy: "state" | "priority" | "assignees";
+  groupBy: TGroupByOptions;
   expandedColumnIds: string[];
-  filters: {
-    stateIds: string[];
-    priorityIds: string[];
-    assigneeIds: string[];
-    searchQuery: string;
-  };
+  visibleColumnIds: string[];
+  filters: TFilterCriteria;
   sortBy: string;
   sortDirection: "asc" | "desc";
 
   toggleIssueSelection: (id: string) => void;
   selectAll: (ids: string[]) => void;
   clearSelection: () => void;
-  setActiveView: (view: "list" | "kanban") => void;
+  setActiveView: (view: TViewLayout) => void;
   setCurrentPage: (page: number) => void;
-  setGroupBy: (groupBy: "state" | "priority" | "assignees") => void;
+  setGroupBy: (groupBy: TGroupByOptions) => void;
   toggleColumnExpand: (id: string) => void;
-  setFilters: (filters: Partial<IIssueStore["filters"]>) => void;
+  setFilters: (filters: Partial<TFilterCriteria>) => void;
   setSortBy: (field: string) => void;
   setSortDirection: (dir: "asc" | "desc") => void;
   clearFilters: () => void;
+  setVisibleColumnIds: (ids: string[]) => void;
 }
 
 export class IssueStore implements IIssueStore {
   selectedIssueIds: string[] = [];
-  activeView: "list" | "kanban" = "list";
+  activeView: TViewLayout = "list";
   currentPage: number = 1;
   pageSize: number = 20;
-  groupBy: "state" | "priority" | "assignees" = "state";
+  groupBy: TGroupByOptions = "state";
   expandedColumnIds: string[] = [];
-  filters: IIssueStore["filters"] = {
+  visibleColumnIds: string[] = [];
+  filters: TFilterCriteria = {
     stateIds: [],
     priorityIds: [],
     assigneeIds: [],
+    labelIds: [],
     searchQuery: "",
+    dateRange: null,
   };
   sortBy: string = "updated_at";
   sortDirection: "asc" | "desc" = "desc";
@@ -54,6 +56,7 @@ export class IssueStore implements IIssueStore {
       pageSize: observable.ref,
       groupBy: observable.ref,
       expandedColumnIds: observable,
+      visibleColumnIds: observable,
       filters: observable,
       sortBy: observable.ref,
       sortDirection: observable.ref,
@@ -68,6 +71,7 @@ export class IssueStore implements IIssueStore {
       setSortBy: action,
       setSortDirection: action,
       clearFilters: action,
+      setVisibleColumnIds: action,
     });
   }
 
@@ -88,7 +92,7 @@ export class IssueStore implements IIssueStore {
     this.selectedIssueIds = [];
   };
 
-  setActiveView = (view: "list" | "kanban"): void => {
+  setActiveView = (view: TViewLayout): void => {
     this.activeView = view;
   };
 
@@ -96,7 +100,7 @@ export class IssueStore implements IIssueStore {
     this.currentPage = page;
   };
 
-  setGroupBy = (groupBy: "state" | "priority" | "assignees"): void => {
+  setGroupBy = (groupBy: TGroupByOptions): void => {
     this.groupBy = groupBy;
   };
 
@@ -109,7 +113,7 @@ export class IssueStore implements IIssueStore {
     }
   };
 
-  setFilters = (filters: Partial<IIssueStore["filters"]>): void => {
+  setFilters = (filters: Partial<TFilterCriteria>): void => {
     Object.assign(this.filters, filters);
   };
 
@@ -122,7 +126,18 @@ export class IssueStore implements IIssueStore {
   };
 
   clearFilters = (): void => {
-    this.filters = { stateIds: [], priorityIds: [], assigneeIds: [], searchQuery: "" };
+    this.filters = {
+      stateIds: [],
+      priorityIds: [],
+      assigneeIds: [],
+      labelIds: [],
+      searchQuery: "",
+      dateRange: null,
+    };
     this.currentPage = 1;
+  };
+
+  setVisibleColumnIds = (ids: string[]): void => {
+    this.visibleColumnIds = ids;
   };
 }
