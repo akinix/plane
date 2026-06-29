@@ -83,10 +83,10 @@ Plans:
 
 ```
 Plans:
-- [ ] 15-01-PLAN.md — 基础设施（TanStack Query + MobX Stores + Mock 数据 + EmojiPicker）
-- [ ] 15-02-PLAN.md — 布局（侧边栏 + 顶栏 + 路由结构）
-- [ ] 15-03-PLAN.md — 工作区页面（Dashboard + 设置 + 成员 + 创建）
-- [ ] 15-04-PLAN.md — 项目页面（列表 + 创建 + Dashboard + 设置 + 成员 + 选择器）
+- [x] 15-01-PLAN.md — 基础设施（TanStack Query + MobX Stores + Mock 数据 + EmojiPicker）
+- [x] 15-02-PLAN.md — 布局（侧边栏 + 顶栏 + 路由结构）
+- [x] 15-03-PLAN.md — 工作区页面（Dashboard + 设置 + 成员 + 创建）
+- [x] 15-04-PLAN.md — 项目页面（列表 + 创建 + Dashboard + 设置 + 成员 + 选择器）
 ```
 
 **UI hint**: yes
@@ -207,7 +207,7 @@ Plans:
 | Phase                             | Plans Complete | Status      | Completed |
 | --------------------------------- | -------------- | ----------- | --------- |
 | 14. 脚手架 & Auth                 | 4/4            | Delivered   | ✅        |
-| 15. 工作区 & 项目                 | 0/4            | Not started | -         |
+| 15. 工作区 & 项目                 | 4/4            | Delivered   | ✅        |
 | 16. Issue 列表/详情 & 看板        | 0/0            | Not started | -         |
 | 17. 日历/甘特/电子表格 & 筛选引擎 | 0/0            | Not started | -         |
 | 18. 周期 & 模块                   | 0/0            | Not started | -         |
