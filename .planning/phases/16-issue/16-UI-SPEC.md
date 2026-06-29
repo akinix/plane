@@ -55,17 +55,16 @@ Exceptions:
 
 ## Typography
 
-| Role    | Tailwind Class            | Size | Weight | Line Height | Specific Use                                          |
-| ------- | ------------------------- | ---- | ------ | ----------- | ----------------------------------------------------- |
-| Display | `text-h2-semibold`        | 28px | 600    | 1.2         | Issue detail page title                               |
-| Heading | `text-h4-semibold`        | 20px | 600    | 1.2         | Section headers (Comments, Activity)                  |
-| Body    | `text-body-sm-regular`    | 14px | 400    | 1.4         | Issue list row content, property values, comment body |
-| Label   | `text-caption-md-regular` | 12px | 400    | 1.1         | Property labels, status badges, metadata              |
-| Tiny    | `text-caption-sm-regular` | 11px | 400    | 1.1         | Timestamps, issue ID prefixes                         |
+| Role    | Tailwind Class            | Size | Weight | Line Height | Specific Use                                                            |
+| ------- | ------------------------- | ---- | ------ | ----------- | ----------------------------------------------------------------------- |
+| Display | `text-h2-semibold`        | 28px | 600    | 1.2         | Issue detail page title                                                 |
+| Heading | `text-h4-semibold`        | 20px | 600    | 1.2         | Section headers (Comments, Activity)                                    |
+| Body    | `text-body-sm-regular`    | 14px | 400    | 1.4         | Issue list row content, property values, comment body                   |
+| Label   | `text-caption-md-regular` | 12px | 400    | 1.1         | Property labels, status badges, metadata, timestamps, issue ID prefixes |
 
 **Letter-spacing**: Body uses `calc(0.01 * size)`; captions use `0`.
 
-**The Plane token system defines full heading (h1-h6), body (md/sm/xs), and caption (md/sm/xs) variants** in 4 weights (regular/medium/semibold/bold). For this phase we constrain to the 5 roles above for consistency. When Plane components use other variants (e.g. `text-body-md-medium`), retain the plane variant — do not downgrade.
+**The Plane token system defines full heading (h1-h6), body (md/sm/xs), and caption (md/sm/xs) variants** in 4 weights (regular/medium/semibold/bold). For this phase we constrain to the 4 roles above for consistency. When Plane components use other variants (e.g. `text-body-md-medium`), retain the plane variant — do not downgrade.
 
 ---
 
@@ -179,6 +178,8 @@ These are available at `@/ui/` path and should be used directly — do not re-im
 ---
 
 ## Interaction Contracts
+
+> **Visual focus:** The "Create Issue" button at the page top-right is the primary CTA. It uses the accent color (`bg-accent-primary` = `bg-brand-default` #4C6FFF) and is the most visually prominent action on the page.
 
 ### 1. Issue List View
 
