@@ -1,5 +1,8 @@
-// FLOW: Store type interfaces for WorkspaceStore and ProjectStore (UI state only per D-P15-08)
+// FLOW: Store type interfaces for WorkspaceStore, ProjectStore, and IssueStore (UI state only per D-P15-08)
 import type { IProject, IWorkspace } from "@plane/types";
+import type { IIssueStore } from "./issue.store";
+
+export type { IIssueStore };
 
 export interface IWorkspaceStore {
   workspaceSwitcherOpen: boolean;
