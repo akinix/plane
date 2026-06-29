@@ -148,7 +148,9 @@ const IssuesKanbanView = observer(function IssuesKanbanView({ workspaceId, proje
         return { priority: destinationDroppableId as TIssue["priority"] };
       }
       if (groupBy === "assignees") {
-        return { assignee_ids: [destinationDroppableId] };
+        return {
+          assignee_ids: destinationDroppableId === "__unassigned__" ? [] : [destinationDroppableId],
+        };
       }
       return {};
     },

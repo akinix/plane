@@ -1,11 +1,12 @@
 // FLOW: FilterBar — shared filter component for all 5 views (per D-P17-09, D-P17-10)
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { Search, X, Filter, ArrowUpDown, ChevronDown } from "lucide-react";
 import { cn } from "@plane/utils";
 import { useFilters } from "./use-filters";
 import { useSorting } from "./use-sorting";
-import type { TViewLayout, TGroupByOptions } from "./types";
+import type { TViewLayout, TGroupByOptions, TFilterCriteria, TSortConfig } from "./types";
 import { MOCK_MEMBERS, MOCK_STATES, MOCK_LABELS } from "@/../src/lib/mock-data";
+import { useStore } from "@/lib/store-context";
 
 const PRIORITY_LABELS: Record<string, string> = {
   urgent: "紧急",
@@ -53,10 +54,25 @@ export function FilterBar({
   showSorting = false,
   showGroupBy = false,
 }: TFilterBarProps) {
-  // Filter state from URL params
-  const { filters, setFilters, clearFilters, hasActiveFilters } = useFilters(projectId);
+  // Bridge: sync FilterBar filter/sort state to MobX store so useIssues picks them up
+  const store = useStore();
+  const syncFilters = useCallback(
+    (f: TFilterCriteria) => {
+      store.issue.setFilters(f);
+    },
+    [store.issue]
+  );
+
+  // Filter state from URL params + sync to MobX store
+  const { filters, setFilters, clearFilters, hasActiveFilters } = useFilters(projectId, syncFilters);
   // Sort state from URL params
   const { sortConfig, setSortBy } = useSorting();
+
+  // Sync sort changes to MobX store
+  useEffect(() => {
+    store.issue.setSortBy(sortConfig.sortBy);
+    store.issue.setSortDirection(sortConfig.sortDirection);
+  }, [store.issue, sortConfig.sortBy, store.issue.setSortDirection, sortConfig.sortDirection]);
   // Group-by local state
   const [groupBy, setGroupBy] = useState<TGroupByOptions>("state");
 
@@ -150,7 +166,7 @@ export function FilterBar({
               className="border-custom-border-200 bg-custom-background-90 text-xs text-custom-text-200 focus:border-custom-primary appearance-none rounded-md border px-3 py-2 pr-8 outline-none"
             >
               <option value="">所有负责人</option>
-              {workspaceMembers.map((m) => (
+              {workspaceMembers.filter((m) => m?.member).map((m) => (
                 <option key={m.member.id} value={m.member.id}>
                   {m.member.display_name}
                 </option>
@@ -232,14 +248,14 @@ export function FilterBar({
           ))}
           {/* Assignee chips */}
           {filters.assigneeIds.map((id) => {
-            const member = workspaceMembers.find((m) => m.member.id === id);
-            if (!member) return null;
+            const membership = workspaceMembers.find((m) => m?.member?.id === id);
+            if (!membership?.member) return null;
             return (
               <span
                 key={`assignee-${id}`}
                 className="border-custom-border-200 bg-custom-background-80 text-xs text-custom-text-200 flex items-center gap-1 rounded-full border px-2 py-0.5"
               >
-                {member.member.display_name}
+                {membership.member.display_name}
                 <button
                   type="button"
                   onClick={() => setFilters({ assigneeIds: filters.assigneeIds.filter((aid) => aid !== id) })}

@@ -74,7 +74,10 @@ type UseFiltersReturn = {
   isLoading: boolean;
 };
 
-export function useFilters(projectId: string): UseFiltersReturn {
+export function useFilters(
+  projectId: string,
+  onFilterChange?: (filters: TFilterCriteria) => void
+): UseFiltersReturn {
   const [searchParams, setSearchParams] = useSearchParams();
   const queryClient = useQueryClient();
 
@@ -114,8 +117,11 @@ export function useFilters(projectId: string): UseFiltersReturn {
         },
         { replace: true }
       );
+
+      // Bridge: sync to parent (e.g. MobX store) when provided
+      onFilterChange?.(merged);
     },
-    [filters, queryClient, queryKey, setSearchParams]
+    [filters, queryClient, queryKey, setSearchParams, onFilterChange]
   );
 
   const clearFilters = useCallback(() => {
@@ -133,7 +139,10 @@ export function useFilters(projectId: string): UseFiltersReturn {
       },
       { replace: true }
     );
-  }, [queryClient, queryKey, setSearchParams]);
+
+    // Bridge: sync cleared state
+    onFilterChange?.(DEFAULT_FILTERS);
+  }, [queryClient, queryKey, setSearchParams, onFilterChange]);
 
   return { filters, setFilters, clearFilters, hasActiveFilters, isLoading };
 }

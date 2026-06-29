@@ -78,8 +78,8 @@ export const GanttChartMainContent = function GanttChartMainContent(props: Props
   // refs
   // FLOW: use useRef from react
   const ganttContainerRef = { current: null as HTMLDivElement | null };
-  // chart hook
-  const { currentView, currentViewData } = useTimeLineChartStore();
+  // chart hook — destructure ALL store accessors at top level (never inside .map())
+  const { currentView, currentViewData, getBlockById } = useTimeLineChartStore();
 
   // FLOW: removed Auto Scroll for Ganttlist (requires @atlaskit)
 
@@ -157,7 +157,6 @@ export const GanttChartMainContent = function GanttChartMainContent(props: Props
               >
                 {/* FLOW: simplified block rendering — render blocks for each issue */}
                 {blockIds.map((blockId) => {
-                  const { getBlockById } = useTimeLineChartStore();
                   const block = getBlockById(blockId);
                   if (!block || !block.data) return null;
                   return (
