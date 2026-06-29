@@ -403,12 +403,12 @@ export const MOCK_ACTIVITIES: TProjectBaseActivity[] = [
 // ---------------------------------------------------------------------------
 // State detail helpers for comments and activities
 // ---------------------------------------------------------------------------
-const _ws1Detail: TIssueActivityWorkspaceDetail = {
+export const _ws1Detail: TIssueActivityWorkspaceDetail = {
   name: "Flow 开发组",
   slug: "flow-dev",
   id: "ws-1",
 };
-const _proj1Detail: TIssueActivityProjectDetail = {
+export const _proj1Detail: TIssueActivityProjectDetail = {
   id: "proj-1",
   identifier: "FF",
   name: "Flow 前端",
@@ -417,7 +417,7 @@ const _proj1Detail: TIssueActivityProjectDetail = {
   emoji: null,
   icon_prop: null,
 };
-const _proj2Detail: TIssueActivityProjectDetail = {
+export const _proj2Detail: TIssueActivityProjectDetail = {
   id: "proj-2",
   identifier: "FA",
   name: "Flow API",
@@ -426,7 +426,7 @@ const _proj2Detail: TIssueActivityProjectDetail = {
   emoji: null,
   icon_prop: null,
 };
-const _user1Detail: TIssueActivityUserDetail = {
+export const _user1Detail: TIssueActivityUserDetail = {
   id: "user-1",
   first_name: "张三",
   last_name: "",
