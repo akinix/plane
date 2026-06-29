@@ -1,11 +1,10 @@
+// DEPRECATED: 此组件将被 filter-bar.tsx 替换。请在 Phase 17 完成前迁移。
 // FLOW: Quick filter bar for Issue list (per D-P16-06)
 import { observer } from "mobx-react";
 import { Filter, Search, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@plane/utils";
 import { MOCK_MEMBERS, MOCK_STATES } from "@/../src/lib/mock-data";
-import { Dropdown as SingleSelectDropdown } from "@plane/ui";
-import type { TDropdownOption } from "@plane/ui";
 import type { IIssueStore } from "@/store/types";
 
 type TProps = {
@@ -20,29 +19,8 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
   // Get states for this project
   const projectStates = MOCK_STATES.filter((s) => s.project_id === projectId);
 
-  const stateOptions: TDropdownOption[] = projectStates.map((s) => ({
-    value: s.id,
-    data: { name: s.name, color: s.color },
-    query: s.name,
-  }));
-
   // Get members for this workspace
   const workspaceMembers = MOCK_MEMBERS[workspaceId] ?? [];
-  const assigneeOptions: TDropdownOption[] = workspaceMembers.map((m) => ({
-    value: m.member.id,
-    data: {
-      name: m.member.display_name,
-      avatar: m.member.avatar_url,
-    },
-  }));
-
-  const priorityOptions: TDropdownOption[] = [
-    { value: "urgent", data: { name: "紧急", color: "#EF4444" } },
-    { value: "high", data: { name: "高", color: "#F59E0B" } },
-    { value: "medium", data: { name: "中", color: "#3B82F6" } },
-    { value: "low", data: { name: "低", color: "#6B7280" } },
-    { value: "none", data: { name: "无", color: "#A3A3A3" } },
-  ];
 
   const clearFilters = () => {
     store.clearFilters();
@@ -60,19 +38,19 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
       <div className="flex items-center gap-2">
         {/* Search */}
         <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 size-3.5 -translate-y-1/2 text-custom-text-400" />
+          <Search className="text-custom-text-400 pointer-events-none absolute top-1/2 left-3 size-3.5 -translate-y-1/2" />
           <input
             type="text"
             placeholder="搜索 Issue..."
             value={store.filters.searchQuery}
             onChange={(e) => store.setFilters({ searchQuery: e.target.value })}
-            className="w-full rounded-md border border-custom-border-200 bg-custom-background-90 py-2 pl-9 pr-3 text-sm text-custom-text-100 outline-none placeholder:text-custom-text-400 focus:border-custom-primary"
+            className="border-custom-border-200 bg-custom-background-90 text-sm text-custom-text-100 placeholder:text-custom-text-400 focus:border-custom-primary w-full rounded-md border py-2 pr-3 pl-9 outline-none"
           />
           {store.filters.searchQuery && (
             <button
               type="button"
               onClick={() => store.setFilters({ searchQuery: "" })}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-custom-text-400 hover:text-custom-text-200"
+              className="text-custom-text-400 hover:text-custom-text-200 absolute top-1/2 right-2 -translate-y-1/2"
             >
               <X className="size-3.5" />
             </button>
@@ -89,7 +67,7 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
                 const val = e.target.value;
                 store.setFilters({ stateIds: val ? [val] : [] });
               }}
-              className="appearance-none rounded-md border border-custom-border-200 bg-custom-background-90 px-3 py-2 pr-8 text-xs text-custom-text-200 outline-none focus:border-custom-primary"
+              className="border-custom-border-200 bg-custom-background-90 text-xs text-custom-text-200 focus:border-custom-primary appearance-none rounded-md border px-3 py-2 pr-8 outline-none"
             >
               <option value="">所有状态</option>
               {projectStates.map((s) => (
@@ -98,7 +76,7 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
                 </option>
               ))}
             </select>
-            <Filter className="pointer-events-none absolute right-2 top-1/2 size-3 -translate-y-1/2 text-custom-text-400" />
+            <Filter className="text-custom-text-400 pointer-events-none absolute top-1/2 right-2 size-3 -translate-y-1/2" />
           </div>
 
           {/* Priority filter chip */}
@@ -109,7 +87,7 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
                 const val = e.target.value;
                 store.setFilters({ priorityIds: val ? [val] : [] });
               }}
-              className="appearance-none rounded-md border border-custom-border-200 bg-custom-background-90 px-3 py-2 pr-8 text-xs text-custom-text-200 outline-none focus:border-custom-primary"
+              className="border-custom-border-200 bg-custom-background-90 text-xs text-custom-text-200 focus:border-custom-primary appearance-none rounded-md border px-3 py-2 pr-8 outline-none"
             >
               <option value="">所有优先级</option>
               <option value="urgent">紧急</option>
@@ -118,7 +96,7 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
               <option value="low">低</option>
               <option value="none">无</option>
             </select>
-            <Filter className="pointer-events-none absolute right-2 top-1/2 size-3 -translate-y-1/2 text-custom-text-400" />
+            <Filter className="text-custom-text-400 pointer-events-none absolute top-1/2 right-2 size-3 -translate-y-1/2" />
           </div>
 
           {/* Assignee filter chip */}
@@ -129,7 +107,7 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
                 const val = e.target.value;
                 store.setFilters({ assigneeIds: val ? [val] : [] });
               }}
-              className="appearance-none rounded-md border border-custom-border-200 bg-custom-background-90 px-3 py-2 pr-8 text-xs text-custom-text-200 outline-none focus:border-custom-primary"
+              className="border-custom-border-200 bg-custom-background-90 text-xs text-custom-text-200 focus:border-custom-primary appearance-none rounded-md border px-3 py-2 pr-8 outline-none"
             >
               <option value="">所有负责人</option>
               {workspaceMembers.map((m) => (
@@ -138,7 +116,7 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
                 </option>
               ))}
             </select>
-            <Filter className="pointer-events-none absolute right-2 top-1/2 size-3 -translate-y-1/2 text-custom-text-400" />
+            <Filter className="text-custom-text-400 pointer-events-none absolute top-1/2 right-2 size-3 -translate-y-1/2" />
           </div>
 
           {/* Extended filter toggle */}
@@ -146,7 +124,7 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
             type="button"
             onClick={() => setShowExtended(!showExtended)}
             className={cn(
-              "flex items-center gap-1 rounded-md border px-3 py-2 text-xs transition-colors",
+              "text-xs flex items-center gap-1 rounded-md border px-3 py-2 transition-colors",
               showExtended
                 ? "border-custom-primary text-custom-primary"
                 : "border-custom-border-200 text-custom-text-300 hover:text-custom-text-200"
@@ -161,7 +139,7 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
             <button
               type="button"
               onClick={clearFilters}
-              className="flex items-center gap-1 rounded-md px-3 py-2 text-xs text-custom-text-400 hover:text-custom-text-200"
+              className="text-xs text-custom-text-400 hover:text-custom-text-200 flex items-center gap-1 rounded-md px-3 py-2"
             >
               <X className="size-3" />
               清除
@@ -181,12 +159,15 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
             return (
               <span
                 key={id}
-                className="flex items-center gap-1 rounded-full border border-custom-border-200 bg-custom-background-80 px-2 py-0.5 text-xs text-custom-text-200"
+                className="border-custom-border-200 bg-custom-background-80 text-xs text-custom-text-200 flex items-center gap-1 rounded-full border px-2 py-0.5"
               >
                 <span className="size-1.5 rounded-full" style={{ backgroundColor: state.color }} />
                 {state.name}
-                <button type="button" onClick={() => store.setFilters({ stateIds: store.filters.stateIds.filter((sid) => sid !== id) })}>
-                  <X className="size-3 text-custom-text-400 hover:text-custom-text-200" />
+                <button
+                  type="button"
+                  onClick={() => store.setFilters({ stateIds: store.filters.stateIds.filter((sid) => sid !== id) })}
+                >
+                  <X className="text-custom-text-400 hover:text-custom-text-200 size-3" />
                 </button>
               </span>
             );
@@ -194,15 +175,18 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
           {store.filters.priorityIds.map((id) => (
             <span
               key={id}
-              className="flex items-center gap-1 rounded-full border border-custom-border-200 bg-custom-background-80 px-2 py-0.5 text-xs text-custom-text-200"
+              className="border-custom-border-200 bg-custom-background-80 text-xs text-custom-text-200 flex items-center gap-1 rounded-full border px-2 py-0.5"
             >
               {id === "urgent" && "紧急"}
               {id === "high" && "高"}
               {id === "medium" && "中"}
               {id === "low" && "低"}
               {id === "none" && "无"}
-              <button type="button" onClick={() => store.setFilters({ priorityIds: store.filters.priorityIds.filter((pid) => pid !== id) })}>
-                <X className="size-3 text-custom-text-400 hover:text-custom-text-200" />
+              <button
+                type="button"
+                onClick={() => store.setFilters({ priorityIds: store.filters.priorityIds.filter((pid) => pid !== id) })}
+              >
+                <X className="text-custom-text-400 hover:text-custom-text-200 size-3" />
               </button>
             </span>
           ))}
@@ -212,11 +196,16 @@ export const QuickFilterBar = observer(function QuickFilterBar({ store, workspac
             return (
               <span
                 key={id}
-                className="flex items-center gap-1 rounded-full border border-custom-border-200 bg-custom-background-80 px-2 py-0.5 text-xs text-custom-text-200"
+                className="border-custom-border-200 bg-custom-background-80 text-xs text-custom-text-200 flex items-center gap-1 rounded-full border px-2 py-0.5"
               >
                 {member.member.display_name}
-                <button type="button" onClick={() => store.setFilters({ assigneeIds: store.filters.assigneeIds.filter((aid) => aid !== id) })}>
-                  <X className="size-3 text-custom-text-400 hover:text-custom-text-200" />
+                <button
+                  type="button"
+                  onClick={() =>
+                    store.setFilters({ assigneeIds: store.filters.assigneeIds.filter((aid) => aid !== id) })
+                  }
+                >
+                  <X className="text-custom-text-400 hover:text-custom-text-200 size-3" />
                 </button>
               </span>
             );
