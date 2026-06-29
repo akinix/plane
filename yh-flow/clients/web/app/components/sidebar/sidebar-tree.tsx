@@ -17,8 +17,8 @@ import { cn } from "@plane/utils";
 
 const PROJECT_VIEWS = [
   { key: "issues", label: "Issues", icon: ListTodo },
-  { key: "cycles", label: "Cycles", icon: Repeat },
-  { key: "modules", label: "Modules", icon: Blocks },
+  { key: "cycles", label: "周期", icon: Repeat },
+  { key: "modules", label: "模块", icon: Blocks },
   { key: "pages", label: "Pages", icon: FileText },
   { key: "views", label: "Views", icon: Eye },
 ] as const;

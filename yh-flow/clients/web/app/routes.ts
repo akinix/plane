@@ -46,5 +46,17 @@ export default [
     // ====================================================================
     route("workspaces/:workspaceId/projects/:projectId/issues", "app/issues/page.tsx"),
     route("workspaces/:workspaceId/projects/:projectId/issues/:issueId", "app/issues/[issueId]/page.tsx"),
+
+    // ====================================================================
+    // CYCLE ROUTES per D-P18-01
+    // ====================================================================
+    route("workspaces/:workspaceId/projects/:projectId/cycles", "app/cycles/page.tsx"),
+    route("workspaces/:workspaceId/projects/:projectId/cycles/:cycleId", "app/cycles/[cycleId]/page.tsx"),
+
+    // ====================================================================
+    // MODULE ROUTES per D-P18-01
+    // ====================================================================
+    route("workspaces/:workspaceId/projects/:projectId/modules", "app/modules/page.tsx"),
+    route("workspaces/:workspaceId/projects/:projectId/modules/:moduleId", "app/modules/[moduleId]/page.tsx"),
   ]),
 ] satisfies RouteConfig;
