@@ -729,6 +729,10 @@ export const MOCK_ISSUES: TIssue[] = [
     updated_by: "user-2",
     is_draft: false,
     description_html: "<p>实现用户登录页面，包括邮箱密码输入框和登录按钮</p>",
+    // FLOW: 添加 blocked_by 依赖用于甘特图 GANT-02 测试
+    issue_relation: [
+      { id: "issue-5", name: "实现后端认证 API", project_id: "proj-1", relation_type: "blocked_by", sequence_id: 5 },
+    ],
   },
   {
     id: "issue-2",
@@ -808,7 +812,8 @@ export const MOCK_ISSUES: TIssue[] = [
     type_id: null,
     created_at: new Date(now - dayMs * 10).toISOString(),
     updated_at: new Date(now - dayMs * 8).toISOString(),
-    start_date: null,
+    // FLOW: 添加 start_date 用于甘特图显示
+    start_date: new Date(now - dayMs * 6).toISOString(),
     target_date: new Date(now + dayMs * 14).toISOString(),
     completed_at: null,
     archived_at: null,
@@ -816,6 +821,10 @@ export const MOCK_ISSUES: TIssue[] = [
     updated_by: "user-1",
     is_draft: false,
     description_html: "<p>首页加载时间超过 3 秒，需要优化组件懒加载和数据请求策略</p>",
+    // FLOW: 添加 blocked_by 依赖用于甘特图 GANT-02 测试
+    issue_relation: [
+      { id: "issue-5", name: "实现后端认证 API", project_id: "proj-1", relation_type: "blocked_by", sequence_id: 5 },
+    ],
   },
   {
     id: "issue-5",
@@ -960,6 +969,11 @@ export const MOCK_ISSUES: TIssue[] = [
     updated_by: "user-3",
     is_draft: false,
     description_html: "<p>实现 Issue 的增删查改 API，包括分页和筛选支持</p>",
+    // FLOW: 添加 blocked_by 依赖用于甘特图 GANT-02 测试
+    issue_relation: [
+      { id: "issue-8", name: "设计 Issue 数据模型", project_id: "proj-2", relation_type: "blocked_by", sequence_id: 1 },
+      { id: "issue-10", name: "添加 API 版本控制和文档", project_id: "proj-2", relation_type: "blocked_by", sequence_id: 3 },
+    ],
   },
   {
     id: "issue-10",
@@ -1096,13 +1110,17 @@ export const MOCK_ISSUES: TIssue[] = [
     type_id: null,
     created_at: new Date(now - dayMs * 11).toISOString(),
     updated_at: new Date(now - dayMs * 9).toISOString(),
-    start_date: null,
+    start_date: new Date(now - dayMs * 1).toISOString(),
     target_date: new Date(now + dayMs * 30).toISOString(),
     completed_at: null,
     archived_at: null,
     created_by: "user-5",
     updated_by: "user-5",
     is_draft: false,
+    // FLOW: 添加 blocked_by 依赖用于甘特图 GANT-02 测试
+    issue_relation: [
+      { id: "issue-12", name: "实现缓存层（Redis）", project_id: "proj-2", relation_type: "blocked_by", sequence_id: 5 },
+    ],
   },
   {
     id: "issue-15",

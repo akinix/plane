@@ -33,6 +33,7 @@ const VIEW_LABELS: Record<string, string> = {
   week: "周",
   month: "月",
   quarter: "季度",
+  day: "天",
 };
 
 export const GanttChartHeader = function GanttChartHeader(props: Props) {

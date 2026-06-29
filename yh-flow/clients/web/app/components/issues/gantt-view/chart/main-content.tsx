@@ -15,7 +15,7 @@ import type { ChartDataType, IBlockUpdateData, IBlockUpdateDependencyData, TGant
 import { cn } from "@plane/utils";
 // components
 // FLOW: use local imports
-import { MonthChartView, QuarterChartView, WeekChartView } from "./views";
+import { MonthChartView, QuarterChartView, WeekChartView, DayChartView } from "./views";
 import { GanttChartSidebar } from "../sidebar";
 // hooks
 import { useTimeLineChartStore } from "../hooks/use-timeline-chart";
@@ -105,6 +105,7 @@ export const GanttChartMainContent = function GanttChartMainContent(props: Props
   const CHART_VIEW_COMPONENTS: {
     [key in TGanttViews]: React.FC;
   } = {
+    day: DayChartView,
     week: WeekChartView,
     month: MonthChartView,
     quarter: QuarterChartView,

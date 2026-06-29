@@ -47,6 +47,7 @@ type ChartViewRootProps = {
 };
 
 const timelineViewHelpers = {
+  day: weekView,
   week: weekView,
   month: monthView,
   quarter: quarterView,
