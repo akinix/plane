@@ -5,10 +5,11 @@ import { ArrowUpDown } from "lucide-react";
 import { cn } from "@plane/utils";
 import { useStore } from "@/lib/store-context";
 import { useIssues } from "@/../src/lib/hooks/use-issues";
-import { Loader, EmptyState } from "@plane/ui";
+import { Loader } from "@plane/ui";
 import { QuickFilterBar } from "./quick-filter-bar";
 import { IssueRow } from "./issue-row";
 import { Pagination } from "./pagination";
+import { BulkActionBar } from "./bulk-action-bar";
 
 type TProps = {
   workspaceId: string;
@@ -103,10 +104,13 @@ export const IssueListView = observer(function IssueListView({ workspaceId, proj
   if (!issues || issues.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
-        <EmptyState
-          title="暂无 Issue"
-          description="这个项目还没有创建 Issue，点击上方按钮创建第一个。"
-        />
+        <div className="mb-3 rounded-full bg-custom-background-80 p-4">
+          <svg className="size-8 text-custom-text-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+        <h3 className="text-sm font-medium text-custom-text-200">暂无 Issue</h3>
+        <p className="mt-1 text-xs text-custom-text-400">这个项目还没有创建 Issue，点击上方按钮创建第一个。</p>
       </div>
     );
   }
@@ -115,10 +119,13 @@ export const IssueListView = observer(function IssueListView({ workspaceId, proj
   if (sorted.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-16">
-        <EmptyState
-          title="没有匹配的 Issue"
-          description="没有符合当前筛选条件的 Issue。"
-        />
+        <div className="mb-3 rounded-full bg-custom-background-80 p-4">
+          <svg className="size-8 text-custom-text-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <h3 className="text-sm font-medium text-custom-text-200">没有匹配的 Issue</h3>
+        <p className="mt-1 text-xs text-custom-text-400">没有符合当前筛选条件的 Issue。</p>
         {(store.issue.filters.stateIds.length > 0 ||
           store.issue.filters.priorityIds.length > 0 ||
           store.issue.filters.assigneeIds.length > 0 ||
@@ -204,6 +211,14 @@ export const IssueListView = observer(function IssueListView({ workspaceId, proj
           onPageChange={handlePageChange}
         />
       </div>
+
+      {/* Bulk action bar */}
+      <BulkActionBar
+        workspaceId={workspaceId}
+        projectId={projectId}
+        selectedIds={store.issue.selectedIssueIds}
+        onClearSelection={() => store.issue.clearSelection()}
+      />
     </div>
   );
 });

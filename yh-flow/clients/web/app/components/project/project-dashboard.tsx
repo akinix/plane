@@ -1,5 +1,7 @@
 // FLOW: ProjectDashboard — project detail framework with placeholder tabs (PROJ-03, D-P15-11)
+// Issues tab now navigates to Issue list page per 16-02
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { useProject } from "../../../src/lib/hooks/use-projects";
 import { cn } from "@plane/utils";
 
@@ -15,6 +17,7 @@ type TProps = { workspaceId: string; projectId: string };
 
 export const ProjectDashboard = ({ workspaceId, projectId }: TProps) => {
   const { data: project, isLoading } = useProject(workspaceId, projectId);
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<string>("issues");
 
   if (isLoading) {
@@ -40,13 +43,20 @@ export const ProjectDashboard = ({ workspaceId, projectId }: TProps) => {
 
   const placeholderText = (tab: string) => {
     const map: Record<string, string> = {
-      issues: "Issue 列表视图将在 Phase 16 中实现",
       cycles: "Cycle 管理将在 Phase 18 中实现",
       modules: "Module 管理将在 Phase 18 中实现",
       pages: "Page 管理将在 Phase 19 中实现",
       views: "视图管理将在 Phase 19 中实现",
     };
     return map[tab] ?? "即将实现";
+  };
+
+  const handleTabClick = (tabKey: string) => {
+    if (tabKey === "issues") {
+      navigate(`/workspaces/${workspaceId}/projects/${projectId}/issues`);
+      return;
+    }
+    setActiveTab(tabKey);
   };
 
   return (
@@ -73,10 +83,10 @@ export const ProjectDashboard = ({ workspaceId, projectId }: TProps) => {
         {TABS.map((tab) => (
           <button
             key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
+            onClick={() => handleTabClick(tab.key)}
             className={cn(
               "px-4 py-2.5 text-sm font-medium transition-colors",
-              activeTab === tab.key
+              activeTab === tab.key && tab.key !== "issues"
                 ? "border-b-2 border-custom-primary text-custom-primary"
                 : "text-custom-text-300 hover:text-custom-text-100",
             )}
@@ -86,12 +96,14 @@ export const ProjectDashboard = ({ workspaceId, projectId }: TProps) => {
         ))}
       </div>
 
-      {/* Tab content */}
-      <div className="flex items-center justify-center py-16">
-        <p className="text-sm text-custom-text-400">
-          {placeholderText(activeTab)}
-        </p>
-      </div>
+      {/* Tab content — only shown for non-issues tabs */}
+      {activeTab !== "issues" && (
+        <div className="flex items-center justify-center py-16">
+          <p className="text-sm text-custom-text-400">
+            {placeholderText(activeTab)}
+          </p>
+        </div>
+      )}
     </div>
   );
 };
