@@ -1,5 +1,5 @@
 // FLOW: Issue list page — entry point for /workspaces/:wsId/projects/:projId/issues (per D-P16-01)
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { useParams, useNavigate } from "react-router";
 import { observer } from "mobx-react";
 import { List, Kanban, Plus } from "lucide-react";
@@ -7,6 +7,8 @@ import { cn } from "@plane/utils";
 import { useStore } from "@/lib/store-context";
 import { IssueListView } from "@/components/issues/list-view";
 import { IssueCreateModal } from "@/components/issues/issue-create-modal";
+
+const IssuesKanbanView = lazy(() => import("@/components/issues/kanban-view"));
 
 const IssuesPage = observer(function IssuesPage() {
   const { workspaceId, projectId } = useParams<{ workspaceId: string; projectId: string }>();
@@ -42,9 +44,13 @@ const IssuesPage = observer(function IssuesPage() {
             </button>
             <button
               type="button"
-              disabled
-              className="flex cursor-not-allowed items-center gap-1 rounded-sm px-2 py-1 text-xs text-custom-text-400 opacity-50"
-              title="看板视图将在后续版本中启用"
+              onClick={() => store.issue.setActiveView("kanban")}
+              className={cn(
+                "flex items-center gap-1 rounded-sm px-2 py-1 text-xs transition-colors",
+                store.issue.activeView === "kanban"
+                  ? "bg-custom-background-100 text-custom-text-100 shadow-sm"
+                  : "text-custom-text-400 hover:text-custom-text-200"
+              )}
             >
               <Kanban className="size-3.5" />
               看板
@@ -67,6 +73,11 @@ const IssuesPage = observer(function IssuesPage() {
       <div className="flex-1 overflow-auto">
         {store.issue.activeView === "list" && (
           <IssueListView workspaceId={workspaceId} projectId={projectId} />
+        )}
+        {store.issue.activeView === "kanban" && (
+          <Suspense fallback={<div className="flex items-center justify-center h-full text-custom-text-400">加载中...</div>}>
+            <IssuesKanbanView workspaceId={workspaceId} projectId={projectId} />
+          </Suspense>
         )}
       </div>
 
