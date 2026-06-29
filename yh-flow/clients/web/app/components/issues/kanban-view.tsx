@@ -1,16 +1,20 @@
-// FLOW: IssuesKanbanView — Kanban board container (DragDropContext + column layout + GroupBySelector)
-// per D-P16-13 (DragDropContext), D-P16-14 (GroupBy state/priority/assignees)
+// FLOW: IssuesKanbanView — Kanban board container (DragDropContext + column layout + GroupBy + SubGroup)
+// per D-P16-13 (DragDropContext), D-P16-14 (GroupBy), D-P17-06 (FilterBar + SubGroup KANB-04)
 import { useRef, useMemo, useCallback } from "react";
 import { observer } from "mobx-react";
-import { Kanban } from "lucide-react";
+import { Kanban, ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@plane/utils";
-import { DragDropContext, type DropResult } from "@hello-pangea/dnd";
+import { DragDropContext, Droppable, type DropResult } from "@hello-pangea/dnd";
 import { useStore } from "@/lib/store-context";
 import { useIssues, useIssueMutations } from "@/../src/lib/hooks/use-issues";
 import { MOCK_STATES, MOCK_PROJECTS } from "@/../src/lib/mock-data";
 import { Loader } from "@plane/ui";
+import { FilterBar } from "./filters/filter-bar";
+import { subGroupIssues, useSubGroupBy } from "./filters/use-sub-group-by";
 import { KanbanColumn } from "./kanban-column";
+import { KanbanCard } from "./kanban-card";
 import type { TIssue } from "@plane/types";
+import type { TGroupByOptions, TSubGroupByOptions } from "./filters/types";
 
 type GroupByType = "state" | "priority" | "assignees";
 
@@ -46,6 +50,12 @@ const GROUP_BY_OPTIONS: { value: GroupByType; label: string }[] = [
   { value: "assignees", label: "按负责人" },
 ];
 
+const SUB_GROUP_OPTIONS: { value: TSubGroupByOptions; label: string }[] = [
+  { value: "none", label: "无" },
+  { value: "state", label: "按状态" },
+  { value: "priority", label: "按优先级" },
+];
+
 type TProps = {
   workspaceId: string;
   projectId: string;
@@ -64,6 +74,9 @@ const IssuesKanbanView = observer(function IssuesKanbanView({ workspaceId, proje
   });
 
   const groupBy = store.issue.groupBy;
+
+  // Sub-group (swimlane) state
+  const { subGroupBy, setSubGroupBy } = useSubGroupBy(issues ?? [], "none", projectId);
 
   // Resolve project identifier for issue ID display
   const projectIdentifier = useMemo(
@@ -164,7 +177,7 @@ const IssuesKanbanView = observer(function IssuesKanbanView({ workspaceId, proje
 
   const handleGroupByChange = useCallback(
     (value: GroupByType) => {
-      store.issue.setGroupBy(value);
+      store.issue.setGroupBy(value as TGroupByOptions);
     },
     [store.issue]
   );
@@ -222,31 +235,63 @@ const IssuesKanbanView = observer(function IssuesKanbanView({ workspaceId, proje
 
   return (
     <div className="flex h-full flex-col">
-      {/* GroupBy selector bar */}
-      <div className="flex items-center gap-4 border-b border-custom-border-200 px-6 py-3">
-        <div className="flex items-center gap-2 rounded-md border border-custom-border-200 bg-custom-background-90 p-0.5">
-          <Kanban className="ml-2 size-3.5 text-custom-text-400" />
-          {GROUP_BY_OPTIONS.map((option) => (
-            <button
-              key={option.value}
-              type="button"
-              onClick={() => handleGroupByChange(option.value)}
-              className={cn(
-                "rounded-sm px-2.5 py-1 text-xs transition-colors",
-                groupBy === option.value
-                  ? "bg-custom-background-100 text-custom-text-100 shadow-sm"
-                  : "text-custom-text-400 hover:text-custom-text-200"
-              )}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
+      {/* FilterBar + GroupBy + SubGroup header */}
+      <div className="border-b border-custom-border-200 px-6 py-3">
+        <FilterBar
+          workspaceId={workspaceId}
+          projectId={projectId}
+          viewType="kanban"
+          showSorting={false}
+          showGroupBy={true}
+        />
 
-        {/* Active filter indicator */}
-        {hasActiveFilters && (
-          <span className="text-xs text-custom-text-400">筛选条件已激活</span>
-        )}
+        {/* Sub-group (swimlane) selector */}
+        <div className="mt-2 flex items-center gap-4">
+          {/* GroupBy selector (kept alongside FilterBar) */}
+          <div className="flex items-center gap-2 rounded-md border border-custom-border-200 bg-custom-background-90 p-0.5">
+            <Kanban className="ml-2 size-3.5 text-custom-text-400" />
+            {GROUP_BY_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => handleGroupByChange(option.value)}
+                className={cn(
+                  "rounded-sm px-2.5 py-1 text-xs transition-colors",
+                  groupBy === option.value
+                    ? "bg-custom-background-100 text-custom-text-100 shadow-sm"
+                    : "text-custom-text-400 hover:text-custom-text-200"
+                )}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Sub-group dropdown */}
+          <div className="flex items-center gap-2 rounded-md border border-custom-border-200 bg-custom-background-90 p-0.5">
+            <span className="ml-2 text-xs text-custom-text-400">子分组：</span>
+            {SUB_GROUP_OPTIONS.map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => setSubGroupBy(option.value)}
+                className={cn(
+                  "rounded-sm px-2.5 py-1 text-xs transition-colors",
+                  subGroupBy === option.value
+                    ? "bg-custom-background-100 text-custom-text-100 shadow-sm"
+                    : "text-custom-text-400 hover:text-custom-text-200"
+                )}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Active filter indicator */}
+          {hasActiveFilters && (
+            <span className="text-xs text-custom-text-400">筛选条件已激活</span>
+          )}
+        </div>
       </div>
 
       {/* Kanban board — horizontal scrollable */}
@@ -270,6 +315,102 @@ const IssuesKanbanView = observer(function IssuesKanbanView({ workspaceId, proje
           )}
           {columns.map((col) => {
             const isExpanded = store.issue.expandedColumnIds.includes(col.id);
+
+            // Sub-group (swimlane) rendering
+            if (subGroupBy !== "none") {
+              const subGroups = subGroupIssues(col.issues, subGroupBy, projectId);
+              return (
+                <div
+                  key={col.id}
+                  className="flex w-[280px] shrink-0 flex-col rounded-lg bg-custom-background-80"
+                  style={{ minHeight: "80px" }}
+                >
+                  {/* Column header */}
+                  <div className="sticky top-0 z-10 flex items-center justify-between rounded-t-lg bg-custom-background-90 px-3 py-2.5">
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span
+                        className="inline-block size-2.5 shrink-0 rounded-full"
+                        style={{ backgroundColor: col.color }}
+                      />
+                      <span className="truncate text-xs font-medium text-custom-text-200">{col.title}</span>
+                      <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-custom-background-80 text-[10px] text-custom-text-400">
+                        {col.issues.length}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => store.issue.toggleColumnExpand(col.id)}
+                      className="flex size-5 shrink-0 items-center justify-center rounded text-custom-text-400 hover:bg-custom-background-80 hover:text-custom-text-200 transition-colors"
+                      aria-label={isExpanded ? "折叠列" : "展开列"}
+                    >
+                      {isExpanded ? <ChevronDown className="size-3.5" /> : <ChevronRight className="size-3.5" />}
+                    </button>
+                  </div>
+
+                  {/* Column body with swimlanes */}
+                  {isExpanded && (
+                    <Droppable droppableId={col.id}>
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.droppableProps}
+                          className={cn(
+                            "flex flex-col gap-0 px-2 pb-2 pt-1",
+                            snapshot.isDraggingOver && "bg-custom-background-90 ring-2 ring-custom-primary/20"
+                          )}
+                        >
+                          {subGroups.map((sg) => (
+                            <div key={sg.id}>
+                              {/* Sub-group header / swimlane label */}
+                              <div className="flex items-center gap-1.5 px-1 py-1.5">
+                                {sg.color && (
+                                  <span
+                                    className="inline-block size-2 shrink-0 rounded-full"
+                                    style={{ backgroundColor: sg.color }}
+                                  />
+                                )}
+                                <span className="text-[10px] font-medium text-custom-text-400">{sg.title}</span>
+                                <span className="text-[10px] text-custom-text-500">{sg.issues.length}</span>
+                              </div>
+
+                              {/* Swimlane cards */}
+                              {sg.issues.map((issue, idx) => (
+                                <KanbanCard
+                                  key={issue.id}
+                                  issue={issue}
+                                  index={idx}
+                                  columnId={col.id}
+                                  workspaceId={workspaceId}
+                                  projectId={projectId}
+                                  projectIdentifier={projectIdentifier}
+                                />
+                              ))}
+
+                              {/* Empty swimlane */}
+                              {sg.issues.length === 0 && !snapshot.isDraggingOver && (
+                                <div className="flex items-center justify-center py-4">
+                                  <p className="text-[10px] text-custom-text-400">拖动 Issue 到此</p>
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                          {provided.placeholder}
+                        </div>
+                      )}
+                    </Droppable>
+                  )}
+
+                  {/* Collapsed column shows just count */}
+                  {!isExpanded && (
+                    <div className="flex items-center justify-center py-8">
+                      <p className="text-[10px] text-custom-text-400">{col.issues.length} 个 Issue（已折叠）</p>
+                    </div>
+                  )}
+                </div>
+              );
+            }
+
+            // Without sub-group, use standard KanbanColumn
             return (
               <KanbanColumn
                 key={col.id}

@@ -1,12 +1,14 @@
-// FLOW: Issue list view — container with filter bar, table header, rows, pagination (per D-P16-02)
-import { useMemo } from "react";
+// FLOW: Issue list view — container with FilterBar, table header, rows, pagination (per D-P17-06)
+import { useMemo, useState } from "react";
 import { observer } from "mobx-react";
-import { ArrowUpDown } from "lucide-react";
+import { Columns3, BookmarkPlus } from "lucide-react";
 import { cn } from "@plane/utils";
 import { useStore } from "@/lib/store-context";
 import { useIssues } from "@/../src/lib/hooks/use-issues";
 import { Loader } from "@plane/ui";
-import { QuickFilterBar } from "./quick-filter-bar";
+import { FilterBar } from "./filters/filter-bar";
+import { ColumnSelector } from "./filters/column-selector";
+import { FilterSaveModal } from "./filters/filter-save-modal";
 import { IssueRow } from "./issue-row";
 import { Pagination } from "./pagination";
 import { BulkActionBar } from "./bulk-action-bar";
@@ -16,16 +18,10 @@ type TProps = {
   projectId: string;
 };
 
-const SORT_FIELDS = [
-  { key: "created_at", label: "创建时间" },
-  { key: "updated_at", label: "更新时间" },
-  { key: "priority", label: "优先级" },
-  { key: "sequence_id", label: "Issue ID" },
-  { key: "sort_order", label: "排序" },
-] as const;
-
 export const IssueListView = observer(function IssueListView({ workspaceId, projectId }: TProps) {
   const store = useStore();
+  const [columnSelectorOpen, setColumnSelectorOpen] = useState(false);
+  const [saveModalOpen, setSaveModalOpen] = useState(false);
 
   const { data: issues, isLoading } = useIssues(projectId, {
     state: store.issue.filters.stateIds,
@@ -68,15 +64,6 @@ export const IssueListView = observer(function IssueListView({ workspaceId, proj
 
   const handlePageChange = (page: number) => {
     store.issue.setCurrentPage(page);
-  };
-
-  const handleSortChange = (field: string) => {
-    if (store.issue.sortBy === field) {
-      store.issue.setSortDirection(store.issue.sortDirection === "asc" ? "desc" : "asc");
-    } else {
-      store.issue.setSortBy(field);
-      store.issue.setSortDirection("desc");
-    }
   };
 
   // Loading state
@@ -144,34 +131,52 @@ export const IssueListView = observer(function IssueListView({ workspaceId, proj
 
   return (
     <div className="flex flex-col">
-      {/* Filter bar */}
-      <div className="px-4 py-3">
-        <QuickFilterBar store={store.issue} workspaceId={workspaceId} projectId={projectId} />
-      </div>
+      {/* FilterBar + column selector + save view */}
+      <div className="border-b border-custom-border-200 px-4 py-3">
+        <div className="flex items-start gap-2">
+          <div className="flex-1">
+            <FilterBar
+              workspaceId={workspaceId}
+              projectId={projectId}
+              viewType="list"
+              showSorting={true}
+              showGroupBy={false}
+            />
+          </div>
+          <div className="flex items-center gap-1 shrink-0 pt-2">
+            {/* Column selector button */}
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setColumnSelectorOpen(!columnSelectorOpen)}
+                className={cn(
+                  "flex items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs transition-colors",
+                  columnSelectorOpen
+                    ? "border-custom-primary text-custom-primary"
+                    : "border-custom-border-200 text-custom-text-300 hover:text-custom-text-200"
+                )}
+              >
+                <Columns3 className="size-3.5" />
+                自定义列
+              </button>
+              <ColumnSelector
+                isOpen={columnSelectorOpen}
+                onClose={() => setColumnSelectorOpen(false)}
+                selectedColumns={store.issue.visibleColumnIds}
+                onChange={(ids) => store.issue.setVisibleColumnIds(ids)}
+              />
+            </div>
 
-      {/* Sort dropdown */}
-      <div className="flex items-center gap-2 border-b border-custom-border-200 px-4 py-2">
-        <ArrowUpDown className="size-3.5 text-custom-text-400" />
-        <span className="text-xs text-custom-text-400">排序：</span>
-        <div className="flex items-center gap-1">
-          {SORT_FIELDS.map((field) => (
+            {/* Save view button */}
             <button
-              key={field.key}
               type="button"
-              onClick={() => handleSortChange(field.key)}
-              className={cn(
-                "rounded-md px-2 py-1 text-xs transition-colors",
-                store.issue.sortBy === field.key
-                  ? "bg-custom-primary/10 text-custom-primary"
-                  : "text-custom-text-300 hover:text-custom-text-100"
-              )}
+              onClick={() => setSaveModalOpen(true)}
+              className="flex items-center gap-1 rounded-md border border-custom-border-200 px-2.5 py-1.5 text-xs text-custom-text-300 hover:text-custom-text-200 transition-colors"
             >
-              {field.label}
-              {store.issue.sortBy === field.key && (
-                <span className="ml-1">{store.issue.sortDirection === "asc" ? "↑" : "↓"}</span>
-              )}
+              <BookmarkPlus className="size-3.5" />
+              保存视图
             </button>
-          ))}
+          </div>
         </div>
       </div>
 
@@ -218,6 +223,18 @@ export const IssueListView = observer(function IssueListView({ workspaceId, proj
         projectId={projectId}
         selectedIds={store.issue.selectedIssueIds}
         onClearSelection={() => store.issue.clearSelection()}
+      />
+
+      {/* Filter save modal */}
+      <FilterSaveModal
+        isOpen={saveModalOpen}
+        onClose={() => setSaveModalOpen(false)}
+        projectId={projectId}
+        workspaceId={workspaceId}
+        currentFilters={store.issue.filters}
+        currentSort={{ sortBy: store.issue.sortBy, sortDirection: store.issue.sortDirection }}
+        currentColumns={store.issue.visibleColumnIds}
+        currentLayout="list"
       />
     </div>
   );
