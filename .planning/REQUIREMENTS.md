@@ -81,8 +81,8 @@
 
 ### Issue 甘特图 (GANT)
 
-- [ ] **GANT-01**: 用户可以看到 Issue 甘特图视图
-- [ ] **GANT-02**: 用户可以在甘特图中查看 Issue 依赖关系
+- [x] **GANT-01**: 用户可以看到 Issue 甘特图视图
+- [x] **GANT-02**: 用户可以在甘特图中查看 Issue 依赖关系
 
 ### Issue 电子表格 (SHEE)
 
@@ -167,28 +167,28 @@
 
 ## Traceability
 
-| Requirement         | Phase    | Status  |
-| ------------------- | -------- | ------- |
-| SCAFF-01 ~ SCAFF-09 | Phase 14 | Pending |
-| AUTH-01 ~ AUTH-06   | Phase 14 | Pending |
-| UI-03               | Phase 14 | Pending |
-| WORK-01 ~ WORK-04   | Phase 15 | Pending |
-| PROJ-01 ~ PROJ-05   | Phase 15 | Pending |
-| UI-01, UI-02, UI-05 | Phase 15 | Pending |
-| ISSU-01 ~ ISSU-08   | Phase 16 | Pending |
-| KANB-01 ~ KANB-05   | Phase 16 | Pending |
-| UI-04               | Phase 16 | Pending |
-| CALN-01 ~ CALN-02   | Phase 17 | Pending |
-| GANT-01 ~ GANT-02   | Phase 17 | Pending |
-| SHEE-01 ~ SHEE-02   | Phase 17 | Pending |
-| FILT-01 ~ FILT-04   | Phase 17 | Pending |
-| CYCLE-01 ~ CYCLE-04 | Phase 18 | Pending |
-| MODU-01 ~ MODU-03   | Phase 18 | Pending |
-| PAGE-01 ~ PAGE-05   | Phase 19 | Pending |
-| VIEW-01 ~ VIEW-03   | Phase 19 | Pending |
-| NOTI-01 ~ NOTI-04   | Phase 20 | Pending |
-| ANAL-01 ~ ANAL-03   | Phase 20 | Pending |
-| UI-06               | Phase 20 | Pending |
+| Requirement         | Phase    | Status    |
+| ------------------- | -------- | --------- |
+| SCAFF-01 ~ SCAFF-09 | Phase 14 | Pending   |
+| AUTH-01 ~ AUTH-06   | Phase 14 | Pending   |
+| UI-03               | Phase 14 | Pending   |
+| WORK-01 ~ WORK-04   | Phase 15 | Pending   |
+| PROJ-01 ~ PROJ-05   | Phase 15 | Pending   |
+| UI-01, UI-02, UI-05 | Phase 15 | Pending   |
+| ISSU-01 ~ ISSU-08   | Phase 16 | Pending   |
+| KANB-01 ~ KANB-05   | Phase 16 | Pending   |
+| UI-04               | Phase 16 | Pending   |
+| CALN-01 ~ CALN-02   | Phase 17 | Pending   |
+| GANT-01 ~ GANT-02   | Phase 17 | Completed |
+| SHEE-01 ~ SHEE-02   | Phase 17 | Pending   |
+| FILT-01 ~ FILT-04   | Phase 17 | Pending   |
+| CYCLE-01 ~ CYCLE-04 | Phase 18 | Pending   |
+| MODU-01 ~ MODU-03   | Phase 18 | Pending   |
+| PAGE-01 ~ PAGE-05   | Phase 19 | Pending   |
+| VIEW-01 ~ VIEW-03   | Phase 19 | Pending   |
+| NOTI-01 ~ NOTI-04   | Phase 20 | Pending   |
+| ANAL-01 ~ ANAL-03   | Phase 20 | Pending   |
+| UI-06               | Phase 20 | Pending   |
 
 **Coverage:**
 

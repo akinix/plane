@@ -20,7 +20,8 @@ v2.0 (Flow Web Frontend): Phase 14~20 — 构建完整 React 前端
 
 - [x] **Phase 14: 脚手架 & Auth** — 前端开发环境搭建，Fork Plane 包，JWT 认证流程，API 适配层
 - [ ] **Phase 15: 工作区 & 项目** — 工作区仪表板/设置/成员管理，项目管理，侧边栏/顶栏/Emoji 选择器
-- [x] **Phase 16: Issue 列表/详情 & 看板** — Issue CRUD、列表视图、详情页、评论、批量操作、看板视图、命令面板 (completed 2026-06-29)
+- [x] **Phase 16: Issue 列表/详情 & 看板** — Issue CRUD、列表视图、详情页、评论、批量操作、看板视图、命令面板
+      (completed 2026-06-29)
 - [ ] **Phase 17: 日历/甘特/电子表格 & 筛选引擎** — Issue 日历/甘特/电子表格视图，通用筛选/排序/自定义列引擎
 - [ ] **Phase 18: 周期 & 模块** — Cycle 列表/详情/看板，Module 列表/详情
 - [ ] **Phase 19: 页面 & 视图** — Page 树形层级/TipTap 编辑器/权限/收藏，自定义视图保存与应用
@@ -206,43 +207,43 @@ Plans:
 
 ## Progress
 
-| Phase                             | Plans Complete | Status      | Completed |
-| --------------------------------- | -------------- | ----------- | --------- |
-| 14. 脚手架 & Auth                 | 4/4            | Delivered   | ✅        |
-| 15. 工作区 & 项目                 | 4/4            | Delivered   | ✅        |
-| 16. Issue 列表/详情 & 看板        | 5/5 | Complete   | 2026-06-29 |
-| 17. 日历/甘特/电子表格 & 筛选引擎 | 0/0            | Not started | -         |
-| 18. 周期 & 模块                   | 0/0            | Not started | -         |
-| 19. 页面 & 视图                   | 0/0            | Not started | -         |
-| 20. 通知 & 分析                   | 0/0            | Not started | -         |
+| Phase                             | Plans Complete | Status      | Completed  |
+| --------------------------------- | -------------- | ----------- | ---------- |
+| 14. 脚手架 & Auth                 | 4/4            | Delivered   | ✅         |
+| 15. 工作区 & 项目                 | 4/4            | Delivered   | ✅         |
+| 16. Issue 列表/详情 & 看板        | 5/5            | Complete    | 2026-06-29 |
+| 17. 日历/甘特/电子表格 & 筛选引擎 | 2/6            | In Progress |            |
+| 18. 周期 & 模块                   | 0/0            | Not started | -          |
+| 19. 页面 & 视图                   | 0/0            | Not started | -          |
+| 20. 通知 & 分析                   | 0/0            | Not started | -          |
 
 ---
 
 ## Requirement Coverage Map
 
-| Requirement                | Phase    | Status    |
-| -------------------------- | -------- | --------- |
-| SCAFF-01 ~ SCAFF-09        | Phase 14 | Delivered |
-| AUTH-01 ~ AUTH-06          | Phase 14 | Delivered |
-| UI-03                      | Phase 14 | Delivered |
-| WORK-01 ~ WORK-04          | Phase 15 | Pending   |
-| PROJ-01 ~ PROJ-05          | Phase 15 | Pending   |
-| UI-01, UI-02, UI-05        | Phase 15 | Pending   |
-| ISSU-01 ~ ISSU-08          | Phase 16 | Pending   |
-| KANB-01 ~ KANB-03, KANB-05 | Phase 16 | Pending   |
-| KANB-04                    | Phase 17 | Pending   |
-| UI-04                      | Phase 16 | Pending   |
-| CALN-01 ~ CALN-02          | Phase 17 | Pending   |
-| GANT-01 ~ GANT-02          | Phase 17 | Pending   |
-| SHEE-01 ~ SHEE-02          | Phase 17 | Pending   |
-| FILT-01 ~ FILT-04          | Phase 17 | Pending   |
-| CYCLE-01 ~ CYCLE-04        | Phase 18 | Pending   |
-| MODU-01 ~ MODU-03          | Phase 18 | Pending   |
-| PAGE-01 ~ PAGE-05          | Phase 19 | Pending   |
-| VIEW-01 ~ VIEW-03          | Phase 19 | Pending   |
-| NOTI-01 ~ NOTI-04          | Phase 20 | Pending   |
-| ANAL-01 ~ ANAL-03          | Phase 20 | Pending   |
-| UI-06                      | Phase 20 | Pending   |
+| Requirement                | Phase    | Status      |
+| -------------------------- | -------- | ----------- |
+| SCAFF-01 ~ SCAFF-09        | Phase 14 | Delivered   |
+| AUTH-01 ~ AUTH-06          | Phase 14 | Delivered   |
+| UI-03                      | Phase 14 | Delivered   |
+| WORK-01 ~ WORK-04          | Phase 15 | Pending     |
+| PROJ-01 ~ PROJ-05          | Phase 15 | Pending     |
+| UI-01, UI-02, UI-05        | Phase 15 | Pending     |
+| ISSU-01 ~ ISSU-08          | Phase 16 | Pending     |
+| KANB-01 ~ KANB-03, KANB-05 | Phase 16 | Pending     |
+| KANB-04                    | Phase 17 | Pending     |
+| UI-04                      | Phase 16 | Pending     |
+| CALN-01 ~ CALN-02          | Phase 17 | Pending     |
+| GANT-01 ~ GANT-02          | Phase 17 | In Progress |
+| SHEE-01 ~ SHEE-02          | Phase 17 | Pending     |
+| FILT-01 ~ FILT-04          | Phase 17 | Pending     |
+| CYCLE-01 ~ CYCLE-04        | Phase 18 | Pending     |
+| MODU-01 ~ MODU-03          | Phase 18 | Pending     |
+| PAGE-01 ~ PAGE-05          | Phase 19 | Pending     |
+| VIEW-01 ~ VIEW-03          | Phase 19 | Pending     |
+| NOTI-01 ~ NOTI-04          | Phase 20 | Pending     |
+| ANAL-01 ~ ANAL-03          | Phase 20 | Pending     |
+| UI-06                      | Phase 20 | Pending     |
 
 **Coverage:**
 

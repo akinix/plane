@@ -1,23 +1,23 @@
 ---
 gsd_state_version: 1.0
 milestone: v2.0
-milestone_name: milestone
-current_phase: 16
+milestone_name: "Strategy:"
+current_phase: 17
 status: executing
-last_updated: "2026-06-29T04:59:18.560Z"
-last_activity: 2026-06-29 -- Phase 16 execution started
+last_updated: "2026-06-29T07:39:28.146Z"
+last_activity: 2026-06-29
 progress:
   total_phases: 7
-  completed_phases: 1
-  total_plans: 13
-  completed_plans: 10
-  percent: 14
+  completed_phases: 2
+  total_plans: 19
+  completed_plans: 16
+  percent: 29
 ---
 
 # YH.Flow — Project State
 
 **Last Updated:** 2026-06-29
-**Current Phase:** 16
+**Current Phase:** 17
 **Active Workstream:** v2.0 milestone — Flow Web 前端
 
 ---
@@ -68,7 +68,8 @@ progress:
 - [x] **Phase 14: 脚手架 & Auth** — 4/4 plans, COMPLETE
 - [x] **Phase 15: 工作区 & 项目** — 4/4 plans, COMPLETE
 - [ ] **Phase 16: Issue 列表/详情 & 看板** — 0/5 plans, Planning
-- [ ] **Phase 17: 日历/甘特/电子表格 & 筛选引擎** — 0/0 plans, Not started
+- [x] **Phase 16: Issue 列表/详情 & 看板** — 5/5 plans, COMPLETE
+- [ ] \*\*Phase 17: 日历/甘特/电子表格 & 筛选引擎 — 1/6 plans, Executing
 - [ ] **Phase 18: 周期 & 模块** — 0/0 plans, Not started
 - [ ] **Phase 19: 页面 & 视图** — 0/0 plans, Not started
 - [ ] **Phase 20: 通知 & 分析** — 0/0 plans, Not started
@@ -136,7 +137,7 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 ## Current Position
 
-Phase: 16 (Issue 列表/详情 & 看板) — EXECUTING
-Plan: 1 of 5
-Status: Executing Phase 16
-Last activity: 2026-06-29 -- Phase 16 execution started
+Phase: 17 (calendar-gantt-sheet) — EXECUTING
+Plan: 2 of 6
+Status: Ready to execute
+Last activity: 2026-06-29
