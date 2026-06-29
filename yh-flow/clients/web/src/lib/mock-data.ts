@@ -721,7 +721,7 @@ export const MOCK_ISSUES: TIssue[] = [
     type_id: null,
     created_at: new Date(now - dayMs * 3).toISOString(),
     updated_at: new Date(now - dayMs * 1).toISOString(),
-    start_date: null,
+    start_date: new Date(now - dayMs * 4).toISOString(),
     target_date: new Date(now + dayMs * 7).toISOString(),
     completed_at: null,
     archived_at: null,
@@ -894,8 +894,8 @@ export const MOCK_ISSUES: TIssue[] = [
     type_id: null,
     created_at: new Date(now - dayMs * 2).toISOString(),
     updated_at: new Date(now - dayMs * 1).toISOString(),
-    start_date: null,
-    target_date: null,
+    start_date: new Date(now - dayMs * 9).toISOString(),
+    target_date: new Date(now - dayMs * 1).toISOString(),
     completed_at: null,
     archived_at: null,
     created_by: "user-2",
@@ -981,7 +981,7 @@ export const MOCK_ISSUES: TIssue[] = [
     type_id: null,
     created_at: new Date(now - dayMs * 8).toISOString(),
     updated_at: new Date(now - dayMs * 6).toISOString(),
-    start_date: null,
+    start_date: new Date(now - dayMs * 14).toISOString(),
     target_date: new Date(now + dayMs * 14).toISOString(),
     completed_at: null,
     archived_at: null,
@@ -1936,10 +1936,32 @@ export const MOCK_COMMENTS: Record<string, TIssueComment[]> = MOCK_ISSUE_COMMENT
     acc[key].push(c);
     return acc;
   },
-  {} as Record<string, TIssueComment[]>,
+  {} as Record<string, TIssueComment[]>
 );
 
 export const _ws1Detail = { id: "ws-1", name: "Flow 开发组", slug: "flow-dev", logo_url: "", logo_props: {} };
-export const _proj1Detail = { id: "proj-1", identifier: "FF", name: "Flow 前端", cover_image: "", description: null, emoji: null, icon_prop: null };
-export const _user1Detail = { id: "user-1", first_name: "我", last_name: "", avatar: "", is_bot: false, display_name: "我" };
-export const _user2Detail = { id: "user-2", first_name: "李四", last_name: "", avatar: "", is_bot: false, display_name: "李四" };
+export const _proj1Detail = {
+  id: "proj-1",
+  identifier: "FF",
+  name: "Flow 前端",
+  cover_image: "",
+  description: null,
+  emoji: null,
+  icon_prop: null,
+};
+export const _user1Detail = {
+  id: "user-1",
+  first_name: "我",
+  last_name: "",
+  avatar: "",
+  is_bot: false,
+  display_name: "我",
+};
+export const _user2Detail = {
+  id: "user-2",
+  first_name: "李四",
+  last_name: "",
+  avatar: "",
+  is_bot: false,
+  display_name: "李四",
+};

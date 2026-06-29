@@ -206,3 +206,5 @@ export const CalendarView = function CalendarView(props: TProps) {
     </div>
   );
 };
+
+export default CalendarView;
