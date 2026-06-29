@@ -99,7 +99,9 @@ Plans:
 
 **Depends on**: Phase 15
 
-**Requirements**: ISSU-01, ISSU-02, ISSU-03, ISSU-04, ISSU-05, ISSU-06, ISSU-07, ISSU-08, KANB-01, KANB-02, KANB-03, KANB-04, KANB-05, UI-04
+**Requirements**: ISSU-01, ISSU-02, ISSU-03, ISSU-04, ISSU-05, ISSU-06, ISSU-07, ISSU-08, KANB-01, KANB-02, KANB-03, KANB-05, UI-04
+
+> **Note:** KANB-04 (子分组/Swimlane) 已推迟到 Phase 17 实现，per D-P16-15。
 
 **Success Criteria** (what must be TRUE):
 
@@ -110,7 +112,7 @@ Plans:
 5. 用户可创建/编辑/删除评论，可批量选中 Issue 执行状态变更/指派/删除操作
 6. 用户在 Issue 描述中可使用 TipTap 富文本编辑器（加粗、列表、标题等）
 7. 用户看到 Issue 看板视图（列 = 状态列），通过拖拽卡片在列之间移动（即变更状态）
-8. 用户在看板中可按负责人/优先级分组，可设置子分组（Swimlane），可在看板内筛选和排序
+8. 用户在看板中可按负责人/优先级分组，可在看板内筛选和排序
 9. 用户可通过 Cmd+K 命令面板快速搜索和导航
 
 **Plans**: TBD
@@ -218,28 +220,29 @@ Plans:
 
 ## Requirement Coverage Map
 
-| Requirement         | Phase    | Status    |
-| ------------------- | -------- | --------- |
-| SCAFF-01 ~ SCAFF-09 | Phase 14 | Delivered |
-| AUTH-01 ~ AUTH-06   | Phase 14 | Delivered |
-| UI-03               | Phase 14 | Delivered |
-| WORK-01 ~ WORK-04   | Phase 15 | Pending   |
-| PROJ-01 ~ PROJ-05   | Phase 15 | Pending   |
-| UI-01, UI-02, UI-05 | Phase 15 | Pending   |
-| ISSU-01 ~ ISSU-08   | Phase 16 | Pending   |
-| KANB-01 ~ KANB-05   | Phase 16 | Pending   |
-| UI-04               | Phase 16 | Pending   |
-| CALN-01 ~ CALN-02   | Phase 17 | Pending   |
-| GANT-01 ~ GANT-02   | Phase 17 | Pending   |
-| SHEE-01 ~ SHEE-02   | Phase 17 | Pending   |
-| FILT-01 ~ FILT-04   | Phase 17 | Pending   |
-| CYCLE-01 ~ CYCLE-04 | Phase 18 | Pending   |
-| MODU-01 ~ MODU-03   | Phase 18 | Pending   |
-| PAGE-01 ~ PAGE-05   | Phase 19 | Pending   |
-| VIEW-01 ~ VIEW-03   | Phase 19 | Pending   |
-| NOTI-01 ~ NOTI-04   | Phase 20 | Pending   |
-| ANAL-01 ~ ANAL-03   | Phase 20 | Pending   |
-| UI-06               | Phase 20 | Pending   |
+| Requirement                | Phase    | Status    |
+| -------------------------- | -------- | --------- |
+| SCAFF-01 ~ SCAFF-09        | Phase 14 | Delivered |
+| AUTH-01 ~ AUTH-06          | Phase 14 | Delivered |
+| UI-03                      | Phase 14 | Delivered |
+| WORK-01 ~ WORK-04          | Phase 15 | Pending   |
+| PROJ-01 ~ PROJ-05          | Phase 15 | Pending   |
+| UI-01, UI-02, UI-05        | Phase 15 | Pending   |
+| ISSU-01 ~ ISSU-08          | Phase 16 | Pending   |
+| KANB-01 ~ KANB-03, KANB-05 | Phase 16 | Pending   |
+| KANB-04                    | Phase 17 | Pending   |
+| UI-04                      | Phase 16 | Pending   |
+| CALN-01 ~ CALN-02          | Phase 17 | Pending   |
+| GANT-01 ~ GANT-02          | Phase 17 | Pending   |
+| SHEE-01 ~ SHEE-02          | Phase 17 | Pending   |
+| FILT-01 ~ FILT-04          | Phase 17 | Pending   |
+| CYCLE-01 ~ CYCLE-04        | Phase 18 | Pending   |
+| MODU-01 ~ MODU-03          | Phase 18 | Pending   |
+| PAGE-01 ~ PAGE-05          | Phase 19 | Pending   |
+| VIEW-01 ~ VIEW-03          | Phase 19 | Pending   |
+| NOTI-01 ~ NOTI-04          | Phase 20 | Pending   |
+| ANAL-01 ~ ANAL-03          | Phase 20 | Pending   |
+| UI-06                      | Phase 20 | Pending   |
 
 **Coverage:**
 
