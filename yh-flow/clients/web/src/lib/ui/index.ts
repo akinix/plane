@@ -14,6 +14,7 @@ export * from "./drag-handle";
 export * from "./drop-indicator";
 export * from "./dropdown";
 export * from "./dropdowns";
+export * from "./emoji-picker";
 export * from "./favorite-star";
 export * from "./form-fields";
 export * from "./header";
