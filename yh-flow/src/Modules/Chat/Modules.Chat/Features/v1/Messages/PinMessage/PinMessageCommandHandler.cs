@@ -1,0 +1,43 @@
+using YH.Framework.Core.Context;
+using YH.Framework.Core.Exceptions;
+using YH.Framework.Web.Realtime;
+using YH.Modules.Chat.Contracts.v1.Commands;
+using YH.Modules.Chat.Data;
+using YH.Modules.Chat.Features.v1.Internal;
+using Mediator;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
+
+namespace YH.Modules.Chat.Features.v1.Messages.PinMessage;
+
+public sealed class PinMessageCommandHandler(
+    ChatDbContext db,
+    ICurrentUser currentUser,
+    IHubContext<AppHub> hub)
+    : ICommandHandler<PinMessageCommand, Unit>
+{
+    public async ValueTask<Unit> Handle(PinMessageCommand cmd, CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(cmd);
+        var userId = currentUser.GetUserId();
+        if (userId == Guid.Empty) throw new UnauthorizedException("no current user");
+        var currentUserId = userId.ToString();
+
+        var message = await db.Messages.FirstOrDefaultAsync(m => m.Id == cmd.MessageId, cancellationToken)
+            .ConfigureAwait(false)
+            ?? throw new NotFoundException("Message not found.");
+
+        var channel = await db.Channels.FirstOrDefaultAsync(c => c.Id == message.ChannelId, cancellationToken)
+            .ConfigureAwait(false)
+            ?? throw new NotFoundException("Message not found.");
+        channel.RequireMember(currentUserId);
+
+        message.Pin(currentUserId);
+        await db.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+
+        await hub.Clients.Group($"channel:{channel.Id}")
+            .SendAsync("ChatMessagePinned", message.ToDto(), cancellationToken)
+            .ConfigureAwait(false);
+        return Unit.Value;
+    }
+}

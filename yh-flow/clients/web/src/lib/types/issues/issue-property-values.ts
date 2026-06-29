@@ -1,0 +1,9 @@
+// FLOW: Forked from @plane/types/src/types/issues/issue-property-values.ts
+/**
+ * Copyright (c) 2023-present Plane Software, Inc. and contributors
+ * SPDX-License-Identifier: AGPL-3.0-only
+ * See the LICENSE file for details.
+ */
+
+export type TIssuePropertyValues = Record<string, unknown>;
+export type TIssuePropertyValueErrors = Record<string, unknown>;

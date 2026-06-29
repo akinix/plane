@@ -1,0 +1,114 @@
+/* FLOW: Forked from Plane packages/tailwind-config/variables.css */
+@import "tailwindcss";
+
+/* FLOW: Base layer with CSS custom properties */
+@layer base {
+  :root,
+  :host {
+    /* ---------- Extended colors ---------- */
+    --extended-color-purple-500: oklch(0.5527 0.1361 288.8);
+    --extended-color-purple-700: oklch(0.42 0.1303 287.25);
+    --extended-color-orange-500: oklch(0.7177 0.1905 47.86);
+    --extended-color-crimson-500: oklch(0.5954 0.1956 28.51);
+    --extended-color-emerald-500: oklch(0.7401 0.166 149.61);
+    --extended-color-pink-500: oklch(0.6185 0.1388 344.06);
+    --extended-color-yellow-500: oklch(0.79 0.1466 82.04);
+    --extended-color-indigo-500: oklch(0.579 0.1807 262.31);
+    --extended-color-grey-500: oklch(0.65 0 0);
+
+    /* ---------- Priority colors ---------- */
+    --priority-urgent: oklch(0.5798 0.1766 26.99);
+    --priority-high: oklch(0.6802 0.1633 50.67);
+    --priority-medium: oklch(0.79 0.1466 82.04);
+    --priority-low: oklch(0.579 0.1807 262.31);
+    --priority-none: oklch(0.6376 0.0129 231.77);
+
+    /* ---------- Light mode color tokens ---------- */
+    --neutral-white: oklch(1 0 0);
+    --neutral-100: oklch(0.9848 0.0003 230.66);
+    --neutral-200: oklch(0.9696 0.0007 230.67);
+    --neutral-300: oklch(0.9543 0.001 230.67);
+    --neutral-400: oklch(0.9389 0.0014 230.68);
+    --neutral-500: oklch(0.9235 0.001733 230.6853);
+    --neutral-600: oklch(0.8925 0.0024 230.7);
+    --neutral-700: oklch(0.8612 0.0032 230.71);
+    --neutral-800: oklch(0.6668 0.0079 230.82);
+    --neutral-900: oklch(0.6161 0.009153 230.867);
+    --neutral-1000: oklch(0.5288 0.0083 230.88);
+    --neutral-1100: oklch(0.4377 0.0066 230.87);
+    --neutral-1200: oklch(0.2378 0.0029 230.83);
+    --neutral-black: oklch(0.1472 0.0034 230.83);
+
+    /* Background derived colors */
+    --bg-canvas: var(--neutral-300);
+    --bg-surface-1: var(--neutral-white);
+    --bg-surface-2: var(--neutral-100);
+    --bg-layer-1: var(--neutral-200);
+
+    /* Border derived colors */
+    --border-subtle: var(--neutral-400);
+    --border-strong: var(--neutral-600);
+
+    /* Text derived colors */
+    --txt-primary: var(--neutral-1200);
+    --txt-secondary: var(--neutral-1100);
+    --txt-tertiary: var(--neutral-1000);
+  }
+
+  /* FLOW: Dark mode theme variables */
+  [data-theme="dark"] {
+    --neutral-black: oklch(0.1689 0.0021 230.81);
+    --neutral-100: oklch(0.1932 0.002 230.81);
+    --neutral-200: oklch(0.2158 0.0025 230.82);
+    --neutral-300: oklch(0.2378 0.0029 230.83);
+    --neutral-400: oklch(0.2593 0.0033 230.84);
+    --neutral-500: oklch(0.3011 0.0041 230.85);
+    --neutral-600: oklch(0.3415 0.0049 230.86);
+    --neutral-700: oklch(0.3999 0.0059 230.87);
+    --neutral-800: oklch(0.5989 0.0096 230.88);
+    --neutral-900: oklch(0.6835 0.0074 230.81);
+    --neutral-1000: oklch(0.7655 0.0054 230.76);
+    --neutral-1100: oklch(0.8455 0.0035 230.72);
+    --neutral-1200: oklch(0.9235 0.001733 230.6853);
+    --neutral-white: oklch(0.9702 0 0);
+
+    /* Background derived colors */
+    --bg-canvas: var(--neutral-black);
+    --bg-surface-1: var(--neutral-100);
+    --bg-surface-2: var(--neutral-200);
+    --bg-layer-1: var(--neutral-200);
+
+    /* Border derived colors */
+    --border-subtle: var(--neutral-400);
+    --border-strong: var(--neutral-600);
+
+    /* Text derived colors */
+    --txt-primary: var(--neutral-1200);
+    --txt-secondary: var(--neutral-1100);
+    --txt-tertiary: var(--neutral-1000);
+  }
+}
+
+/* FLOW: Tailwind CSS v4 @theme inline for semantic color mapping */
+@theme inline {
+  --color-background-canvas: var(--bg-canvas);
+  --color-background-surface-1: var(--bg-surface-1);
+  --color-background-surface-2: var(--bg-surface-2);
+  --color-background-layer-1: var(--bg-layer-1);
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-text-primary: var(--txt-primary);
+  --color-text-secondary: var(--txt-secondary);
+  --color-text-tertiary: var(--txt-tertiary);
+}
+
+/* FLOW: Basic reset and body styles */
+body {
+  font-family: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-canvas);
+  color: var(--txt-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

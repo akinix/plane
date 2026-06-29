@@ -1,0 +1,13 @@
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using Xunit;
+global using Shouldly;
+global using NSubstitute;
+global using Microsoft.EntityFrameworkCore;
+global using YH.Modules.View.Domain;
+global using YH.Modules.View.Data;
+global using YH.Tests.View.TestData;
+global using YH.Framework.Core.Exceptions;

@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>YH.Modules.Analytics</RootNamespace>
+        <AssemblyName>YH.Modules.Analytics</AssemblyName>
+        <NoWarn>$(NoWarn);CA1027;CA1031;CA1056;CA1716;CA1812;S1135;S125;S2094;S3267;S1481;S1144;S6966</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Modules.Analytics.Contracts\Modules.Analytics.Contracts.csproj" />
+        <ProjectReference Include="..\..\..\BuildingBlocks\Web\Web.csproj" />
+        <ProjectReference Include="..\..\..\BuildingBlocks\Jobs\Jobs.csproj" />
+        <ProjectReference Include="..\..\WorkItems\Modules.WorkItems\Modules.WorkItems.csproj" />
+        <ProjectReference Include="..\..\Workspace\Modules.Workspace\Modules.Workspace.csproj" />
+    </ItemGroup>
+
+</Project>

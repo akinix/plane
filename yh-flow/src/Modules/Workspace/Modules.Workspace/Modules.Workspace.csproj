@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>YH.Modules.Workspace</RootNamespace>
+		<AssemblyName>YH.Modules.Workspace</AssemblyName>
+		<NoWarn>$(NoWarn);CA1031;CA1056;CA1716;CA1812;S1135;S125;S2094;S3267;S1144</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!--
+			Finbuckle packages (IMultiTenantStrategy / IMultiTenantStore<T> / AppTenantInfo) used by
+			the slug strategy + tenant store wiring (D-01). Declared DIRECTLY here rather than taken
+			transitively via Modules.Multitenancy runtime — that reference violated
+			Architecture.Tests.Modules_Should_Not_Depend_On_Other_Modules (module runtime projects
+			must not reference other module runtime projects, only Contracts / BuildingBlocks).
+			Fix recorded as a deviation in 02-03-SUMMARY.md.
+		-->
+		<PackageReference Include="Finbuckle.MultiTenant" />
+		<PackageReference Include="Finbuckle.MultiTenant.AspNetCore" />
+		<PackageReference Include="Finbuckle.MultiTenant.EntityFrameworkCore" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\BuildingBlocks\Caching\Caching.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\Core\Core.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\Persistence\Persistence.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\Web\Web.csproj" />
+		<ProjectReference Include="..\Modules.Workspace.Contracts\Modules.Workspace.Contracts.csproj" />
+		<ProjectReference Include="..\..\Identity\Modules.Identity.Contracts\Modules.Identity.Contracts.csproj" />
+		<!--
+			Multitenancy.Contracts (NOT Multitenancy runtime) — the Workspace module only needs the
+			ITenantService contract surface, not the runtime. The runtime was referenced transitively
+			for Finbuckle types, now declared directly above to satisfy the module-boundary rule.
+		-->
+		<ProjectReference Include="..\..\Multitenancy\Modules.Multitenancy.Contracts\Modules.Multitenancy.Contracts.csproj" />
+	</ItemGroup>
+
+</Project>

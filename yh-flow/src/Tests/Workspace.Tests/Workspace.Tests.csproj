@@ -1,0 +1,61 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <IsPublishable>false</IsPublishable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <NoWarn>$(NoWarn);CA1515;CA1861;CA1707;S101;CA1054;CA1812;S1135;S125</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="coverlet.collector">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Shouldly" />
+    <PackageReference Include="AutoFixture" />
+    <PackageReference Include="NSubstitute" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+    <!--
+      Wave 6 (02-07) adds a relational PG fixture, required for CR-01/02/03 coverage that the
+      InMemory suite cannot provide (InMemory provider does not apply Finbuckle AdjustUniqueIndexes
+      nor tenant query filters; see 02-REVIEW.md Notes on the 02-06 closeout tests).
+
+      Npgsql.EntityFrameworkCore.PostgreSQL, Finbuckle.MultiTenant (.EntityFrameworkCore), and
+      Microsoft.Extensions.Hosting.Abstractions arrive transitively via Modules.Workspace /
+      Modules.Multitenancy ProjectReferences (verified via "dotnet list package" with the
+      include-transitive flag). Adding them explicitly would cause TreatWarningsAsErrors
+      duplicate-reference errors (CS1703 / NU1108), so ONLY Testcontainers.PostgreSql is added.
+    -->
+    <PackageReference Include="Testcontainers.PostgreSql" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--
+      Wave 2 (02-03) adds the implementation module + ASP.NET Core for middleware / authorization
+      integration tests. Wave 0 (02-01) only verified Finbuckle DI behaviour; the implementation
+      Modules.Workspace module is now needed for the middleware / handler tests.
+    -->
+    <ProjectReference Include="..\..\Modules\Workspace\Modules.Workspace\Modules.Workspace.csproj" />
+    <ProjectReference Include="..\..\Modules\Workspace\Modules.Workspace.Contracts\Modules.Workspace.Contracts.csproj" />
+    <!--
+      Modules.Multitenancy carries the Finbuckle package references (AddMultiTenant<AppTenantInfo>,
+      AppTenantInfo, EFCoreStore<>) used by the Q1 spike to replicate Phase 1's registration style.
+    -->
+    <ProjectReference Include="..\..\Modules\Multitenancy\Modules.Multitenancy\Modules.Multitenancy.csproj" />
+    <ProjectReference Include="..\..\Modules\Multitenancy\Modules.Multitenancy.Contracts\Modules.Multitenancy.Contracts.csproj" />
+    <!--
+      Wave 6 (02-07): the relational fixture's DbContextOptionsBuilder.UseNpgsql(sql =>
+      sql.MigrationsAssembly("YH.Flow.Migrations.PostgreSQL")) needs the migration assembly to be
+      loadable at runtime so EF Core can discover the InitialWorkspace migration on the Testcontainers
+      PG container. ProjectReference (not a loose bin copy) so the assembly resolves via the test
+      project's deps.json.
+    -->
+    <ProjectReference Include="..\..\Host\YH.Flow.Migrations.PostgreSQL\YH.Flow.Migrations.PostgreSQL.csproj" />
+  </ItemGroup>
+</Project>

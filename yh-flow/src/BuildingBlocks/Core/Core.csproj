@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+	    <RootNamespace>YH.Framework.Core</RootNamespace>
+	    <AssemblyName>YH.Framework.Core</AssemblyName>
+    </PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Mediator.Abstractions" />
+	  <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+	</ItemGroup>
+
+</Project>

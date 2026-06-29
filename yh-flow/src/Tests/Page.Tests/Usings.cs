@@ -1,0 +1,20 @@
+// Project-wide global using directives for Page.Tests.
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.Extensions.Options;
+global using NSubstitute;
+global using Shouldly;
+global using Xunit;
+global using Finbuckle.MultiTenant.Abstractions;
+global using YH.Framework.Core.Exceptions;
+global using YH.Framework.Shared.Multitenancy;
+global using YH.Framework.Shared.Persistence;
+global using YH.Modules.Page.Data;
+global using YH.Modules.Page.Domain;
+global using YH.Modules.Page.Features.v1.Pages;
+global using YH.Tests.Page.TestData;

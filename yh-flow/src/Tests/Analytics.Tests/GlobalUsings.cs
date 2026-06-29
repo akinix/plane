@@ -1,0 +1,13 @@
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using Xunit;
+global using Shouldly;
+global using NSubstitute;
+global using Microsoft.EntityFrameworkCore;
+global using YH.Modules.WorkItems.Domain;
+global using YH.Modules.WorkItems.Data;
+global using YH.Modules.Analytics.Services;
+global using YH.Modules.Analytics.Contracts.DTOs;

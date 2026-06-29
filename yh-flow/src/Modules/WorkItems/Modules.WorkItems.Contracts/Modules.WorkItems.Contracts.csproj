@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>YH.Modules.WorkItems.Contracts</RootNamespace>
+        <AssemblyName>YH.Modules.WorkItems.Contracts</AssemblyName>
+        <NoWarn>$(NoWarn);S2094;CA1010;CA1002;CA2227</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Mediator.Abstractions" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Identity\Modules.Identity.Contracts\Modules.Identity.Contracts.csproj" />
+        <ProjectReference Include="..\..\Workspace\Modules.Workspace.Contracts\Modules.Workspace.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>

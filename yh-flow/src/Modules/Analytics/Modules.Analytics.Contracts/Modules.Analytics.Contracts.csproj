@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>YH.Modules.Analytics.Contracts</RootNamespace>
+        <AssemblyName>YH.Modules.Analytics.Contracts</AssemblyName>
+        <NoWarn>$(NoWarn);S2094;CA1010;CA1002;CA2227</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Workspace\Modules.Workspace.Contracts\Modules.Workspace.Contracts.csproj" />
+    </ItemGroup>
+
+</Project>

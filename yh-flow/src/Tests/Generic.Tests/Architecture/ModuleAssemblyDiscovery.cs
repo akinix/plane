@@ -1,0 +1,35 @@
+using YH.Modules.Auditing;
+using YH.Modules.Identity;
+using YH.Modules.Multitenancy;
+using System.Reflection;
+
+namespace Generic.Tests.Architecture;
+
+/// <summary>
+/// Discovers all YH module assemblies for use in generic architecture tests.
+/// </summary>
+internal static class ModuleAssemblyDiscovery
+{
+    private static readonly Assembly[] _cached = Discover();
+
+    public static Assembly[] GetModuleAssemblies() => _cached;
+
+    private static Assembly[] Discover()
+    {
+        // Force-load seed assemblies
+        _ = typeof(AuditingModule);
+        _ = typeof(IdentityModule);
+        _ = typeof(MultitenancyModule);
+
+        return AppDomain.CurrentDomain
+            .GetAssemblies()
+            .Where(a =>
+            {
+                var name = a.GetName().Name ?? string.Empty;
+                return name.StartsWith("YH.Modules.", StringComparison.Ordinal)
+                       && !name.EndsWith(".Contracts", StringComparison.Ordinal);
+            })
+            .OrderBy(a => a.GetName().Name, StringComparer.Ordinal)
+            .ToArray();
+    }
+}

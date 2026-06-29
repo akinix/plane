@@ -1,0 +1,33 @@
+using YH.Modules.Auditing.Contracts.Authorization;
+using YH.Framework.Shared.Identity.Authorization;
+using YH.Modules.Auditing.Contracts.Dtos;
+using YH.Modules.Auditing.Contracts.v1.GetAuditsByTrace;
+using Mediator;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Routing;
+
+namespace YH.Modules.Auditing.Features.v1.GetAuditsByTrace;
+
+public static class GetAuditsByTraceEndpoint
+{
+    public static RouteHandlerBuilder MapGetAuditsByTraceEndpoint(this IEndpointRouteBuilder group)
+    {
+        return group.MapGet(
+                "/by-trace/{traceId}",
+                async (string traceId, DateTime? fromUtc, DateTime? toUtc, IMediator mediator, CancellationToken cancellationToken) =>
+                    TypedResults.Ok(await mediator.Send(new GetAuditsByTraceQuery
+                    {
+                        TraceId = traceId,
+                        FromUtc = fromUtc,
+                        ToUtc = toUtc
+                    }, cancellationToken)))
+            .WithName("GetAuditsByTrace")
+            .WithSummary("Get audit events by trace id")
+            .WithDescription("Retrieve audit events associated with a given trace id.")
+            .RequirePermission(AuditingPermissions.AuditTrails.View)
+            .Produces<IEnumerable<AuditSummaryDto>>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status401Unauthorized)
+            .Produces(StatusCodes.Status403Forbidden);
+    }
+}
