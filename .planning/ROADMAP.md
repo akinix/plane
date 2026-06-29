@@ -79,7 +79,16 @@ Plans:
 5. 侧边栏显示工作区/项目的树形结构导航，当前所在位置高亮；顶部导航栏显示用户头像、通知图标和搜索入口
 6. 用户在创建/编辑工作区和项目时可以使用 Emoji 图标选择器
 
-**Plans**: TBD
+**Plans**: 4 plans
+
+```
+Plans:
+- [ ] 15-01-PLAN.md — 基础设施（TanStack Query + MobX Stores + Mock 数据 + EmojiPicker）
+- [ ] 15-02-PLAN.md — 布局（侧边栏 + 顶栏 + 路由结构）
+- [ ] 15-03-PLAN.md — 工作区页面（Dashboard + 设置 + 成员 + 创建）
+- [ ] 15-04-PLAN.md — 项目页面（列表 + 创建 + Dashboard + 设置 + 成员 + 选择器）
+```
+
 **UI hint**: yes
 
 ---
@@ -195,42 +204,42 @@ Plans:
 
 ## Progress
 
-| Phase                             | Plans Complete | Status           | Completed |
-| --------------------------------- | -------------- | ---------------- | --------- |
-| 14. 脚手架 & Auth                 | 4/4 | Delivered  | ✅ |
-| 15. 工作区 & 项目                 | 0/0            | Not started      | -         |
-| 16. Issue 列表/详情 & 看板        | 0/0            | Not started      | -         |
-| 17. 日历/甘特/电子表格 & 筛选引擎 | 0/0            | Not started      | -         |
-| 18. 周期 & 模块                   | 0/0            | Not started      | -         |
-| 19. 页面 & 视图                   | 0/0            | Not started      | -         |
-| 20. 通知 & 分析                   | 0/0            | Not started      | -         |
+| Phase                             | Plans Complete | Status      | Completed |
+| --------------------------------- | -------------- | ----------- | --------- |
+| 14. 脚手架 & Auth                 | 4/4            | Delivered   | ✅        |
+| 15. 工作区 & 项目                 | 0/4            | Not started | -         |
+| 16. Issue 列表/详情 & 看板        | 0/0            | Not started | -         |
+| 17. 日历/甘特/电子表格 & 筛选引擎 | 0/0            | Not started | -         |
+| 18. 周期 & 模块                   | 0/0            | Not started | -         |
+| 19. 页面 & 视图                   | 0/0            | Not started | -         |
+| 20. 通知 & 分析                   | 0/0            | Not started | -         |
 
 ---
 
 ## Requirement Coverage Map
 
-| Requirement         | Phase    | Status  |
-| ------------------- | -------- | ------- |
+| Requirement         | Phase    | Status    |
+| ------------------- | -------- | --------- |
 | SCAFF-01 ~ SCAFF-09 | Phase 14 | Delivered |
 | AUTH-01 ~ AUTH-06   | Phase 14 | Delivered |
 | UI-03               | Phase 14 | Delivered |
-| WORK-01 ~ WORK-04   | Phase 15 | Pending |
-| PROJ-01 ~ PROJ-05   | Phase 15 | Pending |
-| UI-01, UI-02, UI-05 | Phase 15 | Pending |
-| ISSU-01 ~ ISSU-08   | Phase 16 | Pending |
-| KANB-01 ~ KANB-05   | Phase 16 | Pending |
-| UI-04               | Phase 16 | Pending |
-| CALN-01 ~ CALN-02   | Phase 17 | Pending |
-| GANT-01 ~ GANT-02   | Phase 17 | Pending |
-| SHEE-01 ~ SHEE-02   | Phase 17 | Pending |
-| FILT-01 ~ FILT-04   | Phase 17 | Pending |
-| CYCLE-01 ~ CYCLE-04 | Phase 18 | Pending |
-| MODU-01 ~ MODU-03   | Phase 18 | Pending |
-| PAGE-01 ~ PAGE-05   | Phase 19 | Pending |
-| VIEW-01 ~ VIEW-03   | Phase 19 | Pending |
-| NOTI-01 ~ NOTI-04   | Phase 20 | Pending |
-| ANAL-01 ~ ANAL-03   | Phase 20 | Pending |
-| UI-06               | Phase 20 | Pending |
+| WORK-01 ~ WORK-04   | Phase 15 | Pending   |
+| PROJ-01 ~ PROJ-05   | Phase 15 | Pending   |
+| UI-01, UI-02, UI-05 | Phase 15 | Pending   |
+| ISSU-01 ~ ISSU-08   | Phase 16 | Pending   |
+| KANB-01 ~ KANB-05   | Phase 16 | Pending   |
+| UI-04               | Phase 16 | Pending   |
+| CALN-01 ~ CALN-02   | Phase 17 | Pending   |
+| GANT-01 ~ GANT-02   | Phase 17 | Pending   |
+| SHEE-01 ~ SHEE-02   | Phase 17 | Pending   |
+| FILT-01 ~ FILT-04   | Phase 17 | Pending   |
+| CYCLE-01 ~ CYCLE-04 | Phase 18 | Pending   |
+| MODU-01 ~ MODU-03   | Phase 18 | Pending   |
+| PAGE-01 ~ PAGE-05   | Phase 19 | Pending   |
+| VIEW-01 ~ VIEW-03   | Phase 19 | Pending   |
+| NOTI-01 ~ NOTI-04   | Phase 20 | Pending   |
+| ANAL-01 ~ ANAL-03   | Phase 20 | Pending   |
+| UI-06               | Phase 20 | Pending   |
 
 **Coverage:**
 
