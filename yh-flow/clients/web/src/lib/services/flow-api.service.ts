@@ -2,7 +2,7 @@
 // request body snake_case transformation (INFRA-01), Token refresh queue (INFRA-02),
 // and standardized error handling (INFRA-04)
 
-import axios, { type AxiosInstance, type AxiosRequestConfig } from "axios";
+import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from "axios";
 import humps from "humps";
 import { standardizeApiError } from "@plane/types";
 
@@ -183,5 +183,92 @@ export abstract class FlowApiService {
 
   request(config = {}) {
     return this.axiosInstance(config);
+  }
+
+  // INFRA-05: === Pagination extraction layer ===
+
+  /**
+   * Unwrap paginated response, extracting the `results` array.
+   * Falls back to returning `data` directly if results is absent or already an array.
+   */
+  protected unwrapPaginated<T>(response: AxiosResponse): T[] {
+    const data = response.data;
+    if (data && Array.isArray(data.results)) {
+      return data.results;
+    }
+    if (Array.isArray(data)) return data;
+    return data;
+  }
+
+  /**
+   * GET request returning a paginated list — automatically unwraps results[].
+   * Type: `Promise<T[]>` — hooks receive a plain array.
+   */
+  async getList<T>(
+    url: string,
+    params: Record<string, unknown> = {},
+    config: AxiosRequestConfig = {}
+  ): Promise<T[]> {
+    const response = await this.get(url, { params, ...config });
+    return this.unwrapPaginated<T>(response);
+  }
+
+  /**
+   * GET request returning a single object — returns response.data as T.
+   */
+  async getOne<T>(
+    url: string,
+    config: AxiosRequestConfig = {}
+  ): Promise<T> {
+    const response = await this.get(url, config);
+    return response.data as T;
+  }
+
+  /**
+   * POST request returning a paginated list (for complex filter body queries).
+   */
+  async postList<T>(
+    url: string,
+    data: Record<string, unknown> = {},
+    config: AxiosRequestConfig = {}
+  ): Promise<T[]> {
+    const response = await this.post(url, data, config);
+    return this.unwrapPaginated<T>(response);
+  }
+
+  /**
+   * POST request returning a single object (for create operations).
+   */
+  async postOne<T>(
+    url: string,
+    data: Record<string, unknown> = {},
+    config: AxiosRequestConfig = {}
+  ): Promise<T> {
+    const response = await this.post(url, data, config);
+    return response.data as T;
+  }
+
+  /**
+   * PATCH request returning a single object.
+   */
+  async patchOne<T>(
+    url: string,
+    data: Record<string, unknown> = {},
+    config: AxiosRequestConfig = {}
+  ): Promise<T> {
+    const response = await this.patch(url, data, config);
+    return response.data as T;
+  }
+
+  /**
+   * PUT request returning a single object.
+   */
+  async putOne<T>(
+    url: string,
+    data: Record<string, unknown> = {},
+    config: AxiosRequestConfig = {}
+  ): Promise<T> {
+    const response = await this.put(url, data, config);
+    return response.data as T;
   }
 }
