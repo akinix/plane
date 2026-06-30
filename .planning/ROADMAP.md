@@ -24,8 +24,8 @@ v2.0 (Flow Web Frontend): Phase 14~20 — 构建完整 React 前端
       (completed 2026-06-29)
 - [x] **Phase 17: 日历/甘特/电子表格 & 筛选引擎** — Issue 日历/甘特/电子表格视图，通用筛选/排序/自定义列引擎 (completed 2026-06-29)
 - [ ] **Phase 18: 周期 & 模块** — Cycle 列表/详情/看板，Module 列表/详情
-- [ ] **Phase 19: 页面 & 视图** — Page 平铺列表/TipTap 编辑器/权限/收藏，自定义视图保存与应用
-- [ ] **Phase 20: 通知 & 分析** — SSE 实时通知，分析仪表板，响应式布局收尾
+- [x] **Phase 19: 页面 & 视图** — Page 平铺列表/TipTap 编辑器/权限/收藏，自定义视图保存与应用 (completed 2026-06-30)
+- [ ] **Phase 20: 通知 & 分析** — 站内通知系统，分析仪表板，响应式布局收尾
 
 ---
 
@@ -183,10 +183,10 @@ Plans:
 
 ```
 Plans:
-- [ ] 19-01-PLAN.md — Pages 数据层（MOCK_PAGES, usePages, usePageMutations, PageStore）
-- [ ] 19-02-PLAN.md — Pages 列表页 UI（Tab/搜索/排序/卡片/创建/删除弹窗 + 路由 + 侧边栏导航）
-- [ ] 19-03-PLAN.md — Pages 编辑器（TipTap 编辑器/Header/NavigationPane + 自动保存/归档/删除）
-- [ ] 19-04-PLAN.md — Views 列表页 + 保存/应用（ViewStore, useViews, 视图列表组件, FilterSaveModal 集成）
+- [x] 19-01-PLAN.md — Pages 数据层（MOCK_PAGES, usePages, usePageMutations, PageStore）
+- [x] 19-02-PLAN.md — Pages 列表页 UI（Tab/搜索/排序/卡片/创建/删除弹窗 + 路由 + 侧边栏导航）
+- [x] 19-03-PLAN.md — Pages 编辑器（TipTap 编辑器/Header/NavigationPane + 自动保存/归档/删除）
+- [x] 19-04-PLAN.md — Views 列表页 + 保存/应用（ViewStore, useViews, 视图列表组件, FilterSaveModal 集成）
 ```
 
 **UI hint**: yes
@@ -195,36 +195,46 @@ Plans:
 
 ### Phase 20: 通知 & 分析
 
-**Goal**: 用户可使用实时通知系统和分析仪表板，页面完成响应式适配
+**Goal**: 用户可使用通知系统和分析仪表板，页面完成响应式适配
 
 **Depends on**: Phase 19
 
-**Requirements**: NOTI-01, NOTI-02, NOTI-03, NOTI-04, ANAL-01, ANAL-02, ANAL-03, UI-06
+**Requirements**: NOTI-01, NOTI-03, NOTI-04, ANAL-01, ANAL-02, ANAL-03, UI-06
+
+> **Note:** NOTI-02 (SSE 实时通知) 跳过 per D-P20-01。通知使用 SWR 轮询 + 手动刷新模式。
 
 **Success Criteria** (what must be TRUE):
 
-1. 用户看到站内通知列表（按时间倒序），可通过 SSE 接收实时通知并自动弹出提示
-2. 用户可标记通知为已读（单条/全部），点击通知可跳转到关联的 Issue 或评论
+1. 用户看到站内通知列表（按时间倒序），通过手动刷新或 Tab 切换时获取数据
+2. 用户可标记通知为已读（单条/全部），点击通知可跳转到关联的 Issue
 3. 用户看到工作区分析仪表板（Issue 按状态/优先级的统计图表、完成率月度趋势）
 4. 用户在项目级别查看分析图表，可导出分析数据为 CSV 文件
 5. 所有页面在桌面端和平板设备上均可正常显示和操作（内容不溢出、布局不断裂）
 
-**Plans**: TBD
+**Plans**: 3 plans
+
+```
+Plans:
+- [ ] 20-01-PLAN.md — 通知系统（Mock 数据 + Store + Hooks + UI 组件 + 路由/侧边栏/顶栏集成）
+- [ ] 20-02-PLAN.md — 分析仪表板（Mock 数据 + Store + Hooks + 图表组件 + 概览/工作项 Tab + CSV 导出）
+- [ ] 20-03-PLAN.md — 响应式布局（侧边栏折叠 + 全局页面响应式修复）
+```
+
 **UI hint**: yes
 
 ---
 
 ## Progress
 
-| Phase                             | Plans Complete | Status      | Completed  |
-| --------------------------------- | -------------- | ----------- | ---------- |
-| 14. 脚手架 & Auth                 | 4/4            | Delivered   | ✅         |
-| 15. 工作区 & 项目                 | 4/4            | Delivered   | ✅         |
-| 16. Issue 列表/详情 & 看板        | 5/5            | Complete    | 2026-06-29 |
-| 17. 日历/甘特/电子表格 & 筛选引擎 | 6/6            | Complete    | 2026-06-29 |
-| 18. 周期 & 模块                   | 4/4            | Complete    | 2026-06-30 |
-| 19. 页面 & 视图                   | 0/4            | Planning    | -          |
-| 20. 通知 & 分析                   | 0/0            | Not started | -          |
+| Phase                             | Plans Complete | Status    | Completed  |
+| --------------------------------- | -------------- | --------- | ---------- |
+| 14. 脚手架 & Auth                 | 4/4            | Delivered | ✅         |
+| 15. 工作区 & 项目                 | 4/4            | Delivered | ✅         |
+| 16. Issue 列表/详情 & 看板        | 5/5            | Complete  | 2026-06-29 |
+| 17. 日历/甘特/电子表格 & 筛选引擎 | 6/6            | Complete  | 2026-06-29 |
+| 18. 周期 & 模块                   | 4/4            | Complete  | 2026-06-30 |
+| 19. 页面 & 视图                   | 4/4            | Complete  | 2026-06-30 |
+| 20. 通知 & 分析                   | 0/3            | Planning  | -          |
 
 ---
 
@@ -263,4 +273,4 @@ Plans:
 ---
 
 _Requirements defined: 2026-06-26_
-_Last updated: 2026-06-26 after v2.0 roadmap creation_
+_Last updated: 2026-06-30 after Phase 20 planning_
