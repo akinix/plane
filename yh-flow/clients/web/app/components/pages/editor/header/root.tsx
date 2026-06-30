@@ -28,6 +28,7 @@ export const PageEditorHeaderRoot = function PageEditorHeaderRoot({
   const { updatePage } = usePageMutations();
   const store = useStore();
   const [accessMenuOpen, setAccessMenuOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const accessLabel = page.access === EPageAccess.PUBLIC ? "公开" : "私人";
   const AccessIcon = page.access === EPageAccess.PUBLIC ? Globe : Lock;
@@ -42,7 +43,7 @@ export const PageEditorHeaderRoot = function PageEditorHeaderRoot({
   };
 
   const handleDelete = () => {
-    store.page.openDeleteModal(page.id, page.name);
+    setDeleteModalOpen(true);
   };
 
   return (
@@ -113,10 +114,10 @@ export const PageEditorHeaderRoot = function PageEditorHeaderRoot({
 
       {/* Delete modal */}
       <DeletePageModal
-        pageId={store.page.deletePageId ?? ""}
-        pageName={store.page.deletePageName ?? ""}
-        isOpen={store.page.pageDeleting}
-        onClose={() => store.page.closeDeleteModal()}
+        pageId={page.id}
+        pageName={page.name}
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
         workspaceId={workspaceId}
       />
     </>
