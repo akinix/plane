@@ -4,14 +4,14 @@ milestone: v3.0
 milestone_name: 前后端打通
 current_phase: 21 (infrastructure-foundation)
 status: executing
-last_updated: "2026-06-30T09:04:12.733Z"
-last_activity: 2026-06-30 -- Phase 21 planning complete
+last_updated: "2026-06-30T09:15:27.816Z"
+last_activity: 2026-06-30 -- Plan 21-02: query-keys.ts completed
 progress:
   total_phases: 7
   completed_phases: 0
   total_plans: 3
-  completed_plans: 0
-  percent: 0
+  completed_plans: 1
+  percent: 33
 ---
 
 # YH.Flow — Project State
@@ -123,15 +123,16 @@ progress:
 | v3.0: OUT-02 归属 Phase 22                                    | 硬编码 Mock ID 替换应随工作区/项目迁移一起完成，因为 ID 主要在这些模块中使用                     | 2026-06-30 |
 | v3.0: OUT-03 为跨阶段关注点                                   | 三态 UI 验证在每个模块迁移后的阶段中进行，非独立阶段                                             | 2026-06-30 |
 | v3.0: Webhook 作为独立新功能最后执行                          | Webhook 是唯一无 Mock 数据阶段的新功能，从零接入最干净，不依赖其他模块迁移                       | 2026-06-30 |
+| v3.0: query-keys.ts 采用 as const 只读元组模式                | 利用 TypeScript readonly 推断完全兼容 TanStack Query v5 的 ReadonlyArray<unknown> QueryKey 类型  | 2026-06-30 |
 
 ---
 
 ## Current Position
 
 Phase 21: Infrastructure Foundation
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-06-30 -- Phase 21 planning complete
+Plan: 21-02 — 集中式查询键工厂 query-keys.ts (INFRA-03)
+Status: In progress (1/3 plans completed)
+Last activity: 2026-06-30 -- Plan 21-02: query-keys.ts completed
 
 ## Next Steps
 

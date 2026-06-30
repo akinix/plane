@@ -58,7 +58,7 @@ Plans:
 **Wave 1**
 
 - [ ] 21-01-PLAN.md — FlowApiService 拦截器：请求体转换 + Token 刷新队列 + 错误标准化（INFRA-01, INFRA-02, INFRA-04）
-- [ ] 21-02-PLAN.md — 集中式查询键工厂 query-keys.ts（INFRA-03）
+- [x] 21-02-PLAN.md — 集中式查询键工厂 query-keys.ts（INFRA-03）
 
 **Wave 2** _(blocked on Wave 1 completion)_
 
