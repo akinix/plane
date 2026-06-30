@@ -84,7 +84,7 @@ Each task was committed atomically:
 2. **Task 2: Notification UI components** — `eac7fe3f9` (feat)
 3. **Task 3: Integration — route, page, sidebar, top-bar** — `0861f5101` (feat)
 
-**Plan metadata:** (pending — committed with state update)
+**Plan metadata:** `9457f931c` (docs: complete 20-01)
 
 ## Files Created/Modified
 

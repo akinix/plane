@@ -8,6 +8,7 @@ import { ModuleStore } from "./module.store";
 import { PageStore } from "./page.store";
 import { ViewStore } from "./view.store";
 import { NotificationStore, type INotificationStore } from "./notification.store";
+import { AnalyticsStore, type IAnalyticsStore } from "./analytics.store";
 import type {
   IWorkspaceStore,
   IProjectStore,
@@ -28,6 +29,7 @@ export interface ICoreRootStore {
   page: IPageStore;
   view: IViewStore;
   notification: INotificationStore;
+  analytics: IAnalyticsStore;
 }
 
 export class CoreRootStore implements ICoreRootStore {
@@ -40,6 +42,7 @@ export class CoreRootStore implements ICoreRootStore {
   page: IPageStore;
   view: IViewStore;
   notification: INotificationStore;
+  analytics: IAnalyticsStore;
 
   constructor() {
     this.auth = new AuthStore();
@@ -51,5 +54,6 @@ export class CoreRootStore implements ICoreRootStore {
     this.page = new PageStore();
     this.view = new ViewStore();
     this.notification = new NotificationStore();
+    this.analytics = new AnalyticsStore();
   }
 }

@@ -14,3 +14,4 @@ export * from "./use-page-mutations";
 export * from "./use-views";
 export * from "./use-view-mutations";
 export * from "./use-notifications";
+export * from "./use-analytics";

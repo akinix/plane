@@ -6,6 +6,7 @@ import type { IModuleStore } from "./module.store";
 import type { IPageStore } from "./page.store";
 import type { IViewStore } from "./view.store";
 import type { INotificationStore } from "./notification.store";
+import type { IAnalyticsStore } from "./analytics.store";
 import type { TViewLayout, TGroupByOptions, TFilterCriteria } from "@/components/issues/filters/types";
 
 export type {
@@ -15,6 +16,7 @@ export type {
   IPageStore,
   IViewStore,
   INotificationStore,
+  IAnalyticsStore,
   TViewLayout,
   TGroupByOptions,
   TFilterCriteria,

@@ -16,6 +16,7 @@ import type {
 } from "@plane/types";
 import { EUserPermissions, EPageAccess } from "@plane/types";
 import type { TProjectBaseActivity } from "@plane/types";
+import type { TChart, TChartDatum } from "../types/charts/common";
 
 // ---------------------------------------------------------------------------
 // Workspaces
@@ -2844,4 +2845,49 @@ export const MOCK_NOTIFICATIONS: TNotification[] = [
 export const MOCK_UNREAD_COUNT: TUnreadNotificationsCount = {
   total_unread_notifications_count: 3,
   mention_unread_notifications_count: 0,
+};
+
+// ---------------------------------------------------------------------------
+// Analytics (per D-P20-07: mock data for ANAL-01, ANAL-02, ANAL-03)
+// ---------------------------------------------------------------------------
+
+export const MOCK_ANALYTICS_OVERVIEW: TChart = {
+  data: [
+    { key: "total_issues", name: "总 Issue 数", count: 128 },
+    { key: "completed", name: "已完成", count: 72 },
+    { key: "in_progress", name: "进行中", count: 31 },
+    { key: "backlog", name: "积压", count: 25 },
+  ],
+  schema: {
+    total_issues: "总 Issue 数",
+    completed: "已完成",
+    in_progress: "进行中",
+    backlog: "积压",
+  },
+};
+
+export const MOCK_ANALYTICS_TREND: TChartDatum[] = [
+  { key: "2026-01", name: "1月", created: 18, resolved: 12 },
+  { key: "2026-02", name: "2月", created: 22, resolved: 15 },
+  { key: "2026-03", name: "3月", created: 28, resolved: 20 },
+  { key: "2026-04", name: "4月", created: 15, resolved: 22 },
+  { key: "2026-05", name: "5月", created: 30, resolved: 25 },
+  { key: "2026-06", name: "6月", created: 15, resolved: 18 },
+];
+
+export const MOCK_ANALYTICS_BAR: TChart = {
+  data: [
+    { key: "urgent", name: "紧急", count: 8 },
+    { key: "high", name: "高", count: 35 },
+    { key: "medium", name: "中", count: 42 },
+    { key: "low", name: "低", count: 18 },
+    { key: "none", name: "无", count: 25 },
+  ],
+  schema: {
+    urgent: "紧急",
+    high: "高",
+    medium: "中",
+    low: "低",
+    none: "无",
+  },
 };
