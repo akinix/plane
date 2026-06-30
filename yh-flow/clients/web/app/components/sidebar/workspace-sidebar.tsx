@@ -12,6 +12,18 @@ export const WorkspaceSidebar = observer(function WorkspaceSidebar() {
   const { workspace: workspaceStore } = useStore();
   const collapsed = workspaceStore.sidebarCollapsed;
 
+  // Keyboard shortcut: Cmd/Ctrl + B to toggle sidebar
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "b") {
+        e.preventDefault();
+        workspaceStore.toggleSidebarCollapsed();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [workspaceStore]);
+
   // Responsive auto-collapse/expand at 1024px breakpoint
   useEffect(() => {
     const handleResize = () => {
