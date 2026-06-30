@@ -118,10 +118,7 @@ export abstract class FlowApiService {
             });
           }
 
-          // This request initiates the refresh
-          originalRequest._retry = true;
-          isRefreshing = true;
-
+          // Guard: check refresh handler early before mutating any state
           if (!refreshHandler) {
             // No refresh handler registered — should not happen in normal flow
             removeToken();
@@ -129,7 +126,10 @@ export abstract class FlowApiService {
             return Promise.reject(error);
           }
 
-          const doRefresh = async (): Promise<void> => {
+          // This request initiates the refresh — set isRefreshing and refreshPromise atomically
+          originalRequest._retry = true;
+          isRefreshing = true;
+          refreshPromise = (async (): Promise<void> => {
             try {
               await refreshHandler!();
               isRefreshing = false;
@@ -141,8 +141,7 @@ export abstract class FlowApiService {
               window.location.href = "/auth/sign-in";
               throw refreshError;
             }
-          };
-          refreshPromise = doRefresh();
+          })();
 
           return new Promise<unknown>((resolve, reject) => {
             failedQueue.push({
