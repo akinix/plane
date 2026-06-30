@@ -4,14 +4,14 @@ milestone: v3.0
 milestone_name: 前后端打通
 current_phase: 21 (infrastructure-foundation)
 status: executing
-last_updated: "2026-06-30T09:35:00.000Z"
-last_activity: "2026-06-30 -- Plan 21-01: FlowApiService 拦截器重构 completed"
+last_updated: "2026-06-30T09:37:20.506Z"
+last_activity: "2026-06-30 -- Plan 21-03: 分页提取层 completed — Phase 21 all 3 plans done"
 progress:
   total_phases: 7
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 2
-  percent: 67
+  completed_plans: 3
+  percent: 14
 ---
 
 # YH.Flow — Project State
@@ -70,9 +70,9 @@ progress:
 - [x] **Phase 19: 页面 & 视图** — 4/4 plans, COMPLETE
 - [x] **Phase 20: 通知 & 分析** — 3/3 plans, COMPLETE
 
-### v3.0 Milestone: Planning
+### v3.0 Milestone: In Progress
 
-- [ ] **Phase 21: Infrastructure Foundation** — API 请求格式转换、Token 刷新队列、集中式查询键工厂、错误标准化、分页提取层
+- [x] **Phase 21: Infrastructure Foundation** — API 请求格式转换、Token 刷新队列、集中式查询键工厂、错误标准化、分页提取层
 - [ ] **Phase 22: Workspace & Project** — 工作区和项目 CRUD 接入真实 API，成员管理，slug 路由适配
 - [ ] **Phase 23: WorkItems** — Issue/状态/标签/评论/活动日志/批量操作接入真实 API，乐观更新竞态处理
 - [ ] **Phase 24: Cycles & Modules** — 周期和模块 CRUD 接入真实 API，与 Issue 关联
@@ -124,20 +124,20 @@ progress:
 | v3.0: OUT-03 为跨阶段关注点                                   | 三态 UI 验证在每个模块迁移后的阶段中进行，非独立阶段                                             | 2026-06-30 |
 | v3.0: Webhook 作为独立新功能最后执行                          | Webhook 是唯一无 Mock 数据阶段的新功能，从零接入最干净，不依赖其他模块迁移                       | 2026-06-30 |
 | v3.0: query-keys.ts 采用 as const 只读元组模式                | 利用 TypeScript readonly 推断完全兼容 TanStack Query v5 的 ReadonlyArray<unknown> QueryKey 类型  | 2026-06-30 |
+| v3.0: Phase 21 complete — Infrastructure Foundation           | 所有 3 个计划（拦截器重构、查询键工厂、分页提取层）已执行完毕，Phase 21 全部交付                 | 2026-06-30 |
 
 ---
 
 ## Current Position
 
-Phase 21: Infrastructure Foundation
-Plan: 21-03 — 分页提取层 + 资源清理 (INFRA-05)
-Status: In progress (2/3 plans completed)
-Last activity: 2026-06-30 -- Plan 21-01: FlowApiService 拦截器重构 completed
+Phase 21: Infrastructure Foundation — COMPLETE (3/3 plans)
+Status: Complete (all 3 plans: 21-01 interceptors, 21-02 query keys, 21-03 pagination)
+Last activity: 2026-06-30 -- Plan 21-03: 分页提取层 completed
 
 ## Next Steps
 
-1. Approve v3.0 roadmap
-2. Execute `/gsd-plan-phase 21` to create execution plans for Phase 21
+1. Approve v3.0 roadmap (done)
+2. Execute `/gsd-plan-phase 22` to create execution plans for Phase 22 (Workspace & Project API integration)
 
 ## Deferred Items
 

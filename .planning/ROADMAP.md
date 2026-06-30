@@ -27,7 +27,7 @@ v3.0 (前后端打通): Phase 21~27 — Flow Web 前端从 Mock 数据切换到�
 
 ## Phases
 
-- [ ] **Phase 21: Infrastructure Foundation** — API 请求格式转换、Token 刷新队列、集中式查询键工厂、错误标准化、分页提取层
+- [x] **Phase 21: Infrastructure Foundation** — API 请求格式转换、Token 刷新队列、集中式查询键工厂、错误标准化、分页提取层
 - [ ] **Phase 22: Workspace & Project** — 工作区和项目 CRUD 接入真实 API，成员管理，slug 路由适配
 - [ ] **Phase 23: WorkItems** — Issue/状态/标签/评论/活动日志/批量操作接入真实 API，乐观更新竞态处理
 - [ ] **Phase 24: Cycles & Modules** — 周期和模块 CRUD 接入真实 API，与 Issue 关联
@@ -62,7 +62,7 @@ Plans:
 
 **Wave 2** _(blocked on Wave 1 completion)_
 
-- [ ] 21-03-PLAN.md — 分页提取层 getList / getOne 方法（INFRA-05）
+- [x] 21-03-PLAN.md — 分页提取层 getList / getOne 方法（INFRA-05）
 
 ### Phase 22: Workspace & Project
 
@@ -168,15 +168,15 @@ Plans:
 
 ## Progress
 
-| Phase                                   | Plans Complete | Status      | Completed |
-| --------------------------------------- | -------------- | ----------- | --------- |
-| 21. Infrastructure Foundation           | 2/3            | In progress | -         |
-| 22. Workspace & Project                 | 0/0            | Not started | -         |
-| 23. WorkItems                           | 0/0            | Not started | -         |
-| 24. Cycles & Modules                    | 0/0            | Not started | -         |
-| 25. Pages & Views                       | 0/0            | Not started | -         |
-| 26. Notifications & Analytics + Cleanup | 0/0            | Not started | -         |
-| 27. Webhook Admin UI                    | 0/0            | Not started | -         |
+| Phase                                   | Plans Complete | Status      | Completed  |
+| --------------------------------------- | -------------- | ----------- | ---------- |
+| 21. Infrastructure Foundation           | 3/3            | Complete    | 2026-06-30 |
+| 22. Workspace & Project                 | 0/0            | Not started | -          |
+| 23. WorkItems                           | 0/0            | Not started | -          |
+| 24. Cycles & Modules                    | 0/0            | Not started | -          |
+| 25. Pages & Views                       | 0/0            | Not started | -          |
+| 26. Notifications & Analytics + Cleanup | 0/0            | Not started | -          |
+| 27. Webhook Admin UI                    | 0/0            | Not started | -          |
 
 ---
 
