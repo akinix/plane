@@ -11,16 +11,16 @@ import { TOAST_TYPE, setToast } from "@plane/propel/toast";
 type Props = {
   view: TIssueView;
   projectId: string;
-  workspaceSlug: string;
+  workspaceId: string;
   onEdit?: () => void;
   onDelete?: () => void;
 };
 
-const ViewQuickActions = observer(function ViewQuickActions({ view, projectId, workspaceSlug, onEdit: _onEdit, onDelete }: Props) {
+const ViewQuickActions = observer(function ViewQuickActions({ view, projectId, workspaceId, onEdit: _onEdit, onDelete }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleCopyLink = () => {
-    const link = `/workspaces/${workspaceSlug}/projects/${projectId}/views/${view.id}`;
+    const link = `/workspaces/${workspaceId}/projects/${projectId}/views/${view.id}`;
     copyUrlToClipboard(link).then(() => {
       setToast({
         type: TOAST_TYPE.SUCCESS,
