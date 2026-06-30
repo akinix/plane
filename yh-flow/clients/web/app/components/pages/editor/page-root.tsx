@@ -28,7 +28,14 @@ export const PageEditorRoot = observer(function PageEditorRoot({ workspaceId, pa
     (_json: object, html: string) => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
       debounceRef.current = setTimeout(() => {
-        updatePage.mutate({ pageId, data: { description_html: html } });
+        updatePage.mutate(
+          { pageId, data: { description_html: html } },
+          {
+            onError: () => {
+              console.warn("Auto-save failed for page:", pageId);
+            },
+          }
+        );
       }, 1500);
     },
     [pageId, updatePage]
