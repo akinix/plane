@@ -199,11 +199,29 @@ d:/github/akinix-plane/
 
 ## 10. Current State
 
-v1.0 里程碑完成（12/14 phases）。v2.0 Flow Web 前端里程碑完成（7/7 phases, 30 plans）。Phase 9（集成）推迟至后续版本。
+v1.0 里程碑完成（12/14 phases）。v2.0 Flow Web 前端里程碑完成（7/7 phases, 30 plans）。v3.0 里程碑已启动。Phase 9（集成）推迟至后续版本。
+
+## Current Milestone: v3.0 — 前后端打通
+
+**Goal:** 将 Flow Web 前端从 Mock 数据切换到真实 .NET API，实现端到端全栈集成。同步完成 Webhook 管理前端页面。
+
+**Target features:**
+
+- 认证（Auth）— JWT 登录/注册/密码重置
+- 工作区（Workspace）— CRUD、成员管理、邀请
+- 项目（Project）— CRUD、成员管理
+- 工作项（WorkItems）— Issue、状态、标签、评论、活动日志
+- 周期（Cycle）— 迭代管理
+- 模块（Module）— 功能分组
+- 页面（Page）— 文档管理
+- 视图（View）— 自定义筛选和展示
+- 通知（Notification）— 站内通知
+- 分析（Analytics）— 仪表板图表 + CSV 导出
+- Webhook — 前端管理页面（新建功能）
 
 ## 11. Next Steps
 
-计划下一个里程碑，将前端从 Mock 数据切换到真实 .NET API。
+执行 v3.0 里程碑：定义需求 → 创建路线图 → 讨论 Phase 21 → 执行。
 
 ## Evolution
 
@@ -226,4 +244,4 @@ This document evolves at phase transitions and milestone boundaries.
 
 ---
 
-_Last updated: 2026-06-26 after v2.0 milestone start_
+_Last updated: 2026-06-30 after v3.0 milestone start_

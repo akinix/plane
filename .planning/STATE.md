@@ -1,17 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v2.0
-milestone_name: milestone
-current_phase: 20 (notification-analytics)
-status: Awaiting next milestone
-last_updated: "2026-06-30T07:08:42.289Z"
-last_activity: 2026-06-30 — Milestone v2.0 completed and archived
+milestone: v3.0
+milestone_name: 前后端打通
+status: planning
+last_updated: "2026-06-30T07:21:43.132Z"
+last_activity: 2026-06-30
 progress:
-  total_phases: 19
-  completed_phases: 11
-  total_plans: 73
-  completed_plans: 63
-  percent: 58
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
+  percent: 0
 ---
 
 # YH.Flow — Project State
@@ -136,10 +135,10 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 ## Current Position
 
-Phase: Milestone v2.0 complete
+Phase: Not started (defining requirements)
 Plan: —
-Status: Awaiting next milestone
-Last activity: 2026-06-30 — Milestone v2.0 completed and archived
+Status: Defining requirements
+Last activity: 2026-06-30 — Milestone v3.0 started
 
 ## Deferred Items
 
