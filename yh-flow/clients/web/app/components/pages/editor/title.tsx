@@ -24,9 +24,9 @@ export const PageEditorTitle = function PageEditorTitle({ pageId, title, workspa
   const { updatePage } = usePageMutations();
 
   const handleBlur = useCallback(() => {
-    setIsEditing(false);
     if (debounceRef.current) clearTimeout(debounceRef.current);
     debounceRef.current = setTimeout(() => {
+      setIsEditing(false);
       if (localTitle !== title) {
         updatePage.mutate({ pageId, data: { name: localTitle } });
       }
