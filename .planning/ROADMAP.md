@@ -25,7 +25,7 @@ v2.0 (Flow Web Frontend): Phase 14~20 — 构建完整 React 前端
 - [x] **Phase 17: 日历/甘特/电子表格 & 筛选引擎** — Issue 日历/甘特/电子表格视图，通用筛选/排序/自定义列引擎 (completed 2026-06-29)
 - [ ] **Phase 18: 周期 & 模块** — Cycle 列表/详情/看板，Module 列表/详情
 - [x] **Phase 19: 页面 & 视图** — Page 平铺列表/TipTap 编辑器/权限/收藏，自定义视图保存与应用 (completed 2026-06-30)
-- [ ] **Phase 20: 通知 & 分析** — 站内通知系统，分析仪表板，响应式布局收尾
+- [ ] **Phase 20: 通知 & 分析** — 站内通知系统（完成），分析仪表板（完成），响应式布局收尾
 
 ---
 
@@ -216,7 +216,7 @@ Plans:
 ```
 Plans:
 - [x] 20-01-PLAN.md — 通知系统（Mock 数据 + Store + Hooks + UI 组件 + 路由/侧边栏/顶栏集成）
-- [ ] 20-02-PLAN.md — 分析仪表板（Mock 数据 + Store + Hooks + 图表组件 + 概览/工作项 Tab + CSV 导出）
+- [x] 20-02-PLAN.md — 分析仪表板（Mock 数据 + Store + Hooks + 图表组件 + 概览/工作项 Tab + CSV 导出）
 - [ ] 20-03-PLAN.md — 响应式布局（侧边栏折叠 + 全局页面响应式修复）
 ```
 
