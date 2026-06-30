@@ -1,13 +1,15 @@
 // FLOW: TopBar — top navigation bar (D-P15-07)
 import { observer } from "mobx-react";
-import { Search, Bell } from "lucide-react";
+import { Search } from "lucide-react";
 import { useLocation } from "react-router";
 import { useStore } from "@/lib/store-context";
+import { NotificationBell } from "@/components/notifications/notification-bell";
 import { UserDropdown } from "./user-dropdown";
 
 export const TopBar = observer(function TopBar() {
   const location = useLocation();
   const { workspace: workspaceStore } = useStore();
+  const wsId = workspaceStore.currentWorkspaceId ?? "";
 
   // Derive page title from current path
   const getTitle = () => {
@@ -20,6 +22,7 @@ export const TopBar = observer(function TopBar() {
     }
     if (path.includes("/settings")) return "设置";
     if (path.includes("/members")) return "成员";
+    if (path.includes("/notifications")) return "通知";
     return "Flow";
   };
 
@@ -42,14 +45,8 @@ export const TopBar = observer(function TopBar() {
           <Search className="size-4" />
         </button>
 
-        {/* Notification bell (placeholder — implemented in Phase 20) */}
-        <button
-          className="relative flex size-8 items-center justify-center rounded-md text-custom-sidebar-text-200 transition-colors hover:bg-custom-sidebar-background-80"
-          title="通知"
-        >
-          <Bell className="size-4" />
-          <span className="absolute right-1.5 top-1.5 size-1.5 rounded-full bg-custom-primary" />
-        </button>
+        {/* Notification bell with unread count */}
+        <NotificationBell workspaceId={wsId} />
 
         {/* User avatar dropdown */}
         <UserDropdown />

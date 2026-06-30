@@ -1,7 +1,7 @@
 // FLOW: SidebarTree — tree navigation showing workspace > projects > views (D-P15-05)
 import { observer } from "mobx-react";
 import { useLocation, useNavigate } from "react-router";
-import { ChevronRight, ChevronDown, LayoutGrid, ListTodo, Repeat, Blocks, FileText, Eye } from "lucide-react";
+import { ChevronRight, ChevronDown, LayoutGrid, ListTodo, Repeat, Blocks, FileText, Eye, Bell } from "lucide-react";
 import { useStore } from "@/lib/store-context";
 import { useProjects } from "../../../src/lib/hooks/use-projects";
 import { cn } from "@plane/utils";
@@ -64,6 +64,19 @@ export const SidebarTree = observer(function SidebarTree() {
           >
             <FileText className="size-3.5" />
             <span>页面</span>
+          </button>
+
+          {/* Notification navigation (workspace-level, per D-P20-04) */}
+          <button
+            onClick={() => navigate(`/workspaces/${wsId}/notifications`)}
+            className={cn("text-xs ml-2 flex w-full items-center gap-2 rounded-md px-2 py-1 transition-colors", {
+              "text-custom-sidebar-text-100": location.pathname.match(/\/workspaces\/([^/]+)\/notifications/),
+              "text-custom-sidebar-text-300 hover:bg-custom-sidebar-background-80":
+                !location.pathname.match(/\/workspaces\/([^/]+)\/notifications/),
+            })}
+          >
+            <Bell className="size-3.5" />
+            <span>通知</span>
           </button>
         </>
       )}

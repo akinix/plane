@@ -72,5 +72,13 @@ export default [
     // ====================================================================
     route("workspaces/:workspaceId/projects/:projectId/modules", "app/modules/page.tsx"),
     route("workspaces/:workspaceId/projects/:projectId/modules/:moduleId", "app/modules/[moduleId]/page.tsx"),
+
+    // ====================================================================
+    // NOTIFICATION ROUTES per D-P20-04
+    // ====================================================================
+    route(
+      "workspaces/:workspaceId/notifications",
+      "app/workspaces/[workspaceId]/notifications/page.tsx"
+    ),
   ]),
 ] satisfies RouteConfig;
