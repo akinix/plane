@@ -55,8 +55,13 @@ v3.0 (前后端打通): Phase 21~27 — Flow Web 前端从 Mock 数据切换到�
 
 Plans:
 
+**Wave 1**
+
 - [ ] 21-01-PLAN.md — FlowApiService 拦截器：请求体转换 + Token 刷新队列 + 错误标准化（INFRA-01, INFRA-02, INFRA-04）
 - [ ] 21-02-PLAN.md — 集中式查询键工厂 query-keys.ts（INFRA-03）
+
+**Wave 2** _(blocked on Wave 1 completion)_
+
 - [ ] 21-03-PLAN.md — 分页提取层 getList / getOne 方法（INFRA-05）
 
 ### Phase 22: Workspace & Project
