@@ -409,7 +409,7 @@ function IssueList() {
 
 3. **TanStack Query + Axios, not TanStack Query + fetch** — Axios interceptors handle JWT injection and 401 redirection at the transport layer. TanStack Query handles caching/refetching at the data layer. They compose via the `queryFn` that calls Axios-based service methods.
 
-4. **SSE for real-time, not WebSocket** — The .NET backend supports Server-Sent Events for notifications. SSE is unidirectional (server → client), simpler than WebSocket, works over HTTP/2, and requires no library — just the browser `EventSource` API. The `EventSource` callback dispatches to TanStack Query for cache invalidation.
+4. **SSE for real-time, not WebSocket** — The .NET backend supports Server-Sent Events for notifications. SSE is unidirectional (server -> client), simpler than WebSocket, works over HTTP/2, and requires no library — just the browser `EventSource` API. The `EventSource` callback dispatches to TanStack Query for cache invalidation.
 
 ---
 
@@ -430,5 +430,361 @@ function IssueList() {
 
 ---
 
-_Stack research for: Flow Web Frontend (v2.0 milestone)_
-_Researched: 2026-06-26_
+## Addendum: API Integration Stack (v3.0 Milestone)
+
+**Researched:** 2026-06-30
+
+The v2.0 milestone delivered a complete frontend with all components working against mock data. The v3.0 milestone switches from mock data to the real .NET backend API. This addendum documents only the changes needed for that integration.
+
+### Current State
+
+| Layer                         | Status                    | Details                                                                    |
+| ----------------------------- | ------------------------- | -------------------------------------------------------------------------- |
+| `AuthService`                 | Already calls real API    | `POST /auth/sign-in/`, `/auth/sign-up/`, `/auth/sign-out/`                 |
+| `FlowApiService` (base Axios) | Production-ready          | JWT Bearer auto-attach, humps snake_case/camelCase, 401 redirect           |
+| MobX stores                   | Clean -- no change needed | UI state only (sidebar, filters, selections)                               |
+| Vite proxy                    | Ready                     | `/api` proxy to `https://localhost:7030`                                   |
+| Backend API (15 modules)      | Complete                  | Identity, Workspace, Project, WorkItems, etc. all have endpoints           |
+| All 15 TanStack Query hooks   | **All use mock data**     | `use-workspaces.ts`, `use-issues.ts`, `use-cycles.ts`, etc.                |
+| 3 service files               | **All use mock data**     | `analytics.service.ts`, `notification.service.ts`, `issue-view.service.ts` |
+
+### What Gets Added (No New Dependencies)
+
+No new npm packages. All integration is through existing `FlowApiService` + `axios` + `@tanstack/react-query`.
+
+**New service classes** (extend `FlowApiService`, follow `auth.service.ts` pattern):
+
+| Service                | Endpoint Group                       |
+| ---------------------- | ------------------------------------ |
+| `workspace.service.ts` | Workspace CRUD, members, invitations |
+| `project.service.ts`   | Project CRUD, members                |
+| `work-item.service.ts` | Issue CRUD, bulk operations          |
+| `cycle.service.ts`     | Cycle CRUD, issues, progress         |
+| `module.service.ts`    | Module CRUD, issues, progress        |
+| `page.service.ts`      | Page CRUD                            |
+| `view.service.ts`      | View CRUD                            |
+| `member.service.ts`    | Cross-domain member resolution       |
+| `state.service.ts`     | State CRUD per project               |
+| `label.service.ts`     | Label CRUD per project               |
+| `comment.service.ts`   | Issue comment CRUD                   |
+| `activity.service.ts`  | Issue activity log                   |
+
+Each service follows the singleton export pattern already established:
+
+```typescript
+// src/lib/services/workspace.service.ts
+import { FlowApiService } from "./flow-api.service";
+
+export class WorkspaceService extends FlowApiService {
+  private static BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5030/api/v1";
+
+  constructor() {
+    super(WorkspaceService.BASE_URL);
+  }
+
+  async list(): Promise<IWorkspace[]> {
+    return this.get("/users/me/workspaces/").then((res) => res?.data);
+  }
+
+  async getBySlug(slug: string): Promise<IWorkspace> {
+    return this.get(`/workspaces/${slug}/`).then((res) => res?.data);
+  }
+
+  async create(data: Partial<IWorkspace>): Promise<IWorkspace> {
+    return this.post("/workspaces/", data).then((res) => res?.data);
+  }
+}
+
+export const workspaceService = new WorkspaceService();
+```
+
+### What Gets Changed
+
+#### 1. Environment Variables (`.env`)
+
+| Variable            | Current (broken)                                | Fixed                                               |
+| ------------------- | ----------------------------------------------- | --------------------------------------------------- |
+| `VITE_API_BASE_URL` | `http://localhost:5173/api/v1` (Vite proxy URL) | `http://localhost:5030/api/v1` (direct backend URL) |
+
+The Vite proxy (`/api` -> `https://localhost:7030`) still works for the proxy, but the direct backend URL is used for Axios API calls to avoid an unnecessary proxy hop. In dev, CORS is fully open (`AllowAll: true` in `appsettings.Development.json`).
+
+#### 2. `endpoints.ts` Bug Fix (Critical)
+
+**File:** `src/lib/constants/endpoints.ts` (line 8-9)
+
+```typescript
+// BROKEN: process.env is undefined in Vite
+export const API_BASE_URL = process.env.VITE_API_BASE_URL || "";
+
+// FIXED: use import.meta.env (Vite convention)
+export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+```
+
+This bug means `endpoints.ts` always falls through to `""` -- it works only because the Vite proxy handles empty-base URLs. After fixing, `VITE_API_BASE_URL` is properly consumed.
+
+#### 3. Auth Store `initAuth()` (Critical)
+
+**File:** `app/store/auth.store.ts` (lines 54-57)
+
+```typescript
+// CURRENT: dummy authenticated user
+this.currentUser = { id: "authenticated" } as IUser;
+
+// MUST CHANGE TO: fetch actual user profile
+const user = await this.authService.getCurrentUser();
+runInAction(() => {
+  this.currentUser = user;
+});
+```
+
+This requires adding a `getCurrentUser()` method to `AuthService` that calls `GET /me`:
+
+```typescript
+// In auth.service.ts:
+async getCurrentUser(): Promise<PlaneUserProfile> {
+  return this.get("/me").then((res) => res?.data);
+}
+```
+
+The backend `/me` endpoint returns `PlaneUserProfile` with fields: `id`, `email`, `first_name`, `last_name`, `avatar`, `is_email_verified`.
+
+#### 4. CORS Configuration (Production)
+
+**File:** `src/Host/YH.Flow.Api/appsettings.json` (line 104)
+
+```json
+// CURRENT:
+"AllowedOrigins": ["https://localhost:4200", "https://localhost:7140"]
+
+// MUST ADD:
+"AllowedOrigins": ["https://localhost:4200", "https://localhost:7140", "http://localhost:5173"]
+```
+
+The frontend dev server runs on `http://localhost:5173`. The "production" CORS config rejects this, but development config (`appsettings.Development.json`) has `AllowAll: true`, so this only matters when running without `ASPNETCORE_ENVIRONMENT=Development`.
+
+#### 5. TanStack Query Hooks (15 files)
+
+Every hook file in `src/lib/hooks/` switches `queryFn` from mock data to real API:
+
+**Pattern (example: `use-workspaces.ts`):**
+
+```typescript
+// BEFORE (mock):
+import { MOCK_WORKSPACES } from "../mock-data";
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const useWorkspaces = () => {
+  return useQuery<IWorkspace[]>({
+    queryKey: ["workspaces"],
+    queryFn: async () => {
+      await delay(300);
+      return MOCK_WORKSPACES;
+    },
+  });
+};
+
+// AFTER (real API):
+import { workspaceService } from "../services/workspace.service";
+export const useWorkspaces = () => {
+  return useQuery<IWorkspace[]>({
+    queryKey: ["workspaces"],
+    queryFn: () => workspaceService.list(),
+  });
+};
+```
+
+#### 6. Service Files (3 files)
+
+| File                               | Current                                                      | Replace With                                               |
+| ---------------------------------- | ------------------------------------------------------------ | ---------------------------------------------------------- |
+| `services/analytics.service.ts`    | Mock data (class, `MOCK_ANALYTICS_*`)                        | `FlowApiService`-based, calls `/analytics/*` endpoints     |
+| `services/notification.service.ts` | Mock data (class, `MOCK_NOTIFICATIONS`)                      | `FlowApiService`-based, calls `/notifications/*` endpoints |
+| `services/issue-view.service.ts`   | Partial mock (extends `FlowApiService` but methods are mock) | All methods call real API endpoints                        |
+
+### What MUST NOT Change
+
+| Component                     | Reason                                                                               |
+| ----------------------------- | ------------------------------------------------------------------------------------ |
+| MobX stores (`app/store/*`)   | UI state only -- sidebar, filters, selections. Do not migrate server data into MobX. |
+| `FlowApiService` interceptors | JWT injection, humps conversion, 401 handling all correct.                           |
+| Vite proxy config             | Still useful for fallback / dev convenience. No change needed.                       |
+| Component JSX                 | No UI changes. The v3.0 milestone is strictly data layer.                            |
+| Route definitions             | No route changes. API integration is transparent to routing.                         |
+
+### API Endpoint Mapping (Complete)
+
+#### Auth (already working, minor fix needed)
+
+| Operation        | Method | Backend Path                       |
+| ---------------- | ------ | ---------------------------------- |
+| Sign in          | POST   | `/auth/sign-in/`                   |
+| Sign up          | POST   | `/auth/sign-up/`                   |
+| Sign out         | POST   | `/auth/sign-out/`                  |
+| Get current user | GET    | `/me`                              |
+| Refresh token    | POST   | `/api/v1/identity/refresh-token`   |
+| Forgot password  | POST   | `/api/v1/identity/forgot-password` |
+| Reset password   | POST   | `/api/v1/identity/reset-password`  |
+
+#### Workspace (route group: `/workspaces/{slug}`)
+
+| Operation               | Backend Path                                                   |
+| ----------------------- | -------------------------------------------------------------- |
+| List my workspaces      | `GET /api/v1/users/me/workspaces/`                             |
+| Get workspace by slug   | `GET /api/v1/workspaces/{slug}/`                               |
+| Create workspace        | `POST /api/v1/workspaces/`                                     |
+| Update workspace        | `PUT /api/v1/workspaces/{slug}/`                               |
+| Delete workspace        | `DELETE /api/v1/workspaces/{slug}/`                            |
+| Check slug availability | `GET /api/v1/workspaces/slug-check?slug=X`                     |
+| List members            | `GET /api/v1/workspaces/{slug}/members/`                       |
+| Update member role      | `PUT /api/v1/workspaces/{slug}/members/{memberId}/`            |
+| Remove member           | `DELETE /api/v1/workspaces/{slug}/members/{memberId}/`         |
+| Leave workspace         | `POST /api/v1/workspaces/{slug}/members/leave/`                |
+| List invitations        | `GET /api/v1/workspaces/{slug}/invitations/`                   |
+| Create invitation       | `POST /api/v1/workspaces/{slug}/invitations/`                  |
+| Revoke invitation       | `DELETE /api/v1/workspaces/{slug}/invitations/{invitationId}/` |
+| Accept invitation       | `POST /api/v1/workspaces/invitations/{invitationId}/accept/`   |
+| Reject invitation       | `POST /api/v1/workspaces/invitations/{invitationId}/reject/`   |
+
+#### Project (route group: `/workspaces/{slug}/projects/{projectId}`)
+
+| Operation            | Backend Path                                                                |
+| -------------------- | --------------------------------------------------------------------------- |
+| List projects        | `GET /api/v1/workspaces/{slug}/projects/`                                   |
+| Get project          | `GET /api/v1/workspaces/{slug}/projects/{projectId}/`                       |
+| Create project       | `POST /api/v1/workspaces/{slug}/projects/`                                  |
+| Update project       | `PUT /api/v1/workspaces/{slug}/projects/{projectId}/`                       |
+| Delete project       | `DELETE /api/v1/workspaces/{slug}/projects/{projectId}/`                    |
+| List project members | `GET /api/v1/workspaces/{slug}/projects/{projectId}/members/`               |
+| Add project member   | `POST /api/v1/workspaces/{slug}/projects/{projectId}/members/`              |
+| Update member role   | `PUT /api/v1/workspaces/{slug}/projects/{projectId}/members/{memberId}/`    |
+| Remove member        | `DELETE /api/v1/workspaces/{slug}/projects/{projectId}/members/{memberId}/` |
+
+#### WorkItems (route group: `/workspaces/{slug}/projects/{projectId}/work-items`)
+
+| Operation           | Backend Path                                         |
+| ------------------- | ---------------------------------------------------- |
+| List issues         | `GET /work-items/`                                   |
+| Get issue           | `GET /work-items/{issueId}/`                         |
+| Create issue        | `POST /work-items/`                                  |
+| Update issue        | `PATCH /work-items/{issueId}/`                       |
+| Delete issue        | `DELETE /work-items/{issueId}/`                      |
+| Bulk update issues  | `PATCH /work-items/bulk/`                            |
+| List issue comments | `GET /work-items/{issueId}/comments/`                |
+| Create comment      | `POST /work-items/{issueId}/comments/`               |
+| Update comment      | `PUT /work-items/{issueId}/comments/{commentId}/`    |
+| Delete comment      | `DELETE /work-items/{issueId}/comments/{commentId}/` |
+| List activities     | `GET /work-items/{issueId}/activities/`              |
+| List issue links    | `GET /work-items/{issueId}/links/`                   |
+| Create issue link   | `POST /work-items/{issueId}/links/`                  |
+| Delete issue link   | `DELETE /work-items/{issueId}/links/{linkId}/`       |
+
+#### States (route group: `/workspaces/{slug}/projects/{projectId}/states`)
+
+| Operation    | Backend Path                |
+| ------------ | --------------------------- |
+| List states  | `GET /states/`              |
+| Get state    | `GET /states/{stateId}/`    |
+| Create state | `POST /states/`             |
+| Update state | `PUT /states/{stateId}/`    |
+| Delete state | `DELETE /states/{stateId}/` |
+
+#### Labels (route group: `/workspaces/{slug}/projects/{projectId}/labels`)
+
+| Operation    | Backend Path                |
+| ------------ | --------------------------- |
+| List labels  | `GET /labels/`              |
+| Get label    | `GET /labels/{labelId}/`    |
+| Create label | `POST /labels/`             |
+| Update label | `PUT /labels/{labelId}/`    |
+| Delete label | `DELETE /labels/{labelId}/` |
+
+#### Cycles (route group: `/workspaces/{slug}/projects/{projectId}/cycles`)
+
+| Operation               | Backend Path                                 |
+| ----------------------- | -------------------------------------------- |
+| List cycles             | `GET /cycles/`                               |
+| Get cycle               | `GET /cycles/{cycleId}/`                     |
+| Create cycle            | `POST /cycles/`                              |
+| Update cycle            | `PUT /cycles/{cycleId}/`                     |
+| Delete cycle            | `DELETE /cycles/{cycleId}/`                  |
+| List cycle issues       | `GET /cycles/{cycleId}/issues/`              |
+| Add issues to cycle     | `POST /cycles/{cycleId}/issues/`             |
+| Remove issue from cycle | `DELETE /cycles/{cycleId}/issues/{issueId}/` |
+| Get cycle progress      | `GET /cycles/{cycleId}/progress/`            |
+| Transfer cycle issues   | `POST /cycles/{cycleId}/transfer-issues/`    |
+| Date check              | `GET /cycles/date-check/?start=X&end=Y`      |
+
+#### Modules (route group: `/workspaces/{slug}/projects/{projectId}/modules`)
+
+| Operation                | Backend Path                                   |
+| ------------------------ | ---------------------------------------------- |
+| List modules             | `GET /modules/`                                |
+| Get module               | `GET /modules/{moduleId}/`                     |
+| Create module            | `POST /modules/`                               |
+| Update module            | `PUT /modules/{moduleId}/`                     |
+| Delete module            | `DELETE /modules/{moduleId}/`                  |
+| List module issues       | `GET /modules/{moduleId}/issues/`              |
+| Add issues to module     | `POST /modules/{moduleId}/issues/`             |
+| Remove issue from module | `DELETE /modules/{moduleId}/issues/{issueId}/` |
+| Get module progress      | `GET /modules/{moduleId}/progress/`            |
+| Add module link          | `POST /modules/{moduleId}/links/`              |
+| Remove module link       | `DELETE /modules/{moduleId}/links/{linkId}/`   |
+
+#### Estimates (route group: `/workspaces/{slug}/projects/{projectId}/estimates`)
+
+| Operation       | Backend Path                      |
+| --------------- | --------------------------------- |
+| List estimates  | `GET /estimates/`                 |
+| Get estimate    | `GET /estimates/{estimateId}/`    |
+| Create estimate | `POST /estimates/`                |
+| Update estimate | `PUT /estimates/{estimateId}/`    |
+| Delete estimate | `DELETE /estimates/{estimateId}/` |
+
+#### Page, View, Notification, Analytics
+
+These modules exist in the backend but the addendum creator did not read their `*Module.cs` files. Their exact route structures need verification during implementation. The following are best-guess paths:
+
+| Module       | Likely Route Base                                       |
+| ------------ | ------------------------------------------------------- |
+| Page         | `/api/v1/workspaces/{slug}/pages/`                      |
+| View         | `/api/v1/workspaces/{slug}/projects/{projectId}/views/` |
+| Notification | `/api/v1/notifications/` or similar                     |
+| Analytics    | `/api/v1/workspaces/{slug}/analytics/`                  |
+
+### Key Integration Points
+
+1. **Workspace slug vs ID**: Frontend routes use `workspaceId` in the URL. Backend workspace endpoints use `{slug}`. The frontend TanStack Query hooks must pass the workspace slug (stored in `IWorkspace.slug`), not the workspace UUID. This requires ensuring `useWorkspace()` returns the slug alongside the ID.
+
+2. **Auth init timing**: The `AuthInitializer` in `provider.tsx` calls `auth.initAuth()` on mount. With the real `GET /me` call, this becomes a loading gate -- the app must wait for this call before rendering authenticated routes. Move `isLoading` check to a route-level guard.
+
+3. **TanStack Query refetch on auth change**: When the user signs out and signs in as a different user, all TanStack Query caches become stale. Call `queryClient.clear()` on sign out to avoid leaking data between sessions.
+
+4. **Pagination**: Backend endpoints support `?page=` and `?per_page=` query params. Frontend hooks currently return all mock data. For the initial migration, use a large page size (e.g., `?per_page=100`) to approximate the mock behavior. Pagination UI can be implemented later.
+
+5. **Error handling**: The current hooks have no error handling (they throw via `FlowApiService` error interceptor). Add `useQuery({ onError: ... })` or error boundaries for critical paths (workspace list, project list).
+
+### What Gets Removed After Migration
+
+| File                                              | Reason                                          |
+| ------------------------------------------------- | ----------------------------------------------- |
+| `src/lib/mock-data.ts`                            | All mock data -- replaced by real API responses |
+| `services/analytics.service.ts` (old)             | Replace with FlowApiService-based version       |
+| `services/notification.service.ts` (old)          | Same                                            |
+| `services/issue-view.service.ts` (old mock logic) | Replace methods with real API calls             |
+
+### Verification Plan
+
+For each domain after hook migration:
+
+1. Start backend: `dotnet run --project src/Host/YH.Flow.Api`
+2. Start frontend: `cd clients/web && npm run dev`
+3. Sign in via the login page (creates JWT token)
+4. Navigate to the workspace/project/issue page
+5. Open browser DevTools Network tab
+6. Verify API calls go to `http://localhost:5030/api/v1/...` (or through proxy)
+7. Verify response is processed (humps converts, cache populated)
+8. Verify mutations (create/update/delete) send correct payloads
+
+---
+
+_Stack research for: YH.Flow Frontend-Backend Integration (v3.0 milestone)_
+_Researched: 2026-06-30_
