@@ -28,6 +28,10 @@ export class WorkspaceStore implements IWorkspaceStore {
     this.sidebarCollapsed = collapsed;
   };
 
+  toggleSidebarCollapsed = (): void => {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
+  };
+
   setCurrentWorkspace = (id: string): void => {
     this.currentWorkspaceId = id;
   };

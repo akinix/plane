@@ -30,6 +30,7 @@ export interface IWorkspaceStore {
   workspaces: IWorkspace[];
 
   setSidebarCollapsed: (collapsed: boolean) => void;
+  toggleSidebarCollapsed: () => void;
   setCurrentWorkspace: (id: string) => void;
   setWorkspaceSwitcherOpen: (open: boolean) => void;
   toggleWorkspaceExpand: (id: string) => void;
