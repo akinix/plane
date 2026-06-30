@@ -59,8 +59,8 @@ export function FilterSaveModal({
       onClose();
       onSave?.();
       // FUTURE: show toast notification when toast system is available
-    } catch {
-      // Error handling — mock layer should not fail
+    } catch (error) {
+      console.error("[FilterSaveModal] Failed to save view:", error);
     }
   };
 

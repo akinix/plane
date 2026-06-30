@@ -25,7 +25,8 @@ export function PageForm(props: Props) {
       setIsSubmitting(true);
       await handleFormSubmit();
       setIsSubmitting(false);
-    } catch {
+    } catch (error) {
+      console.error("[PageForm] Failed to submit:", error);
       setIsSubmitting(false);
     }
   };
