@@ -7,6 +7,7 @@ import { ModalCore, EModalWidth } from "@plane/ui";
 import { useStore } from "@/lib/store-context";
 import { useViews } from "@/../src/lib/hooks/use-views";
 import { useViewMutations } from "@/../src/lib/hooks/use-view-mutations";
+import { EViewAccess } from "@/../src/lib/types/views";
 import { ViewForm } from "./form";
 
 type Props = {
@@ -27,15 +28,15 @@ const ViewModal = observer(function ViewModal({ isOpen, onClose, projectId, work
     return views.find((v) => v.id === viewStore.selectedViewId) ?? null;
   }, [viewStore.viewModalMode, viewStore.selectedViewId, views]);
 
-  const handleSubmit = async (name: string) => {
+  const handleSubmit = async (data: { name: string; access: EViewAccess; description: string }) => {
     if (viewStore.viewModalMode === "edit" && editView) {
       await updateView.mutateAsync({
         viewId: editView.id,
-        data: { name },
+        data: { name: data.name },
       });
     } else {
       await createView.mutateAsync({
-        name,
+        name: data.name,
         projectId,
         filters: { stateIds: [], priorityIds: [], assigneeIds: [], labelIds: [], searchQuery: "", dateRange: null },
         sort: { sortBy: "updated_at", sortDirection: "desc" },
