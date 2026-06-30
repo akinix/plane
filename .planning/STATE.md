@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: "Strategy:"
 current_phase: 20 (notification-analytics)
-status: completed
-last_updated: "2026-06-30T05:59:57.409Z"
-last_activity: 2026-06-30
+status: Awaiting next milestone
+last_updated: "2026-06-30T07:06:33.706Z"
+last_activity: 2026-06-30 — Milestone v2.0 completed and archived
 progress:
   total_phases: 7
-  completed_phases: 7
+  completed_phases: 6
   total_plans: 30
-  completed_plans: 30
-  percent: 100
+  completed_plans: 29
+  percent: 86
 ---
 
 # YH.Flow — Project State
@@ -136,7 +136,23 @@ YH.Flow Target:    d:/github/akinix-plane/yh-flow/
 
 ## Current Position
 
-Phase: 20 (notification-analytics) — 20-03 COMPLETE
-Plans: 3 plans (20-01 / 20-02 / 20-03)
-Status: COMPLETE (all v2.0 phases done)
-Last activity: 2026-06-30
+Phase: Milestone v2.0 complete
+Plan: —
+Status: Awaiting next milestone
+Last activity: 2026-06-30 — Milestone v2.0 completed and archived
+
+## Deferred Items
+
+Items acknowledged and deferred at milestone close on 2026-06-30 (v2.0 close, v1.0 legacy):
+
+| Category          | Item                                             | Status       |
+| ----------------- | ------------------------------------------------ | ------------ |
+| uat_gaps          | Phase 00: 00-HUMAN-UAT.md (2 pending scenarios)  | acknowledged |
+| uat_gaps          | Phase 02: 02-HUMAN-UAT.md (11 pending scenarios) | acknowledged |
+| uat_gaps          | Phase 02: 02-UAT.md (0 pending scenarios)        | acknowledged |
+| verification_gaps | Phase 00: 00-VERIFICATION.md (human_needed)      | acknowledged |
+| verification_gaps | Phase 02: 02-VERIFICATION.md (human_needed)      | acknowledged |
+
+## Operator Next Steps
+
+- Start the next milestone with /gsd-new-milestone

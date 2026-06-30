@@ -174,21 +174,36 @@ d:/github/akinix-plane/
 - T0.8: ✅ 编译验证通过（51 projects, 0 errors, 0 warnings）
 - ⏳ 待人工验证: Aspire 容器完整启动 + API 健康检查
 
-## 10. Current Milestone: v2.0 Flow Web 前端
+### v2.0 Flow Web 前端 — SHIPPED 2026-06-30
 
-**Goal:** 基于 Plane Web 渐进改造，构建对标 Plane 完整功能的 React 前端
+- ✓ Vite 7 + React 19 + TypeScript 5 + Tailwind CSS 4 前端脚手架
+- ✓ Fork @plane/types、@plane/utils、@plane/constants、@plane/ui、@plane/editor
+- ✓ JWT 认证流程（登录/注册/密码重置 + 路由保护）
+- ✓ Axios 拦截器 + SnakeCase API 适配层
+- ✓ 工作区仪表板/设置/成员管理
+- ✓ Project CRUD + 项目选择器 + 项目成员管理
+- ✓ 侧边栏导航 + 顶栏 + Emoji 选择器
+- ✓ Issue 完整 CRUD（列表/详情/评论/批量操作）
+- ✓ TipTap 富文本编辑器
+- ✓ 看板视图（拖拽 + 分组）
+- ✓ 日历/甘特/电子表格视图
+- ✓ 筛选/排序/自定义列引擎
+- ✓ Cycle 列表/详情/看板
+- ✓ Module 列表/详情
+- ✓ Page 列表/编辑器/权限/收藏
+- ✓ 自定义视图保存与应用
+- ✓ 通知系统
+- ✓ 分析仪表板（图表 + CSV 导出）
+- ✓ 命令面板（Cmd+K）
+- ✓ 响应式布局 + 暗色/亮色主题
 
-**Target features:**
+## 10. Current State
 
-- 继承 Plane Web 既有 UI 组件和设计系统
-- 逐步将 API 调用层从 Django REST 切换到 .NET 后端
-- 完整页面集：登录/注册、工作区仪表板、Project/Issue/Cycle/Module/Page/View 管理页面
-- TipTap 富文本编辑器、拖拽排序、暗色模式、响应式布局
-- SSE 实时通知
+v1.0 里程碑完成（12/14 phases）。v2.0 Flow Web 前端里程碑完成（7/7 phases, 30 plans）。Phase 9（集成）推迟至后续版本。
 
-## 11. Current State
+## 11. Next Steps
 
-v1.0 里程碑完成（12/14 phases）。Phase 9（集成）推迟至后续版本。当前阶段：启动 v2.0 前端里程碑。
+计划下一个里程碑，将前端从 Mock 数据切换到真实 .NET API。
 
 ## Evolution
 
