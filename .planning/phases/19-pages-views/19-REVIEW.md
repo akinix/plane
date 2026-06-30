@@ -100,11 +100,10 @@ The codebase follows a consistent forked-from-Plane pattern with good separation
 **Issue:** `const navigate = useNavigate()` is called on line 21 but `useNavigate` is not imported from `react-router`. The imports only include `useMemo` from React and `observer` from mobx-react. This will cause a `ReferenceError: useNavigate is not defined` at runtime when the component renders.
 
 **Fix:**
-
 ```typescript
 import { useMemo } from "react";
 import { observer } from "mobx-react";
-import { useNavigate } from "react-router"; // ADD THIS IMPORT
+import { useNavigate } from "react-router";  // ADD THIS IMPORT
 import { useStore } from "@/lib/store-context";
 ```
 
@@ -116,7 +115,6 @@ import { useStore } from "@/lib/store-context";
 **Issue:** `localTitle` is initialized once in `useState(title ?? "")`. When `title` arrives asynchronously (page data loads after mount), the displayed non-editing view correctly shows `title || "无标题"`, but `localTitle` remains `""`. If the user clicks to edit and then blurs without typing, `handleBlur` compares `localTitle !== title` (evaluates `"" !== "Project Plan"`), which is true, and saves the empty string, overwriting the actual page title.
 
 **Sequence:**
-
 1. Component mounts, `title = undefined`, `localTitle = ""`
 2. Page data loads, `title` becomes "Project Plan"
 3. Non-editing display shows "Project Plan" (correct)
@@ -124,7 +122,6 @@ import { useStore } from "@/lib/store-context";
 5. User blurs without typing -> `localTitle "" !== title "Project Plan"` -> save `name: ""` -> DATA LOSS
 
 **Fix:** Add a `useEffect` to sync the prop into local state when not editing:
-
 ```typescript
 const [localTitle, setLocalTitle] = useState(title ?? "");
 
@@ -144,7 +141,6 @@ useEffect(() => {
 **Issue:** The copy-link function generates `${workspaceSlug}/projects/${projectId}/views/${view.id}` which produces a URL like `flow-dev/projects/proj-1/views/view-1` — missing the `/workspaces/` prefix and using a slug in the path position where the route expects the full path. The route is defined as `/workspaces/:workspaceId/projects/:projectId/views` (routes.ts line 54), so the generated link does not match any route and will lead to a 404 or broken navigation.
 
 **Fix:**
-
 ```typescript
 const handleCopyLink = () => {
   const link = `/workspaces/${workspaceSlug}/projects/${projectId}/views/${view.id}`;
@@ -168,7 +164,6 @@ const handleCopyLink = () => {
 **Issue:** The component manages `access` state (line 18) and renders a description input (lines 53-64), but the `onSubmit` callback is called as `onSubmit(name.trim())` — only the name is passed. The user's access toggle choice and description text are silently discarded. The access toggle and description input are rendered as functional-looking UI elements but have zero effect.
 
 **Fix:** Change the submit signature to include all form fields:
-
 ```typescript
 type Props = {
   title: string;
@@ -178,9 +173,7 @@ type Props = {
   isPending?: boolean;
 };
 ```
-
 Then update the call:
-
 ```typescript
 await onSubmit({ name: name.trim(), access, description: descriptionValue });
 ```
@@ -193,14 +186,13 @@ await onSubmit({ name: name.trim(), access, description: descriptionValue });
 **Issue:** The `DeletePageModal` is opened via local `showDeleteModal` state here, but also opened via `store.page` in `PageEditorHeaderRoot` (editor/header/root.tsx lines 115-121). The store modal `isOpen` is bound to `store.page.pageDeleting`, but in `page.store.ts` line 105, `openDeleteModal` sets `this.pageDeleting = true` unconditionally. This means the `pageDeleting` boolean conflates "modal is open" with "deletion is in progress". If the store-based modal's handleDelete fails (catch block is empty), `closeDeleteModal` is never called, leaving `pageDeleting` stuck at `true` and the modal in a permanently visible non-interactive state.
 
 **Fix:** Either separate the "modal open" state from the "deleting in progress" state, or add an error handler to `DeletePageModal.handleDelete` that calls `onClose()`:
-
 ```typescript
 try {
   await deletePage.mutateAsync(pageId);
   onClose();
 } catch (error) {
   console.error("Failed to delete page:", error);
-  onClose(); // Always close the modal, even on error
+  onClose();  // Always close the modal, even on error
 }
 ```
 
@@ -211,7 +203,6 @@ try {
 ### WR-01: Empty catch blocks swallow errors in multiple locations
 
 **Files:**
-
 - `yh-flow/clients/web/app/components/issues/filters/filter-save-modal.tsx:62-64`
 - `yh-flow/clients/web/app/components/pages/modals/delete-page-modal.tsx:31-33`
 - `yh-flow/clients/web/app/components/pages/modals/page-form.tsx:28-30`
@@ -220,7 +211,6 @@ try {
 **Issue:** Four empty catch blocks (or catch blocks with only a comment) silently swallow all errors. When the mock data layer transitions to a real API, network errors, validation errors, and 500 responses will be invisible to the user and the developer. This makes debugging production issues nearly impossible.
 
 **Fix:** At minimum, log the error:
-
 ```typescript
 catch (error) {
   console.error("[FilterSaveModal] Failed to save view:", error);
@@ -232,7 +222,6 @@ catch (error) {
 ### WR-02: Fire-and-forget `mutate()` calls without error handling cause UI state inconsistency
 
 **Files:**
-
 - `yh-flow/clients/web/app/components/pages/header/favorite-control.tsx:21`
 - `yh-flow/clients/web/app/components/pages/list/block.tsx:29`
 - `yh-flow/clients/web/app/components/pages/editor/header/logo-picker.tsx:22`
@@ -240,7 +229,6 @@ catch (error) {
 **Issue:** `favoritePage.mutate(...)` is called without error callbacks. If the mutation fails (when transitioning to real API), the UI star icon has already been toggled optimistically (via the click handler), but the server state hasn't changed. The React Query cache may also be out of sync. The user sees incorrect UI state with no feedback.
 
 **Fix:** Add error handling:
-
 ```typescript
 favoritePage.mutate(
   { pageId: id, is_favorite: !is_favorite },
@@ -261,7 +249,6 @@ favoritePage.mutate(
 **Issue:** Page filtering uses `p.access === 0` and `p.access === 1` instead of comparing against `EPageAccess.PUBLIC` / `EPageAccess.PRIVATE` enum values. This creates a fragile coupling to the enum's numeric values. If the enum definition changes (e.g., adding a new member), the filtering silently breaks.
 
 **Fix:**
-
 ```typescript
 import { EPageAccess } from "@plane/types";
 // ...
@@ -277,7 +264,6 @@ if (activeTab === "private") return p.access === EPageAccess.PRIVATE && !p.archi
 **Issue:** The component casts the view to `any` to access `access`, `is_favorite`, `description`, and `owned_by` fields. These fields exist in the mock data (injected via `as TIssueView & {...}` in issue-view.service.ts) but are absent from the `TIssueView` type. When the mock layer is replaced with a real API that returns only the typed fields, these properties will silently be `undefined`, causing the access badge to show incorrectly, the favorite star to default to unfavorited, and the creator avatar to show "?".
 
 **Fix:** Extend the `TIssueView` type to include these fields, or create an interface:
-
 ```typescript
 interface TIssueViewExtended extends TIssueView {
   access: number;
@@ -293,14 +279,12 @@ interface TIssueViewExtended extends TIssueView {
 ### WR-05: NaN from date parsing in sort comparator
 
 **Files:**
-
 - `yh-flow/clients/web/app/components/pages/pages-list-main-content.tsx:49-50`
 - `yh-flow/clients/web/app/components/views/views-list.tsx:48-49`
 
 **Issue:** `new Date(a.created_at ?? 0).getTime()` returns `NaN` when `a.created_at` is an invalid date string. `NaN - anyNumber` = `NaN`, which makes `toSorted` behavior undefined (comparator returning NaN means the sort order is implementation-dependent). This can occur with malformed or null date values.
 
 **Fix:**
-
 ```typescript
 const aTime = a.created_at ? new Date(a.created_at).getTime() : 0;
 const bTime = b.created_at ? new Date(b.created_at).getTime() : 0;
@@ -326,14 +310,13 @@ if (isNaN(cmp)) cmp = 0;
 **Issue:** The try block calls `onClose()` on success, but the catch block only has a comment. If `mutateAsync` throws, `isDeleting` is set to `false` (in `finally`) but `onClose()` is never called, leaving the modal in a permanently visible state with the button re-enabled. The user is stuck.
 
 **Fix:**
-
 ```typescript
 try {
   await deletePage.mutateAsync(pageId);
   onClose();
 } catch (error) {
   console.error("Failed to delete page:", error);
-  onClose(); // Always close on error too
+  onClose();  // Always close on error too
 }
 ```
 
@@ -345,7 +328,6 @@ try {
 **Issue:** The component is wrapped with `observer()` from mobx-react but does not access any MobX observable — it only receives props from its parent. This adds unnecessary overhead and creates a misleading signal about which components react to store changes.
 
 **Fix:** Remove the `observer` wrapper:
-
 ```typescript
 export function ViewListItemAction({ view: _view, projectId: _projectId, onEdit, onDelete }: Props) {
 ```
@@ -358,7 +340,6 @@ export function ViewListItemAction({ view: _view, projectId: _projectId, onEdit,
 **Issue:** On mount, the component calls `editorRef.current.setEditorValue(initialValueRef.current)` in the empty-deps `useEffect` (line 23) AND passes `value={initialValue}` to `DocumentEditorWithRef` (line 40). The editor receives the same value twice through two different mechanisms. If the `setEditorValue` and the `value` prop conflict in the editor implementation, this can cause double-rendering or cursor position issues.
 
 **Fix:** Remove one of the two mechanisms. If the editor handles the `value` prop internally, the `setEditorValue` call is redundant:
-
 ```typescript
 // Remove the initial-set effect entirely; DocumentEditorWithRef handles value prop
 useEffect(() => {
@@ -376,7 +357,6 @@ useEffect(() => {
 ### IN-01: Unnecessary `observer` wrappers on components not using observables
 
 **Files:**
-
 - `yh-flow/clients/web/app/components/pages/editor/editor-body.tsx:16`
 - `yh-flow/clients/web/app/components/views/delete-view-modal.tsx:17`
 
@@ -387,7 +367,6 @@ useEffect(() => {
 ### IN-02: Unused or redundant props
 
 **Files:**
-
 - `yh-flow/clients/web/app/components/pages/list/block-item-action.tsx:14` — `parentRef` prop is defined but never used in the component body
 - `yh-flow/clients/web/app/components/views/view-list-item.tsx:23` — `parentRef` is created via `useRef` but never passed to any child or used
 
