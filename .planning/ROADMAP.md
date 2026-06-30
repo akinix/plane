@@ -24,7 +24,7 @@ v2.0 (Flow Web Frontend): Phase 14~20 — 构建完整 React 前端
       (completed 2026-06-29)
 - [x] **Phase 17: 日历/甘特/电子表格 & 筛选引擎** — Issue 日历/甘特/电子表格视图，通用筛选/排序/自定义列引擎 (completed 2026-06-29)
 - [ ] **Phase 18: 周期 & 模块** — Cycle 列表/详情/看板，Module 列表/详情
-- [ ] **Phase 19: 页面 & 视图** — Page 树形层级/TipTap 编辑器/权限/收藏，自定义视图保存与应用
+- [ ] **Phase 19: 页面 & 视图** — Page 平铺列表/TipTap 编辑器/权限/收藏，自定义视图保存与应用
 - [ ] **Phase 20: 通知 & 分析** — SSE 实时通知，分析仪表板，响应式布局收尾
 
 ---
@@ -173,13 +173,22 @@ Plans:
 
 **Success Criteria** (what must be TRUE):
 
-1. 用户看到 Page 列表（树形层级结构展示），可展开/折叠子页面
-2. 用户使用 TipTap 编辑器创建/编辑 Page 内容，可归档/删除 Page
+1. 用户看到 Page 列表（平铺展示 per D-P19-03 — 单级无父子级嵌套），可通过 Tab（公开/私人/已归档）切换
+2. 用户使用 TipTap 编辑器创建/编辑 Page 内容，可归档/删除 Page，内容自动保存
 3. 用户可将 Page 设置为 Public（工作区内所有人可查看）或 Private（仅创建者可查看），可收藏/星标 Page
-4. 用户看到已保存的自定义视图列表，可点击应用视图（自动切换到该视图的筛选/排序/分组配置）
+4. 用户看到已保存的自定义视图列表，可点击应用视图（导航到 Issue 列表页）
 5. 用户在任意 Issue 视图中可将当前筛选/排序/分组/列配置保存为新视图
 
-**Plans**: TBD
+**Plans**: 4 plans
+
+```
+Plans:
+- [ ] 19-01-PLAN.md — Pages 数据层（MOCK_PAGES, usePages, usePageMutations, PageStore）
+- [ ] 19-02-PLAN.md — Pages 列表页 UI（Tab/搜索/排序/卡片/创建/删除弹窗 + 路由 + 侧边栏导航）
+- [ ] 19-03-PLAN.md — Pages 编辑器（TipTap 编辑器/Header/NavigationPane + 自动保存/归档/删除）
+- [ ] 19-04-PLAN.md — Views 列表页 + 保存/应用（ViewStore, useViews, 视图列表组件, FilterSaveModal 集成）
+```
+
 **UI hint**: yes
 
 ---
@@ -213,8 +222,8 @@ Plans:
 | 15. 工作区 & 项目                 | 4/4            | Delivered   | ✅         |
 | 16. Issue 列表/详情 & 看板        | 5/5            | Complete    | 2026-06-29 |
 | 17. 日历/甘特/电子表格 & 筛选引擎 | 6/6            | Complete    | 2026-06-29 |
-| 18. 周期 & 模块                   | 2/4            | In Progress |            |
-| 19. 页面 & 视图                   | 0/0            | Not started | -          |
+| 18. 周期 & 模块                   | 4/4            | Complete    | 2026-06-30 |
+| 19. 页面 & 视图                   | 0/4            | Planning    | -          |
 | 20. 通知 & 分析                   | 0/0            | Not started | -          |
 
 ---
@@ -250,3 +259,8 @@ Plans:
 - v2.0 requirements: 75 total
 - Mapped to phases: 75
 - Unmapped: 0 ✓
+
+---
+
+_Requirements defined: 2026-06-26_
+_Last updated: 2026-06-26 after v2.0 roadmap creation_
