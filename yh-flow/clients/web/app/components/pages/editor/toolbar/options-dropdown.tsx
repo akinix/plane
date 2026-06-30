@@ -1,7 +1,6 @@
 // FLOW: Forked from Plane. Original: apps/web/core/components/pages/editor/toolbar/options-dropdown.tsx
 // FLOW: PageOptionsDropdown — 更多选项下拉（预留扩展）
 "use client";
-import { useState } from "react";
 import { Maximize2, FileText } from "lucide-react";
 import { CustomMenu } from "@plane/ui";
 
@@ -11,7 +10,6 @@ type Props = {
 };
 
 export const PageOptionsDropdown = function PageOptionsDropdown({ isFullWidth, onToggleFullWidth }: Props) {
-  const [_, _set] = useState(false);
 
   return (
     <CustomMenu
