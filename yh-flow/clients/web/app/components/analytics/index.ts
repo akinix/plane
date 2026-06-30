@@ -6,3 +6,5 @@ export { DataTable } from "./data-table";
 export { FilterBar } from "./filter-bar";
 export { AnalyticsEmptyState } from "./analytics-empty-state";
 export { AnalyticsSkeleton } from "./analytics-skeleton";
+export { OverviewTab } from "./overview-tab";
+export { WorkItemsTab } from "./work-items-tab";
