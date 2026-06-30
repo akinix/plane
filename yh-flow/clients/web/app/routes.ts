@@ -45,6 +45,7 @@ export default [
     // PAGE ROUTES per D-P19-01 (Workspace-level, not project-level)
     // ====================================================================
     route("workspaces/:workspaceId/pages", "app/workspaces/[workspaceId]/pages/page.tsx"),
+    route("workspaces/:workspaceId/pages/:pageId", "app/workspaces/[workspaceId]/pages/[pageId]/page.tsx"),
 
     // ====================================================================
     // ISSUE ROUTES per D-P16-04
