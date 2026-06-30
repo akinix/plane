@@ -7,7 +7,16 @@ import { CycleStore } from "./cycle.store";
 import { ModuleStore } from "./module.store";
 import { PageStore } from "./page.store";
 import { ViewStore } from "./view.store";
-import type { IWorkspaceStore, IProjectStore, IIssueStore, ICycleStore, IModuleStore, IPageStore, IViewStore } from "./types";
+import { NotificationStore, type INotificationStore } from "./notification.store";
+import type {
+  IWorkspaceStore,
+  IProjectStore,
+  IIssueStore,
+  ICycleStore,
+  IModuleStore,
+  IPageStore,
+  IViewStore,
+} from "./types";
 
 export interface ICoreRootStore {
   auth: IAuthStore;
@@ -18,6 +27,7 @@ export interface ICoreRootStore {
   module: IModuleStore;
   page: IPageStore;
   view: IViewStore;
+  notification: INotificationStore;
 }
 
 export class CoreRootStore implements ICoreRootStore {
@@ -29,6 +39,7 @@ export class CoreRootStore implements ICoreRootStore {
   module: IModuleStore;
   page: IPageStore;
   view: IViewStore;
+  notification: INotificationStore;
 
   constructor() {
     this.auth = new AuthStore();
@@ -39,5 +50,6 @@ export class CoreRootStore implements ICoreRootStore {
     this.module = new ModuleStore();
     this.page = new PageStore();
     this.view = new ViewStore();
+    this.notification = new NotificationStore();
   }
 }
