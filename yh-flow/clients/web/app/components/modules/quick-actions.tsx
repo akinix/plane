@@ -22,11 +22,11 @@ export const ModuleQuickActions = function ModuleQuickActions(props: Props) {
   const moduleLink = `${workspaceSlug}/projects/${projectId}/modules/${moduleId}`;
 
   const handleEdit = () => {
-    moduleStore.openModuleModal("edit", moduleId);
+    moduleStore.openModuleModal("edit");
   };
 
   const handleDelete = () => {
-    moduleStore.openDeleteModal(moduleId);
+    moduleStore.setModuleDeleting(true);
   };
 
   const handleCopyLink = () => {

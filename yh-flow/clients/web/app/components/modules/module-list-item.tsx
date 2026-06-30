@@ -1,7 +1,7 @@
 // FLOW: Forked from Plane modules/module-list-item.tsx
 // FLOW: ModuleListItem — Module 紧凑列表项
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router";
 import { Info, Check } from "lucide-react";
 import { useModules } from "@/../src/lib/hooks/use-modules";
 import { ModuleStatusDropdown } from "./module-status-dropdown";
@@ -15,7 +15,7 @@ type Props = {
 
 export const ModuleListItem = React.memo(function ModuleListItem(props: Props) {
   const { moduleId, projectId, workspaceId } = props;
-  const router = useRouter();
+  const navigate = useNavigate();
   const { data: modules } = useModules(projectId);
   const moduleDetails = modules?.find((m) => m.id === moduleId);
 
@@ -26,15 +26,15 @@ export const ModuleListItem = React.memo(function ModuleListItem(props: Props) {
     : 0;
 
   const progress = isNaN(completionPercentage) ? 0 : completionPercentage;
-  const completedModuleCheck = moduleDetails.status === "completed";
 
   const handleClick = () => {
-    router.push(`/workspaces/${workspaceId}/projects/${projectId}/modules/${moduleId}`);
+    navigate(`/workspaces/${workspaceId}/projects/${projectId}/modules/${moduleId}`);
   };
 
   return (
-    <div
-      className="group flex items-center gap-3 border-b border-subtle px-4 py-2.5 hover:bg-surface-1 cursor-pointer"
+    <button
+      type="button"
+      className="group flex w-full items-center gap-3 border-b border-subtle px-4 py-2.5 hover:bg-surface-1 cursor-pointer text-left"
       onClick={handleClick}
     >
       {/* 进度圆环 */}
@@ -90,11 +90,11 @@ export const ModuleListItem = React.memo(function ModuleListItem(props: Props) {
       </button>
 
       <ModuleQuickActions
-        parentRef={React.createRef()}
+        parentRef={React.createRef<HTMLDivElement>() as unknown as React.RefObject<HTMLDivElement>}
         moduleId={moduleId}
         projectId={projectId}
         workspaceSlug={workspaceId}
       />
-    </div>
+    </button>
   );
 });

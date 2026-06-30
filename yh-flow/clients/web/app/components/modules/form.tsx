@@ -116,7 +116,7 @@ export function ModuleForm(props: Props) {
             <Controller
               control={control}
               name="start_date"
-              render={({ field: { value, onChange } }) => (
+              render={({ field: { value, onChange } }: { field: { value: any; onChange: (...args: any[]) => void } }) => (
                 <input
                   type="date"
                   value={value ? new Date(value).toISOString().split("T")[0] : ""}
@@ -130,7 +130,7 @@ export function ModuleForm(props: Props) {
             <Controller
               control={control}
               name="target_date"
-              render={({ field: { value, onChange } }) => (
+              render={({ field: { value, onChange } }: { field: { value: any; onChange: (...args: any[]) => void } }) => (
                 <input
                   type="date"
                   value={value ? new Date(value).toISOString().split("T")[0] : ""}
@@ -143,7 +143,7 @@ export function ModuleForm(props: Props) {
             <Controller
               control={control}
               name="status"
-              render={({ field: { value, onChange } }) => (
+              render={({ field: { value, onChange } }: { field: { value: any; onChange: (...args: any[]) => void } }) => (
                 <select
                   value={value ?? "backlog"}
                   onChange={(e) => onChange(e.target.value)}

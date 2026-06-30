@@ -1,7 +1,7 @@
 // FLOW: Forked from Plane modules/gantt-chart/blocks.tsx
 // FLOW: ModuleGanttBlock + ModuleGanttSidebarBlock — Module 甘特图区块（复用 Phase 17 GanttView per D-P18-11）
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router";
 import { MODULE_STATUS } from "@plane/constants";
 import { useModules } from "@/../src/lib/hooks/use-modules";
 
@@ -22,7 +22,7 @@ type Props = {
 };
 
 export const ModuleGanttBlock = React.memo(function ModuleGanttBlock({ moduleId, projectId, workspaceId }: Props) {
-  const router = useRouter();
+  const navigate = useNavigate();
   const { data: modules } = useModules(projectId);
   const moduleDetails = modules?.find((m) => m.id === moduleId);
 
@@ -38,11 +38,12 @@ export const ModuleGanttBlock = React.memo(function ModuleGanttBlock({ moduleId,
   };
 
   return (
-    <div
+    <button
+      type="button"
       className="relative flex h-full w-full cursor-pointer items-center rounded-sm text-13"
       style={blockStyle}
       onClick={() =>
-        router.push(`/workspaces/${workspaceId}/projects/${projectId}/modules/${moduleId}`)
+        navigate(`/workspaces/${workspaceId}/projects/${projectId}/modules/${moduleId}`)
       }
     >
       <div className="absolute top-0 left-0 h-full w-full bg-surface-1/50" />
@@ -52,19 +53,20 @@ export const ModuleGanttBlock = React.memo(function ModuleGanttBlock({ moduleId,
       >
         {moduleDetails.name}
       </div>
-    </div>
+    </button>
   );
 });
 
 export const ModuleGanttSidebarBlock = React.memo(function ModuleGanttSidebarBlock({ moduleId, projectId, workspaceId }: Props) {
-  const router = useRouter();
+  const navigate = useNavigate();
   const { data: modules } = useModules(projectId);
   const moduleDetails = modules?.find((m) => m.id === moduleId);
 
   return (
-    <div
+    <button
+      type="button"
       className="relative flex h-full w-full cursor-pointer items-center gap-2"
-      onClick={() => router.push(`/workspaces/${workspaceId}/projects/${projectId}/modules/${moduleId}`)}
+      onClick={() => navigate(`/workspaces/${workspaceId}/projects/${projectId}/modules/${moduleId}`)}
     >
       <span
         className="h-3 w-3 rounded-full flex-shrink-0"
@@ -73,6 +75,6 @@ export const ModuleGanttSidebarBlock = React.memo(function ModuleGanttSidebarBlo
         }}
       />
       <h6 className="flex-grow truncate text-13 font-medium">{moduleDetails?.name ?? "未知模块"}</h6>
-    </div>
+    </button>
   );
 });

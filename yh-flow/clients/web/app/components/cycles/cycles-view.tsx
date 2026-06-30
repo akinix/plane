@@ -2,7 +2,7 @@
 // FLOW: CyclesView — 主视图容器，3 Tab 切换（活跃/已完成/全部）
 import { observer } from "mobx-react";
 import { useStore } from "@/lib/store-context";
-import { useCycles } from "@/lib/hooks/use-cycles";
+import { useCycles } from "@/../src/lib/hooks/use-cycles";
 import { CyclesViewHeader } from "./cycles-view-header";
 import { CyclesList } from "./list/root";
 import { CycleModal } from "./modal";
@@ -21,8 +21,6 @@ export const CyclesView = observer(function CyclesView(props: ICyclesView) {
   const activeCycles = cycles?.filter((c) => c.status === "current") ?? [];
   const completedCycles = cycles?.filter((c) => c.status === "completed") ?? [];
   const upcomingCycles = cycles?.filter((c) => c.status === "upcoming") ?? [];
-  const draftCycles = cycles?.filter((c) => c.status === "draft") ?? [];
-
   const getFilteredCycleIds = () => {
     switch (cycleStore.activeTab) {
       case "active":
@@ -42,7 +40,7 @@ export const CyclesView = observer(function CyclesView(props: ICyclesView) {
     return (
       <div className="flex h-full w-full flex-col gap-2 p-4">
         {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="h-16 animate-pulse rounded-md bg-surface-2" />
+          <div key={`skeleton-${i}`} className="h-16 animate-pulse rounded-md bg-surface-2" />
         ))}
       </div>
     );

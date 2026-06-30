@@ -2,7 +2,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { Loader } from "@plane/ui";
-import { useCycleProgress } from "@/lib/hooks/use-cycle-issues";
+import { useCycleProgress } from "@/../src/lib/hooks/use-cycle-issues";
 import { CycleSidebarHeader } from "./sidebar-header";
 import { CycleSidebarDetails } from "./sidebar-details";
 import { CycleAnalyticsProgress } from "./issue-progress";

@@ -1,7 +1,7 @@
 // FLOW: Forked from Plane modules/module-card-item.tsx
 // FLOW: ModuleCardItem — Module 卡片组件（4 色状态徽章、进度条、Issue 计数）
 import React from "react";
-import { useRouter } from "next/navigation";
+import { useNavigate } from "react-router";
 import { SquareUser } from "lucide-react";
 import { MODULE_STATUS, PROGRESS_STATE_GROUPS_DETAILS } from "@plane/constants";
 import type { IModule } from "@plane/types";
@@ -33,7 +33,7 @@ type Props = {
 
 export const ModuleCardItem = React.memo(function ModuleCardItem(props: Props) {
   const { moduleId, projectId, workspaceId } = props;
-  const router = useRouter();
+  const navigate = useNavigate();
   const { data: modules } = useModules(projectId);
   const moduleDetails = modules?.find((m) => m.id === moduleId);
 
@@ -65,7 +65,7 @@ export const ModuleCardItem = React.memo(function ModuleCardItem(props: Props) {
   }));
 
   const handleClick = () => {
-    router.push(`/workspaces/${workspaceId}/projects/${projectId}/modules/${moduleId}`);
+    navigate(`/workspaces/${workspaceId}/projects/${projectId}/modules/${moduleId}`);
   };
 
   return (

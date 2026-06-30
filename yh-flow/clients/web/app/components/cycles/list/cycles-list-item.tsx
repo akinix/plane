@@ -1,10 +1,10 @@
 // FLOW: Forked from Plane cycles/list/cycles-list-item.tsx
 // FLOW: CyclesListItem — Cycle 列表项卡片
 import type { MouseEvent } from "react";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { observer } from "mobx-react";
 import { CalendarDays, Circle } from "lucide-react";
-import { useCycles } from "@/lib/hooks/use-cycles";
+import { useCycles } from "@/../src/lib/hooks/use-cycles";
 import { CycleListItemAction } from "./cycle-list-item-action";
 import { CycleQuickActions } from "../quick-actions";
 
@@ -16,7 +16,7 @@ type TCyclesListItem = {
 
 export const CyclesListItem = observer(function CyclesListItem(props: TCyclesListItem) {
   const { cycleId, workspaceSlug, projectId } = props;
-  const parentRef = useRef(null);
+  const parentRef = useRef<HTMLDivElement>(null);
   const { data: cycles } = useCycles(projectId);
   const cycleDetails = cycles?.find((c) => c.id === cycleId);
 
@@ -90,7 +90,7 @@ export const CyclesListItem = observer(function CyclesListItem(props: TCyclesLis
           projectId={projectId}
           cycleId={cycleId}
           cycleDetails={cycleDetails}
-          parentRef={parentRef}
+          parentRef={parentRef as unknown as React.RefObject<HTMLDivElement>}
           isActive={isActive}
         />
       </div>
@@ -98,7 +98,7 @@ export const CyclesListItem = observer(function CyclesListItem(props: TCyclesLis
       {/* Quick actions (mobile) */}
       <div className="block md:hidden">
         <CycleQuickActions
-          parentRef={parentRef}
+          parentRef={parentRef as unknown as React.RefObject<HTMLElement>}
           cycleId={cycleId}
           projectId={projectId}
           workspaceSlug={workspaceSlug}

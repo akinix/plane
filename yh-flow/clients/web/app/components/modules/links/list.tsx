@@ -35,7 +35,7 @@ export const ModuleLinksList = function ModuleLinksList({ moduleId, projectId }:
       created_at: new Date().toISOString(),
       created_by: "user-1",
       metadata: {},
-    } as ILinkDetails;
+    } as unknown as ILinkDetails;
     await addLink.mutateAsync(newLink);
     setNewTitle("");
     setNewUrl("");

@@ -2,7 +2,7 @@
 // FLOW: CyclesList — Cycle 列表根容器，按状态分组渲染
 import { observer } from "mobx-react";
 import { useStore } from "@/lib/store-context";
-import { useCycles } from "@/lib/hooks/use-cycles";
+import { useCycles } from "@/../src/lib/hooks/use-cycles";
 import { CycleListGroupHeader } from "./cycle-list-group-header";
 import { CyclesListMap } from "./cycles-list-map";
 
@@ -17,7 +17,6 @@ export interface ICyclesList {
 
 export const CyclesList = observer(function CyclesList(props: ICyclesList) {
   const { completedCycleIds, upcomingCycleIds, cycleIds, workspaceSlug, projectId, isArchived = false } = props;
-  const { cycle: cycleStore } = useStore();
   const { data: cycles } = useCycles(projectId);
 
   const activeCycleIds = cycles?.filter((c) => c.status === "current").map((c) => c.id) ?? [];

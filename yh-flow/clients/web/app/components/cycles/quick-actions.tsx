@@ -4,7 +4,7 @@ import { useState } from "react";
 import { observer } from "mobx-react";
 import { MoreHorizontal } from "lucide-react";
 import { useStore } from "@/lib/store-context";
-import { useCycleMutations } from "@/lib/hooks/use-cycles";
+import { useCycleMutations } from "@/../src/lib/hooks/use-cycles";
 import { CycleDeleteModal } from "./delete-modal";
 import { CycleModal as CycleCreateUpdateModal } from "./modal";
 

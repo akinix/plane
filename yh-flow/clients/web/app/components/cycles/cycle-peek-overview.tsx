@@ -1,11 +1,10 @@
 // FLOW: Forked from Plane cycles/cycle-peek-overview.tsx
 // FLOW: CyclePeekOverview — Cycle 详情弹窗/概览
 import { observer } from "mobx-react";
-import { useCycleDetail } from "@/lib/hooks/use-cycles";
+import { useCycleDetail } from "@/../src/lib/hooks/use-cycles";
 import { ActiveCycleProgress } from "./active-cycle/progress";
 import { ActiveCycleStats } from "./active-cycle/cycle-stats";
 import { ActiveCycleProductivity } from "./active-cycle/productivity";
-import { CycleDetailsSidebar } from "./analytics-sidebar/root";
 
 type Props = {
   cycleId: string;

@@ -23,10 +23,10 @@ export function ModuleModal(props: ModuleModalProps) {
   const { module: moduleStore } = useStore();
 
   const isOpen = propsIsOpen ?? moduleStore.moduleModalOpen ?? false;
-  const data = propsData ?? moduleStore.editingModule ?? null;
+  const data = propsData ?? null;
   const workspaceId = propsWs ?? "ws-1";
   const projectId = propsPid ?? "proj-1";
-  const isEdit = !!data || moduleStore.cycleModalMode === "edit";
+  const isEdit = !!data || moduleStore.moduleModalMode === "edit";
 
   const handleClose = () => {
     if (propsHandleClose) {

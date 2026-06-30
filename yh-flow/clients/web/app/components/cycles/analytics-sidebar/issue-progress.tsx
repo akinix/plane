@@ -2,7 +2,7 @@
 import React from "react";
 import { observer } from "mobx-react";
 import { Loader } from "@plane/ui";
-import { useCycleProgress } from "@/lib/hooks/use-cycle-issues";
+import { useCycleProgress } from "@/../src/lib/hooks/use-cycle-issues";
 import { BurndownChart } from "./burndown-chart";
 import { AnalyticsProgressStats } from "./progress-stats";
 

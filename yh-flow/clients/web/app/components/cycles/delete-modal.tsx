@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { observer } from "mobx-react";
 import { AlertTriangle } from "lucide-react";
-import { useCycleMutations } from "@/lib/hooks/use-cycles";
+import { useCycleMutations } from "@/../src/lib/hooks/use-cycles";
 
 interface ICycleDelete {
   cycle: any;
@@ -14,7 +14,7 @@ interface ICycleDelete {
 }
 
 export const CycleDeleteModal = observer(function CycleDeleteModal(props: ICycleDelete) {
-  const { isOpen, handleClose, cycle, workspaceSlug, projectId } = props;
+  const { isOpen, handleClose, cycle, projectId } = props;
   const [loading, setLoading] = useState(false);
   const { deleteCycle } = useCycleMutations();
 

@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import type { ICycle } from "@plane/types";
-import { useCycleMutations } from "@/lib/hooks/use-cycles";
+import { useCycleMutations } from "@/../src/lib/hooks/use-cycles";
 
 type Props = {
   onClose?: () => void;

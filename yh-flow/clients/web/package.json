@@ -67,6 +67,7 @@
     "react": "^19.0.0",
     "react-color": "^2.19.3",
     "react-dom": "^19.0.0",
+    "react-hook-form": "catalog:",
     "react-popper": "^2.3.0",
     "react-router": "^7.0.0",
     "rehype-parse": "^9.0.1",

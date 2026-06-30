@@ -1,7 +1,8 @@
 // FLOW: TanStack Query hooks for Cycle-Issue associations (mock data layer per D-P18-04)
+import { useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { TIssue } from "@plane/types";
-import { MOCK_ISSUES } from "../mock-data";
+import { MOCK_ISSUES, MOCK_STATES } from "../mock-data";
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -70,6 +71,32 @@ export const useRemoveIssueFromCycle = () => {
       queryClient.invalidateQueries({ queryKey: ["issues"] });
     },
   });
+};
+
+export const useCycleProgress = (projectId: string, cycleId: string) => {
+  const { data: cycleIssues, isLoading } = useCycleIssues(projectId, cycleId);
+
+  const progress = useMemo(() => {
+    const getStateGroup = (issue: TIssue): string => {
+      const state = MOCK_STATES.find((s: { id: string; group: string }) => s.id === issue.state_id);
+      return state?.group ?? "backlog";
+    };
+    const completed = cycleIssues?.filter((i) => getStateGroup(i) === "completed").length ?? 0;
+    const total = cycleIssues?.length ?? 0;
+    return {
+      total_issues: total,
+      completed_issues: completed,
+      backlog_issues: cycleIssues?.filter((i) => getStateGroup(i) === "backlog").length ?? 0,
+      unstarted_issues: cycleIssues?.filter((i) => getStateGroup(i) === "unstarted").length ?? 0,
+      started_issues: cycleIssues?.filter((i) => getStateGroup(i) === "started").length ?? 0,
+      cancelled_issues: cycleIssues?.filter((i) => getStateGroup(i) === "cancelled").length ?? 0,
+      start_date: "",
+      end_date: "",
+      burndown: [] as { date: string; ideal: number; actual: number }[],
+    };
+  }, [cycleIssues]);
+
+  return { data: progress, isLoading, isError: false };
 };
 
 export const useTransferCycleIssues = () => {

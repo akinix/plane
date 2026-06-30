@@ -7,6 +7,8 @@ export interface IModuleStore {
   selectedModuleId: string | null;
   moduleModalOpen: boolean;
   moduleModalMode: "create" | "edit";
+  deleteModuleId: string | null;
+  deleteModuleName: string | null;
   moduleDeleting: boolean;
   activeView: "list" | "gantt";
   filters: {
@@ -18,6 +20,8 @@ export interface IModuleStore {
   setSelectedModuleId: (id: string | null) => void;
   openModuleModal: (mode: "create" | "edit") => void;
   closeModuleModal: () => void;
+  openDeleteModal: (moduleId: string) => void;
+  closeDeleteModal: () => void;
   setModuleDeleting: (state: boolean) => void;
   setActiveView: (view: "list" | "gantt") => void;
   setFilters: (filters: { status?: TModuleStatus[]; searchQuery?: string }) => void;
@@ -28,6 +32,8 @@ export class ModuleStore implements IModuleStore {
   selectedModuleId: string | null = null;
   moduleModalOpen: boolean = false;
   moduleModalMode: "create" | "edit" = "create";
+  deleteModuleId: string | null = null;
+  deleteModuleName: string | null = null;
   moduleDeleting: boolean = false;
   activeView: "list" | "gantt" = "list";
   filters: {
@@ -40,12 +46,16 @@ export class ModuleStore implements IModuleStore {
       selectedModuleId: observable.ref,
       moduleModalOpen: observable.ref,
       moduleModalMode: observable.ref,
+      deleteModuleId: observable.ref,
+      deleteModuleName: observable.ref,
       moduleDeleting: observable.ref,
       activeView: observable.ref,
       filters: observable,
       setSelectedModuleId: action,
       openModuleModal: action,
       closeModuleModal: action,
+      openDeleteModal: action,
+      closeDeleteModal: action,
       setModuleDeleting: action,
       setActiveView: action,
       setFilters: action,
@@ -70,6 +80,17 @@ export class ModuleStore implements IModuleStore {
     this.moduleDeleting = state;
   };
 
+  openDeleteModal = (moduleId: string): void => {
+    this.deleteModuleId = moduleId;
+    this.moduleDeleting = true;
+  };
+
+  closeDeleteModal = (): void => {
+    this.deleteModuleId = null;
+    this.deleteModuleName = null;
+    this.moduleDeleting = false;
+  };
+
   setActiveView = (view: "list" | "gantt"): void => {
     this.activeView = view;
   };
@@ -82,6 +103,8 @@ export class ModuleStore implements IModuleStore {
     this.selectedModuleId = null;
     this.moduleModalOpen = false;
     this.moduleModalMode = "create";
+    this.deleteModuleId = null;
+    this.deleteModuleName = null;
     this.moduleDeleting = false;
     this.activeView = "list";
     this.filters = {};

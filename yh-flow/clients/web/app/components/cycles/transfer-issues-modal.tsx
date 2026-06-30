@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { observer } from "mobx-react";
 import { Search, AlertCircle, X } from "lucide-react";
-import { useTransferCycleIssues } from "@/lib/hooks/use-cycle-issues";
-import { useCycles } from "@/lib/hooks/use-cycles";
+import { useTransferCycleIssues } from "@/../src/lib/hooks/use-cycle-issues";
+import { useCycles } from "@/../src/lib/hooks/use-cycles";
 
 type Props = {
   isOpen: boolean;
