@@ -7,11 +7,7 @@ import { CycleStore } from "./cycle.store";
 import { ModuleStore } from "./module.store";
 import { PageStore } from "./page.store";
 import { ViewStore } from "./view.store";
-import type { IWorkspaceStore, IProjectStore, IIssueStore } from "./types";
-import type { ICycleStore } from "./cycle.store";
-import type { IModuleStore } from "./module.store";
-import type { IPageStore } from "./page.store";
-import type { IViewStore } from "./view.store";
+import type { IWorkspaceStore, IProjectStore, IIssueStore, ICycleStore, IModuleStore, IPageStore, IViewStore } from "./types";
 
 export interface ICoreRootStore {
   auth: IAuthStore;
