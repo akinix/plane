@@ -189,6 +189,7 @@ export abstract class FlowApiService {
   /**
    * Unwrap paginated response, extracting the `results` array.
    * Falls back to returning `data` directly if results is absent or already an array.
+   * Returns an empty array if data is neither a paginated response with results nor an array.
    */
   protected unwrapPaginated<T>(response: AxiosResponse): T[] {
     const data = response.data;
@@ -196,7 +197,7 @@ export abstract class FlowApiService {
       return data.results;
     }
     if (Array.isArray(data)) return data;
-    return data;
+    return [];
   }
 
   /**
