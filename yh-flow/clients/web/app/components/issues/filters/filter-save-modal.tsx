@@ -24,6 +24,7 @@ type TFilterSaveModalProps = {
   currentSort: TSortConfig;
   currentColumns: string[];
   currentLayout: TViewLayout;
+  onSave?: () => void; // FLOW: post-save navigation callback (19-04 VIEW-02)
 };
 
 export function FilterSaveModal({
@@ -35,6 +36,7 @@ export function FilterSaveModal({
   currentSort,
   currentColumns,
   currentLayout,
+  onSave,
 }: TFilterSaveModalProps) {
   const [name, setName] = useState("");
   const { mutateAsync: createIssueView, isPending } = useCreateIssueView();
@@ -55,6 +57,7 @@ export function FilterSaveModal({
       });
       setName("");
       onClose();
+      onSave?.();
       // FUTURE: show toast notification when toast system is available
     } catch {
       // Error handling — mock layer should not fail

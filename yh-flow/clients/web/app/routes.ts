@@ -48,6 +48,14 @@ export default [
     route("workspaces/:workspaceId/pages/:pageId", "app/workspaces/[workspaceId]/pages/[pageId]/page.tsx"),
 
     // ====================================================================
+    // VIEW ROUTES per D-P19-01 (Project-level: views belong to project)
+    // ====================================================================
+    route(
+      "workspaces/:workspaceId/projects/:projectId/views",
+      "app/workspaces/[workspaceId]/projects/[projectId]/views/page.tsx"
+    ),
+
+    // ====================================================================
     // ISSUE ROUTES per D-P16-04
     // ====================================================================
     route("workspaces/:workspaceId/projects/:projectId/issues", "app/issues/page.tsx"),
