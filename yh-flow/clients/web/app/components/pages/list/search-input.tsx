@@ -17,7 +17,7 @@ export function PageSearchInput(props: Props) {
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Escape") {
-      if (searchQuery && searchQuery.trim() !== "") updateSearchQuery("");
+      if (searchQuery.trim() !== "") updateSearchQuery("");
       else {
         setIsSearchOpen(false);
         inputRef.current?.blur();
