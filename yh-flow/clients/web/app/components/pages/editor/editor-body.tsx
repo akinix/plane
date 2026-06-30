@@ -17,14 +17,8 @@ export const PageEditorBody = observer(function PageEditorBody({ onChange, initi
   const editorRef = useRef<EditorRefApi>(null);
   const initialValueRef = useRef(initialValue);
 
-  // Set initial editor value on mount
-  useEffect(() => {
-    if (editorRef.current && initialValueRef.current) {
-      editorRef.current.setEditorValue(initialValueRef.current);
-    }
-  }, []);
-
-  // Update initialValue ref when prop changes (new page loaded)
+  // DocumentEditorWithRef handles value prop directly;
+  // this effect updates the ref and editor when initialValue changes (new page loaded)
   useEffect(() => {
     initialValueRef.current = initialValue;
     if (editorRef.current && initialValue) {
