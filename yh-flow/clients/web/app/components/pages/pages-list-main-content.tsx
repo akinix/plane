@@ -4,7 +4,7 @@
 import { observer } from "mobx-react";
 import { useStore } from "@/lib/store-context";
 import { usePages } from "@/../src/lib/hooks/use-pages";
-import type { TPage, TPageNavigationTabs } from "@plane/types";
+import { EPageAccess, type TPage, type TPageNavigationTabs } from "@plane/types";
 import { PagesListView } from "./pages-list-view";
 import { PageTabNavigation } from "./list/tab-navigation";
 import { PageSearchInput } from "./list/search-input";
@@ -27,8 +27,8 @@ export const PagesListMainContent = observer(function PagesListMainContent({ wor
   // Filter pages based on active tab
   const filteredByTab =
     pages?.filter((p: TPage) => {
-      if (activeTab === "public") return p.access === 0 && !p.archived_at;
-      if (activeTab === "private") return p.access === 1 && !p.archived_at;
+      if (activeTab === "public") return p.access === EPageAccess.PUBLIC && !p.archived_at;
+      if (activeTab === "private") return p.access === EPageAccess.PRIVATE && !p.archived_at;
       if (activeTab === "archived") return !!p.archived_at;
       return true;
     }) ?? [];
