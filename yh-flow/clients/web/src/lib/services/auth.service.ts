@@ -22,7 +22,7 @@ export class AuthService extends FlowApiService {
     return this.post("/auth/email-check/", data)
       .then((res) => res?.data)
       .catch((err) => {
-        throw err?.response?.data;
+        throw err?.response?.data ?? err;
       });
   }
 
@@ -38,7 +38,7 @@ export class AuthService extends FlowApiService {
         return tokenData;
       })
       .catch((err) => {
-        throw err?.response?.data;
+        throw err?.response?.data ?? err;
       });
   }
 
@@ -58,7 +58,7 @@ export class AuthService extends FlowApiService {
         return tokenData;
       })
       .catch((err) => {
-        throw err?.response?.data;
+        throw err?.response?.data ?? err;
       });
   }
 
@@ -67,7 +67,7 @@ export class AuthService extends FlowApiService {
     return this.post("/auth/forgot-password/", data)
       .then((res) => res?.data)
       .catch((err) => {
-        throw err?.response?.data;
+        throw err?.response?.data ?? err;
       });
   }
 
@@ -76,7 +76,7 @@ export class AuthService extends FlowApiService {
     return this.post(`/auth/reset-password/${token}/`, data)
       .then((res) => res?.data)
       .catch((err) => {
-        throw err?.response?.data;
+        throw err?.response?.data ?? err;
       });
   }
 
@@ -98,7 +98,7 @@ export class AuthService extends FlowApiService {
         return tokenData;
       })
       .catch((err) => {
-        throw err?.response?.data;
+        throw err?.response?.data ?? err;
       });
   }
 }
