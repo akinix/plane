@@ -8,6 +8,7 @@ import { useStore } from "@/lib/store-context";
 import { useViews } from "@/../src/lib/hooks/use-views";
 import { useViewMutations } from "@/../src/lib/hooks/use-view-mutations";
 import { EViewAccess } from "@/../src/lib/types/views";
+import type { TIssueView } from "@/components/issues/filters/types";
 import { ViewForm } from "./form";
 
 type Props = {
@@ -32,11 +33,13 @@ const ViewModal = observer(function ViewModal({ isOpen, onClose, projectId, work
     if (viewStore.viewModalMode === "edit" && editView) {
       await updateView.mutateAsync({
         viewId: editView.id,
-        data: { name: data.name },
+        data: { name: data.name, access: data.access, description: data.description } as Partial<TIssueView>,
       });
     } else {
       await createView.mutateAsync({
         name: data.name,
+        access: data.access,
+        description: data.description,
         projectId,
         filters: { stateIds: [], priorityIds: [], assigneeIds: [], labelIds: [], searchQuery: "", dateRange: null },
         sort: { sortBy: "updated_at", sortDirection: "desc" },
@@ -44,7 +47,7 @@ const ViewModal = observer(function ViewModal({ isOpen, onClose, projectId, work
         subGroupBy: "none",
         displayColumns: ["state", "priority", "assignee", "labels", "created_at"],
         layout: "list",
-      });
+      } as Omit<TIssueView, "id" | "createdAt" | "updatedAt">);
     }
     viewStore.closeViewModal();
   };
@@ -54,6 +57,8 @@ const ViewModal = observer(function ViewModal({ isOpen, onClose, projectId, work
       <ViewForm
         title={viewStore.viewModalMode === "edit" ? "编辑视图" : "保存为视图"}
         defaultName={editView?.name ?? ""}
+        defaultAccess={(editView as TIssueView & { access?: EViewAccess })?.access ?? EViewAccess.PUBLIC}
+        defaultDescription={(editView as TIssueView & { description?: string })?.description ?? ""}
         onSubmit={handleSubmit}
         onCancel={onClose}
         isPending={createView.isPending || updateView.isPending}
