@@ -22,11 +22,12 @@ const DeleteViewModal = observer(function DeleteViewModal({ isOpen, onClose, vie
     setIsDeleting(true);
     try {
       await deleteView.mutateAsync(viewId);
-      onClose();
     } catch (error) {
       console.error("[DeleteViewModal] Failed to delete view:", error);
+    } finally {
+      setIsDeleting(false);
+      onClose();
     }
-    setIsDeleting(false);
   };
 
   return (
