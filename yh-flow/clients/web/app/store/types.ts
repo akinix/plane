@@ -3,9 +3,10 @@ import type { IProject, IWorkspace } from "@plane/types";
 import type { IIssueStore } from "./issue.store";
 import type { ICycleStore } from "./cycle.store";
 import type { IModuleStore } from "./module.store";
+import type { IPageStore } from "./page.store";
 import type { TViewLayout, TGroupByOptions, TFilterCriteria } from "@/components/issues/filters/types";
 
-export type { IIssueStore, ICycleStore, IModuleStore, TViewLayout, TGroupByOptions, TFilterCriteria };
+export type { IIssueStore, ICycleStore, IModuleStore, IPageStore, TViewLayout, TGroupByOptions, TFilterCriteria };
 
 export interface IWorkspaceStore {
   workspaceSwitcherOpen: boolean;
