@@ -1,0 +1,33 @@
+## Phase 17: 日历/甘特/电子表格 & 筛选引擎
+
+**Goal**: 用户可使用多种 Issue 视图和可复用的筛选/排序/自定义列引擎
+
+**Depends on**: Phase 16
+
+**Requirements**: CALN-01, CALN-02, GANT-01, GANT-02, SHEE-01, SHEE-02, FILT-01, FILT-02, FILT-03, FILT-04
+
+**Success Criteria** (what must be TRUE):
+
+1. 用户看到 Issue 日历视图（按截止日期/开始日期在日历上展示），可通过拖拽调整 Issue 日期
+2. 用户看到 Issue 甘特图视图（横向时间轴展示 Issue 跨度），可查看 Issue 依赖关系连线
+3. 用户看到 Issue 电子表格视图（表格形式展示字段列），可在表格中内联编辑 Issue 属性
+4. 用户可按状态、优先级、负责人、标签组合筛选 Issues，可按任意字段升序/降序排序
+5. 用户可自定义列表/看板/日历/甘特/电子表格视图中显示的列，可将当前筛选/排序/列配置保存为自定义视图（保存的视图在 Phase 19 中管理和应用）
+
+**Plans**: 6 plans
+
+```
+Plans:
+- [ ] 17-01-PLAN.md — 筛选引擎基础设施（类型定义 + useFilters/useSorting/useGroupBy/useSubGroupBy hooks + IssueStore 扩展）
+- [ ] 17-02-PLAN.md — 日历视图（Fork Plane 日历组件 + CalendarView 主容器 + 拖拽调整日期）
+- [ ] 17-03-PLAN.md — 甘特图视图（Fork Plane 甘特组件 + GanttView 主容器 + 4 级缩放 + 依赖连线）
+- [ ] 17-04-PLAN.md — 电子表格视图（Fork Plane 电子表格组件 + SpreadsheetView 主容器 + 16 列类型 + 内联编辑）
+- [ ] 17-05-PLAN.md — 筛选引擎 UI（FilterBar + ColumnSelector + FilterSaveModal + IssueView 服务）
+- [ ] 17-06-PLAN.md — 视图集成（5 视图切换 + 列表视图接入 FilterBar + 看板子分组 KANB-04）
+```
+
+**UI hint**: yes
+
+---
+
+### Phase 18: 周期 & 模块

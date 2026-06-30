@@ -16,6 +16,7 @@ status: all_fixed
 **Iteration:** 3
 
 **Summary:**
+
 - Findings in scope: 13
 - Fixed: 13
 - Skipped: 0

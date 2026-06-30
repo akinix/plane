@@ -1,0 +1,61 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-06-26T01:00:11.119Z",
+  "phase": "12",
+  "phase_name": "analytics",
+  "phase_dir": ".planning/phases/12-analytics",
+  "plan": 1,
+  "task": 0,
+  "total_tasks": 4,
+  "status": "paused",
+  "completed_tasks": [],
+  "remaining_tasks": [
+    { "id": 1, "name": "Wave 1 — Module Scaffolding (12-01-PLAN.md)", "status": "not_started" },
+    { "id": 2, "name": "Wave 2 — Overview + Stats Endpoints (12-02-PLAN.md)", "status": "not_started" },
+    { "id": 3, "name": "Wave 3 — Chart + Export Endpoints (12-03-PLAN.md)", "status": "not_started" },
+    { "id": 4, "name": "Wave 4 — Integration Tests (12-04-PLAN.md)", "status": "not_started" }
+  ],
+  "blockers": [],
+  "human_actions_pending": [],
+  "decisions": [
+    { "decision": "独立 Modules.Analytics + Contracts 项目", "rationale": "与所有后端模块一致的模式", "phase": "12" },
+    {
+      "decision": "不创建独立 AnalyticsDbContext",
+      "rationale": "纯查询模块，直接跨 WorkItemsDbContext 读取",
+      "phase": "12"
+    },
+    {
+      "decision": "先决条件：WorkItemsDbContext 中的 Issue/Cycle/Module 实体存在",
+      "rationale": "Phase 4/5/6 已完成，数据结构就绪",
+      "phase": "12"
+    },
+    {
+      "decision": "CSV 导出使用 Hangfire 后台作业",
+      "rationale": "复用 Phase 10 Webhook 已建立的 Hangfire 基础设施",
+      "phase": "12"
+    },
+    {
+      "decision": "4 端点组：Overview / Stats / Chart / Export",
+      "rationale": "与 Plane Analytics API 兼容",
+      "phase": "12"
+    },
+    { "decision": "实时聚合查询（无缓存）", "rationale": "v1.0 不做缓存，GET 时动态 COUNT/GROUP BY", "phase": "12" }
+  ],
+  "uncommitted_files": [
+    ".planning/STATE.md",
+    ".planning/phases/07-page/07-CONTEXT.md",
+    "yh-flow/src/BuildingBlocks/Web/Exceptions/GlobalExceptionHandler.cs",
+    "yh-flow/src/Modules/Notifications/Modules.Notifications/Data/NotificationsDbContext.cs",
+    "yh-flow/src/Modules/Notifications/Modules.Notifications/Domain/Notification.cs",
+    "yh-flow/src/Modules/Notifications/Modules.Notifications/NotificationsModule.cs",
+    "yh-flow/src/Modules/Workspace/Modules.Workspace/Features/v1/Workspaces/DeleteWorkspace/DeleteWorkspaceEndpoint.cs",
+    "yh-flow/src/Modules/Workspace/Modules.Workspace/Features/v1/Workspaces/GetWorkspace/GetWorkspaceEndpoint.cs",
+    "yh-flow/src/Modules/Workspace/Modules.Workspace/Features/v1/Workspaces/UpdateWorkspace/UpdateWorkspaceEndpoint.cs",
+    "yh-flow/src/Modules/Workspace/Modules.Workspace/WorkspaceModule.cs",
+    "yh-flow/src/Tests/Webhooks.Tests/GlobalUsings.cs",
+    "yh-flow/src/Tests/Webhooks.Tests/Webhooks.Tests.csproj",
+    "yh-flow/src/YH.Flow.slnx"
+  ],
+  "next_action": "执行 Wave 1：创建 Modules.Analytics + Contracts 项目结构、添加 Issue 分析覆盖索引、注册模块到 slnx 和 Host",
+  "context_notes": "Phase 12 (Analytics) 处于执行起始点。4 个计划已创建并提交，计划检查器通过（一个 WARNING：缺少优先级维度统计，建议 Wave 2 执行时补充）。gsd-execute-phase \"12 --no-transition\" 已调用但未启动任何子代理——上下文用尽。恢复后需从 Wave 1 (12-01-PLAN.md) 开始执行，由 gsd-executor 子代理完成。上游依赖：Phase 4/5/6（WorkItems/Cycle/Module 实体）已完成。未提交的源代码更改来自 Phase 10/11（Notification + Workspace 微调），与 Phase 12 无关。"
+}
