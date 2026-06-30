@@ -51,7 +51,13 @@ v3.0 (前后端打通): Phase 21~27 — Flow Web 前端从 Mock 数据切换到�
 3. 每个模块的 TanStack Query 缓存键均使用集中式 `query-keys.ts` 工厂，无临时字符串拼写
 4. API 错误响应（ProblemDetails + Plane 格式 + FluentValidation 字段级错误）在响应拦截器中统一提取为前端可消费格式
 5. Service 层自动解包 `PlanePagedResult.results[]`，hooks 层继续使用 `T[]` 数组
-   **Plans**: TBD
+   **Plans**: 3 plans
+
+Plans:
+
+- [ ] 21-01-PLAN.md — FlowApiService 拦截器：请求体转换 + Token 刷新队列 + 错误标准化（INFRA-01, INFRA-02, INFRA-04）
+- [ ] 21-02-PLAN.md — 集中式查询键工厂 query-keys.ts（INFRA-03）
+- [ ] 21-03-PLAN.md — 分页提取层 getList / getOne 方法（INFRA-05）
 
 ### Phase 22: Workspace & Project
 
@@ -159,7 +165,7 @@ v3.0 (前后端打通): Phase 21~27 — Flow Web 前端从 Mock 数据切换到�
 
 | Phase                                   | Plans Complete | Status      | Completed |
 | --------------------------------------- | -------------- | ----------- | --------- |
-| 21. Infrastructure Foundation           | 0/0            | Not started | -         |
+| 21. Infrastructure Foundation           | 0/3            | Not started | -         |
 | 22. Workspace & Project                 | 0/0            | Not started | -         |
 | 23. WorkItems                           | 0/0            | Not started | -         |
 | 24. Cycles & Modules                    | 0/0            | Not started | -         |
