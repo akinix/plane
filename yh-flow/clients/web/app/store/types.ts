@@ -4,9 +4,19 @@ import type { IIssueStore } from "./issue.store";
 import type { ICycleStore } from "./cycle.store";
 import type { IModuleStore } from "./module.store";
 import type { IPageStore } from "./page.store";
+import type { IViewStore } from "./view.store";
 import type { TViewLayout, TGroupByOptions, TFilterCriteria } from "@/components/issues/filters/types";
 
-export type { IIssueStore, ICycleStore, IModuleStore, IPageStore, TViewLayout, TGroupByOptions, TFilterCriteria };
+export type {
+  IIssueStore,
+  ICycleStore,
+  IModuleStore,
+  IPageStore,
+  IViewStore,
+  TViewLayout,
+  TGroupByOptions,
+  TFilterCriteria,
+};
 
 export interface IWorkspaceStore {
   workspaceSwitcherOpen: boolean;

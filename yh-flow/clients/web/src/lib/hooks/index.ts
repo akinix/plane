@@ -11,3 +11,5 @@ export * from "./use-issues";
 export * from "./use-comments";
 export * from "./use-pages";
 export * from "./use-page-mutations";
+export * from "./use-views";
+export * from "./use-view-mutations";

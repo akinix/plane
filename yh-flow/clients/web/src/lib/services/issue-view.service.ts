@@ -4,6 +4,7 @@ import type { TIssueView } from "@/components/issues/filters/types";
 import { FlowApiService } from "./flow-api.service";
 
 // In-memory mock storage for issue views
+// Extra fields (access, description, is_favorite, owned_by, created_by) are used by View UI
 const MOCK_VIEWS: TIssueView[] = [
   {
     id: "view-1",
@@ -24,7 +25,87 @@ const MOCK_VIEWS: TIssueView[] = [
     layout: "list",
     createdAt: "2026-06-01T00:00:00Z",
     updatedAt: "2026-06-01T00:00:00Z",
-  },
+  } as TIssueView & { access: number; description: string; is_favorite: boolean; owned_by: string; created_by: string },
+  {
+    id: "view-2",
+    name: "高优先级 Issues",
+    projectId: "proj-1",
+    filters: {
+      stateIds: [],
+      priorityIds: ["urgent", "high"],
+      assigneeIds: [],
+      labelIds: [],
+      searchQuery: "",
+      dateRange: null,
+    },
+    sort: { sortBy: "priority", sortDirection: "desc" },
+    groupBy: "priority",
+    subGroupBy: "none",
+    displayColumns: ["state", "priority", "assignee", "labels", "created_at"],
+    layout: "list",
+    createdAt: "2026-06-05T00:00:00Z",
+    updatedAt: "2026-06-20T00:00:00Z",
+  } as TIssueView & { access: number; description: string; is_favorite: boolean; owned_by: string; created_by: string },
+  {
+    id: "view-3",
+    name: "待审阅",
+    projectId: "proj-1",
+    filters: {
+      stateIds: ["state-ff-3"],
+      priorityIds: [],
+      assigneeIds: ["user-2", "user-3"],
+      labelIds: [],
+      searchQuery: "",
+      dateRange: null,
+    },
+    sort: { sortBy: "updated_at", sortDirection: "desc" },
+    groupBy: "state",
+    subGroupBy: "none",
+    displayColumns: ["state", "priority", "assignee", "labels", "created_at"],
+    layout: "kanban",
+    createdAt: "2026-06-10T00:00:00Z",
+    updatedAt: "2026-06-25T00:00:00Z",
+  } as TIssueView & { access: number; description: string; is_favorite: boolean; owned_by: string; created_by: string },
+  {
+    id: "view-4",
+    name: "本周计划",
+    projectId: "proj-2",
+    filters: {
+      stateIds: [],
+      priorityIds: [],
+      assigneeIds: [],
+      labelIds: [],
+      searchQuery: "",
+      dateRange: { start: "2026-06-29", end: "2026-07-05" },
+    },
+    sort: { sortBy: "target_date", sortDirection: "asc" },
+    groupBy: "state",
+    subGroupBy: "none",
+    displayColumns: ["state", "priority", "assignee", "labels", "created_at"],
+    layout: "list",
+    createdAt: "2026-06-28T00:00:00Z",
+    updatedAt: "2026-06-29T00:00:00Z",
+  } as TIssueView & { access: number; description: string; is_favorite: boolean; owned_by: string; created_by: string },
+  {
+    id: "view-5",
+    name: "待办事项",
+    projectId: "proj-1",
+    filters: {
+      stateIds: ["state-ff-1"],
+      priorityIds: [],
+      assigneeIds: [],
+      labelIds: [],
+      searchQuery: "",
+      dateRange: null,
+    },
+    sort: { sortBy: "created_at", sortDirection: "asc" },
+    groupBy: "state",
+    subGroupBy: "none",
+    displayColumns: ["state", "priority", "assignee", "labels", "created_at"],
+    layout: "list",
+    createdAt: "2026-06-15T00:00:00Z",
+    updatedAt: "2026-06-22T00:00:00Z",
+  } as TIssueView & { access: number; description: string; is_favorite: boolean; owned_by: string; created_by: string },
 ];
 
 let nextId = 100;
@@ -75,6 +156,27 @@ export class IssueViewService extends FlowApiService {
     const idx = MOCK_VIEWS.findIndex((v) => v.id === viewId);
     if (idx >= 0) {
       MOCK_VIEWS.splice(idx, 1);
+    }
+  }
+
+  /**
+   * Update a view (current: mock in-memory, future: PATCH /api/v1/views/:id)
+   */
+  async updateIssueView(viewId: string, data: Partial<TIssueView>): Promise<TIssueView | undefined> {
+    const idx = MOCK_VIEWS.findIndex((v) => v.id === viewId);
+    if (idx >= 0) {
+      MOCK_VIEWS[idx] = { ...MOCK_VIEWS[idx], ...data, updatedAt: new Date().toISOString() };
+    }
+    return MOCK_VIEWS[idx];
+  }
+
+  /**
+   * Toggle favorite status for a view
+   */
+  async favoriteIssueView(viewId: string, isFavorite: boolean): Promise<void> {
+    const view = MOCK_VIEWS.find((v) => v.id === viewId);
+    if (view) {
+      (view as Record<string, unknown>).is_favorite = isFavorite;
     }
   }
 }

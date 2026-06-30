@@ -6,10 +6,12 @@ import { IssueStore } from "./issue.store";
 import { CycleStore } from "./cycle.store";
 import { ModuleStore } from "./module.store";
 import { PageStore } from "./page.store";
+import { ViewStore } from "./view.store";
 import type { IWorkspaceStore, IProjectStore, IIssueStore } from "./types";
 import type { ICycleStore } from "./cycle.store";
 import type { IModuleStore } from "./module.store";
 import type { IPageStore } from "./page.store";
+import type { IViewStore } from "./view.store";
 
 export interface ICoreRootStore {
   auth: IAuthStore;
@@ -19,6 +21,7 @@ export interface ICoreRootStore {
   cycle: ICycleStore;
   module: IModuleStore;
   page: IPageStore;
+  view: IViewStore;
 }
 
 export class CoreRootStore implements ICoreRootStore {
@@ -29,6 +32,7 @@ export class CoreRootStore implements ICoreRootStore {
   cycle: ICycleStore;
   module: IModuleStore;
   page: IPageStore;
+  view: IViewStore;
 
   constructor() {
     this.auth = new AuthStore();
@@ -38,5 +42,6 @@ export class CoreRootStore implements ICoreRootStore {
     this.cycle = new CycleStore();
     this.module = new ModuleStore();
     this.page = new PageStore();
+    this.view = new ViewStore();
   }
 }
