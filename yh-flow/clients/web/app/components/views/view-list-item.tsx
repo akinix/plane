@@ -8,6 +8,15 @@ import { Earth, Lock, Star } from "lucide-react";
 import { useStore } from "@/lib/store-context";
 import { useViewMutations } from "@/../src/lib/hooks/use-view-mutations";
 import type { TIssueView } from "@/components/issues/filters/types";
+
+// Extended type for view items with additional fields from mock data
+interface TIssueViewExtended extends TIssueView {
+  access: number;
+  is_favorite: boolean;
+  description: string;
+  owned_by: string;
+  created_by: string;
+}
 import { ViewListItemAction } from "./view-list-item-action";
 
 type Props = {
@@ -21,7 +30,7 @@ const ViewListItem = observer(function ViewListItem({ view, workspaceId, project
   const { view: viewStore } = useStore();
   const { favoriteView } = useViewMutations();
   const parentRef = useRef<HTMLDivElement>(null);
-  const ext = view as any;
+  const ext = view as TIssueViewExtended;
   const access: number = ext.access ?? 0;
   const isFav: boolean = ext.is_favorite ?? false;
   const description: string = ext.description ?? "";
