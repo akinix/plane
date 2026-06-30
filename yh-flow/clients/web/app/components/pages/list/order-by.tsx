@@ -57,18 +57,14 @@ export function PageOrderByDropdown(props: Props) {
       <hr className="border-custom-border-200 my-2" />
       <CustomMenu.MenuItem
         className="flex items-center justify-between gap-2"
-        onClick={() => {
-          if (isDescending) onChange({ order: "asc" });
-        }}
+        onClick={() => onChange({ order: "asc" })}
       >
         升序
         {!isDescending && <Check className="text-custom-primary size-3" />}
       </CustomMenu.MenuItem>
       <CustomMenu.MenuItem
         className="flex items-center justify-between gap-2"
-        onClick={() => {
-          if (!isDescending) onChange({ order: "desc" });
-        }}
+        onClick={() => onChange({ order: "desc" })}
       >
         降序
         {isDescending && <Check className="text-custom-primary size-3" />}
