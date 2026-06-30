@@ -14,6 +14,11 @@ const PROJECT_VIEWS = [
   { key: "views", label: "Views", icon: Eye },
 ] as const;
 
+// Safely parse emoji codepoint, fall back to first char of project name
+const safeParseEmoji = (value: string, projectName: string) => {
+  const code = parseInt(value, 10);
+  return Number.isSafeInteger(code) && code > 0 ? String.fromCodePoint(code) : projectName.charAt(0);
+};
 export const SidebarTree = observer(function SidebarTree() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -82,7 +87,7 @@ export const SidebarTree = observer(function SidebarTree() {
                   {/* Emoji or first char */}
                   <span className="text-xs flex size-4 items-center justify-center">
                     {project.logo_props?.emoji?.value
-                      ? String.fromCodePoint(parseInt(project.logo_props.emoji.value, 10))
+                      ? safeParseEmoji(project.logo_props.emoji.value, project.name)
                       : project.name.charAt(0)}
                   </span>
                   <span className="truncate">{project.name}</span>

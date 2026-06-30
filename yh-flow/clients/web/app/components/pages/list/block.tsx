@@ -39,7 +39,10 @@ export const PageListBlock = function PageListBlock({ page, workspaceId }: Props
   // Determine icon to display
   const renderIcon = () => {
     if (logo_props?.in_use === "emoji" && logo_props?.emoji?.value) {
-      return <span className="text-lg">{String.fromCodePoint(parseInt(logo_props.emoji.value, 10))}</span>;
+      const code = parseInt(logo_props.emoji.value, 10);
+      if (Number.isSafeInteger(code) && code > 0) {
+        return <span className="text-lg">{String.fromCodePoint(code)}</span>;
+      }
     }
     return <FileText className="text-custom-text-300 size-5" />;
   };
