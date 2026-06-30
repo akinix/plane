@@ -3,6 +3,7 @@
 "use client";
 import { useMemo } from "react";
 import { observer } from "mobx-react";
+import { useNavigate } from "react-router";
 import { useStore } from "@/lib/store-context";
 import { useViews } from "@/../src/lib/hooks/use-views";
 import type { TIssueView } from "@/components/issues/filters/types";
