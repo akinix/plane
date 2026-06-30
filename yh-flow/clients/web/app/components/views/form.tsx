@@ -8,7 +8,7 @@ import { EViewAccess } from "@/../src/lib/types/views";
 type Props = {
   title: string;
   defaultName?: string;
-  onSubmit: (name: string) => Promise<void>;
+  onSubmit: (data: { name: string; access: EViewAccess; description: string }) => Promise<void>;
   onCancel: () => void;
   isPending?: boolean;
 };
@@ -16,11 +16,12 @@ type Props = {
 const ViewForm = function ViewForm({ title, defaultName = "", onSubmit, onCancel, isPending = false }: Props) {
   const [name, setName] = useState(defaultName);
   const [access, setAccess] = useState<EViewAccess>(EViewAccess.PUBLIC);
+  const [description, setDescription] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim()) return;
-    await onSubmit(name.trim());
+    await onSubmit({ name: name.trim(), access, description });
   };
 
   return (
@@ -58,6 +59,8 @@ const ViewForm = function ViewForm({ title, defaultName = "", onSubmit, onCancel
           <input
             id="view-description"
             type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             placeholder="添加描述（可选）"
             className="border-custom-border-200 bg-custom-background-90 text-sm text-custom-text-100 placeholder:text-custom-text-400 focus:border-custom-primary rounded-md border px-3 py-2 outline-none"
           />
