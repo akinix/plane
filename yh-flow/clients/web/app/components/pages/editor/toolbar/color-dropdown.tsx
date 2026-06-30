@@ -16,7 +16,7 @@ const PRESET_COLORS = [
   { key: "gray", textColor: "#6B7280", backgroundColor: "#F3F4F6" },
 ];
 
-export const ColorDropdown = function ColorDropdown() {
+export const ColorDropdown = function ColorDropdown({ onChange }: { onChange?: (color: string | null) => void }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -47,13 +47,15 @@ export const ColorDropdown = function ColorDropdown() {
                   type="button"
                   className="border-custom-border-200 size-6 flex-shrink-0 rounded-sm border transition-opacity hover:opacity-60"
                   style={{ backgroundColor: color.textColor }}
+                  onClick={() => onChange?.(color.textColor)}
                   aria-label={color.key}
                 />
               ))}
               <button
                 type="button"
                 className="border-custom-border-200 text-custom-text-400 hover:bg-custom-background-80 grid size-6 flex-shrink-0 place-items-center rounded-sm border transition-colors"
-                aria-label="清除颜色"
+                  onClick={() => onChange?.(null)}
+                  aria-label="清除颜色"
               >
                 <Ban className="size-4" />
               </button>
