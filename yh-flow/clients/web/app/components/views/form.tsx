@@ -10,13 +10,15 @@ type Props = {
   defaultName?: string;
   onSubmit: (data: { name: string; access: EViewAccess; description: string }) => Promise<void>;
   onCancel: () => void;
+  defaultAccess?: EViewAccess;
+  defaultDescription?: string;
   isPending?: boolean;
 };
 
-const ViewForm = function ViewForm({ title, defaultName = "", onSubmit, onCancel, isPending = false }: Props) {
+const ViewForm = function ViewForm({ title, defaultName = "", onSubmit, onCancel, defaultAccess = EViewAccess.PUBLIC, defaultDescription = "", isPending = false }: Props) {
   const [name, setName] = useState(defaultName);
-  const [access, setAccess] = useState<EViewAccess>(EViewAccess.PUBLIC);
-  const [description, setDescription] = useState("");
+  const [access, setAccess] = useState<EViewAccess>(defaultAccess);
+  const [description, setDescription] = useState(defaultDescription);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
