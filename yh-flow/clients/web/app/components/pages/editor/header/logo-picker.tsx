@@ -4,8 +4,6 @@
 import { useState } from "react";
 import { SmilePlus } from "lucide-react";
 import { cn } from "@plane/utils";
-import { useQueryClient } from "@tanstack/react-query";
-import { usePageMutations } from "@/../src/lib/hooks/use-page-mutations";
 import type { TPage } from "@plane/types";
 
 type Props = {
@@ -14,29 +12,10 @@ type Props = {
 
 export const PageEditorHeaderLogoPicker = function PageEditorHeaderLogoPicker({ page }: Props) {
   const [isOpen, _setIsOpen] = useState(false);
-  const { updatePage } = usePageMutations();
-  const queryClient = useQueryClient();
   const hasLogo = page.logo_props?.in_use;
 
   const handleLogoClick = () => {
-    // Simple emoji picker placeholder — set a default emoji
-    const emojiCode = page.logo_props?.emoji?.value || "📄";
-    updatePage.mutate(
-      {
-        pageId: page.id,
-        data: {
-          logo_props: {
-            in_use: "emoji",
-            emoji: { value: emojiCode },
-          },
-        },
-      },
-      {
-        onError: () => {
-          queryClient.invalidateQueries({ queryKey: ["pages"] });
-        },
-      }
-    );
+    // Placeholder: emoji picker not yet implemented
   };
 
   if (!hasLogo) {
