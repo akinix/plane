@@ -208,7 +208,12 @@ export abstract class FlowApiService {
     params: Record<string, unknown> = {},
     config: AxiosRequestConfig = {}
   ): Promise<T[]> {
-    const response = await this.get(url, { params, ...config });
+    // Merge config.params into explicit params — explicit params take precedence
+    const mergedConfig: AxiosRequestConfig = {
+      ...config,
+      params: { ...(config.params as Record<string, unknown> || {}), ...params },
+    };
+    const response = await this.get(url, mergedConfig);
     return this.unwrapPaginated<T>(response);
   }
 
