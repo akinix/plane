@@ -146,9 +146,9 @@ export const notificationKeys = {
   /** Root key for invalidating all notification queries */
   all: () => ["notifications"] as const,
   /** List of notifications scoped to a workspace */
-  list: (workspaceId: string) => ["workspace-notifications", workspaceId] as const,
+  list: (workspaceId: string) => ["notifications", "workspace", workspaceId] as const,
   /** Unread notification count scoped to a workspace */
-  unreadCount: (workspaceId: string) => ["workspace-unread-count", workspaceId] as const,
+  unreadCount: (workspaceId: string) => ["notifications", "unread-count", workspaceId] as const,
 };
 
 // ---------------------------------------------------------------------------

@@ -5,7 +5,7 @@ import notificationService from "../services/notification.service";
 
 export const useNotifications = (workspaceId: string) => {
   return useQuery<TNotification[]>({
-    queryKey: ["workspace-notifications", workspaceId],
+    queryKey: ["notifications", "workspace", workspaceId],
     queryFn: async () => {
       return notificationService.getNotifications(workspaceId);
     },
@@ -15,7 +15,7 @@ export const useNotifications = (workspaceId: string) => {
 
 export const useUnreadCount = (workspaceId: string) => {
   return useQuery<TUnreadNotificationsCount>({
-    queryKey: ["workspace-unread-count", workspaceId],
+    queryKey: ["notifications", "unread-count", workspaceId],
     queryFn: async () => {
       return notificationService.getUnreadCount(workspaceId);
     },
@@ -38,8 +38,8 @@ export const useNotificationMutations = () => {
       await notificationService.markAsRead(notificationId);
     },
     onSuccess: (_data, variables) => {
-      queryClient.invalidateQueries({ queryKey: ["workspace-notifications", variables.workspaceId] });
-      queryClient.invalidateQueries({ queryKey: ["workspace-unread-count", variables.workspaceId] });
+      queryClient.invalidateQueries({ queryKey: ["notifications", "workspace", variables.workspaceId] });
+      queryClient.invalidateQueries({ queryKey: ["notifications", "unread-count", variables.workspaceId] });
     },
   });
 
@@ -48,8 +48,8 @@ export const useNotificationMutations = () => {
       await notificationService.markAllAsRead(workspaceId);
     },
     onSuccess: (_data, workspaceId) => {
-      queryClient.invalidateQueries({ queryKey: ["workspace-notifications", workspaceId] });
-      queryClient.invalidateQueries({ queryKey: ["workspace-unread-count", workspaceId] });
+      queryClient.invalidateQueries({ queryKey: ["notifications", "workspace", workspaceId] });
+      queryClient.invalidateQueries({ queryKey: ["notifications", "unread-count", workspaceId] });
     },
   });
 
