@@ -31,7 +31,9 @@ export const PageActions = function PageActions({ page, workspaceId, parentRef: 
   const handleCopyLink = () => {
     if (!id) return;
     const url = `${window.location.origin}/workspaces/${workspaceId}/pages/${id}`;
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(url).catch(() => {
+      // Clipboard write failed (permissions, HTTP context, etc.) — silently ignore
+    });
   };
 
   if (!id) return null;

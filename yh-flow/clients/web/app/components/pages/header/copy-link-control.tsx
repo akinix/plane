@@ -16,7 +16,9 @@ export const PageCopyLinkControl = function PageCopyLinkControl() {
   }, []);
 
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(window.location.href);
+    navigator.clipboard.writeText(window.location.href).catch(() => {
+      // Clipboard write failed (permissions, HTTP context, etc.) — silently ignore
+    });
     setIsCopied(true);
     if (timerRef.current) clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
