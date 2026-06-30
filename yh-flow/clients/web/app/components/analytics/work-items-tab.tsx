@@ -71,24 +71,27 @@ export const WorkItemsTab = observer(function WorkItemsTab() {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Area Chart — Created vs Resolved trend */}
-      <div className="border-custom-border-200 bg-custom-background-90 rounded-md border p-4">
-        <h3 className="text-custom-text-100 mb-4 text-18 font-semibold">创建 vs 完成趋势</h3>
-        {areaChartData.length > 0 ? (
-          <AnalyticsAreaChart data={areaChartData} xKey="name" areas={[]} />
-        ) : (
-          <p className="text-custom-text-300 py-8 text-center text-13">暂无趋势数据</p>
-        )}
-      </div>
+      {/* Charts row — side-by-side on lg+, stacked on narrow screens */}
+      <div className="flex flex-col gap-6 lg:flex-row">
+        {/* Area Chart — Created vs Resolved trend */}
+        <div className="flex-1 rounded-md border border-custom-border-200 bg-custom-background-90 p-4">
+          <h3 className="text-custom-text-100 mb-4 text-18 font-semibold">创建 vs 完成趋势</h3>
+          {areaChartData.length > 0 ? (
+            <AnalyticsAreaChart data={areaChartData} xKey="name" areas={[]} />
+          ) : (
+            <p className="text-custom-text-300 py-8 text-center text-13">暂无趋势数据</p>
+          )}
+        </div>
 
-      {/* Bar Chart — Priority distribution */}
-      <div className="border-custom-border-200 bg-custom-background-90 rounded-md border p-4">
-        <h3 className="text-custom-text-100 mb-4 text-18 font-semibold">优先级分布</h3>
-        {barChartData.length > 0 ? (
-          <AnalyticsBarChart data={barChartData} xKey="name" yKey="count" />
-        ) : (
-          <p className="text-custom-text-300 py-8 text-center text-13">暂无分布数据</p>
-        )}
+        {/* Bar Chart — Priority distribution */}
+        <div className="flex-1 rounded-md border border-custom-border-200 bg-custom-background-90 p-4">
+          <h3 className="text-custom-text-100 mb-4 text-18 font-semibold">优先级分布</h3>
+          {barChartData.length > 0 ? (
+            <AnalyticsBarChart data={barChartData} xKey="name" yKey="count" />
+          ) : (
+            <p className="text-custom-text-300 py-8 text-center text-13">暂无分布数据</p>
+          )}
+        </div>
       </div>
 
       {/* Data Table */}

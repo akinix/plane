@@ -40,19 +40,19 @@ const AnalyticsPage = observer(function AnalyticsPage() {
   return (
     <ContentWrapper>
       <div className="mx-auto max-w-6xl">
-        {/* Header */}
-        <div className="border-custom-border-200 flex items-center justify-between border-b px-6 py-4">
+        {/* Header — responsive: stack on narrow screens */}
+        <div className="border-custom-border-200 flex flex-col items-start gap-3 border-b px-4 py-3 md:flex-row md:items-center md:justify-between md:px-6 md:py-4">
           <h1 className="text-2xl text-custom-text-100 font-semibold">分析</h1>
           <FilterBar projects={projects ?? []} onRefresh={handleRefresh} isRefreshing={isRefreshing} />
         </div>
 
         {/* Tabs */}
-        <div className="border-custom-border-200 flex items-center border-b px-6">
+        <div className="border-custom-border-200 flex items-center overflow-x-auto border-b px-4 md:px-6">
           {tabs.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-3 text-13 font-medium transition-colors ${
+              className={`flex-shrink-0 px-3 py-3 text-13 font-medium transition-colors md:px-4 ${
                 activeTab === tab.key
                   ? "border-custom-primary text-custom-text-100 border-b-2"
                   : "text-custom-text-300 hover:text-custom-text-200"
@@ -64,7 +64,7 @@ const AnalyticsPage = observer(function AnalyticsPage() {
         </div>
 
         {/* Content */}
-        <div className="px-6 py-6">{activeTab === "overview" ? <OverviewTab /> : <WorkItemsTab />}</div>
+        <div className="px-4 py-4 md:px-6 md:py-6">{activeTab === "overview" ? <OverviewTab /> : <WorkItemsTab />}</div>
       </div>
     </ContentWrapper>
   );

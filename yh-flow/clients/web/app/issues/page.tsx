@@ -96,12 +96,12 @@ const IssuesPage = observer(function IssuesPage() {
 
   return (
     <div className="flex h-full flex-col">
-      {/* Page header */}
-      <div className="flex items-center justify-between border-b border-custom-border-200 px-6 py-3">
+      {/* Page header — responsive padding */}
+      <div className="flex items-center justify-between overflow-x-auto border-b border-custom-border-200 px-4 py-3 md:px-6">
         <div className="flex items-center gap-3">
-          <h1 className="text-lg font-semibold text-custom-text-100">Issues</h1>
+          <h1 className="flex-shrink-0 text-lg font-semibold text-custom-text-100">Issues</h1>
 
-          {/* View toggle — 5 buttons */}
+          {/* View toggle — 5 buttons, responsive: hide labels on narrow screens */}
           <div className="flex items-center gap-0.5 rounded-md border border-custom-border-200 bg-custom-background-90 p-0.5">
             {VIEW_OPTIONS.map((option) => {
               const Icon = option.icon;
@@ -119,7 +119,7 @@ const IssuesPage = observer(function IssuesPage() {
                   )}
                 >
                   <Icon className="size-3.5" />
-                  {option.label}
+                  <span className="hidden md:inline">{option.label}</span>
                 </button>
               );
             })}

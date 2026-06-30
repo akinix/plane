@@ -23,7 +23,7 @@ export default function WorkspaceDashboardPage() {
   }
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 p-6">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 p-4 md:p-6">
       {/* Workspace header */}
       <div>
         <h1 className="text-2xl font-semibold text-custom-text-100">

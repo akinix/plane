@@ -26,8 +26,8 @@ const NotificationsPage = observer(function NotificationsPage() {
 
   return (
     <div className="mx-auto flex h-full w-full max-w-3xl flex-col">
-      {/* Header */}
-      <div className="flex items-center justify-between border-b border-custom-border-200 px-6 py-4">
+      {/* Header — responsive padding */}
+      <div className="flex items-center justify-between border-b border-custom-border-200 px-4 py-3 md:px-6 md:py-4">
         <h1 className="text-2xl font-semibold text-custom-text-100">通知</h1>
         <div className="flex items-center gap-2">
           {/* Refresh button */}

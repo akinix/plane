@@ -76,7 +76,7 @@ export const PagesListMainContent = observer(function PagesListMainContent({ wor
   return (
     <div className="flex h-full flex-col overflow-hidden">
       {/* Tab + Search + Order bar */}
-      <div className="border-custom-border-200 flex items-center justify-between border-b px-4">
+      <div className="border-custom-border-200 flex items-center justify-between overflow-x-auto border-b px-4">
         <PageTabNavigation
           workspaceId={workspaceId}
           activeTab={activeTab}

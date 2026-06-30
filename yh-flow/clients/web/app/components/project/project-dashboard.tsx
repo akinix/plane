@@ -60,9 +60,9 @@ export const ProjectDashboard = ({ workspaceId, projectId }: TProps) => {
   };
 
   return (
-    <div className="flex flex-col">
-      {/* Project header */}
-      <div className="border-b border-custom-border-200 px-6 py-4">
+    <div className="flex min-w-0 flex-col">
+      {/* Project header — responsive padding */}
+      <div className="border-b border-custom-border-200 px-4 py-4 md:px-6">
         <div className="flex items-center gap-3">
           <span className="flex size-10 items-center justify-center rounded-lg bg-custom-background-80 text-xl">
             {emoji ?? project.name.charAt(0)}
@@ -78,8 +78,8 @@ export const ProjectDashboard = ({ workspaceId, projectId }: TProps) => {
         </div>
       </div>
 
-      {/* Tab bar */}
-      <div className="flex gap-0 border-b border-custom-border-200 px-6">
+      {/* Tab bar — responsive padding */}
+      <div className="flex gap-0 overflow-x-auto border-b border-custom-border-200 px-4 md:px-6">
         {TABS.map((tab) => (
           <button
             key={tab.key}
