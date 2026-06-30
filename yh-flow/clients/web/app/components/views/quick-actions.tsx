@@ -20,7 +20,7 @@ const ViewQuickActions = observer(function ViewQuickActions({ view, projectId, w
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleCopyLink = () => {
-    const link = `${workspaceSlug}/projects/${projectId}/views/${view.id}`;
+    const link = `/workspaces/${workspaceSlug}/projects/${projectId}/views/${view.id}`;
     copyUrlToClipboard(link).then(() => {
       setToast({
         type: TOAST_TYPE.SUCCESS,
