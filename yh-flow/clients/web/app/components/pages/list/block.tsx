@@ -29,7 +29,7 @@ export const PageListBlock = function PageListBlock({ page, workspaceId }: Props
     e.stopPropagation();
     if (id) {
       favoritePage.mutate({ pageId: id, is_favorite: !is_favorite }, {
-        onError: () => {
+        onSettled: () => {
           queryClient.invalidateQueries({ queryKey: ["pages"] });
         },
       });

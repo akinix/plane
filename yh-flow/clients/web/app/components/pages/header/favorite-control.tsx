@@ -21,7 +21,7 @@ export const PageFavoriteControl = function PageFavoriteControl({ page }: Props)
     e.preventDefault();
     if (id) {
       favoritePage.mutate({ pageId: id, is_favorite: !is_favorite }, {
-        onError: () => {
+        onSettled: () => {
           queryClient.invalidateQueries({ queryKey: ["pages"] });
         },
       });
