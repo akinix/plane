@@ -1,7 +1,7 @@
 // FLOW: Forked from Plane. Original: apps/web/core/components/pages/editor/title.tsx
 // FLOW: PageEditorTitle — 页面标题编辑输入框
 "use client";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import { usePageMutations } from "@/../src/lib/hooks/use-page-mutations";
 
 type Props = {
@@ -13,6 +13,13 @@ type Props = {
 export const PageEditorTitle = function PageEditorTitle({ pageId, title, workspaceId: _workspaceId }: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const [localTitle, setLocalTitle] = useState(title ?? "");
+
+  // Sync prop into local state when title loads asynchronously
+  useEffect(() => {
+    if (!isEditing && title !== undefined) {
+      setLocalTitle(title);
+    }
+  }, [title, isEditing]);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { updatePage } = usePageMutations();
 
