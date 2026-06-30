@@ -47,9 +47,15 @@ const ViewsList = observer(function ViewsList({ workspaceId, projectId }: Props)
       if (sortKey === "name") {
         cmp = (a.name ?? "").localeCompare(b.name ?? "");
       } else if (sortKey === "created_at") {
-        cmp = new Date(a.createdAt ?? 0).getTime() - new Date(b.createdAt ?? 0).getTime();
+        const aTime = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+        const bTime = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+        cmp = aTime - bTime;
+        if (isNaN(cmp)) cmp = 0;
       } else if (sortKey === "updated_at") {
-        cmp = new Date(a.updatedAt ?? 0).getTime() - new Date(b.updatedAt ?? 0).getTime();
+        const aTime = a.updatedAt ? new Date(a.updatedAt).getTime() : 0;
+        const bTime = b.updatedAt ? new Date(b.updatedAt).getTime() : 0;
+        cmp = aTime - bTime;
+        if (isNaN(cmp)) cmp = 0;
       }
       return sortBy === "desc" ? -cmp : cmp;
     });

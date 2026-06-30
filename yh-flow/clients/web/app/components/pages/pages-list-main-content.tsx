@@ -46,9 +46,15 @@ export const PagesListMainContent = observer(function PagesListMainContent({ wor
     if (sortKey === "name") {
       cmp = (a.name ?? "").localeCompare(b.name ?? "");
     } else if (sortKey === "created_at") {
-      cmp = new Date(a.created_at ?? 0).getTime() - new Date(b.created_at ?? 0).getTime();
+      const aTime = a.created_at ? new Date(a.created_at).getTime() : 0;
+      const bTime = b.created_at ? new Date(b.created_at).getTime() : 0;
+      cmp = aTime - bTime;
+      if (isNaN(cmp)) cmp = 0;
     } else if (sortKey === "updated_at") {
-      cmp = new Date(a.updated_at ?? 0).getTime() - new Date(b.updated_at ?? 0).getTime();
+      const aTime = a.updated_at ? new Date(a.updated_at).getTime() : 0;
+      const bTime = b.updated_at ? new Date(b.updated_at).getTime() : 0;
+      cmp = aTime - bTime;
+      if (isNaN(cmp)) cmp = 0;
     }
     return sortBy === "desc" ? -cmp : cmp;
   });
