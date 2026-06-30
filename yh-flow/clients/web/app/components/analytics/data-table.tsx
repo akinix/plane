@@ -106,7 +106,11 @@ export const DataTable: React.FC<DataTableProps> = ({ data, columns, total }) =>
                   const value = row[col.key as keyof TChartDatum];
                   return (
                     <td key={col.key} className="text-custom-text-200 px-4 py-2.5">
-                      {col.key === "count" || col.key === "percentage" ? (value ?? "-") : (value ?? "-")}
+                      {col.key === "percentage"
+                        ? `${totalCount > 0 ? Math.round(((typeof row.count === "number" ? row.count : 0) / totalCount) * 100) : 0}%`
+                        : col.key === "count"
+                          ? (value ?? "-")
+                          : (value ?? "-")}
                     </td>
                   );
                 })}
