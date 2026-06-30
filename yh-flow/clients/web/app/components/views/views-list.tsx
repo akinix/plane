@@ -26,7 +26,7 @@ const ViewsList = observer(function ViewsList({ workspaceId, projectId }: Props)
   const tabFiltered = useMemo(() => {
     if (!views) return [];
     if (viewStore.activeTab === "created") {
-      return views.filter((v) => (v as any).created_by === "user-1");
+      return views.filter((v) => (v as TIssueView & { created_by?: string }).created_by === "user-1");
     }
     return views;
   }, [views, viewStore.activeTab]);
