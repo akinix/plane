@@ -20,3 +20,15 @@ export type TPaginatedResponse<T> = {
   total_results?: number;
   extra_stats?: string | null;
 };
+
+// Paginated response where results is always an array
+export type TPaginatedListResponse<T> = TPaginatedResponse<T[]>;
+
+// Utility type: extracts T from TPaginatedResponse<T[]>, returns T unchanged otherwise
+export type UnwrapPaginatedResult<T> = T extends TPaginatedResponse<infer R> ? R : T;
+
+// Cursor pagination parameter type for paginated requests
+export type TPaginationCursor = {
+  cursor?: string;
+  per_page?: number;
+};
