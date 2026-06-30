@@ -18,8 +18,12 @@ export const PageHeaderActions = function PageHeaderActions({ page, workspaceId 
   const { archivePage } = usePageMutations();
 
   const handleArchive = async () => {
-    await archivePage.mutateAsync(page.id);
-    setShowArchiveConfirm(false);
+    try {
+      await archivePage.mutateAsync(page.id);
+      setShowArchiveConfirm(false);
+    } catch {
+      // Archive failed — confirmation dialog stays open for retry
+    }
   };
 
   return (

@@ -27,11 +27,11 @@ export const DeletePageModal = function DeletePageModal({
     setIsDeleting(true);
     try {
       await deletePage.mutateAsync(pageId);
+      onClose();
     } catch (error) {
       console.error("Failed to delete page:", error);
     } finally {
       setIsDeleting(false);
-      onClose();
     }
   };
 
