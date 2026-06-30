@@ -57,6 +57,7 @@ metrics:
 ### Task 1: 创建 FlowApiService 基类
 
 **文件创建：**
+
 - `clients/web/src/lib/services/flow-api.service.ts` — 核心基类，包含：
   - Request 拦截器：自动附加 `Authorization: Bearer <token>`（D-11）
   - Response 拦截器：humps.camelizeKeys 将 snake_case 转换为 camelCase（D-12）
@@ -80,6 +81,7 @@ metrics:
 ### Task 2: 配置 Vite 代理和 .NET API SnakeCase 设置
 
 **前端配置：**
+
 - `clients/web/vite.config.ts`：
   - 添加 Vite resolve aliases 将 `@plane/*` 映射到 `src/lib/*`（D-04）
   - 添加 dev server proxy：`/api` → `https://localhost:7030`（SCAFF-05）
@@ -88,6 +90,7 @@ metrics:
   - `VITE_API_PROXY_TARGET=https://localhost:7030`
 
 **后端配置：**
+
 - `yh-flow/src/Host/YH.Flow.Api/Program.cs`：
   - `ConfigureHttpJsonOptions` 中添加 `JsonNamingPolicy.SnakeCaseLower`（SCAFF-06）
   - 添加 `JsonIgnoreCondition.WhenWritingNull`（SCAFF-06）
@@ -118,8 +121,9 @@ None — plan executed exactly as written.
 ## 附加的脚手架文件
 
 为支持 TypeScript 编译，还创建了以下不在计划范围内的文件（Rule 2 — 必要基础设施）：
+
 - `clients/web/package.json` — axios、humps、typescript、vite 依赖
-- `clients/web/tsconfig.json` — TypeScript 配置，含 @/* 和 @plane/* paths 映射
+- `clients/web/tsconfig.json` — TypeScript 配置，含 @/_ 和 @plane/_ paths 映射
 
 ## Threat Flags
 

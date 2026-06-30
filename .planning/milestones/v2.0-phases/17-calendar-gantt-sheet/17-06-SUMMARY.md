@@ -38,10 +38,12 @@ completed_date: 2026-06-29
 ### Task 1: 5 种视图切换
 
 **文件修改:**
+
 - `yh-flow/clients/web/app/issues/page.tsx` — 视图切换从 2 按钮扩展至 5 按钮，添加 CalendarDays/GitBranch/Table 图标，添加 4 个 React.lazy 懒加载视图（kanban/calendar/gantt/spreadsheet）
 - `yh-flow/clients/web/app/hooks/use-view-switcher.ts` — 新建 hook，封装视图选项和切换逻辑
 
 **关键变更:**
+
 - 所有非默认视图使用 `React.lazy` + `Suspense` 懒加载，fallback 统一为 "加载中..."
 - CalendarView 使用 `CalendarViewWrapper` 桥接其不同 props 接口（需要 `issues`/`isLoading`/`handleDragAndDrop`）
 - 视图切换通过 `store.issue.setActiveView()` MobX action 管理，确保状态一致性
@@ -50,10 +52,12 @@ completed_date: 2026-06-29
 ### Task 2: FilterBar 接入 + 看板子分组
 
 **文件修改:**
+
 - `yh-flow/clients/web/app/components/issues/list-view.tsx` — 替换 QuickFilterBar 为 FilterBar（showSorting=true），添加"自定义列"(ColumnSelector)和"保存视图"(FilterSaveModal)按钮，移除独立排序按钮组
 - `yh-flow/clients/web/app/components/issues/kanban-view.tsx` — 添加 FilterBar（showGroupBy=true），添加子分组 dropdown 选择器（None/State/Priority），实现 swimlane 渲染
 
 **关键变更:**
+
 - list-view 使用 `FilterBar` + `useFilters`/`useSorting` 替换原有 `QuickFilterBar`
 - kanban-view 使用 `useSubGroupBy` hook 管理子分组状态，选择子分组后每个列内按 swimlane 分区显示
 - 看板子分组使用独立 Droppable 容器保持拖拽兼容性
@@ -61,21 +65,21 @@ completed_date: 2026-06-29
 
 ## 验证
 
-| 检查项 | 结果 |
-|--------|------|
-| 5 种视图在 page.tsx 中存在 | PASS (19 matches) |
-| React.lazy 导入 | PASS (8 matches) |
-| FilterBar 在 list-view 中 | PASS (4 matches) |
-| FilterSaveModal 在 list-view 中 | PASS (2 matches) |
-| ColumnSelector 在 list-view 中 | PASS (5 matches) |
-| subGroup 在 kanban-view 中 | PASS (6 matches) |
-| `npx tsc --noEmit` 新增错误 | PASS (0 new errors) |
+| 检查项                          | 结果                |
+| ------------------------------- | ------------------- |
+| 5 种视图在 page.tsx 中存在      | PASS (19 matches)   |
+| React.lazy 导入                 | PASS (8 matches)    |
+| FilterBar 在 list-view 中       | PASS (4 matches)    |
+| FilterSaveModal 在 list-view 中 | PASS (2 matches)    |
+| ColumnSelector 在 list-view 中  | PASS (5 matches)    |
+| subGroup 在 kanban-view 中      | PASS (6 matches)    |
+| `npx tsc --noEmit` 新增错误     | PASS (0 new errors) |
 
 ## 提交记录
 
-| 哈希 | 消息 |
-|------|------|
-| `bde0aaa92` | feat(17-06): 5-view toggle with lazy loading for calendar/gantt/spreadsheet |
+| 哈希        | 消息                                                                                   |
+| ----------- | -------------------------------------------------------------------------------------- |
+| `bde0aaa92` | feat(17-06): 5-view toggle with lazy loading for calendar/gantt/spreadsheet            |
 | `495af0b9b` | feat(17-06): integrate FilterBar into list-view, add subgroup (KANB-04) to kanban-view |
 
 ## 关键决策

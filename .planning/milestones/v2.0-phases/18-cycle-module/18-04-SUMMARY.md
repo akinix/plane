@@ -110,9 +110,9 @@ None - no new security-relevant surface introduced.
 
 ## Known Stubs
 
-| File | Line | Description |
-|------|------|-------------|
-| app/cycles/[cycleId]/page.tsx | ~230 | "添加 Issue"按钮弹窗使用简化占位，完整 Issue 选择器 deferred to Phase 19 |
+| File                            | Line | Description                                                              |
+| ------------------------------- | ---- | ------------------------------------------------------------------------ |
+| app/cycles/[cycleId]/page.tsx   | ~230 | "添加 Issue"按钮弹窗使用简化占位，完整 Issue 选择器 deferred to Phase 19 |
 | app/modules/[moduleId]/page.tsx | ~260 | "添加 Issue"按钮弹窗使用简化占位，完整 Issue 选择器 deferred to Phase 19 |
 
 ## Next Phase Readiness
@@ -124,5 +124,6 @@ None - no new security-relevant surface introduced.
 - 下一步（18-05 或 Phase 19）可添加完整 Issue 选择器和路由守卫
 
 ---
-*Phase: 18-cycle-module / Plan: 04*
-*Completed: 2026-06-30*
+
+_Phase: 18-cycle-module / Plan: 04_
+_Completed: 2026-06-30_

@@ -84,46 +84,46 @@ key_decisions:
 
 #### 数据层
 
-| File                                              | Description                                                                                   |
-| ------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `app/store/view.store.ts`                         | ViewStore — activeTab(all/created)、filters(search/sort)、appliedViewId、modal/delete 状态    |
-| `src/lib/hooks/use-views.ts`                      | useViews(projectId) + useViewDetail(projectId, viewId)，共享 Phase 17 的 cache key             |
-| `src/lib/hooks/use-view-mutations.ts`             | useViewMutations — createView, updateView, deleteView, favoriteView, 均 invalidate issue-views |
+| File                                  | Description                                                                                    |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `app/store/view.store.ts`             | ViewStore — activeTab(all/created)、filters(search/sort)、appliedViewId、modal/delete 状态     |
+| `src/lib/hooks/use-views.ts`          | useViews(projectId) + useViewDetail(projectId, viewId)，共享 Phase 17 的 cache key             |
+| `src/lib/hooks/use-view-mutations.ts` | useViewMutations — createView, updateView, deleteView, favoriteView, 均 invalidate issue-views |
 
 #### 路由 & 入口
 
-| File                                                                                                                                           | Description                   |
-| ---------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- |
-| `app/workspaces/[workspaceId]/projects/[projectId]/views/page.tsx`                                                                             | 视图列表页入口路由组件        |
-| `app/routes.ts`                                                                                                                                | 添加 `workspaces/:wsId/projects/:projId/views` 路由 |
+| File                                                               | Description                                         |
+| ------------------------------------------------------------------ | --------------------------------------------------- |
+| `app/workspaces/[workspaceId]/projects/[projectId]/views/page.tsx` | 视图列表页入口路由组件                              |
+| `app/routes.ts`                                                    | 添加 `workspaces/:wsId/projects/:projId/views` 路由 |
 
 #### UI 组件
 
-| File                                                            | Description                                          |
-| --------------------------------------------------------------- | ---------------------------------------------------- |
-| `app/components/views/views-list.tsx`                           | 视图列表主容器：Tab 切换 + 搜索 + 排序 + 卡片列表    |
-| `app/components/views/view-list-header.tsx`                     | 搜索输入框（展开动画）+ 排序下拉 + "新建视图"按钮     |
-| `app/components/views/view-list-item.tsx`                       | 视图卡片：名称、描述、权限徽章、收藏星标、创建人头像 |
-| `app/components/views/view-list-item-action.tsx`                | 悬停操作：编辑/删除下拉菜单                          |
-| `app/components/views/modal.tsx`                                | 创建/编辑视图弹窗（ModalCore 容器）                  |
-| `app/components/views/form.tsx`                                 | 视图表单（名称 + 描述 + 访问权限切换）               |
-| `app/components/views/delete-view-modal.tsx`                    | 删除确认弹窗（AlertModalCore）                       |
-| `app/components/views/quick-actions.tsx`                        | 快捷操作下拉（复制链接、删除）                       |
-| `app/components/views/helper.tsx`                               | 工具函数预留                                         |
-| `app/components/views/filters/filter-selection.tsx`             | 筛选面板（视图类型：公开/私人）                      |
-| `app/components/views/filters/order-by.tsx`                     | 排序选择器（名称/创建时间/更新时间 + 升序/降序）     |
-| `app/components/views/applied-filters/root.tsx`                 | 已应用筛选器标签显示                                 |
+| File                                                | Description                                          |
+| --------------------------------------------------- | ---------------------------------------------------- |
+| `app/components/views/views-list.tsx`               | 视图列表主容器：Tab 切换 + 搜索 + 排序 + 卡片列表    |
+| `app/components/views/view-list-header.tsx`         | 搜索输入框（展开动画）+ 排序下拉 + "新建视图"按钮    |
+| `app/components/views/view-list-item.tsx`           | 视图卡片：名称、描述、权限徽章、收藏星标、创建人头像 |
+| `app/components/views/view-list-item-action.tsx`    | 悬停操作：编辑/删除下拉菜单                          |
+| `app/components/views/modal.tsx`                    | 创建/编辑视图弹窗（ModalCore 容器）                  |
+| `app/components/views/form.tsx`                     | 视图表单（名称 + 描述 + 访问权限切换）               |
+| `app/components/views/delete-view-modal.tsx`        | 删除确认弹窗（AlertModalCore）                       |
+| `app/components/views/quick-actions.tsx`            | 快捷操作下拉（复制链接、删除）                       |
+| `app/components/views/helper.tsx`                   | 工具函数预留                                         |
+| `app/components/views/filters/filter-selection.tsx` | 筛选面板（视图类型：公开/私人）                      |
+| `app/components/views/filters/order-by.tsx`         | 排序选择器（名称/创建时间/更新时间 + 升序/降序）     |
+| `app/components/views/applied-filters/root.tsx`     | 已应用筛选器标签显示                                 |
 
 ### Modified (6 files)
 
-| File                                              | Change                                                                                    |
-| ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| `app/store/root.store.ts`                         | 导入 ViewStore/IViewStore，添加 `view: IViewStore` 属性和 `new ViewStore()` 初始化         |
-| `app/store/types.ts`                              | 导入并 re-export IViewStore 类型                                                           |
-| `src/lib/hooks/index.ts`                          | 添加 `export * from "./use-views"` 和 `export * from "./use-view-mutations"`              |
-| `src/lib/services/issue-view.service.ts`          | 添加 `updateIssueView`、`favoriteIssueView` 方法；扩展 MOCK_VIEWS 从 1 条到 5 条           |
-| `app/routes.ts`                                   | 在 ISSUE ROUTES 前插入 VIEW ROUTES 区块                                                    |
-| `app/components/issues/filters/filter-save-modal.tsx` | 添加 `onSave?: () => void` 可选 prop，保存成功后调用以实现 VIEW-02 跳转                   |
+| File                                                  | Change                                                                             |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `app/store/root.store.ts`                             | 导入 ViewStore/IViewStore，添加 `view: IViewStore` 属性和 `new ViewStore()` 初始化 |
+| `app/store/types.ts`                                  | 导入并 re-export IViewStore 类型                                                   |
+| `src/lib/hooks/index.ts`                              | 添加 `export * from "./use-views"` 和 `export * from "./use-view-mutations"`       |
+| `src/lib/services/issue-view.service.ts`              | 添加 `updateIssueView`、`favoriteIssueView` 方法；扩展 MOCK_VIEWS 从 1 条到 5 条   |
+| `app/routes.ts`                                       | 在 ISSUE ROUTES 前插入 VIEW ROUTES 区块                                            |
+| `app/components/issues/filters/filter-save-modal.tsx` | 添加 `onSave?: () => void` 可选 prop，保存成功后调用以实现 VIEW-02 跳转            |
 
 ## Key Decisions
 

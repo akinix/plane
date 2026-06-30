@@ -40,10 +40,10 @@ metrics:
 
 ## Completed Tasks
 
-| Task | Name | Commit | Key Files |
-| ---- | ---- | ------ | --------- |
-| 1 | 创建 Issue 列表页面、列表视图容器、Issue 行和快速筛选条 | 3ce90d1ee | page.tsx, list-view.tsx, issue-row.tsx, quick-filter-bar.tsx, pagination.tsx |
-| 2 | 创建 IssueCreateModal、BulkActionBar、更新 ProjectDashboard | 776b56961 | issue-create-modal.tsx, bulk-action-bar.tsx, project-dashboard.tsx |
+| Task | Name                                                        | Commit    | Key Files                                                                    |
+| ---- | ----------------------------------------------------------- | --------- | ---------------------------------------------------------------------------- |
+| 1    | 创建 Issue 列表页面、列表视图容器、Issue 行和快速筛选条     | 3ce90d1ee | page.tsx, list-view.tsx, issue-row.tsx, quick-filter-bar.tsx, pagination.tsx |
+| 2    | 创建 IssueCreateModal、BulkActionBar、更新 ProjectDashboard | 776b56961 | issue-create-modal.tsx, bulk-action-bar.tsx, project-dashboard.tsx           |
 
 ## Task Details
 
@@ -106,23 +106,27 @@ None — plan executed as written.
 ### Auto-Added Missing Functionality
 
 **1. [Rule 2 - Missing] EmptyState 替换为内联空状态**
+
 - 计划引用 EmptyState 但该组件在 UI 库中不存在
 - Fix: 内联 SVG 图标 + 文本
 - Files: list-view.tsx
 - Commit: 3ce90d1ee
 
 **2. [Rule 2 - Missing] LiteTextEditor 替换为 textarea 暂替**
+
 - LiteTextEditorWithRef 需要 service 层接口（fileHandler, mentionHandler），mock 层不可用
 - Fix: textarea 暂替，标注为 stub
 - Files: issue-create-modal.tsx
 - Commit: 776b56961
 
 **3. [Rule 2 - Simpler] @plane/ui Dropdown 替换为原生 select**
+
 - @plane/ui Dropdown 依赖 Headless UI Combobox + Popper.js，mock 层用原生 select 更简洁
 - Files: issue-create-modal.tsx, bulk-action-bar.tsx
 - Commit: 776b56961
 
 **4. [Rule 2 - Missing] BulkActionBar 集成到 list-view.tsx**
+
 - Task 1 创建的 list-view.tsx 未包含 BulkActionBar
 - Files: list-view.tsx
 - Commit: 776b56961

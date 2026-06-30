@@ -112,9 +112,10 @@ completed: 2026-06-26
 ## Files Created/Modified
 
 ### 项目骨架文件
+
 - `yh-flow/clients/web/package.json` — 项目依赖（React 19, Vite 7, React Router 7, MobX, next-themes）
-- `yh-flow/clients/web/tsconfig.json` — TypeScript 配置（strict, @plane/* paths, skipLibCheck）
-- `yh-flow/clients/web/vite.config.ts` — Vite 配置（@vitejs/plugin-react, @plane/* alias）
+- `yh-flow/clients/web/tsconfig.json` — TypeScript 配置（strict, @plane/\* paths, skipLibCheck）
+- `yh-flow/clients/web/vite.config.ts` — Vite 配置（@vitejs/plugin-react, @plane/\* alias）
 - `yh-flow/clients/web/react-router.config.ts` — React Router 配置（ssr: false）
 - `yh-flow/clients/web/index.html` — Vite HTML 入口
 - `yh-flow/clients/web/app/entry.client.tsx` — 应用入口（HydratedRouter）
@@ -126,13 +127,14 @@ completed: 2026-06-26
 - `yh-flow/clients/web/.env` — 环境变量（VITE_API_BASE_URL）
 
 ### Fork Plane 包
+
 - `yh-flow/clients/web/src/lib/types/` — @plane/types（62 个文件，无外部依赖）
 - `yh-flow/clients/web/src/lib/utils/` — @plane/utils（45 个文件，依赖 @plane/types/@plane/constants）
 - `yh-flow/clients/web/src/lib/constants/` — @plane/constants（42 个文件，依赖 @plane/types）
 
 ## Decisions Made
 
-- **保留 @plane/* import 语句，不改为相对路径**：通过 tsconfig paths + Vite alias 双重解析，确保 tsc 编译和 Vite 构建都能正确解析。相对路径不适合嵌套目录深度的场景。
+- **保留 @plane/\* import 语句，不改为相对路径**：通过 tsconfig paths + Vite alias 双重解析，确保 tsc 编译和 Vite 构建都能正确解析。相对路径不适合嵌套目录深度的场景。
 - **Fork @plane/constants 到 src/lib/**：utils 和 constants 大量依赖 @plane/constants，直接 Fork 比 inline 更高效。constants 使用 Vite alias 映射，无需改 import 语句。
 - **使用 skipLibCheck**：lucide-react 0.469 类型定义引用 React 19 已移除的 ReactSVG 类型，skipLibCheck 是最小侵入性的解决方案。
 
@@ -141,6 +143,7 @@ completed: 2026-06-26
 ### Auto-fixed Issues
 
 **1. [Rule 3 - Blocking] React Router 7 缺少配置文件和 provider 依赖**
+
 - **Found during:** Task 1（项目骨架创建）
 - **Issue:** root.tsx 引用 AppProvider 但无 import 和 provider.tsx 文件
 - **Fix:** 添加 import 声明并创建最小化 provider.tsx，后续 Task 2 完善
@@ -148,6 +151,7 @@ completed: 2026-06-26
 - **Committed in:** 48ae93b35
 
 **2. [Rule 3 - Blocking] tsconfig.json 需要 skipLibCheck**
+
 - **Found during:** Task 3（包 Fork 编译验证）
 - **Issue:** lucide-react 类型与 React 19 不兼容（ReactSVG 被移除），导致 30+ 类型错误
 - **Fix:** 添加 skipLibCheck: true，同时保留 tsconfig 的所有其他严格检查
@@ -155,13 +159,15 @@ completed: 2026-06-26
 - **Committed in:** 7a6a42c06
 
 **3. [Rule 3 - Blocking] 缺失大量外部依赖**
+
 - **Found during:** Task 3（Fork 包编译验证）
-- **Issue:** @plane/utils 依赖 uuid, sanitize-html, chroma-js, lodash-es, date-fns, unified, rehype-*, remark-*；@plane/constants 依赖 @types/node
+- **Issue:** @plane/utils 依赖 uuid, sanitize-html, chroma-js, lodash-es, date-fns, unified, rehype-_, remark-_；@plane/constants 依赖 @types/node
 - **Fix:** 安装 15+ 个缺失依赖包
 - **Files modified:** package.json
 - **Committed in:** 7a6a42c06
 
 **4. [Rule 3 - Blocking] getGroupChildren import 路径错误**
+
 - **Found during:** Task 3（编译验证）
 - **Issue:** utils/rich-filters/validators/core.ts 从 `@plane/types` 导入 `getGroupChildren`，但该函数定义在 utils/rich-filters/types/shared.ts 中
 - **Fix:** 改为从本地 `../types` 导入
@@ -169,6 +175,7 @@ completed: 2026-06-26
 - **Committed in:** 7a6a42c06
 
 **5. [Rule 1 - Bug] Fork 文件多出一层 src/ 子目录**
+
 - **Found during:** Task 3（文件结构验证）
 - **Issue:** cp -r 命令将 packages/types/src/ 复制为 src/lib/types/src/（多一层嵌套）
 - **Fix:** mv 将内容上移一级，删除空 src/ 目录
@@ -194,7 +201,7 @@ completed: 2026-06-26
 - [x] `yh-flow/clients/web/app/entry.client.tsx` — 存在，使用 HydratedRouter
 - [x] `yh-flow/clients/web/app/routes.ts` — 存在，导出 RouteConfig
 - [x] `yh-flow/clients/web/styles/globals.css` — 存在，包含 @import "tailwindcss" 和 [data-theme="dark"]
-- [x] `yh-flow/clients/web/tsconfig.json` — 存在，paths 包含 @plane/* 映射
+- [x] `yh-flow/clients/web/tsconfig.json` — 存在，paths 包含 @plane/\* 映射
 - [x] `yh-flow/clients/web/.env` — 存在（gitignored）
 - [x] `src/lib/types/index.ts` — 存在，barrel export
 - [x] `src/lib/utils/index.ts` — 存在，导出 cn
@@ -223,5 +230,5 @@ Phase 14-02（Fork UI & Editor）可以开始。本计划已建立完整的包 F
 
 ---
 
-*Phase: 14-auth*
-*Completed: 2026-06-26*
+_Phase: 14-auth_
+_Completed: 2026-06-26_

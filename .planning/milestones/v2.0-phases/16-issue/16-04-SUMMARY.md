@@ -13,10 +13,10 @@ status: complete
 
 ## Tasks
 
-| # | Status | Commits |
-|---|--------|---------|
-| 1 | ✅ | `b964c17df` — Create Kanban core components (KanbanView, KanbanColumn, KanbanCard) |
-| 2 | ✅ | (orchestrator) — Update issues/page.tsx to integrate Kanban view with lazy loading |
+| #   | Status | Commits                                                                            |
+| --- | ------ | ---------------------------------------------------------------------------------- |
+| 1   | ✅     | `b964c17df` — Create Kanban core components (KanbanView, KanbanColumn, KanbanCard) |
+| 2   | ✅     | (orchestrator) — Update issues/page.tsx to integrate Kanban view with lazy loading |
 
 ## Files Created
 

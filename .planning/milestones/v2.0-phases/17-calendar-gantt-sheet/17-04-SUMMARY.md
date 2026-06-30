@@ -58,14 +58,15 @@ metrics:
 
 ## 任务完成情况
 
-| 任务 | 名称 | 类型 | 状态 | 提交 |
-|------|------|------|------|------|
-| 1 | Fork Plane 电子表格核心组件 | auto | Done | `f9f4a2732` |
-| 2 | Fork 16 种列类型组件 + 创建 SpreadsheetView 主容器 | auto | Done | `6e5d93fda` |
+| 任务 | 名称                                               | 类型 | 状态 | 提交        |
+| ---- | -------------------------------------------------- | ---- | ---- | ----------- |
+| 1    | Fork Plane 电子表格核心组件                        | auto | Done | `f9f4a2732` |
+| 2    | Fork 16 种列类型组件 + 创建 SpreadsheetView 主容器 | auto | Done | `6e5d93fda` |
 
 ### 任务 1: Fork Plane 电子表格核心组件
 
 创建了 7 个核心文件：
+
 - **README.md**: 架构文档 + 数据流说明
 - **base-spreadsheet-root.tsx**: 简化版根容器，使用 useIssues 获取数据，包含加载骨架屏和空状态（"暂无 Issue"）
 - **issue-column.tsx**: 列容器，查找 SPREADSHEET_COLUMNS 注册表来渲染对应列组件
@@ -81,6 +82,7 @@ metrics:
 创建了 15 个列类型组件 + 1 个注册表 + 1 个主容器（共 17 个文件）：
 
 **可编辑列（8种）** — 使用原生 HTML 控件：
+
 - state-column: native `<select>` 显示项目状态列表（从 MOCK_STATES 获取）
 - priority-column: native `<select>` 五个优先级选项（紧急/高/中/低/无）
 - assignee-column: native `<select>` 从 MOCK_MEMBERS 获取成员
@@ -91,12 +93,14 @@ metrics:
 - estimate-column: native `<select>` 斐波那契估算点选择
 
 **只读列（6种）** — 纯文本展示：
+
 - created-on-column / updated-on-column: 日期格式显示
 - attachment-column / link-column: 计数显示
 - sub-issue-column: 子 Issue 计数
 - header-column: 列标题（中文标签）
 
 **SpreadsheetView 主容器**：
+
 - 遵循 list-view / kanban-view 的 yh-flow 模式
 - 使用 useIssues(projectId) + useIssueMutations() 进行数据操作
 - 使用 store.issue.visibleColumnIds 控制列可见性
@@ -118,6 +122,7 @@ metrics:
 ### Auto-fixed Issues
 
 **1. [Rule 1 - Bug] Removed unused import in base-spreadsheet-root.tsx**
+
 - **Found during:** Task 1 (commit pre-hook detected)
 - **Issue:** `useEffect` was imported but never used in the simplified root container
 - **Fix:** Removed the import
@@ -140,19 +145,19 @@ The following adaptations were applied per D-P17-03 (fork + adapt) guidelines:
 
 ## Known Stubs
 
-| Stub | File | Line | Reason |
-|------|------|------|--------|
-| MOCK_CYCLES placeholder | columns/cycle-column.tsx | 10-14 | No real cycle API — mock data only |
-| MOCK_MODULES placeholder | columns/module-column.tsx | 10-14 | No real module API — mock data only |
-| Hardcoded workspaceId "ws-1" | columns/assignee-column.tsx | 15 | Mock members lookup — needs real workspace context |
-| DEFAULT_DISPLAY_FILTERS no-op | spreadsheet-view.tsx | 44-46 | Filter updates are no-ops — pending filter engine integration |
-| DEFAULT_DISPLAY_PROPERTIES | spreadsheet-view.tsx | 30-44 | All columns enabled by default — pending column visibility UI |
-| disableUserActions always false | issue-row.tsx | 15 | No permissions check — mock mode |
+| Stub                            | File                        | Line  | Reason                                                        |
+| ------------------------------- | --------------------------- | ----- | ------------------------------------------------------------- |
+| MOCK_CYCLES placeholder         | columns/cycle-column.tsx    | 10-14 | No real cycle API — mock data only                            |
+| MOCK_MODULES placeholder        | columns/module-column.tsx   | 10-14 | No real module API — mock data only                           |
+| Hardcoded workspaceId "ws-1"    | columns/assignee-column.tsx | 15    | Mock members lookup — needs real workspace context            |
+| DEFAULT_DISPLAY_FILTERS no-op   | spreadsheet-view.tsx        | 44-46 | Filter updates are no-ops — pending filter engine integration |
+| DEFAULT_DISPLAY_PROPERTIES      | spreadsheet-view.tsx        | 30-44 | All columns enabled by default — pending column visibility UI |
+| disableUserActions always false | issue-row.tsx               | 15    | No permissions check — mock mode                              |
 
 ## Threat Flags
 
-| Flag | File | Description |
-|------|------|-------------|
+| Flag                         | File                 | Description                                                                         |
+| ---------------------------- | -------------------- | ----------------------------------------------------------------------------------- |
 | threat_flag: tamper_mitigate | spreadsheet-view.tsx | T-17-SHE-01 mitigated with 800ms debounce + optimistic update via useIssueMutations |
 
 ## Key Decisions
@@ -165,26 +170,26 @@ The following adaptations were applied per D-P17-03 (fork + adapt) guidelines:
 
 ## Commit History
 
-| Hash | Message |
-|------|---------|
-| `f9f4a2732` | feat(17-04): fork spreadsheet core components from Plane |
+| Hash        | Message                                                                  |
+| ----------- | ------------------------------------------------------------------------ |
+| `f9f4a2732` | feat(17-04): fork spreadsheet core components from Plane                 |
 | `6e5d93fda` | feat(17-04): fork 15 column type components + spreadsheet-view container |
 
 ## File Inventory
 
 ### Created (24 files, ~1014 lines)
 
-| Path | Lines | Description |
-|------|-------|-------------|
-| spreadsheet-view/README.md | ~60 | Architecture documentation |
-| base-spreadsheet-root.tsx | ~62 | Root container with data fetching & state handling |
-| issue-row.tsx | ~58 | Single issue row |
-| issue-column.tsx | ~40 | Column cell wrapper |
-| spreadsheet-header.tsx | ~64 | Sticky header |
-| spreadsheet-header-column.tsx | ~40 | Single header column |
-| spreadsheet-table.tsx | ~80 | Table body with scroll shadow |
-| columns/index.ts | ~36 | SPREADSHEET_COLUMNS registry |
-| 15 column type files | ~574 | 8 editable + 6 read-only + 1 header column |
+| Path                          | Lines | Description                                        |
+| ----------------------------- | ----- | -------------------------------------------------- |
+| spreadsheet-view/README.md    | ~60   | Architecture documentation                         |
+| base-spreadsheet-root.tsx     | ~62   | Root container with data fetching & state handling |
+| issue-row.tsx                 | ~58   | Single issue row                                   |
+| issue-column.tsx              | ~40   | Column cell wrapper                                |
+| spreadsheet-header.tsx        | ~64   | Sticky header                                      |
+| spreadsheet-header-column.tsx | ~40   | Single header column                               |
+| spreadsheet-table.tsx         | ~80   | Table body with scroll shadow                      |
+| columns/index.ts              | ~36   | SPREADSHEET_COLUMNS registry                       |
+| 15 column type files          | ~574  | 8 editable + 6 read-only + 1 header column         |
 
 ## Self-Check: PASSED
 
