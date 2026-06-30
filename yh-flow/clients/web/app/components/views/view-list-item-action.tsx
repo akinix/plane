@@ -2,7 +2,6 @@
 // FLOW: ViewListItemAction — 视图列表项操作（编辑 / 删除下拉菜单）
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { observer } from "mobx-react";
 import { MoreHorizontal, Pencil, Trash2 } from "lucide-react";
 import type { TIssueView } from "@/components/issues/filters/types";
 
@@ -13,7 +12,7 @@ type Props = {
   onDelete: () => void;
 };
 
-const ViewListItemAction = observer(function ViewListItemAction({ view: _view, projectId: _projectId, onEdit, onDelete }: Props) {
+export function ViewListItemAction({ view: _view, projectId: _projectId, onEdit, onDelete }: Props) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -72,6 +71,5 @@ const ViewListItemAction = observer(function ViewListItemAction({ view: _view, p
       )}
     </div>
   );
-});
-
-export { ViewListItemAction };
+}
+
