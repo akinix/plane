@@ -115,6 +115,7 @@ const ViewListItem = observer(function ViewListItem({ view, workspaceId, project
         view={view}
         projectId={projectId}
         onEdit={() => {
+          viewStore.setSelectedViewId(view.id);
           viewStore.openViewModal("edit");
         }}
         onDelete={() => {
