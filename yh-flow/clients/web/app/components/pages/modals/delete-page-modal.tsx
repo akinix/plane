@@ -28,8 +28,9 @@ export const DeletePageModal = function DeletePageModal({
     try {
       await deletePage.mutateAsync(pageId);
       onClose();
-    } catch {
-      // Error handled by mutation
+    } catch (error) {
+      console.error("Failed to delete page:", error);
+      onClose();
     } finally {
       setIsDeleting(false);
     }
