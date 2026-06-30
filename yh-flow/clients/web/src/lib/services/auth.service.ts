@@ -2,21 +2,19 @@
 // Replaces Plane's CSRF-based AuthService with JWT Bearer pattern
 // Endpoint paths match .NET Identity API conventions
 
-import type {
-  IEmailCheckData,
-  IEmailCheckResponse,
-  IPasswordSignInData,
-  ILoginTokenResponse,
-} from "@plane/types";
-import { FlowApiService, setToken, removeToken } from "./flow-api.service";
+import type { IEmailCheckData, IEmailCheckResponse, IPasswordSignInData, ILoginTokenResponse } from "@plane/types";
+import { FlowApiService, registerRefreshHandler, setToken, removeToken } from "./flow-api.service";
 export { getToken, setToken, removeToken } from "./flow-api.service";
 
 export class AuthService extends FlowApiService {
-  private static BASE_URL =
-    import.meta.env.VITE_API_BASE_URL || "http://localhost:5030/api/v1";
+  private static BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5030/api/v1";
 
   constructor() {
     super(AuthService.BASE_URL);
+    // INFRA-02: Register token refresh handler for FlowApiService interceptors
+    registerRefreshHandler(async () => {
+      await this.refreshToken();
+    });
   }
 
   // Check if email exists in the system
@@ -74,10 +72,7 @@ export class AuthService extends FlowApiService {
   }
 
   // Reset password with token
-  async resetPassword(
-    token: string,
-    data: { password: string }
-  ): Promise<void> {
+  async resetPassword(token: string, data: { password: string }): Promise<void> {
     return this.post(`/auth/reset-password/${token}/`, data)
       .then((res) => res?.data)
       .catch((err) => {
