@@ -9,3 +9,5 @@ export * from "./use-projects";
 export * from "./use-workspaces";
 export * from "./use-issues";
 export * from "./use-comments";
+export * from "./use-pages";
+export * from "./use-page-mutations";
