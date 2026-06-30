@@ -7,6 +7,7 @@ import type { TPage } from "@plane/types";
 import { EPageAccess } from "@plane/types";
 import { usePageMutations } from "@/../src/lib/hooks/use-page-mutations";
 import { cn, renderFormattedDate } from "@plane/utils";
+import { useQueryClient } from "@tanstack/react-query";
 
 type Props = {
   page: TPage;
@@ -16,6 +17,7 @@ type Props = {
 export const PageListBlock = function PageListBlock({ page, workspaceId }: Props) {
   const navigate = useNavigate();
   const { favoritePage } = usePageMutations();
+  const queryClient = useQueryClient();
 
   const { id, name, logo_props, access, is_favorite, updated_at, archived_at } = page;
 
@@ -26,7 +28,11 @@ export const PageListBlock = function PageListBlock({ page, workspaceId }: Props
   const handleFavorite = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (id) {
-      favoritePage.mutate({ pageId: id, is_favorite: !is_favorite });
+      favoritePage.mutate({ pageId: id, is_favorite: !is_favorite }, {
+        onError: () => {
+          queryClient.invalidateQueries({ queryKey: ["pages"] });
+        },
+      });
     }
   };
 

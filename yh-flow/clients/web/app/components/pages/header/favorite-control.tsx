@@ -5,12 +5,14 @@ import { Star } from "lucide-react";
 import type { TPage } from "@plane/types";
 import { usePageMutations } from "@/../src/lib/hooks/use-page-mutations";
 import { cn } from "@plane/utils";
+import { useQueryClient } from "@tanstack/react-query";
 
 type Props = {
   page: TPage;
 };
 
 export const PageFavoriteControl = function PageFavoriteControl({ page }: Props) {
+  const queryClient = useQueryClient();
   const { favoritePage } = usePageMutations();
   const { id, is_favorite } = page;
 
@@ -18,7 +20,11 @@ export const PageFavoriteControl = function PageFavoriteControl({ page }: Props)
     e.stopPropagation();
     e.preventDefault();
     if (id) {
-      favoritePage.mutate({ pageId: id, is_favorite: !is_favorite });
+      favoritePage.mutate({ pageId: id, is_favorite: !is_favorite }, {
+        onError: () => {
+          queryClient.invalidateQueries({ queryKey: ["pages"] });
+        },
+      });
     }
   };
 
