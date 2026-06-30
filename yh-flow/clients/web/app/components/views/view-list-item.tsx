@@ -82,7 +82,7 @@ const ViewListItem = observer(function ViewListItem({ view, workspaceId, project
       {/* Creator avatar */}
       <div className="flex flex-shrink-0 items-center">
         <div className="flex h-6 w-6 items-center justify-center rounded-full bg-custom-background-80 text-2xs text-custom-text-300">
-          {ownedBy ? ownedBy.slice(-1).toUpperCase() : "?"}
+          {ownedBy ? ownedBy.slice(0, 1).toUpperCase() : "U"}
         </div>
       </div>
 
