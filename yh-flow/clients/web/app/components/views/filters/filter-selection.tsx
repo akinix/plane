@@ -15,6 +15,15 @@ type Props = {
 const ViewFiltersSelection = observer(function ViewFiltersSelection({ filters, onFiltersUpdate }: Props) {
   const [searchQuery, setSearchQuery] = useState("");
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+    onFiltersUpdate({
+      ...filters,
+      searchQuery: value,
+    });
+  };
+
   const handleFilterToggle = (key: keyof TViewFilterProps, value: string | EViewAccess) => {
     const current = filters.filters?.[key] ?? [];
     const arr = Array.isArray(current) ? [...current] : [];
@@ -40,7 +49,7 @@ const ViewFiltersSelection = observer(function ViewFiltersSelection({ filters, o
         <input
           type="text"
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={handleSearchChange}
           placeholder="搜索筛选条件..."
           className="w-full bg-transparent text-xs text-custom-text-100 outline-none placeholder:text-custom-text-400"
         />
