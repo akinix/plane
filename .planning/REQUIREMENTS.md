@@ -8,10 +8,10 @@
 
 ### INFRA — 基础设施
 
-- [ ] **INFRA-01**: FlowApiService 请求拦截器添加 `humps.decamelizeKeys`，对所有 POST/PUT/PATCH 请求体进行 camelCase→snake_case 转换（含嵌套对象和查询字符串）
-- [ ] **INFRA-02**: 实现 Token 刷新队列（单例 refresh promise + 请求队列），防止并发 401 时重复刷新和强制登出
+- [x] **INFRA-01**: FlowApiService 请求拦截器添加 `humps.decamelizeKeys`，对所有 POST/PUT/PATCH 请求体进行 camelCase→snake_case 转换（含嵌套对象和查询字符串）
+- [x] **INFRA-02**: 实现 Token 刷新队列（单例 refresh promise + 请求队列），防止并发 401 时重复刷新和强制登出
 - [x] **INFRA-03**: 创建集中式查询键工厂 `query-keys.ts`，统一管理所有模块的 TanStack Query 缓存键
-- [ ] **INFRA-04**: 错误格式标准化 — 在响应拦截器中统一提取 ProblemDetails 和 Plane 格式错误消息，包括 FluentValidation 字段级错误映射
+- [x] **INFRA-04**: 错误格式标准化 — 在响应拦截器中统一提取 ProblemDetails 和 Plane 格式错误消息，包括 FluentValidation 字段级错误映射
 - [ ] **INFRA-05**: 分页提取层 — Service 层自动提取 `PlanePagedResult.results[]`，hooks 继续返回 `T[]` 数组
 
 ### WRKPRJ — 工作区 & 项目
@@ -79,10 +79,10 @@
 
 | Requirement | Phase      | Status  |
 | ----------- | ---------- | ------- |
-| INFRA-01    | Phase 21   | Pending |
-| INFRA-02    | Phase 21   | Pending |
+| INFRA-01    | Phase 21   | Done    |
+| INFRA-02    | Phase 21   | Done    |
 | INFRA-03    | Phase 21   | Done    |
-| INFRA-04    | Phase 21   | Pending |
+| INFRA-04    | Phase 21   | Done    |
 | INFRA-05    | Phase 21   | Pending |
 | WRKPRJ-01   | Phase 22   | Pending |
 | WRKPRJ-02   | Phase 22   | Pending |

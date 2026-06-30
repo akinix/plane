@@ -57,7 +57,7 @@ Plans:
 
 **Wave 1**
 
-- [ ] 21-01-PLAN.md — FlowApiService 拦截器：请求体转换 + Token 刷新队列 + 错误标准化（INFRA-01, INFRA-02, INFRA-04）
+- [x] 21-01-PLAN.md — FlowApiService 拦截器：请求体转换 + Token 刷新队列 + 错误标准化（INFRA-01, INFRA-02, INFRA-04）
 - [x] 21-02-PLAN.md — 集中式查询键工厂 query-keys.ts（INFRA-03）
 
 **Wave 2** _(blocked on Wave 1 completion)_
@@ -170,7 +170,7 @@ Plans:
 
 | Phase                                   | Plans Complete | Status      | Completed |
 | --------------------------------------- | -------------- | ----------- | --------- |
-| 21. Infrastructure Foundation           | 0/3            | Not started | -         |
+| 21. Infrastructure Foundation           | 2/3            | In progress | -         |
 | 22. Workspace & Project                 | 0/0            | Not started | -         |
 | 23. WorkItems                           | 0/0            | Not started | -         |
 | 24. Cycles & Modules                    | 0/0            | Not started | -         |

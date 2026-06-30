@@ -4,14 +4,14 @@ milestone: v3.0
 milestone_name: 前后端打通
 current_phase: 21 (infrastructure-foundation)
 status: executing
-last_updated: "2026-06-30T09:15:27.816Z"
-last_activity: 2026-06-30 -- Plan 21-02: query-keys.ts completed
+last_updated: "2026-06-30T09:35:00.000Z"
+last_activity: "2026-06-30 -- Plan 21-01: FlowApiService 拦截器重构 completed"
 progress:
   total_phases: 7
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
-  percent: 33
+  completed_plans: 2
+  percent: 67
 ---
 
 # YH.Flow — Project State
@@ -130,9 +130,9 @@ progress:
 ## Current Position
 
 Phase 21: Infrastructure Foundation
-Plan: 21-02 — 集中式查询键工厂 query-keys.ts (INFRA-03)
-Status: In progress (1/3 plans completed)
-Last activity: 2026-06-30 -- Plan 21-02: query-keys.ts completed
+Plan: 21-03 — 分页提取层 + 资源清理 (INFRA-05)
+Status: In progress (2/3 plans completed)
+Last activity: 2026-06-30 -- Plan 21-01: FlowApiService 拦截器重构 completed
 
 ## Next Steps
 
