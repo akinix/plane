@@ -2,6 +2,17 @@
 // Supports .NET ProblemDetails (RFC 7807), Plane legacy format, and FluentValidation field errors
 
 /**
+ * Safely serialize a value to JSON, returning a fallback string on circular reference errors.
+ */
+function safeStringify(value: unknown): string {
+  try {
+    return JSON.stringify(value);
+  } catch {
+    return String(value);
+  }
+}
+
+/**
  * RFC 7807 ProblemDetails format — .NET native error response
  */
 export interface ProblemDetails {
@@ -89,7 +100,7 @@ export function standardizeApiError(data: unknown): StandardizedApiError {
 
   // Fallback: serialize whatever we received
   return {
-    message: String(record.detail ?? record.title ?? record.error ?? JSON.stringify(data) ?? "未知错误"),
+    message: String(record.detail ?? record.title ?? record.error ?? safeStringify(data) ?? "未知错误"),
     statusCode: typeof record.status === "number" ? record.status : undefined,
     originalType: "unknown",
   };
