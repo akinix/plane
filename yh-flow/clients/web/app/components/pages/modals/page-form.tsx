@@ -4,7 +4,7 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { Globe, Lock, FileText } from "lucide-react";
-import { EPageAccess } from "@plane/constants";
+import { EPageAccess } from "@plane/types";
 import type { TPage } from "@plane/types";
 import { Input, Button } from "@plane/ui";
 
