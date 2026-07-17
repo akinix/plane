@@ -161,7 +161,7 @@ catalog:
   "react-pdf-html": "^2.1.2"
   "react-popper": "^2.3.0"
   "react-router": "7.15.0"
-  "recharts": "^2.15.1"
+  "recharts": "^2.15.4"
   "reflect-metadata": "^0.2.2"
   "rehype-parse": "^9.0.1"
   "rehype-remark": "^10.0.1"
